@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Activity Card – Translate Prototype</title>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --text-primary: #092f42;
+    --text-secondary: #5d7682;
+    --text-brand: #0276b1;
+    --text-invert: #ffffff;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f6f7;
+    --bg-error: #fef5f5;
+    --border-primary: #dfe4e6;
+    --border-secondary: #f5f6f7;
+    --accent: #0276b1;
+
+    --font-base: 16px;
+    --font-sm: 14px;
+    --lh-base: 22px;
+    --lh-sm: 18px;
+
+    --spacing-2xs: 4px;
+    --spacing-xs: 8px;
+    --spacing-s: 12px;
+    --spacing-m: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+
+    --radius-m: 8px;
+    --radius-interactive: 6px;
+  }
+
+  body {
+    font-family: 'Fira Sans', sans-serif;
+    background: #eef0f2;
+    min-height: 100vh;
+    padding: 24px 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @keyframes shimmer {
+    0%   { background-position: 200% 0 }
+    100% { background-position: -200% 0 }
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(3px) }
+    to   { opacity: 1; transform: translateY(0) }
+  }
+  @keyframes cursorBlink {
+    0%, 100% { opacity: 1 }
+    50%      { opacity: 0 }
+  }
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(2,118,177,0.16) }
+    50%      { box-shadow: 0 0 0 6px rgba(2,118,177,0.06) }
+  }
+
+  .shimmer-bar {
+    border-radius: 4px;
+    background: linear-gradient(90deg, #e4e8ec 25%, #f0f2f5 50%, #e4e8ec 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.2s ease-in-out infinite;
+  }
+  .fade-in { animation: fadeInUp 0.3s ease both; }
+
+  /* ── card shell ── */
+  .card {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-m);
+    box-shadow: 2px 2px 8px rgba(9,30,66,0.1);
+    overflow: hidden;
+  }
+
+  /* ── header ── */
+  .card-header {
+    background: var(--bg-secondary);
+    border-bottom: 1px solid #e1e8ec;
+    padding: 0 var(--spacing-lg) 0 var(--spacing-xl);
+    height: 57px;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+  }
+  .header-title {
+    font-size: var(--font-base);
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: var(--lh-base);
+  }
+  .header-info {
+    font-size: 12px;
+    color: var(--accent);
+  }
+
+  /* ── instructions ── */
+  .instructions {
+    background: var(--bg-primary);
+    padding: 24px var(--spacing-xl) var(--spacing-xs);
+  }
+  .instructions-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    padding-top: var(--spacing-xs);
+  }
+  .instr-primary {
+    font-size: var(--font-base); font-weight: 400;
+    color: var(--text-primary); line-height: var(--lh-base);
+  }
+  .instr-secondary {
+    font-size: var(--font-base); font-weight: 400;
+    color: var(--text-secondary); line-height: var(--lh-base);
+  }
+
+  /* ── writing area ── */
+  .activity-area {
+    background: var(--bg-primary);
+    padding: var(--spacing-s) var(--spacing-xl) var(--spacing-lg);
+  }
+  .input-field {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-m);
+    height: 80px; display: flex; overflow: hidden;
+  }
+  .input-text-area {
+    flex: 1;
+    padding: var(--spacing-xs) var(--spacing-xs) var(--spacing-xs) var(--spacing-s);
+  }
+  .input-placeholder {
+    font-size: var(--font-base); color: var(--text-secondary);
+    line-height: var(--lh-base);
+  }
+  .send-col {
+    display: flex; align-items: flex-end;
+    padding: var(--spacing-2xs);
+  }
+  .send-btn {
+    width: 32px; height: 32px;
+    border-radius: var(--radius-interactive);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0.4; border: none; background: none; cursor: pointer;
+  }
+  .input-meta {
+    display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .clear-link {
+    font-size: 12px; color: var(--text-secondary);
+    text-decoration: underline; opacity: 0;
+    padding: 0 var(--spacing-2xs); line-height: 16px;
+  }
+  .char-count {
+    font-size: 12px; color: var(--text-secondary);
+    padding: 0 var(--spacing-2xs); line-height: 16px;
+  }
+  .ai-disclaimer {
+    display: flex; align-items: center; gap: var(--spacing-2xs);
+  }
+  .ai-disclaimer-text {
+    font-size: var(--font-sm); font-weight: 400;
+    color: var(--text-primary); line-height: var(--lh-sm);
+  }
+
+  /* ── eval section ── */
+  .eval-section { background: var(--bg-error); }
+  .eval-divider { height: 1px; background: var(--border-primary); }
+  .eval-header-area {
+    padding: var(--spacing-m);
+    display: flex; flex-direction: column; gap: var(--spacing-m);
+  }
+  .eval-title-row {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .eval-title {
+    font-size: var(--font-base); font-weight: 600;
+    color: var(--text-primary); line-height: var(--lh-base);
+  }
+
+  /* gradient bar */
+  .gradient-track {
+    position: relative; padding-top: var(--spacing-2xs);
+  }
+  .gradient-bar {
+    height: 8px; border-radius: 4px;
+    border: 1px solid var(--border-primary);
+    background: linear-gradient(90deg, #ca2b34 0%, #e67322 20%, #f5c542 40%, #8bc34a 65%, #287147 100%);
+    position: relative;
+  }
+  .gradient-marker {
+    position: absolute; left: -5px; top: 10px;
+  }
+
+  /* ── feedback area ── */
+  .feedback-section {
+    background: var(--bg-error);
+    padding: var(--spacing-s) var(--spacing-xl) var(--spacing-m);
+  }
+  .feedback-inner {
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .summary-row {
+    display: flex; align-items: flex-start; justify-content: space-between;
+  }
+  .summary-label {
+    font-size: var(--font-sm); font-weight: 600;
+    color: var(--text-primary); line-height: var(--lh-sm);
+  }
+  .collapse-btn {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: var(--font-sm); font-weight: 400;
+    color: var(--text-brand); line-height: var(--lh-sm);
+    background: none; border: none; cursor: pointer; padding: 0;
+    text-align: right;
+  }
+
+  /* content box */
+  .content-box {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-secondary);
+    border-radius: var(--radius-m);
+    padding: var(--spacing-lg) var(--spacing-m);
+    display: flex; flex-direction: column; gap: 24px;
+    transition: opacity 0.35s ease;
+  }
+
+  /* score breakdown */
+  .score-block { display: flex; flex-direction: column; gap: var(--spacing-xs); }
+  .section-heading {
+    font-size: var(--font-sm); font-weight: 600;
+    color: var(--text-primary); line-height: var(--lh-sm);
+    min-height: 18px;
+  }
+  .score-details { display: flex; flex-direction: column; gap: 12px; max-width: 420px; }
+  .score-row {
+    display: flex; align-items: center; justify-content: space-between;
+    min-height: 18px;
+  }
+  .score-label {
+    font-size: var(--font-sm); font-weight: 400;
+    color: var(--text-primary); line-height: var(--lh-sm);
+    white-space: nowrap; min-height: 18px;
+  }
+  .progress-group {
+    display: flex; align-items: center; gap: 12px; width: 153px;
+  }
+  .bar-track {
+    flex: 1; height: 8px; border-radius: 8px; position: relative;
+  }
+  .bar-bg {
+    position: absolute; inset: 0; border-radius: 4px;
+  }
+  .bar-fill {
+    position: absolute; top: 0; left: 0;
+    height: 8px; border-radius: 4px; transition: width 0.4s ease;
+  }
+  .score-val {
+    font-size: var(--font-sm); font-weight: 400;
+    color: var(--text-primary); line-height: var(--lh-sm);
+    white-space: nowrap;
+  }
+
+  /* feedback */
+  .feedback-block { display: flex; flex-direction: column; gap: var(--spacing-xs); }
+  .feedback-text {
+    font-size: var(--font-sm); font-weight: 400;
+    color: var(--text-primary); line-height: var(--lh-sm);
+    min-height: 36px;
+  }
+  .feedback-text .cursor {
+    display: inline-block; width: 2px; height: 1em;
+    background: var(--accent); margin-left: 1px;
+    vertical-align: text-bottom;
+    animation: cursorBlink 0.6s step-end infinite;
+  }
+  .shimmer-lines { display: flex; flex-direction: column; gap: 6px; }
+
+  /* translate button */
+  .translate-btn {
+    font-family: 'Fira Sans', sans-serif;
+    display: flex; align-items: center; gap: var(--spacing-xs);
+    height: 32px; padding: var(--spacing-xs);
+    border-radius: var(--radius-interactive);
+    background: none; border: none; cursor: pointer;
+    transition: opacity 0.3s;
+  }
+  .translate-btn:disabled { cursor: default; opacity: 0.45; }
+  .translate-btn.animating { animation: pulseGlow 1.5s infinite; }
+  .translate-btn .btn-label {
+    font-size: var(--font-sm); font-weight: 600;
+    color: var(--accent); line-height: var(--lh-sm);
+    white-space: nowrap; text-transform: capitalize;
+  }
+
+  /* ── footer ── */
+  .card-footer {
+    background: var(--bg-primary);
+    border-top: 1px solid #e1e8ec;
+    padding: var(--spacing-s) var(--spacing-m);
+    display: flex; align-items: center;
+    justify-content: flex-end; gap: var(--spacing-m);
+    border-radius: 0 0 10px 10px;
+  }
+  .btn-ghost {
+    font-family: 'Fira Sans', sans-serif;
+    display: flex; align-items: center; gap: var(--spacing-xs);
+    height: 32px; padding: var(--spacing-xs);
+    border-radius: var(--radius-interactive);
+    background: none; border: none; cursor: pointer;
+  }
+  .btn-ghost .btn-label,
+  .btn-ghost-label {
+    font-size: var(--font-sm); font-weight: 600;
+    color: var(--accent); line-height: var(--lh-sm);
+    text-transform: capitalize; white-space: nowrap;
+  }
+  .btn-primary {
+    font-family: 'Fira Sans', sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    gap: var(--spacing-xs); height: 32px; padding: var(--spacing-xs);
+    border-radius: var(--radius-interactive);
+    background: var(--accent); border: none; cursor: pointer;
+    box-shadow: 0 1px 2px rgba(9,30,66,0.1);
+  }
+  .btn-primary .btn-label {
+    font-size: var(--font-sm); font-weight: 600;
+    color: var(--text-invert); line-height: var(--lh-sm);
+    text-transform: capitalize; white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <!-- Header -->
+  <div class="card-header">
+    <span class="header-title">Optional</span>
+    <span class="header-info">&#xf05a;</span>
+  </div>
+
+  <!-- Instructions -->
+  <div class="instructions">
+    <div class="instructions-inner">
+      <p class="instr-primary">Question text</p>
+      <p class="instr-secondary">Translated instructions</p>
+      <p class="instr-secondary">Custom instructions</p>
+    </div>
+  </div>
+
+  <!-- Writing area -->
+  <div class="activity-area">
+    <div class="input-field">
+      <div class="input-text-area">
+        <span class="input-placeholder">Write your answer here, then hit submit for quick feedback.</span>
+      </div>
+      <div class="send-col">
+        <button class="send-btn">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3.3 7.3L12.5 2.8L9.5 13L7 8.5L3.3 7.3Z" fill="#0276b1"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="input-meta">
+      <span class="clear-link">Clear</span>
+      <span class="char-count">0 / 300</span>
+    </div>
+    <div class="ai-disclaimer">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M10 6L12 2L14 6L18 8L14 10L12 14L10 10L6 8L10 6Z" fill="#092f42" opacity="0.55"/>
+        <path d="M18.5 3L20 1L17 2.5L18.5 3Z" fill="#092f42" opacity="0.4"/>
+      </svg>
+      <span class="ai-disclaimer-text">Your response is evaluated by AI</span>
+    </div>
+  </div>
+
+  <!-- Evaluation -->
+  <div class="eval-section">
+    <div class="eval-divider"></div>
+    <div class="eval-header-area">
+      <div class="eval-title-row">
+        <span class="eval-title">Could do better</span>
+      </div>
+      <div class="gradient-track">
+        <div class="gradient-bar">
+          <div class="gradient-marker">
+            <svg width="21" height="12" viewBox="0 0 21 12" fill="none">
+              <path d="M10.5 12L0 0H21L10.5 12Z" fill="#092f42"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feedback section -->
+    <div class="feedback-section">
+      <div class="feedback-inner">
+        <div class="summary-row">
+          <span class="summary-label">Evaluation Summary</span>
+          <button class="collapse-btn" id="collapseBtn">Collapse</button>
+        </div>
+
+        <div class="content-box" id="contentBox">
+          <div class="score-block">
+            <div class="section-heading" id="scoreTitleEl">Score Breakdown</div>
+            <div class="score-details" id="scoreRows"></div>
+          </div>
+
+          <div class="feedback-block">
+            <div class="section-heading" id="feedbackTitleEl">Feedback</div>
+            <div class="feedback-text" id="feedbackBody"></div>
+          </div>
+
+          <button class="translate-btn" id="translateBtn">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M1.5 3.5H6.5" stroke="#0276b1" stroke-width="1.3" stroke-linecap="round"/>
+              <path d="M4 2V3.5" stroke="#0276b1" stroke-width="1.3" stroke-linecap="round"/>
+              <path d="M3 3.5C3.5 5.3 4.8 7 7 8.5" stroke="#0276b1" stroke-width="1.3" stroke-linecap="round"/>
+              <path d="M5.5 3.5C5.2 5 4 6.5 2 8" stroke="#0276b1" stroke-width="1.3" stroke-linecap="round"/>
+              <path d="M8.5 14L10.5 9L12.5 14" stroke="#0276b1" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9.2 12.5H11.8" stroke="#0276b1" stroke-width="1.3" stroke-linecap="round"/>
+              <path d="M7 8.5L9 10.5" stroke="#0276b1" stroke-width="1.3" stroke-linecap="round"/>
+            </svg>
+            <span class="btn-label" id="translateLabel">Translate</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="card-footer">
+    <button class="btn-ghost">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M2 8L5.5 4.5V7H10V9H5.5V11.5L2 8Z" fill="#0276b1" transform="rotate(180 8 8)"/>
+        <path d="M11 4.5L14 8L11 11.5" stroke="#0276b1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="btn-label">Skip Card</span>
+    </button>
+    <button class="btn-primary">
+      <span class="btn-label">Continue</span>
+    </button>
+  </div>
+</div>
+
+<script>
+const ORIGINAL = {
+  scoreTitle: "Score Breakdown",
+  feedbackTitle: "Feedback",
+  categories: [
+    { label: "Task Completion",       score: "4/4", pct: 100,   color: "#287147", bg: "#fcdfe0" },
+    { label: "Language Use",          score: "2/4", pct: 50.36, color: "#a35905", bg: "#fef1dc" },
+    { label: "Content and Coherence", score: "1/4", pct: 20.15, color: "#ca2b34", bg: "#fcdfe0" },
+    { label: "Vocabulary and Style",  score: "1/4", pct: 20.15, color: "#ca2b34", bg: "#fcdfe0" },
+  ],
+  feedback: "Your writing does not answer the task. The response is not related to the professional writing prompt. You wrote a clear and simple sentence. The main area to improve is making sure your writing matches the task. You need to write a formal apology to your boss about missing a meeting, not about your dog. Next time, start your message with a formal greeting and say you are sorry for missing the meeting. For example: \u2018Dear Sir or Madam, I am sorry I could not come to the meeting today because I was sick.\u2019 Keep practicing writing about different topics and you will improve!"
+};
+
+const TRANSLATED = {
+  scoreTitle: "Desglose de Puntuaci\u00f3n",
+  feedbackTitle: "Comentarios",
+  categories: [
+    { label: "Cumplimiento de la Tarea", score: "4/4", pct: 100,   color: "#287147", bg: "#fcdfe0" },
+    { label: "Uso del Idioma",           score: "2/4", pct: 50.36, color: "#a35905", bg: "#fef1dc" },
+    { label: "Contenido y Coherencia",   score: "1/4", pct: 20.15, color: "#ca2b34", bg: "#fcdfe0" },
+    { label: "Vocabulario y Estilo",     score: "1/4", pct: 20.15, color: "#ca2b34", bg: "#fcdfe0" },
+  ],
+  feedback: "Tu escrito no responde a la tarea. La respuesta no est\u00e1 relacionada con el ejercicio de escritura profesional. Escribiste una oraci\u00f3n clara y sencilla. El \u00e1rea principal a mejorar es asegurarte de que tu escritura coincida con la tarea. Necesitas escribir una disculpa formal a tu jefe por faltar a una reuni\u00f3n, no sobre tu perro. La pr\u00f3xima vez, comienza tu mensaje con un saludo formal y di que lo sientes por faltar a la reuni\u00f3n. Por ejemplo: \u2018Dear Sir or Madam, I am sorry I could not come to the meeting today because I was sick.\u2019 \u00a1Sigue practicando la escritura sobre diferentes temas y mejorar\u00e1s!"
+};
+
+let phase = "original";
+let collapsed = false;
+let rafId = null;
+
+const $ = s => document.querySelector(s);
+const scoreTitleEl   = $("#scoreTitleEl");
+const scoreRows      = $("#scoreRows");
+const feedbackTitleEl = $("#feedbackTitleEl");
+const feedbackBody   = $("#feedbackBody");
+const translateBtn   = $("#translateBtn");
+const translateLabel = $("#translateLabel");
+const contentBox     = $("#contentBox");
+const collapseBtn    = $("#collapseBtn");
+
+function shimmer(w, h = 14, delay = 0) {
+  const d = document.createElement("div");
+  d.className = "shimmer-bar";
+  d.style.width  = typeof w === "number" ? w + "px" : w;
+  d.style.height = h + "px";
+  d.style.animationDelay = delay + "ms";
+  return d;
+}
+
+function buildRow(cat) {
+  const row = document.createElement("div");
+  row.className = "score-row";
+
+  const label = document.createElement("span");
+  label.className = "score-label";
+  label.textContent = cat.label;
+  row.appendChild(label);
+
+  const pg = document.createElement("div");
+  pg.className = "progress-group";
+
+  const track = document.createElement("div");
+  track.className = "bar-track";
+  const bg = document.createElement("div");
+  bg.className = "bar-bg";
+  bg.style.background = cat.bg;
+  track.appendChild(bg);
+  const fill = document.createElement("div");
+  fill.className = "bar-fill";
+  fill.style.width = cat.pct + "%";
+  fill.style.background = cat.color;
+  track.appendChild(fill);
+  pg.appendChild(track);
+
+  const val = document.createElement("span");
+  val.className = "score-val";
+  val.textContent = cat.score;
+  pg.appendChild(val);
+
+  row.appendChild(pg);
+  return row;
+}
+
+function renderStatic(data) {
+  scoreTitleEl.textContent = data.scoreTitle;
+  feedbackTitleEl.textContent = data.feedbackTitle;
+  feedbackBody.textContent = data.feedback;
+  scoreRows.innerHTML = "";
+  data.categories.forEach(cat => scoreRows.appendChild(buildRow(cat)));
+}
+
+function renderShimmer() {
+  scoreTitleEl.innerHTML = "";
+  scoreTitleEl.appendChild(shimmer(120, 16));
+
+  feedbackTitleEl.innerHTML = "";
+  feedbackTitleEl.appendChild(shimmer(80, 16, 200));
+
+  scoreRows.innerHTML = "";
+  ORIGINAL.categories.forEach((cat, i) => {
+    const row = document.createElement("div");
+    row.className = "score-row";
+    const lbl = document.createElement("div");
+    lbl.className = "score-label";
+    lbl.style.flex = "1";
+    lbl.appendChild(shimmer((55 + i * 12) + "%", 14, i * 80));
+    row.appendChild(lbl);
+
+    const pg = document.createElement("div");
+    pg.className = "progress-group";
+    const track = document.createElement("div");
+    track.className = "bar-track";
+    const bg = document.createElement("div");
+    bg.className = "bar-bg"; bg.style.background = cat.bg;
+    track.appendChild(bg);
+    const fill = document.createElement("div");
+    fill.className = "bar-fill";
+    fill.style.width = cat.pct + "%"; fill.style.background = cat.color;
+    track.appendChild(fill);
+    pg.appendChild(track);
+    const val = document.createElement("span");
+    val.className = "score-val"; val.textContent = cat.score;
+    pg.appendChild(val);
+    row.appendChild(pg);
+    scoreRows.appendChild(row);
+  });
+
+  feedbackBody.innerHTML = "";
+  const lines = document.createElement("div");
+  lines.className = "shimmer-lines";
+  [100, 100, 95, 100, 88, 60].forEach((w, i) =>
+    lines.appendChild(shimmer(w + "%", 14, 100 + i * 80))
+  );
+  feedbackBody.appendChild(lines);
+}
+
+function typeText(el, text, duration, baseDelay, onDone) {
+  cancelAnimationFrame(rafId);
+  el.innerHTML = "";
+  const visible = document.createElement("span");
+  const hidden  = document.createElement("span");
+  hidden.style.opacity = "0";
+  const cursor  = document.createElement("span");
+  cursor.className = "cursor";
+  el.append(visible, hidden, cursor);
+
+  const charsPerMs = text.length / duration;
+  let start = null;
+
+  function tick(ts) {
+    if (!start) start = ts;
+    const elapsed = ts - start - baseDelay;
+    if (elapsed < 0) { rafId = requestAnimationFrame(tick); return; }
+    const count = Math.min(Math.floor(elapsed * charsPerMs), text.length);
+    visible.textContent = text.slice(0, count);
+    hidden.textContent  = text.slice(count);
+    if (count < text.length) {
+      rafId = requestAnimationFrame(tick);
+    } else {
+      cursor.remove();
+      onDone?.();
+    }
+  }
+  rafId = requestAnimationFrame(tick);
+}
+
+function revealLabels(data) {
+  const labels = scoreRows.querySelectorAll(".score-label");
+  labels.forEach((cell, i) => {
+    cell.innerHTML = "";
+    cell.style.flex = "1";
+    cell.appendChild(shimmer((55 + i * 12) + "%", 14));
+  });
+  data.categories.forEach((cat, i) => {
+    setTimeout(() => {
+      const cell = labels[i];
+      if (!cell) return;
+      cell.innerHTML = "";
+      cell.textContent = cat.label;
+      cell.style.flex = "";
+      cell.classList.remove("fade-in");
+      void cell.offsetWidth;
+      cell.classList.add("fade-in");
+    }, 200 + i * 220);
+  });
+}
+
+function handleTranslate() {
+  if (phase === "loading" || phase === "translating") return;
+
+  if (phase === "translated") {
+    phase = "reverting";
+    contentBox.style.opacity = "0";
+    translateBtn.disabled = true;
+    setTimeout(() => {
+      renderStatic(ORIGINAL);
+      contentBox.style.opacity = "1";
+      translateLabel.textContent = "Translate";
+      translateBtn.disabled = false;
+      translateBtn.classList.remove("animating");
+      phase = "original";
+    }, 350);
+    return;
+  }
+
+  phase = "loading";
+  translateBtn.disabled = true;
+  translateLabel.textContent = "Translating\u2026";
+  translateBtn.classList.add("animating");
+  renderShimmer();
+
+  setTimeout(() => {
+    phase = "translating";
+
+    scoreTitleEl.innerHTML = "";
+    scoreTitleEl.textContent = TRANSLATED.scoreTitle;
+    scoreTitleEl.classList.remove("fade-in");
+    void scoreTitleEl.offsetWidth;
+    scoreTitleEl.classList.add("fade-in");
+
+    feedbackTitleEl.innerHTML = "";
+    feedbackTitleEl.textContent = TRANSLATED.feedbackTitle;
+    feedbackTitleEl.classList.remove("fade-in");
+    void feedbackTitleEl.offsetWidth;
+    feedbackTitleEl.classList.add("fade-in");
+
+    scoreRows.innerHTML = "";
+    TRANSLATED.categories.forEach(cat => scoreRows.appendChild(buildRow(cat)));
+    revealLabels(TRANSLATED);
+
+    typeText(feedbackBody, TRANSLATED.feedback, 1800, 800, () => {
+      phase = "translated";
+      translateLabel.textContent = "Show Original";
+      translateBtn.disabled = false;
+      translateBtn.classList.remove("animating");
+    });
+  }, 1100);
+}
+
+collapseBtn.addEventListener("click", () => {
+  collapsed = !collapsed;
+  contentBox.style.display = collapsed ? "none" : "";
+  collapseBtn.textContent = collapsed ? "Expand" : "Collapse";
+});
+
+translateBtn.addEventListener("click", handleTranslate);
+renderStatic(ORIGINAL);
+</script>
+</body>
+</html>
