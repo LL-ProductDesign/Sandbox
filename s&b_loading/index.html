@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learnlight — Generate 3 More Prototype</title>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { height: 100%; }
+  body {
+    font-family: 'Fira Sans', sans-serif;
+    color: #092f42;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100%;
+    background: #eef1f3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .wrapper {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+    max-width: 720px;
+  }
+
+  /* ── Phone frame ── */
+  .phone {
+    width: 390px;
+    min-width: 390px;
+    height: 740px;
+    background: #f5f6f7;
+    border-radius: 28px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 8px 40px rgba(9, 30, 66, 0.12), 0 2px 8px rgba(9, 30, 66, 0.08);
+  }
+
+  /* ── Header ── */
+  .header {
+    height: 60px;
+    background: #fff;
+    border-bottom: 2px solid #dfe4e6;
+    box-shadow: 0 2px 2px rgba(9, 30, 66, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    position: relative;
+    z-index: 10;
+  }
+  .logo {
+    font-weight: 600;
+    font-size: 18px;
+    color: #0a8a7b;
+    letter-spacing: -0.3px;
+  }
+  .avatar-wrap { display: flex; align-items: center; }
+  .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 22px;
+    background: #e3f4fd;
+    border: 1px solid #dfe4e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: #092f42;
+  }
+  .caret { margin-left: 2px; font-size: 12px; color: #5d7682; }
+
+  /* ── Scrollable content ── */
+  .scroll-area {
+    height: calc(740px - 60px - 68px);
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    background: #f5f6f7;
+  }
+  .scroll-area::-webkit-scrollbar { width: 0; }
+
+  /* ── Page title section ── */
+  .page-title { padding: 16px; }
+  .welcome {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .icon-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  /* ── Steps ── */
+  .steps { display: flex; align-items: center; margin-top: 8px; }
+  .step {
+    height: 40px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    box-shadow: 2px 2px 4px rgba(9, 30, 66, 0.1);
+  }
+  .step-done {
+    flex: 1;
+    background: #fff;
+    border: 1px solid #0276b1;
+    color: #0276b1;
+    gap: 8px;
+  }
+  .step-active {
+    flex: 0 0 auto;
+    padding: 0 12px;
+    background: #0276b1;
+    border: 1px solid #0276b1;
+    color: #fff;
+    gap: 2px;
+  }
+  .step-line { width: 16px; height: 2px; background: #dfe4e6; flex-shrink: 0; }
+  .step-future {
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border: 1px solid #dfe4e6;
+    color: #092f42;
+  }
+
+  /* ── Content card ── */
+  .content-card {
+    background: #fff;
+    box-shadow: 2px 2px 8px rgba(9, 30, 66, 0.1);
+    margin-top: 16px;
+  }
+  .widget-title {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+  }
+  .body-area { padding: 8px 16px 16px; }
+  .desc { font-size: 16px; font-weight: 400; line-height: 22px; margin-bottom: 4px; }
+  .subdesc { font-size: 14px; font-weight: 400; line-height: 18px; color: #5d7682; }
+  .subdesc a { color: #0276b1; text-decoration: underline; }
+
+  /* ── Sections ── */
+  .section { margin-top: 16px; }
+  .section-label {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18px;
+    color: #092f42;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .trainer { display: flex; align-items: center; gap: 4px; margin-top: 8px; }
+  .trainer-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 22px;
+    border: 1px solid #dfe4e6;
+    background: #c8d6dc;
+    flex-shrink: 0;
+  }
+  .trainer-name { font-size: 14px; font-weight: 400; line-height: 18px; }
+
+  /* ── Schedules header ── */
+  .schedules-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 12px;
+    margin-bottom: 8px;
+  }
+  .gen-btn {
+    background: none;
+    border: none;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18px;
+    color: #0276b1;
+    cursor: pointer;
+    padding: 0 8px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 6px;
+    text-transform: capitalize;
+  }
+  .gen-btn:hover { background: rgba(2, 118, 177, 0.06); }
+  .gen-btn:disabled { opacity: 0.5; cursor: default; background: none; }
+
+  /* ── Schedule cards ── */
+  .sched-card {
+    background: #fff;
+    border: 1px solid #dfe4e6;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    transition: border-color 0.6s ease;
+  }
+  .sched-card-body { padding: 8px 8px 0; }
+  .sched-row { display: flex; gap: 8px; margin-bottom: 8px; }
+  .sched-col { flex: 1; min-width: 0; }
+  .label-xxs {
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 14px;
+    color: #5d7682;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+  }
+  .value-base { font-size: 16px; font-weight: 400; line-height: 22px; color: #092f42; }
+
+  /* ── Coverage ── */
+  .coverage { display: flex; align-items: center; gap: 2px; }
+  .cov-badge {
+    width: 24px;
+    height: 24px;
+    border-radius: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .cov-badge-green { background: #ecf9f1; }
+  .cov-badge-red   { background: #fcdfe0; }
+  .cov-badge-amber { background: #fef3e0; }
+  .cov-text { font-size: 16px; font-weight: 600; line-height: 22px; }
+  .cov-green { color: #287147; }
+  .cov-red   { color: #ca2b34; }
+  .cov-amber { color: #a06b10; }
+  .cov-icon { font-size: 12px; }
+  .info-icon { width: 12px; height: 12px; color: #5d7682; font-size: 12px; margin-left: 2px; opacity: 0.6; }
+
+  /* ── Card footer ── */
+  .sched-card-footer {
+    border-top: 1px solid #dfe4e6;
+    padding: 0 8px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  .sched-card-footer:hover { background: #f8f9fa; }
+  .radio {
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    border: 1px solid #092f42;
+    background: #fff;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .radio-label { font-size: 14px; font-weight: 400; line-height: 18px; color: #091e42; margin-left: 4px; }
+
+  /* ── Footer ── */
+  .footer {
+    height: 68px;
+    background: #fff;
+    border-top: 1px solid #dfe4e6;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+  .back-link { font-size: 14px; font-weight: 600; line-height: 18px; color: #5d7682; text-transform: capitalize; cursor: pointer; }
+  .confirm-btn {
+    background: #0276b1;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.16);
+    border-radius: 6px;
+    height: 32px;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18px;
+    color: #fff;
+    text-transform: capitalize;
+    opacity: 0.4;
+  }
+
+  /* ── Animations ── */
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes cardIn {
+    0%   { opacity: 0; transform: translateY(14px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulseHL {
+    0%   { box-shadow: 0 0 0 0 rgba(2, 118, 177, 0.25); }
+    50%  { box-shadow: 0 0 0 4px rgba(2, 118, 177, 0.12); }
+    100% { box-shadow: 0 0 0 0 rgba(2, 118, 177, 0); }
+  }
+  .sched-card-new {
+    animation: cardIn 0.35s ease-out both, pulseHL 1.2s ease-out 0.45s;
+    border-color: rgba(2, 118, 177, 0.4);
+  }
+  .spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(2, 118, 177, 0.2);
+    border-top-color: #0276b1;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    display: none;
+    flex-shrink: 0;
+  }
+  .divider-new {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 4px 0 16px;
+    opacity: 0;
+    animation: cardIn 0.3s ease-out 0.1s both;
+  }
+  .divider-line { flex: 1; height: 1px; background: #dfe4e6; }
+  .divider-text {
+    font-size: 11px;
+    font-weight: 600;
+    color: #5d7682;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── Side panel ── */
+  .side-panel { flex: 1; min-width: 200px; padding-top: 8px; }
+  .side-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #092f42;
+    margin-bottom: 14px;
+  }
+  .side-title svg { vertical-align: -2px; margin-right: 6px; }
+  #log p {
+    font-size: 13px;
+    color: #5d7682;
+    line-height: 2.2;
+    margin: 0;
+  }
+  #log .log-icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #e3f4fd;
+    text-align: center;
+    line-height: 18px;
+    font-size: 11px;
+    color: #0276b1;
+    margin-right: 6px;
+    vertical-align: -3px;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 700px) {
+    body { padding: 12px; }
+    .wrapper { flex-direction: column; align-items: center; }
+    .side-panel { min-width: 0; width: 100%; max-width: 390px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- Phone -->
+  <div class="phone">
+    <div class="header">
+      <div class="logo">learnlight</div>
+      <div class="avatar-wrap">
+        <div class="avatar">AL</div>
+        <span class="caret">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4.5 6.5L8 10L11.5 6.5" stroke="#5d7682" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </div>
+
+    <div class="scroll-area" id="scrollArea">
+      <div class="page-title">
+        <div class="welcome">
+          <span>Welcome, Alex!</span>
+          <div class="icon-btn">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="1.5" width="12" height="13" rx="1.5" stroke="#092f42" stroke-width="1.2"/><path d="M5 5h6M5 8h6M5 11h3" stroke="#092f42" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div class="steps">
+          <div class="step step-done">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5L6.5 11.5L12.5 5.5" stroke="#0276b1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>1</span>
+          </div>
+          <div class="step-line"></div>
+          <div class="step step-active">
+            <span>2</span><span>.</span><span>&nbsp;Trainers</span>
+          </div>
+          <div class="step-line"></div>
+          <div class="step step-future">3</div>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <div class="widget-title">Select Schedule</div>
+        <div class="body-area">
+          <p class="desc">Confirm your schedule, or return to adjust your availability or trainer if needed</p>
+          <p class="subdesc">Review your <a href="#">cancellation policy</a> before confirming the schedule, and check your <a href="#">time zone</a>.</p>
+
+          <div class="section">
+            <div class="section-label">Trainer</div>
+            <div class="trainer">
+              <div class="trainer-avatar"></div>
+              <span class="trainer-name">Elias Sorenson</span>
+            </div>
+          </div>
+
+          <div class="schedules-header">
+            <div class="section-label">Proposed schedules</div>
+            <button class="gen-btn" id="genBtn" onclick="handleGenerate()">
+              <span id="btnLabel">Generate 3 More</span>
+              <div class="spinner" id="spinner"></div>
+            </button>
+          </div>
+
+          <div id="cardsWrap">
+            <!-- Card 1 -->
+            <div class="sched-card">
+              <div class="sched-card-body">
+                <div class="sched-row">
+                  <div class="sched-col"><div class="label-xxs">day</div><div class="value-base">Mondays</div></div>
+                  <div class="sched-col"><div class="label-xxs">time</div><div class="value-base">12:00-12:30</div></div>
+                </div>
+                <div>
+                  <div class="label-xxs">schedule coverage</div>
+                  <div class="coverage">
+                    <div class="cov-badge cov-badge-green">
+                      <svg class="cov-icon cov-green" width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1.5" y="2" width="9" height="8.5" rx="1" stroke="#287147" stroke-width="1.1"/><path d="M1.5 5h9" stroke="#287147" stroke-width="1.1"/><path d="M4 0.5v2M8 0.5v2" stroke="#287147" stroke-width="1.1" stroke-linecap="round"/><path d="M4 7.5l1.5 1.5L8 6.5" stroke="#287147" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <span class="cov-text cov-green" style="margin-left:4px">100</span>
+                    <span class="cov-text cov-green">&thinsp;% coverage</span>
+                    <svg class="info-icon" width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.5" stroke="#5d7682" stroke-width="1"/><path d="M6 5.5V8.5" stroke="#5d7682" stroke-width="1" stroke-linecap="round"/><circle cx="6" cy="4" r="0.5" fill="#5d7682"/></svg>
+                  </div>
+                </div>
+              </div>
+              <div class="sched-card-footer"><div class="radio"></div><span class="radio-label">Select this schedule</span></div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="sched-card">
+              <div class="sched-card-body">
+                <div class="sched-row">
+                  <div class="sched-col"><div class="label-xxs">day</div><div class="value-base">Tuesdays</div></div>
+                  <div class="sched-col"><div class="label-xxs">time</div><div class="value-base">17:00-17:30</div></div>
+                </div>
+                <div>
+                  <div class="label-xxs">schedule coverage</div>
+                  <div class="coverage">
+                    <div class="cov-badge cov-badge-red">
+                      <svg class="cov-icon" width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1.5" y="2" width="9" height="8.5" rx="1" stroke="#ca2b34" stroke-width="1.1"/><path d="M1.5 5h9" stroke="#ca2b34" stroke-width="1.1"/><path d="M4 0.5v2M8 0.5v2" stroke="#ca2b34" stroke-width="1.1" stroke-linecap="round"/><path d="M4 7.5l1.5 1.5L8 6.5" stroke="#ca2b34" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <span class="cov-text cov-red" style="margin-left:4px">50</span>
+                    <span class="cov-text cov-red">&thinsp;% coverage</span>
+                    <svg class="info-icon" width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.5" stroke="#5d7682" stroke-width="1"/><path d="M6 5.5V8.5" stroke="#5d7682" stroke-width="1" stroke-linecap="round"/><circle cx="6" cy="4" r="0.5" fill="#5d7682"/></svg>
+                  </div>
+                </div>
+              </div>
+              <div class="sched-card-footer"><div class="radio"></div><span class="radio-label">Select this schedule</span></div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="sched-card">
+              <div class="sched-card-body">
+                <div class="sched-row">
+                  <div class="sched-col"><div class="label-xxs">day</div><div class="value-base">Wednesdays</div></div>
+                  <div class="sched-col"><div class="label-xxs">time</div><div class="value-base">09:00-09:30</div></div>
+                </div>
+                <div>
+                  <div class="label-xxs">schedule coverage</div>
+                  <div class="coverage">
+                    <div class="cov-badge cov-badge-green">
+                      <svg class="cov-icon" width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1.5" y="2" width="9" height="8.5" rx="1" stroke="#287147" stroke-width="1.1"/><path d="M1.5 5h9" stroke="#287147" stroke-width="1.1"/><path d="M4 0.5v2M8 0.5v2" stroke="#287147" stroke-width="1.1" stroke-linecap="round"/><path d="M4 7.5l1.5 1.5L8 6.5" stroke="#287147" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <span class="cov-text cov-green" style="margin-left:4px">100</span>
+                    <span class="cov-text cov-green">&thinsp;% coverage</span>
+                    <svg class="info-icon" width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.5" stroke="#5d7682" stroke-width="1"/><path d="M6 5.5V8.5" stroke="#5d7682" stroke-width="1" stroke-linecap="round"/><circle cx="6" cy="4" r="0.5" fill="#5d7682"/></svg>
+                  </div>
+                </div>
+              </div>
+              <div class="sched-card-footer"><div class="radio"></div><span class="radio-label">Select this schedule</span></div>
+            </div>
+          </div>
+
+          <div style="height:24px"></div>
+        </div>
+      </div>
+      <div style="height:16px"></div>
+    </div>
+
+    <div class="footer">
+      <span class="back-link">Back To Trainer Selection</span>
+      <div class="confirm-btn">Confirm Schedule</div>
+    </div>
+  </div>
+
+  <!-- Side panel -->
+  <div class="side-panel">
+    <div class="side-title">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M11 5L6 10" stroke="#0276b1" stroke-width="1.5" stroke-linecap="round"/><path d="M7 5H11V9" stroke="#0276b1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Tap "Generate 3 More" to see the pattern
+    </div>
+    <div id="log"></div>
+  </div>
+
+</div>
+
+<script>
+  var done = false;
+
+  function addLog(text, num) {
+    var p = document.createElement('p');
+    p.innerHTML = '<span class="log-icon">' + num + '</span>' + text;
+    document.getElementById('log').appendChild(p);
+  }
+
+  function makeCardHTML(day, time, cov, covColorClass, badgeColorClass, strokeColor) {
+    return '<div class="sched-card-body">' +
+      '<div class="sched-row">' +
+        '<div class="sched-col"><div class="label-xxs">day</div><div class="value-base">' + day + '</div></div>' +
+        '<div class="sched-col"><div class="label-xxs">time</div><div class="value-base">' + time + '</div></div>' +
+      '</div>' +
+      '<div>' +
+        '<div class="label-xxs">schedule coverage</div>' +
+        '<div class="coverage">' +
+          '<div class="cov-badge ' + badgeColorClass + '">' +
+            '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1.5" y="2" width="9" height="8.5" rx="1" stroke="' + strokeColor + '" stroke-width="1.1"/><path d="M1.5 5h9" stroke="' + strokeColor + '" stroke-width="1.1"/><path d="M4 0.5v2M8 0.5v2" stroke="' + strokeColor + '" stroke-width="1.1" stroke-linecap="round"/><path d="M4 7.5l1.5 1.5L8 6.5" stroke="' + strokeColor + '" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+          '</div>' +
+          '<span class="cov-text ' + covColorClass + '" style="margin-left:4px">' + cov + '</span>' +
+          '<span class="cov-text ' + covColorClass + '">&thinsp;% coverage</span>' +
+          '<svg class="info-icon" width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.5" stroke="#5d7682" stroke-width="1"/><path d="M6 5.5V8.5" stroke="#5d7682" stroke-width="1" stroke-linecap="round"/><circle cx="6" cy="4" r="0.5" fill="#5d7682"/></svg>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="sched-card-footer"><div class="radio"></div><span class="radio-label">Select this schedule</span></div>';
+  }
+
+  function handleGenerate() {
+    if (done) return;
+    done = true;
+
+    var btn = document.getElementById('genBtn');
+    var lbl = document.getElementById('btnLabel');
+    var sp  = document.getElementById('spinner');
+
+    lbl.textContent = 'Generating…';
+    sp.style.display = 'inline-block';
+    btn.disabled = true;
+    addLog('Button enters loading state', '1');
+
+    setTimeout(function () {
+      sp.style.display = 'none';
+      lbl.textContent = '3 more generated';
+      addLog('Loading completes — label updates', '2');
+
+      var wrap = document.getElementById('cardsWrap');
+
+      // Divider
+      var div = document.createElement('div');
+      div.className = 'divider-new';
+      div.innerHTML = '<div class="divider-line"></div><span class="divider-text">New options</span><div class="divider-line"></div>';
+      wrap.appendChild(div);
+      addLog('"New options" divider separates old from new', '3');
+
+      // New cards data
+      var newCards = [
+        { day: 'Mondays',   time: '12:00-12:30', cov: 100, cls: 'cov-green', badge: 'cov-badge-green', stroke: '#287147' },
+        { day: 'Thursdays', time: '14:00-14:30', cov: 100, cls: 'cov-green', badge: 'cov-badge-green', stroke: '#287147' },
+        { day: 'Fridays',   time: '10:00-10:30', cov: 75,  cls: 'cov-amber', badge: 'cov-badge-amber', stroke: '#a06b10' }
+      ];
+
+      newCards.forEach(function (c, i) {
+        var el = document.createElement('div');
+        el.className = 'sched-card sched-card-new';
+        el.style.animationDelay = (0.15 + i * 0.12) + 's, ' + (0.55 + i * 0.12) + 's';
+        el.innerHTML = makeCardHTML(c.day, c.time, c.cov, c.cls, c.badge, c.stroke);
+        wrap.appendChild(el);
+      });
+
+      addLog('Cards stagger in with fade + slide-up', '4');
+
+      // Smart scroll
+      setTimeout(function () {
+        var sa = document.getElementById('scrollArea');
+        var allCards = wrap.querySelectorAll('.sched-card');
+        var lastOriginal = allCards[2];
+        var target = lastOriginal.offsetTop + lastOriginal.offsetHeight - 30;
+        sa.scrollTo({ top: target, behavior: 'smooth' });
+        addLog('Auto-scroll anchors to the boundary', '5');
+
+        // Fade highlight
+        setTimeout(function () {
+          addLog('Highlight pulse draws the eye', '6');
+          setTimeout(function () {
+            var nc = wrap.querySelectorAll('.sched-card-new');
+            nc.forEach(function (c) {
+              c.style.borderColor = '#dfe4e6';
+            });
+            addLog('Accent border fades to default', '7');
+          }, 2000);
+        }, 600);
+      }, 250);
+
+    }, 1400);
+  }
+</script>
+
+</body>
+</html>
