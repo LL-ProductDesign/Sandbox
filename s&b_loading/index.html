@@ -210,6 +210,33 @@
   .gen-btn:hover { background: rgba(2, 118, 177, 0.06); }
   .gen-btn:disabled { opacity: 0.5; cursor: default; background: none; }
 
+  /* ── Generate more button at bottom of list ── */
+  .gen-more-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+    animation: cardIn 0.3s ease-out both;
+  }
+  .gen-more-btn {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18px;
+    color: #0276b1;
+    background: none;
+    border: 1.5px solid #0276b1;
+    border-radius: 6px;
+    height: 36px;
+    padding: 0 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.15s;
+  }
+  .gen-more-btn:hover { background: rgba(2, 118, 177, 0.06); }
+  .gen-more-btn:disabled { opacity: 0.4; cursor: default; background: none; }
+
   /* ── Schedule cards ── */
   .sched-card {
     background: #fff;
@@ -447,7 +474,7 @@
           <div class="schedules-header">
             <div class="section-label">Proposed schedules</div>
             <button class="gen-btn" id="genBtn" onclick="handleGenerate()">
-              <span id="btnLabel">Generate 3 More</span>
+              <span class="btn-label" id="btnLabel">Generate 3 More</span>
               <div class="spinner" id="spinner"></div>
             </button>
           </div>
@@ -544,12 +571,16 @@
 </div>
 
 <script>
-  var done = false;
+  var generateCount = 0;
 
   function addLog(text, num) {
     var p = document.createElement('p');
     p.innerHTML = '<span class="log-icon">' + num + '</span>' + text;
     document.getElementById('log').appendChild(p);
+  }
+
+  function clearLog() {
+    document.getElementById('log').innerHTML = '';
   }
 
   function makeCardHTML(day, time, cov, covColorClass, badgeColorClass, strokeColor) {
@@ -573,14 +604,98 @@
     '<div class="sched-card-footer"><div class="radio"></div><span class="radio-label">Select this schedule</span></div>';
   }
 
-  function handleGenerate() {
-    if (done) return;
-    done = true;
+  function runGenerate(triggerBtn, logOffset) {
+    triggerBtn.disabled = true;
+    var lbl = triggerBtn.querySelector('.btn-label');
+    var sp  = triggerBtn.querySelector('.spinner');
+    lbl.textContent = 'Generating…';
+    sp.style.display = 'inline-block';
+    addLog('Button enters loading state', logOffset);
 
+    setTimeout(function () {
+      sp.style.display = 'none';
+      addLog('Loading completes', logOffset + 1);
+
+      var wrap = document.getElementById('cardsWrap');
+
+      // Remove existing bottom button before appending new content
+      var existing = document.getElementById('bottomGenWrap');
+      if (existing) existing.remove();
+
+      // Divider
+      var div = document.createElement('div');
+      div.className = 'divider-new';
+      div.innerHTML = '<div class="divider-line"></div><span class="divider-text">New options</span><div class="divider-line"></div>';
+      wrap.appendChild(div);
+      addLog('"New options" divider separates old from new', logOffset + 2);
+
+      var allCardSets = [
+        [
+          { day: 'Mondays',   time: '12:00-12:30', cov: 100, cls: 'cov-green', badge: 'cov-badge-green', stroke: '#287147' },
+          { day: 'Thursdays', time: '14:00-14:30', cov: 100, cls: 'cov-green', badge: 'cov-badge-green', stroke: '#287147' },
+          { day: 'Fridays',   time: '10:00-10:30', cov: 75,  cls: 'cov-amber', badge: 'cov-badge-amber', stroke: '#a06b10' }
+        ],
+        [
+          { day: 'Tuesdays',  time: '08:00-08:30', cov: 100, cls: 'cov-green', badge: 'cov-badge-green', stroke: '#287147' },
+          { day: 'Wednesdays',time: '16:00-16:30', cov: 50,  cls: 'cov-red',   badge: 'cov-badge-red',   stroke: '#ca2b34' },
+          { day: 'Fridays',   time: '11:00-11:30', cov: 100, cls: 'cov-green', badge: 'cov-badge-green', stroke: '#287147' }
+        ]
+      ];
+
+      var newCards = allCardSets[generateCount % allCardSets.length];
+      var firstNewCard = null;
+
+      newCards.forEach(function (c, i) {
+        var el = document.createElement('div');
+        el.className = 'sched-card sched-card-new';
+        el.style.animationDelay = (0.15 + i * 0.12) + 's, ' + (0.55 + i * 0.12) + 's';
+        el.innerHTML = makeCardHTML(c.day, c.time, c.cov, c.cls, c.badge, c.stroke);
+        wrap.appendChild(el);
+        if (i === 0) firstNewCard = el;
+      });
+
+      addLog('Cards stagger in with fade + slide-up', logOffset + 3);
+
+      // Add bottom "Generate 3 More" button
+      var bottomWrap = document.createElement('div');
+      bottomWrap.className = 'gen-more-wrap';
+      bottomWrap.id = 'bottomGenWrap';
+      bottomWrap.style.animationDelay = '0.5s';
+      bottomWrap.innerHTML =
+        '<button class="gen-more-btn" onclick="handleBottomGenerate(this)">' +
+          '<span class="btn-label">Generate 3 More</span>' +
+          '<div class="spinner" style="display:none"></div>' +
+        '</button>';
+      wrap.appendChild(bottomWrap);
+      addLog('"Generate 3 More" button appears at bottom of list', logOffset + 4);
+
+      // Smart scroll: show boundary between old and new
+      setTimeout(function () {
+        var sa = document.getElementById('scrollArea');
+        var target = firstNewCard.offsetTop - 40;
+        sa.scrollTo({ top: target, behavior: 'smooth' });
+        addLog('Auto-scroll anchors to the boundary', logOffset + 5);
+
+        setTimeout(function () {
+          addLog('Highlight pulse draws the eye', logOffset + 6);
+          setTimeout(function () {
+            var nc = wrap.querySelectorAll('.sched-card-new');
+            nc.forEach(function (c) { c.style.borderColor = '#dfe4e6'; });
+            addLog('Accent border fades to default', logOffset + 7);
+          }, 2000);
+        }, 600);
+      }, 350);
+
+    }, 1400);
+  }
+
+  function handleGenerate() {
+    clearLog();
     var btn = document.getElementById('genBtn');
     var lbl = document.getElementById('btnLabel');
     var sp  = document.getElementById('spinner');
 
+    // Swap to spinner state
     lbl.textContent = 'Generating…';
     sp.style.display = 'inline-block';
     btn.disabled = true;
@@ -588,8 +703,11 @@
 
     setTimeout(function () {
       sp.style.display = 'none';
-      lbl.textContent = '3 more generated';
-      addLog('Loading completes — label updates', '2');
+      addLog('Loading completes', '2');
+
+      // Hide the top button — it's done its job
+      btn.style.display = 'none';
+      addLog('Top button disappears — action complete', '3');
 
       var wrap = document.getElementById('cardsWrap');
 
@@ -598,14 +716,15 @@
       div.className = 'divider-new';
       div.innerHTML = '<div class="divider-line"></div><span class="divider-text">New options</span><div class="divider-line"></div>';
       wrap.appendChild(div);
-      addLog('"New options" divider separates old from new', '3');
+      addLog('"New options" divider separates old from new', '4');
 
-      // New cards data
       var newCards = [
         { day: 'Mondays',   time: '12:00-12:30', cov: 100, cls: 'cov-green', badge: 'cov-badge-green', stroke: '#287147' },
         { day: 'Thursdays', time: '14:00-14:30', cov: 100, cls: 'cov-green', badge: 'cov-badge-green', stroke: '#287147' },
         { day: 'Fridays',   time: '10:00-10:30', cov: 75,  cls: 'cov-amber', badge: 'cov-badge-amber', stroke: '#a06b10' }
       ];
+
+      var firstNewCard = null;
 
       newCards.forEach(function (c, i) {
         var el = document.createElement('div');
@@ -613,33 +732,48 @@
         el.style.animationDelay = (0.15 + i * 0.12) + 's, ' + (0.55 + i * 0.12) + 's';
         el.innerHTML = makeCardHTML(c.day, c.time, c.cov, c.cls, c.badge, c.stroke);
         wrap.appendChild(el);
+        if (i === 0) firstNewCard = el;
       });
 
-      addLog('Cards stagger in with fade + slide-up', '4');
+      addLog('Cards stagger in with fade + slide-up', '5');
+
+      // Add bottom "Generate 3 More" button
+      var bottomWrap = document.createElement('div');
+      bottomWrap.className = 'gen-more-wrap';
+      bottomWrap.id = 'bottomGenWrap';
+      bottomWrap.style.animationDelay = '0.5s';
+      bottomWrap.innerHTML =
+        '<button class="gen-more-btn" onclick="handleBottomGenerate(this)">' +
+          '<span class="btn-label">Generate 3 More</span>' +
+          '<div class="spinner" style="display:none"></div>' +
+        '</button>';
+      wrap.appendChild(bottomWrap);
+      addLog('"Generate 3 More" appears at end of list', '6');
 
       // Smart scroll
       setTimeout(function () {
         var sa = document.getElementById('scrollArea');
-        var allCards = wrap.querySelectorAll('.sched-card');
-        var lastOriginal = allCards[2];
-        var target = lastOriginal.offsetTop + lastOriginal.offsetHeight - 30;
+        var target = firstNewCard.offsetTop - 40;
         sa.scrollTo({ top: target, behavior: 'smooth' });
-        addLog('Auto-scroll anchors to the boundary', '5');
+        addLog('Auto-scroll anchors to the boundary', '7');
 
-        // Fade highlight
         setTimeout(function () {
-          addLog('Highlight pulse draws the eye', '6');
+          addLog('Highlight pulse draws the eye', '8');
           setTimeout(function () {
             var nc = wrap.querySelectorAll('.sched-card-new');
-            nc.forEach(function (c) {
-              c.style.borderColor = '#dfe4e6';
-            });
-            addLog('Accent border fades to default', '7');
+            nc.forEach(function (c) { c.style.borderColor = '#dfe4e6'; });
+            addLog('Accent border fades to default', '9');
           }, 2000);
         }, 600);
-      }, 250);
+      }, 350);
 
     }, 1400);
+  }
+
+  function handleBottomGenerate(btn) {
+    generateCount++;
+    clearLog();
+    runGenerate(btn, 1);
   }
 </script>
 
