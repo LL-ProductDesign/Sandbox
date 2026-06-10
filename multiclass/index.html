@@ -1,0 +1,763 @@
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ll-navy:#0A2540;--ll-navy-2:#1B3A57;--ll-blue:#185FA5;--ll-blue-dark:#0C447C;--ll-blue-light:#E6F1FB;--ll-blue-border:#B5D4F4;
+  --ll-bg:#F4F5F7;--ll-card:#FFFFFF;--ll-border:#E5E7EB;--ll-text-muted:#5F6B7A;--ll-label:#7A8694;
+  --ll-green-fill:#E8F5E0;--ll-green-fill-hover:#D7EBC9;--ll-green-border:#7CB342;
+  --ll-na-fill:#F0F2F5;--ll-na-border:#DDE1E6;
+  --ll-yellow-bg:#FFF4DA;--ll-yellow-text:#B07509;
+  --ll-red-bg:#FCE8EA;--ll-red-text:#C62828;
+  --ll-green-bg:#E1F5EE;--ll-green-text:#0F6E56;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+.app{display:flex;min-height:760px;background:var(--ll-bg);font-family:'Fira Sans',sans-serif;color:var(--ll-navy);font-size:13px}
+.sidebar{width:210px;min-width:210px;background:var(--ll-card);border-right:1px solid var(--ll-border);padding:14px 0;display:flex;flex-direction:column;flex-shrink:0}
+.sb-brand{padding:6px 16px;display:flex;align-items:baseline;gap:5px}
+.sb-brand-logo{font-size:16px;font-weight:700;color:var(--ll-blue);letter-spacing:-0.3px}
+.sb-brand-logo .dot{color:#F5B400}
+.sb-sub{font-size:9px;color:var(--ll-label);text-transform:uppercase;letter-spacing:1px;padding:0 16px 12px;border-bottom:1px solid var(--ll-border);margin-bottom:8px}
+.sb-section{font-size:9px;color:var(--ll-label);padding:10px 16px 4px;text-transform:uppercase;letter-spacing:1px;font-weight:600}
+.sb-item{padding:8px 16px 8px 13px;font-size:12px;cursor:pointer;border-left:3px solid transparent;color:var(--ll-navy-2);transition:all 0.15s;line-height:1.35}
+.sb-item:hover{background:var(--ll-bg)}
+.sb-item.active{background:var(--ll-blue-light);color:var(--ll-blue-dark);border-left-color:var(--ll-blue);font-weight:500}
+.sb-item .num{display:inline-block;width:18px;color:var(--ll-label);font-weight:500}
+.sb-item.active .num{color:var(--ll-blue)}
+.main{flex:1;min-width:0;display:flex;flex-direction:column;overflow:hidden}
+.app-header{background:var(--ll-card);border-bottom:1px solid var(--ll-border);padding:10px 24px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.app-header-logo{font-size:18px;font-weight:700;color:var(--ll-blue);letter-spacing:-0.4px}
+.app-header-logo .dot{color:#F5B400}
+.app-avatar{width:32px;height:32px;border-radius:50%;background:#D9EBFA;color:var(--ll-blue);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500}
+.screen{display:none;flex:1;overflow-y:auto}
+.screen.active{display:block}
+.welcome-row{display:flex;justify-content:space-between;align-items:flex-start;padding:22px 24px 18px;gap:16px}
+.welcome-row h1{font-size:24px;font-weight:700;color:var(--ll-navy);letter-spacing:-0.3px;line-height:1.15}
+.welcome-row p{font-size:13px;color:var(--ll-navy-2);margin-top:4px}
+.steps{display:flex;align-items:center;gap:0}
+.step{padding:5px 10px;border:1px solid var(--ll-border);border-radius:4px;font-size:11px;color:var(--ll-navy);background:var(--ll-card);min-width:30px;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px}
+.step.done{color:var(--ll-blue)}
+.step.done i{color:var(--ll-blue);font-size:13px}
+.step.active{background:var(--ll-blue);color:#fff;border-color:var(--ll-blue);font-weight:500}
+.step-sep{width:6px;height:1px;background:var(--ll-border)}
+.body-row{display:flex;gap:14px;padding:0 24px 22px;align-items:flex-start}
+.prog-card{width:200px;min-width:200px;background:var(--ll-card);border-radius:10px;padding:18px 18px 6px;flex-shrink:0;align-self:flex-start}
+.prog-card h4{font-size:13px;font-weight:600;color:var(--ll-navy);margin-bottom:14px}
+.pf{margin-bottom:14px}
+.pf-label{font-size:9px;text-transform:uppercase;letter-spacing:0.8px;color:var(--ll-label);font-weight:500}
+.pf-value{font-size:13px;color:var(--ll-navy);margin-top:2px;font-weight:400}
+.pf-row{display:flex;gap:16px;margin-bottom:14px}
+.pf-row .pf{flex:1;margin-bottom:0}
+.content-card{flex:1;min-width:0;background:var(--ll-card);border-radius:10px;padding:18px;display:flex;flex-direction:column}
+.cc-title{font-size:14px;font-weight:600;color:var(--ll-navy);margin-bottom:6px}
+.cc-desc{font-size:12px;color:var(--ll-navy-2);margin-bottom:14px;line-height:1.5}
+.cb-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ll-navy);margin-bottom:10px}
+.cb{width:14px;height:14px;border:1px solid var(--ll-border);border-radius:3px;cursor:pointer;flex-shrink:0;background:var(--ll-card)}
+.legend{display:flex;align-items:center;gap:14px;justify-content:flex-end;font-size:11px;color:var(--ll-navy)}
+.lg{display:flex;align-items:center;gap:5px}
+.lg-box{width:11px;height:11px;border-radius:2px;border:1px solid}
+.lg-na{background:var(--ll-na-fill);border-color:var(--ll-na-border)}
+.lg-av{background:var(--ll-green-fill);border-color:var(--ll-green-border)}
+.lg-sl{background:var(--ll-blue-light);border-color:var(--ll-blue)}
+.gs-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+.grid{border:1px solid var(--ll-border);border-radius:6px;overflow:hidden}
+.grid-head{display:grid;grid-template-columns:42px repeat(7,1fr);font-size:11px;font-weight:600;color:var(--ll-navy);text-align:center;background:var(--ll-card);border-bottom:1px solid var(--ll-border)}
+.grid-head > div{padding:7px 0}
+.grid-body{max-height:300px;overflow-y:auto;background:var(--ll-card)}
+.grid-row{display:grid;grid-template-columns:42px repeat(7,1fr)}
+.time-lbl{font-size:11px;color:var(--ll-navy);padding:0 6px 0 0;display:flex;align-items:center;justify-content:flex-end;background:var(--ll-card);font-weight:400}
+.slot{height:22px;border-right:1px solid var(--ll-border);border-bottom:1px solid var(--ll-border);cursor:pointer;position:relative;font-size:9px;display:flex;align-items:center;justify-content:center;color:transparent;transition:background 0.08s}
+.grid-row:last-child .slot{border-bottom:none}
+.slot:last-child{border-right:none}
+.slot.avail{background:var(--ll-green-fill)}
+.slot.avail:hover{background:var(--ll-green-fill-hover)}
+.slot.selected{background:var(--ll-blue-light);color:var(--ll-blue-dark)}
+.slot.selected::after{content:attr(data-time);font-size:9px;color:var(--ll-blue-dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 2px;font-weight:500}
+.slot.na{background:var(--ll-na-fill);cursor:default}
+.cov-strip{display:flex;align-items:center;justify-content:space-between;margin-top:12px;gap:12px;flex-wrap:wrap;min-height:42px}
+.cov-block{display:flex;align-items:center;gap:8px}
+.cov-pct{font-size:18px;font-weight:600;line-height:1}
+.cov-pct.green{color:var(--ll-green-text)}
+.cov-pct.yellow{color:var(--ll-yellow-text)}
+.cov-pct.red{color:var(--ll-red-text)}
+.cov-lbl{font-size:11px;color:var(--ll-text-muted)}
+.cov-info{display:inline-flex;width:13px;height:13px;border-radius:50%;border:1px solid var(--ll-text-muted);color:var(--ll-text-muted);font-size:8px;align-items:center;justify-content:center;cursor:help}
+.calc-cov-btn{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;background:var(--ll-card);border:2px solid var(--ll-blue);border-radius:8px;color:var(--ll-blue);font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:background 0.15s}
+.calc-cov-btn:hover{background:var(--ll-blue-light)}
+.calc-cov-btn i{font-size:16px}
+.calc-cov-btn:disabled{opacity:0.5;cursor:not-allowed}
+.recalc-link{font-size:11px;color:var(--ll-blue);background:none;border:none;cursor:pointer;text-decoration:underline;font-family:inherit;padding:4px 0;display:inline-flex;align-items:center;gap:4px;margin-left:8px}
+.recalc-link i{font-size:12px}
+.cta-area{display:flex;align-items:center;gap:10px}
+.cta-hint{font-size:11px;color:var(--ll-text-muted);font-style:italic}
+.cta-hint.ok{color:var(--ll-green-text);font-style:normal}
+.cta-hint.warn{color:var(--ll-yellow-text);font-style:normal}
+.btn-primary{padding:8px 18px;background:var(--ll-blue);color:#fff;border:none;border-radius:5px;font-size:12px;cursor:pointer;font-weight:500;font-family:inherit;letter-spacing:0.2px}
+.btn-primary:hover{background:var(--ll-blue-dark)}
+.btn-primary:disabled{background:#B7D2EC;cursor:not-allowed}
+.btn-link{padding:8px 12px;background:none;border:none;color:var(--ll-blue);font-size:12px;cursor:pointer;font-weight:500;font-family:inherit}
+.btn-ghost{padding:7px 14px;background:var(--ll-card);border:1px solid var(--ll-border);border-radius:5px;font-size:12px;cursor:pointer;color:var(--ll-navy-2);font-family:inherit}
+.app-footer{padding:12px 24px;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--ll-text-muted);border-top:1px solid var(--ll-border);background:var(--ll-card);flex-shrink:0}
+.app-footer .left{display:flex;gap:12px;align-items:center}
+.app-footer .left a{color:var(--ll-blue);text-decoration:underline}
+.app-footer .right{display:flex;gap:10px;align-items:center}
+.app-footer .right .pwby b{color:var(--ll-blue);font-weight:700}
+.cb-banner{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;border-radius:6px;font-size:11px;line-height:1.5;margin-bottom:12px}
+.cb-banner.info{background:var(--ll-blue-light);color:var(--ll-blue-dark);border:1px solid var(--ll-blue-border)}
+.cb-banner.warn{background:var(--ll-yellow-bg);color:#5C3B05;border:1px solid #F5B400}
+.cb-banner i{font-size:14px;flex-shrink:0;margin-top:1px}
+.cb-banner a{color:var(--ll-blue-dark);text-decoration:underline;font-weight:500}
+.suggest-banner{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;border-radius:6px;font-size:11px;line-height:1.5;margin-bottom:12px;background:var(--ll-yellow-bg);border:1px solid #F5B400;color:#5C3B05}
+.suggest-banner i{font-size:16px;color:#F5B400;flex-shrink:0;margin-top:1px}
+.suggest-banner .sb-title{font-weight:600;color:#5C3B05;font-size:12px}
+.suggest-banner .sb-desc{font-size:11px;margin-top:1px;color:#7A5410}
+.suggest-banner .sb-actions{display:flex;gap:6px;margin-top:6px}
+.suggest-banner .sb-actions button{padding:4px 10px;font-size:11px;border-radius:4px;cursor:pointer;font-family:inherit;font-weight:500;border:none}
+.suggest-banner .sb-apply{background:#F5B400;color:#5C3B05}
+.suggest-banner .sb-dismiss{background:transparent;color:#7A5410}
+.t-table{background:var(--ll-card);border:1px solid var(--ll-border);border-radius:8px;overflow:hidden;margin-bottom:10px}
+.t-head{display:grid;grid-template-columns:24px 1fr 48px 110px 70px;padding:7px 12px;font-size:9px;text-transform:uppercase;letter-spacing:0.6px;color:var(--ll-label);font-weight:600;border-bottom:1px solid var(--ll-border);background:var(--ll-bg)}
+.t-row{display:grid;grid-template-columns:24px 1fr 48px 110px 70px;align-items:center;padding:9px 12px;border-bottom:1px solid var(--ll-border);gap:6px;cursor:pointer}
+.t-row:last-child{border-bottom:none}
+.t-row:hover{background:var(--ll-bg)}
+.t-row.selected{background:var(--ll-blue-light)}
+.t-radio{width:14px;height:14px;border:1px solid var(--ll-border);border-radius:50%;background:var(--ll-card)}
+.t-row.selected .t-radio{background:var(--ll-blue);border-color:var(--ll-blue);box-shadow:inset 0 0 0 2px #fff}
+.t-name{font-size:12px;color:var(--ll-blue);font-weight:500;display:flex;align-items:center;gap:6px}
+.t-known{font-size:9px;background:var(--ll-bg);color:var(--ll-text-muted);padding:2px 5px;border-radius:3px;border:1px solid var(--ll-border);font-weight:500;text-transform:uppercase;letter-spacing:0.3px}
+.t-rating{font-size:11px;color:var(--ll-yellow-text);font-weight:500;display:flex;align-items:center;gap:3px}
+.t-rating i{color:#F5B400;font-size:11px}
+.t-langs{font-size:9px;color:var(--ll-blue);font-weight:500;display:flex;gap:3px;flex-wrap:wrap}
+.t-lang-pill{padding:1px 5px;border:1px solid var(--ll-blue-border);border-radius:3px;text-transform:uppercase;letter-spacing:0.3px}
+.t-cov{font-size:12px;font-weight:600;text-align:right;padding:3px 7px;border-radius:10px}
+.t-cov.green{background:var(--ll-green-bg);color:var(--ll-green-text)}
+.t-cov.yellow{background:var(--ll-yellow-bg);color:var(--ll-yellow-text)}
+.t-cov.red{background:var(--ll-red-bg);color:var(--ll-red-text)}
+.psec{margin-bottom:14px}
+.psec h5{font-size:11px;font-weight:600;color:var(--ll-navy-2);margin-bottom:6px;display:flex;align-items:center;gap:5px}
+.match-row{display:grid;grid-template-columns:24px 1fr 55px 1fr;gap:7px;align-items:center;padding:9px 12px;border:1px solid var(--ll-border);border-radius:6px;margin-bottom:5px;background:var(--ll-card);cursor:pointer}
+.match-row:hover{background:var(--ll-bg)}
+.match-row.selected{background:var(--ll-blue-light);border-color:var(--ll-blue)}
+.match-row.partial{border-left:3px solid #F5B400;padding-left:9px}
+.match-row.selected .t-radio{background:var(--ll-blue);border-color:var(--ll-blue);box-shadow:inset 0 0 0 2px #fff}
+.match-alt{font-size:10px;color:var(--ll-text-muted);line-height:1.3}
+.match-alt strong{color:var(--ll-navy)}
+.sched-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.sched-card{border:1px solid var(--ll-border);border-radius:8px;padding:12px;background:var(--ll-card);cursor:pointer}
+.sched-card:hover{border-color:var(--ll-blue-border)}
+.sched-card.selected{border:2px solid var(--ll-blue);padding:11px}
+.sc-row{display:flex;gap:14px;margin-bottom:7px}
+.sc-col{flex:1}
+.sc-lbl{font-size:8px;text-transform:uppercase;letter-spacing:0.6px;color:var(--ll-label);font-weight:600}
+.sc-val{font-size:13px;font-weight:500;color:var(--ll-navy);margin-top:1px}
+.sc-cov-lbl{font-size:8px;text-transform:uppercase;letter-spacing:0.6px;color:var(--ll-label);font-weight:600;margin-top:9px}
+.sc-cov-num{font-size:14px;font-weight:600;margin-top:3px}
+.sc-cov-num.green{color:var(--ll-green-text)}
+.sc-cov-num.yellow{color:var(--ll-yellow-text)}
+.sc-cov-num.red{color:var(--ll-red-text)}
+.sc-radio{display:flex;align-items:center;gap:5px;margin-top:9px;padding-top:9px;border-top:1px solid var(--ll-border);font-size:11px;color:var(--ll-navy-2)}
+.sc-radio .rdo{width:12px;height:12px;border:1px solid var(--ll-border);border-radius:50%;background:var(--ll-card)}
+.sched-card.selected .rdo{background:var(--ll-blue);border-color:var(--ll-blue);box-shadow:inset 0 0 0 2px #fff}
+.empty{text-align:center;padding:30px 18px;background:var(--ll-bg);border-radius:8px;border:1px solid var(--ll-border)}
+.empty .icn{font-size:30px;color:var(--ll-text-muted);margin-bottom:10px}
+.empty h4{font-size:14px;font-weight:600;margin-bottom:5px;color:var(--ll-navy)}
+.empty p{font-size:12px;color:var(--ll-text-muted);line-height:1.5;max-width:340px;margin:0 auto 14px}
+.alt-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px;max-width:440px;margin-left:auto;margin-right:auto}
+.alt-card{border:1px solid var(--ll-border);border-radius:6px;padding:13px;text-align:left;cursor:pointer;background:var(--ll-card)}
+.alt-card:hover{border-color:var(--ll-blue);background:var(--ll-blue-light)}
+.alt-card i{font-size:20px;color:var(--ll-blue);margin-bottom:5px}
+.alt-card h5{font-size:12px;font-weight:600;color:var(--ll-navy);margin-bottom:3px}
+.alt-card p{font-size:10px;color:var(--ll-text-muted);line-height:1.4;margin:0}
+.confirmed-card{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding:11px 14px;background:var(--ll-green-bg);border-radius:6px;border:1px solid #B7DCB0}
+.checkmark-icon{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:var(--ll-green-text);color:#fff;border-radius:50%;font-size:11px;font-weight:700;flex-shrink:0}
+.confirmed-card .info-text{flex:1}
+.confirmed-card .info-text .title{font-size:12px;color:var(--ll-green-text);font-weight:600}
+.confirmed-card .info-text .sub{font-size:11px;color:var(--ll-green-text);opacity:0.85;margin-top:1px}
+.step-marker{width:24px;height:24px;border-radius:50%;background:var(--ll-blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0}
+.day-filter-wrap{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;padding:10px 12px;background:var(--ll-bg);border-radius:6px;border:1px solid var(--ll-border)}
+.day-filter-lbl{font-size:11px;color:var(--ll-text-muted);font-weight:500}
+.day-chip{padding:4px 11px;border:1px solid var(--ll-border);border-radius:14px;font-size:11px;cursor:pointer;background:var(--ll-card);color:var(--ll-navy-2);font-family:inherit;display:flex;align-items:center;gap:5px;user-select:none}
+.day-chip.on{background:var(--ll-blue);color:#fff;border-color:var(--ll-blue)}
+.day-chip .x{font-size:13px;opacity:0.7}
+.day-filter-reset{margin-left:auto;font-size:10px;color:var(--ll-blue);background:none;border:none;cursor:pointer;font-family:inherit;text-decoration:underline}
+.flow-nav{display:flex;justify-content:space-between;padding:14px 24px;border-top:1px solid var(--ll-border);background:var(--ll-card);align-items:center;flex-shrink:0}
+.review-note{background:var(--ll-blue-light);border:1px solid var(--ll-blue-border);border-radius:6px;padding:9px 12px;font-size:11px;color:var(--ll-blue-dark);margin-bottom:14px;line-height:1.5;display:flex;align-items:flex-start;gap:8px}
+.review-note i{font-size:14px;flex-shrink:0;margin-top:1px}
+.review-note a{color:var(--ll-blue-dark);text-decoration:underline;font-weight:500}
+.calc-spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--ll-blue-border);border-top-color:var(--ll-blue);border-radius:50%;animation:spin 0.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+
+<h2 class="sr-only">UX-536 self-service multi-class scheduling prototype</h2>
+
+<div class="app">
+  <div class="sidebar">
+    <div class="sb-brand"><span class="sb-brand-logo">learnl<span class="dot">i</span>ght</span></div>
+    <div class="sb-sub">UX-536 prototype</div>
+    <div class="sb-section">Main flow</div>
+    <div class="sb-item active" onclick="goScreen('s1',this)"><span class="num">1·</span>Availability</div>
+    <div class="sb-item" onclick="goScreen('s2',this)"><span class="num">2·</span>Trainer selection</div>
+    <div class="sb-item" onclick="goScreen('s3',this)"><span class="num">3·</span>Schedule — class 1</div>
+    <div class="sb-item" onclick="goScreen('s4',this)"><span class="num">4·</span>Schedule — class 2</div>
+    <div class="sb-section">Edge cases</div>
+    <div class="sb-item" onclick="goScreen('e1',this)"><span class="num">✕</span>Conflict (no match)</div>
+    <div class="sb-item" onclick="goScreen('e2',this)"><span class="num">✕</span>No-trainer fallback</div>
+  </div>
+
+  <div class="main">
+    <div class="app-header">
+      <span class="app-header-logo">learnl<span class="dot">i</span>ght</span>
+      <div class="app-avatar">AL</div>
+    </div>
+
+    <div class="screen active" id="s1">
+      <div class="welcome-row">
+        <div><h1>Welcome, Alex!</h1><p>Let's get your learning program set up for success</p></div>
+        <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">2. Availability</div><div class="step-sep"></div><div class="step">3</div></div>
+      </div>
+      <div class="body-row">
+        <div class="prog-card">
+          <h4>Your Program Details</h4>
+          <div class="pf"><div class="pf-label">Program</div><div class="pf-value">English</div></div>
+          <div class="pf"><div class="pf-label">Assigned Course</div><div class="pf-value">B1 - Intermediate 1</div></div>
+          <div class="pf-row">
+            <div class="pf"><div class="pf-label">Active From</div><div class="pf-value">01 Sep 2025</div></div>
+            <div class="pf"><div class="pf-label">Active To</div><div class="pf-value">01 Jun 2026</div></div>
+          </div>
+          <div class="pf-row">
+            <div class="pf"><div class="pf-label">Total Classes</div><div class="pf-value">16</div></div>
+            <div class="pf"><div class="pf-label">Class Duration</div><div class="pf-value">30 min</div></div>
+          </div>
+          <div class="pf"><div class="pf-label">Class Frequency</div><div class="pf-value">2 × week</div></div>
+        </div>
+
+        <div class="content-card">
+          <div class="cc-title">Specify Availability</div>
+          <div class="cc-desc">Select the slots that fit your availability so we can recommend a more accurate schedule</div>
+
+          <div class="cb-banner info">
+            <i class="ti ti-info-circle"></i>
+            <div><strong>Both of your weekly classes will be with the same trainer.</strong> We'll find a trainer whose availability covers all your selected slots — select more times to give us more options.</div>
+          </div>
+
+          <div id="suggest-banner-host"></div>
+
+          <div class="gs-top">
+            <div class="cb-row"><div class="cb"></div>Select all available times</div>
+            <div class="legend">
+              <div class="lg"><div class="lg-box lg-na"></div>Not available</div>
+              <div class="lg"><div class="lg-box lg-av"></div>Available</div>
+              <div class="lg"><div class="lg-box lg-sl"></div>Selected</div>
+            </div>
+          </div>
+
+          <div class="grid">
+            <div class="grid-head">
+              <div></div><div>Mondays</div><div>Tuesdays</div><div>Wednesdays</div><div>Thursdays</div><div>Fridays</div><div>Saturdays</div><div>Sundays</div>
+            </div>
+            <div class="grid-body" id="s1-grid"></div>
+          </div>
+
+          <div class="cov-strip">
+            <div id="s1-cov-area" style="display:none"></div>
+            <div class="cta-area" style="margin-left:auto">
+              <span class="cta-hint" id="s1-hint">Select your available slots to begin</span>
+              <button class="btn-link">Select A Trainer</button>
+              <button class="btn-primary" id="s1-genbtn" disabled onclick="goScreen('s2',document.querySelectorAll('.sb-item')[1])">Schedule Options</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="screen" id="s2">
+      <div class="welcome-row">
+        <div><h1>Choose your trainer</h1><p>Pick the trainer you'd like for both of your weekly classes</p></div>
+        <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">3. Schedule</div></div>
+      </div>
+      <div class="body-row">
+        <div class="prog-card">
+          <h4>Your selected slots</h4>
+          <div class="pf"><div class="pf-label">Slot 1</div><div class="pf-value">Mon 10:00</div></div>
+          <div class="pf"><div class="pf-label">Slot 2</div><div class="pf-value">Thu 10:00</div></div>
+          <div class="pf"><div class="pf-label">Slot 3</div><div class="pf-value">Fri 09:30</div></div>
+          <div class="pf"><div class="pf-label">Coverage required</div><div class="pf-value">≥ 80%</div></div>
+        </div>
+        <div class="content-card">
+          <div class="cc-title">Available trainers</div>
+          <div class="cc-desc">Choose one trainer for both weekly classes. Partial matches suggest a slight slot adjustment.</div>
+
+          <div class="psec">
+            <h5><i class="ti ti-circle-check" style="color:var(--ll-green-border);font-size:13px"></i> Full matches — covers all your slots</h5>
+            <div class="t-table">
+              <div class="t-head"><div></div><div>Name</div><div>Rating</div><div>Languages</div><div style="text-align:right">Coverage</div></div>
+              <div class="t-row" onclick="selectTrainer(this)" data-tname="Camille Dubois"><div class="t-radio"></div><div class="t-name">Camille Dubois</div><div class="t-rating"><i class="ti ti-star-filled"></i>4.8</div><div class="t-langs"><span class="t-lang-pill">EN</span><span class="t-lang-pill">FR</span><span class="t-lang-pill">ES</span></div><div class="t-cov green">100%</div></div>
+              <div class="t-row" onclick="selectTrainer(this)" data-tname="Elias Sorenson"><div class="t-radio"></div><div class="t-name">Elias Sorenson <span class="t-known">Known</span></div><div class="t-rating"><i class="ti ti-star-filled"></i>4.8</div><div class="t-langs"><span class="t-lang-pill">EN</span><span class="t-lang-pill">ES</span><span class="t-lang-pill">IT</span></div><div class="t-cov green">100%</div></div>
+              <div class="t-row" onclick="selectTrainer(this)" data-tname="Sofía Rodríguez"><div class="t-radio"></div><div class="t-name">Sofía Rodríguez</div><div class="t-rating"><i class="ti ti-star-filled"></i>4.7</div><div class="t-langs"><span class="t-lang-pill">EN</span><span class="t-lang-pill">ES</span></div><div class="t-cov green">85%</div></div>
+            </div>
+          </div>
+
+          <div class="psec">
+            <h5><i class="ti ti-alert-triangle" style="color:#F5B400;font-size:13px"></i> Partial matches — small slot adjustment</h5>
+            <div class="match-row partial" onclick="selectTrainer(this)" data-tname="Marcus Silva">
+              <div class="t-radio"></div>
+              <div>
+                <div class="t-name">Marcus Silva</div>
+                <div class="t-langs" style="margin-top:3px"><span class="t-lang-pill">EN</span><span class="t-lang-pill">ES</span></div>
+              </div>
+              <div class="t-cov yellow">75%</div>
+              <div class="match-alt">Mon 10:00 ✓ &nbsp;·&nbsp; Fri 09:30 ✓ &nbsp;·&nbsp; Thu: try <strong>Thu 10:30</strong></div>
+            </div>
+            <div class="match-row partial" onclick="selectTrainer(this)" data-tname="Arthur Reyes">
+              <div class="t-radio"></div>
+              <div>
+                <div class="t-name">Arthur Reyes <span class="t-known">Known</span></div>
+                <div class="t-langs" style="margin-top:3px"><span class="t-lang-pill">EN</span><span class="t-lang-pill">FR</span></div>
+              </div>
+              <div class="t-cov yellow">75%</div>
+              <div class="match-alt">Thu 10:00 ✓ &nbsp;·&nbsp; Fri 09:30 ✓ &nbsp;·&nbsp; Mon: try <strong>Mon 09:30</strong></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="flow-nav">
+        <button class="btn-ghost" onclick="goScreen('s1',document.querySelectorAll('.sb-item')[0])">← Back to availability</button>
+        <button class="btn-primary" id="s2-next" disabled onclick="goScreen('s3',document.querySelectorAll('.sb-item')[2])">Continue with selected trainer →</button>
+      </div>
+    </div>
+
+    <div class="screen" id="s3">
+      <div class="welcome-row">
+        <div><h1>Welcome, Alex!</h1><p>Pick your first weekly class</p></div>
+        <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">3. Schedule</div></div>
+      </div>
+      <div class="body-row">
+        <div class="prog-card">
+          <h4>Your Program Details</h4>
+          <div class="pf"><div class="pf-label">Trainer</div><div class="pf-value">Camille Dubois</div></div>
+          <div class="pf"><div class="pf-label">Class 1</div><div class="pf-value" style="color:var(--ll-blue);font-weight:500">Choosing now</div></div>
+          <div class="pf"><div class="pf-label">Class 2</div><div class="pf-value" style="color:var(--ll-label)">After class 1</div></div>
+          <div class="pf"><div class="pf-label">Frequency</div><div class="pf-value">2 × week</div></div>
+        </div>
+        <div class="content-card">
+          <div class="cc-title">Select Schedule</div>
+          <div class="cc-desc">Confirm your schedule, or return to adjust your availability or trainer if needed.</div>
+          <div class="review-note"><i class="ti ti-info-circle"></i><div>Review your <a href="#">cancellation policy</a> before confirming the schedule, and check your <a href="#">time zone</a>.</div></div>
+
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+            <div class="step-marker">1</div>
+            <div>
+              <div style="font-size:13px;font-weight:600;color:var(--ll-navy)">Choose Class 1</div>
+              <div style="font-size:11px;color:var(--ll-text-muted)">Pick a recurring weekly time</div>
+            </div>
+          </div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div style="font-size:11px;color:var(--ll-text-muted);text-transform:uppercase;letter-spacing:0.5px;font-weight:600">Proposed schedules</div>
+            <button class="btn-link" style="padding:4px 8px">Generate 3 More</button>
+          </div>
+
+          <div class="sched-grid">
+            <div class="sched-card" onclick="selectClass1(this)"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">Mondays</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">10:00-10:30</div></div></div><div class="sc-cov-lbl">Schedule coverage</div><div class="sc-cov-num green">85%</div><div class="sc-radio"><div class="rdo"></div>Select this schedule</div></div>
+            <div class="sched-card" onclick="selectClass1(this)"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">Thursdays</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">10:00-10:30</div></div></div><div class="sc-cov-lbl">Schedule coverage</div><div class="sc-cov-num yellow">75%</div><div class="sc-radio"><div class="rdo"></div>Select this schedule</div></div>
+            <div class="sched-card" onclick="selectClass1(this)"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">Fridays</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">09:30-10:00</div></div></div><div class="sc-cov-lbl">Schedule coverage</div><div class="sc-cov-num red">60%</div><div class="sc-radio"><div class="rdo"></div>Select this schedule</div></div>
+          </div>
+
+        </div>
+      </div>
+      <div class="flow-nav">
+        <button class="btn-ghost" onclick="goScreen('s2',document.querySelectorAll('.sb-item')[1])">← Back to trainer</button>
+        <button class="btn-primary" id="s3-next" disabled onclick="confirmClass1Go()">Confirm class 1 & continue →</button>
+      </div>
+    </div>
+
+    <div class="screen" id="s4">
+      <div class="welcome-row">
+        <div><h1>Welcome, Alex!</h1><p>Now pick your second weekly class</p></div>
+        <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">3. Schedule</div></div>
+      </div>
+      <div class="body-row">
+        <div class="prog-card">
+          <h4>Your Program Details</h4>
+          <div class="pf"><div class="pf-label">Trainer</div><div class="pf-value" id="s4-trainer">Camille Dubois</div></div>
+          <div class="pf"><div class="pf-label">Class 1</div><div class="pf-value" style="color:var(--ll-green-text);font-weight:500" id="s4-class1">Mondays 10:00-10:30</div></div>
+          <div class="pf"><div class="pf-label">Class 2</div><div class="pf-value" style="color:var(--ll-blue);font-weight:500">Choosing now</div></div>
+          <div class="pf"><div class="pf-label">Frequency</div><div class="pf-value">2 × week</div></div>
+        </div>
+        <div class="content-card">
+          <div class="cc-title">Select Schedule</div>
+          <div class="cc-desc">Pick a second weekly class with <span id="s4-trainer-inline">Camille</span>.</div>
+
+          <div class="confirmed-card">
+            <div class="checkmark-icon">✓</div>
+            <div class="info-text">
+              <div class="title">Class 1 confirmed — <span id="s4-c1-text">Mondays 10:00-10:30</span></div>
+              <div class="sub">85% coverage · with Camille Dubois</div>
+            </div>
+            <button class="btn-link" style="padding:4px 10px;font-size:11px" onclick="editClass1()"><i class="ti ti-edit" style="font-size:12px;vertical-align:-2px"></i> Edit</button>
+          </div>
+
+          <div id="edit-warning" style="display:none">
+            <div class="cb-banner warn">
+              <i class="ti ti-alert-triangle"></i>
+              <div><strong>Changing Class 1 may require picking a new Class 2.</strong> If you choose a Class 1 with a different trainer, your current Class 2 selection will be reset.</div>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+            <div class="step-marker">2</div>
+            <div>
+              <div style="font-size:13px;font-weight:600;color:var(--ll-navy)">Choose Class 2</div>
+              <div style="font-size:11px;color:var(--ll-text-muted)">Filter by day to narrow your options</div>
+            </div>
+          </div>
+
+          <div class="day-filter-wrap">
+            <span class="day-filter-lbl">Show days:</span>
+            <div class="day-chip on" data-day="Mon" onclick="toggleDayFilter(this)">Mon <span class="x">×</span></div>
+            <div class="day-chip on" data-day="Tue" onclick="toggleDayFilter(this)">Tue <span class="x">×</span></div>
+            <div class="day-chip on" data-day="Wed" onclick="toggleDayFilter(this)">Wed <span class="x">×</span></div>
+            <div class="day-chip on" data-day="Thu" onclick="toggleDayFilter(this)">Thu <span class="x">×</span></div>
+            <div class="day-chip on" data-day="Fri" onclick="toggleDayFilter(this)">Fri <span class="x">×</span></div>
+            <button class="day-filter-reset" onclick="resetDayFilter()">Reset</button>
+          </div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div style="font-size:11px;color:var(--ll-text-muted);text-transform:uppercase;letter-spacing:0.5px;font-weight:600">Proposed schedules · <span id="s4-shown-count">5</span> shown</div>
+            <button class="btn-link" style="padding:4px 8px">Generate 3 More</button>
+          </div>
+
+          <div class="sched-grid" id="s4-sched-grid"></div>
+          <div id="s4-empty" style="display:none;text-align:center;padding:20px;background:var(--ll-bg);border-radius:6px;border:1px solid var(--ll-border);font-size:12px;color:var(--ll-text-muted)">No schedules match the selected days. Adjust the filter above to see more options.</div>
+
+        </div>
+      </div>
+      <div class="flow-nav">
+        <button class="btn-ghost" onclick="goScreen('s3',document.querySelectorAll('.sb-item')[2])">← Back to class 1</button>
+        <button class="btn-primary" id="s4-next" disabled>Confirm schedule</button>
+      </div>
+    </div>
+
+    <div class="screen" id="e1">
+      <div class="welcome-row">
+        <div><h1>Welcome, Alex!</h1><p>This selection has a conflict</p></div>
+        <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">2. Availability</div><div class="step-sep"></div><div class="step">3</div></div>
+      </div>
+      <div class="body-row">
+        <div class="prog-card">
+          <h4>Edge case</h4>
+          <div class="pf"><div class="pf-label">Scenario</div><div class="pf-value">No trainer covers selection</div></div>
+          <div class="pf"><div class="pf-label">Trigger</div><div class="pf-value">All selected slots fail trainer constraint</div></div>
+        </div>
+        <div class="content-card">
+          <div class="cc-title">Specify Availability — conflict state</div>
+          <div class="cc-desc">When the learner clicks Calculate Coverage and no trainer can be matched, both the upfront constraint banner and a contextual warning are shown.</div>
+
+          <div class="cb-banner info">
+            <i class="ti ti-info-circle"></i>
+            <div><strong>Both of your weekly classes will be with the same trainer.</strong> We'll find a trainer whose availability covers all your selected slots.</div>
+          </div>
+
+          <div class="cb-banner warn">
+            <i class="ti ti-alert-triangle"></i>
+            <div><strong>No trainer covers your current selection.</strong> Your selected slots (Sat 07:00 + Sun 07:00) don't match any single trainer. <a href="#" onclick="event.preventDefault();goScreen('e2',document.querySelectorAll('.sb-item')[5])">See your options →</a></div>
+          </div>
+
+          <div class="gs-top">
+            <div class="cb-row"><div class="cb"></div>Select all available times</div>
+            <div class="legend">
+              <div class="lg"><div class="lg-box lg-na"></div>Not available</div>
+              <div class="lg"><div class="lg-box lg-av"></div>Available</div>
+              <div class="lg"><div class="lg-box lg-sl"></div>Selected</div>
+            </div>
+          </div>
+          <div class="grid">
+            <div class="grid-head"><div></div><div>Mondays</div><div>Tuesdays</div><div>Wednesdays</div><div>Thursdays</div><div>Fridays</div><div>Saturdays</div><div>Sundays</div></div>
+            <div class="grid-body" id="e1-grid"></div>
+          </div>
+          <div class="cov-strip">
+            <div class="cov-block">
+              <span class="cov-pct red">0%</span>
+              <span class="cov-lbl">coverage <span class="cov-info">i</span></span>
+            </div>
+            <div class="cta-area">
+              <span class="cta-hint" style="color:var(--ll-red-text)">No trainer matches — see options</span>
+              <button class="btn-primary" disabled>Schedule Options</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="screen" id="e2">
+      <div class="welcome-row">
+        <div><h1>Let's find a path forward</h1><p>Two ways to get back on track</p></div>
+        <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">2. Availability</div><div class="step-sep"></div><div class="step">3</div></div>
+      </div>
+      <div class="body-row">
+        <div class="prog-card">
+          <h4>Situation</h4>
+          <div class="pf"><div class="pf-label">Slot 1</div><div class="pf-value">Sat 07:00</div></div>
+          <div class="pf"><div class="pf-label">Slot 2</div><div class="pf-value">Sun 07:00</div></div>
+          <div class="pf"><div class="pf-label">Trainers found</div><div class="pf-value" style="color:var(--ll-red-text)">0</div></div>
+        </div>
+        <div class="content-card">
+          <div class="cc-title">No-trainer fallback</div>
+          <div class="cc-desc">When no trainer can cover the selection, two paths forward — neither is a dead end.</div>
+          <div class="empty">
+            <div class="icn"><i class="ti ti-calendar-off"></i></div>
+            <h4>No trainers available for these slots</h4>
+            <p>We couldn't find a trainer who covers Saturday 07:00 and Sunday 07:00. Here's how to move forward:</p>
+            <div class="alt-opts">
+              <div class="alt-card" onclick="sendPrompt('Walk me through the nearby-times flow for UX-536')"><i class="ti ti-clock-edit"></i><h5>Try nearby times</h5><p>See slots ±1 hour from your preference where trainers are available</p></div>
+              <div class="alt-card" onclick="goScreen('s1',document.querySelectorAll('.sb-item')[0])"><i class="ti ti-calendar-plus"></i><h5>Adjust availability</h5><p>Go back and open up more days or times to expand the trainer pool</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="app-footer">
+      <div class="left">© 2026 Learnlight. All Rights Reserved <a href="#">Privacy</a> <a href="#">Cookies</a></div>
+      <div class="right"><span><i class="ti ti-world" style="font-size:12px;vertical-align:-1px"></i> EN ▾</span><span class="pwby">Powered by: <b>learnl<span style="color:#F5B400">i</span>ght</b></span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const TIMES=['08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30'];
+const UNAVAIL={'0-0':1,'0-1':1,'1-2':1,'2-0':1,'3-3':1,'4-4':1,'5-0':1,'5-1':1,'5-2':1,'5-3':1,'6-0':1,'6-1':1,'6-2':1,'6-3':1,'6-4':1,'6-5':1,'6-6':1,'6-7':1,'6-8':1,'6-9':1,'6-10':1,'6-11':1};
+const TIMES_PRETTY=t=>{const[h,m]=t.split(':').map(Number);const next=m===30?[h+1,0]:[h,30];return t+' → '+String(next[0]).padStart(2,'0')+':'+String(next[1]).padStart(2,'0')};
+const COVERAGE_THRESHOLD=80;
+
+let s1Sel={};
+let coverageCalculated=false;
+let coverageValue=0;
+let selectedTrainer=null;
+let class1Sel=null;
+let dayFilter={Mon:true,Tue:true,Wed:true,Thu:true,Fri:true};
+let suggestionShown=false;
+let suggestionDismissed=false;
+
+const CLASS2_OPTIONS=[
+  {day:'Thursdays',dayKey:'Thu',time:'10:00-10:30',cov:80,col:'green'},
+  {day:'Tuesdays',dayKey:'Tue',time:'14:00-14:30',cov:75,col:'yellow'},
+  {day:'Wednesdays',dayKey:'Wed',time:'10:00-10:30',cov:70,col:'yellow'},
+  {day:'Fridays',dayKey:'Fri',time:'09:30-10:00',cov:65,col:'yellow'},
+  {day:'Tuesdays',dayKey:'Tue',time:'09:00-09:30',cov:60,col:'red'}
+];
+
+function buildGrid(containerId,onClick){
+  const c=document.getElementById(containerId);if(!c)return;
+  c.innerHTML='';
+  TIMES.forEach((t,ti)=>{
+    const row=document.createElement('div');row.className='grid-row';
+    const lbl=document.createElement('div');lbl.className='time-lbl';
+    if(ti%2===0)lbl.textContent=t;
+    row.appendChild(lbl);
+    DAYS.forEach((d,di)=>{
+      const slot=document.createElement('div');
+      const na=UNAVAIL[di+'-'+ti];
+      slot.className='slot '+(na?'na':'avail');
+      slot.dataset.di=di;slot.dataset.ti=ti;slot.dataset.day=d;slot.dataset.t=t;
+      if(!na){slot.onclick=()=>{if(onClick)onClick(slot,di,ti,d,t)}}
+      row.appendChild(slot);
+    });
+    c.appendChild(row);
+  });
+}
+
+function goScreen(id,el){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.sb-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(el)el.classList.add('active');
+  if(id==='s4')renderClass2();
+}
+
+function refreshS1(){
+  buildGrid('s1-grid',(slot,di,ti,d,t)=>{
+    const k=di+'-'+ti;
+    if(s1Sel[k]){delete s1Sel[k];slot.classList.remove('selected');slot.classList.add('avail');delete slot.dataset.time}
+    else{s1Sel[k]=1;slot.classList.add('selected');slot.classList.remove('avail');slot.dataset.time=TIMES_PRETTY(t)}
+    coverageCalculated=false;
+    coverageValue=0;
+    updateS1();
+  });
+}
+
+function renderCovArea(){
+  const area=document.getElementById('s1-cov-area');
+  const n=Object.keys(s1Sel).length;
+  if(!area)return;
+  if(n===0){area.style.display='none';area.innerHTML='';return}
+  area.style.display='';
+  if(!coverageCalculated){
+    area.innerHTML='<button class="calc-cov-btn" id="s1-calc-btn" onclick="calculateCoverage()"><i class="ti ti-percentage"></i>Calculate Coverage</button>';
+  } else {
+    const pct=coverageValue;
+    const cls=pct>=80?'green':pct>=60?'yellow':'red';
+    area.innerHTML='<div class="cov-block"><span class="cov-pct '+cls+'">'+pct+'%</span><span class="cov-lbl">coverage <span class="cov-info" title="How well your selected slots cover trainer availability">i</span></span><button class="recalc-link" onclick="resetCoverage()"><i class="ti ti-refresh"></i>Recalculate</button></div>';
+  }
+}
+
+function calculateCoverage(){
+  const btn=document.getElementById('s1-calc-btn');
+  if(btn){
+    btn.innerHTML='<span class="calc-spinner"></span>Calculating…';
+    btn.disabled=true;
+  }
+  setTimeout(()=>{
+    const n=Object.keys(s1Sel).length;
+    coverageValue=Math.min(100,Math.round(n/5*100));
+    coverageCalculated=true;
+    renderCovArea();
+    updateS1();
+  },550);
+}
+
+function resetCoverage(){
+  coverageCalculated=false;
+  coverageValue=0;
+  renderCovArea();
+  updateS1();
+}
+
+function updateS1(){
+  const n=Object.keys(s1Sel).length;
+  const hint=document.getElementById('s1-hint');
+  const btn=document.getElementById('s1-genbtn');
+
+  renderCovArea();
+
+  // Schedule Options button is enabled ONLY when coverage is calculated AND >= 80%
+  if(hint&&btn){
+    if(n===0){
+      hint.textContent='Select your available slots to begin';
+      hint.className='cta-hint';
+      btn.disabled=true;
+    } else if(!coverageCalculated){
+      hint.textContent='Calculate coverage to continue';
+      hint.className='cta-hint';
+      btn.disabled=true;
+    } else if(coverageValue<COVERAGE_THRESHOLD){
+      hint.textContent='Coverage below '+COVERAGE_THRESHOLD+'% — add more slots';
+      hint.className='cta-hint warn';
+      btn.disabled=true;
+    } else {
+      hint.textContent='Ready to schedule';
+      hint.className='cta-hint ok';
+      btn.disabled=false;
+    }
+  }
+
+  if(n>=2&&!suggestionDismissed&&!suggestionShown)showSuggestion();
+  if(n<2&&suggestionShown){hideSuggestion()}
+}
+
+function showSuggestion(){
+  if(suggestionDismissed)return;
+  const host=document.getElementById('suggest-banner-host');if(!host)return;
+  host.innerHTML='<div class="suggest-banner"><i class="ti ti-bulb"></i><div style="flex:1"><div class="sb-title">Try adding Wednesday 10:00 for better matches</div><div class="sb-desc">22 trainers are free at this time — adding it could raise your trainer pool from 4 to 26.</div><div class="sb-actions"><button class="sb-apply" onclick="applySuggestion()">Apply suggestion</button><button class="sb-dismiss" onclick="dismissSuggestion()">Dismiss</button></div></div></div>';
+  suggestionShown=true;
+}
+
+function hideSuggestion(){
+  const host=document.getElementById('suggest-banner-host');if(host)host.innerHTML='';
+  suggestionShown=false;
+}
+
+function dismissSuggestion(){suggestionDismissed=true;hideSuggestion()}
+
+function applySuggestion(){
+  const di=2,ti=4;const k=di+'-'+ti;
+  if(!s1Sel[k]){
+    const slot=document.querySelector('#s1-grid .slot[data-di="'+di+'"][data-ti="'+ti+'"]');
+    if(slot&&!slot.classList.contains('na')){
+      s1Sel[k]=1;slot.classList.add('selected');slot.classList.remove('avail');
+      slot.dataset.time=TIMES_PRETTY(TIMES[ti]);
+      coverageCalculated=false;coverageValue=0;
+    }
+  }
+  dismissSuggestion();updateS1();
+}
+
+function selectTrainer(row){
+  document.querySelectorAll('#s2 .t-row, #s2 .match-row').forEach(r=>r.classList.remove('selected'));
+  row.classList.add('selected');
+  selectedTrainer=row.dataset.tname;
+  const btn=document.getElementById('s2-next');if(btn)btn.disabled=false;
+  const t4=document.getElementById('s4-trainer');const t4i=document.getElementById('s4-trainer-inline');
+  if(t4)t4.textContent=selectedTrainer;
+  if(t4i)t4i.textContent=selectedTrainer.split(' ')[0];
+}
+
+function selectClass1(card){
+  document.querySelectorAll('#s3 .sched-card').forEach(c=>c.classList.remove('selected'));
+  card.classList.add('selected');
+  const day=card.querySelector('.sc-val').textContent;
+  const time=card.querySelectorAll('.sc-val')[1].textContent;
+  class1Sel={day,time};
+  const btn=document.getElementById('s3-next');if(btn)btn.disabled=false;
+}
+
+function confirmClass1Go(){
+  if(class1Sel){
+    const txt=class1Sel.day+' '+class1Sel.time;
+    const e1=document.getElementById('s4-class1');const e2=document.getElementById('s4-c1-text');
+    if(e1)e1.textContent=txt;if(e2)e2.textContent=txt;
+  }
+  goScreen('s4',document.querySelectorAll('.sb-item')[3]);
+}
+
+function editClass1(){
+  const w=document.getElementById('edit-warning');if(w)w.style.display='';
+  goScreen('s3',document.querySelectorAll('.sb-item')[2]);
+}
+
+function toggleDayFilter(chip){
+  const day=chip.dataset.day;dayFilter[day]=!dayFilter[day];
+  chip.classList.toggle('on');
+  chip.querySelector('.x').textContent=dayFilter[day]?'×':'+';
+  renderClass2();
+}
+
+function resetDayFilter(){
+  Object.keys(dayFilter).forEach(k=>{dayFilter[k]=true});
+  document.querySelectorAll('#s4 .day-chip').forEach(c=>{c.classList.add('on');c.querySelector('.x').textContent='×'});
+  renderClass2();
+}
+
+function renderClass2(){
+  const grid=document.getElementById('s4-sched-grid');const empty=document.getElementById('s4-empty');const cnt=document.getElementById('s4-shown-count');
+  if(!grid)return;
+  const visible=CLASS2_OPTIONS.filter(o=>dayFilter[o.dayKey]);
+  if(cnt)cnt.textContent=visible.length;
+  if(visible.length===0){grid.style.display='none';if(empty)empty.style.display='';return}
+  grid.style.display='';if(empty)empty.style.display='none';
+  grid.innerHTML=visible.map((o,i)=>'<div class="sched-card" onclick="selectClass2(this,'+i+')"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">'+o.day+'</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">'+o.time+'</div></div></div><div class="sc-cov-lbl">Schedule coverage</div><div class="sc-cov-num '+o.col+'">'+o.cov+'%</div><div class="sc-radio"><div class="rdo"></div>Select this schedule</div></div>').join('');
+}
+
+function selectClass2(card,i){
+  document.querySelectorAll('#s4 .sched-card').forEach(c=>c.classList.remove('selected'));
+  card.classList.add('selected');
+  const btn=document.getElementById('s4-next');if(btn)btn.disabled=false;
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  refreshS1();
+  buildGrid('e1-grid',null);
+  setTimeout(()=>{
+    const e1Grid=document.getElementById('e1-grid');if(!e1Grid)return;
+    const sa=e1Grid.querySelector('.slot[data-di="5"][data-ti="5"]');
+    const sb=e1Grid.querySelector('.slot[data-di="5"][data-ti="6"]');
+    if(sa){sa.classList.remove('avail');sa.classList.add('selected');sa.dataset.time='10:30 → 11:00'}
+    if(sb){sb.classList.remove('avail');sb.classList.add('selected');sb.dataset.time='11:00 → 11:30'}
+  },50);
+  renderClass2();
+});
+</script>
