@@ -12,9 +12,10 @@
   --ll-yellow-bg:#FFF4DA;--ll-yellow-text:#B07509;
   --ll-red-bg:#FCE8EA;--ll-red-text:#C62828;
   --ll-green-bg:#E1F5EE;--ll-green-text:#0F6E56;
+  --ll-bio-blue:#0276B1;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-.app{display:flex;min-height:760px;background:var(--ll-bg);font-family:'Fira Sans',sans-serif;color:var(--ll-navy);font-size:13px}
+.app{display:flex;min-height:760px;background:var(--ll-bg);font-family:'Fira Sans',sans-serif;color:var(--ll-navy);font-size:13px;position:relative}
 .sidebar{width:210px;min-width:210px;background:var(--ll-card);border-right:1px solid var(--ll-border);padding:14px 0;display:flex;flex-direction:column;flex-shrink:0}
 .sb-brand{padding:6px 16px;display:flex;align-items:baseline;gap:5px}
 .sb-brand-logo{font-size:16px;font-weight:700;color:var(--ll-blue);letter-spacing:-0.3px}
@@ -26,7 +27,7 @@
 .sb-item.active{background:var(--ll-blue-light);color:var(--ll-blue-dark);border-left-color:var(--ll-blue);font-weight:500}
 .sb-item .num{display:inline-block;width:18px;color:var(--ll-label);font-weight:500}
 .sb-item.active .num{color:var(--ll-blue)}
-.main{flex:1;min-width:0;display:flex;flex-direction:column;overflow:hidden}
+.main{flex:1;min-width:0;display:flex;flex-direction:column;overflow:hidden;position:relative}
 .app-header{background:var(--ll-card);border-bottom:1px solid var(--ll-border);padding:10px 24px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .app-header-logo{font-size:18px;font-weight:700;color:var(--ll-blue);letter-spacing:-0.4px}
 .app-header-logo .dot{color:#F5B400}
@@ -88,8 +89,6 @@
 .calc-cov-btn:hover{background:var(--ll-blue-light)}
 .calc-cov-btn i{font-size:16px}
 .calc-cov-btn:disabled{opacity:0.5;cursor:not-allowed}
-.recalc-link{font-size:11px;color:var(--ll-blue);background:none;border:none;cursor:pointer;text-decoration:underline;font-family:inherit;padding:4px 0;display:inline-flex;align-items:center;gap:4px;margin-left:8px}
-.recalc-link i{font-size:12px}
 .cta-area{display:flex;align-items:center;gap:10px}
 .cta-hint{font-size:11px;color:var(--ll-text-muted);font-style:italic}
 .cta-hint.ok{color:var(--ll-green-text);font-style:normal}
@@ -118,8 +117,8 @@
 .suggest-banner .sb-apply{background:#F5B400;color:#5C3B05}
 .suggest-banner .sb-dismiss{background:transparent;color:#7A5410}
 .t-table{background:var(--ll-card);border:1px solid var(--ll-border);border-radius:8px;overflow:hidden;margin-bottom:10px}
-.t-head{display:grid;grid-template-columns:24px 1fr 48px 110px 70px;padding:7px 12px;font-size:9px;text-transform:uppercase;letter-spacing:0.6px;color:var(--ll-label);font-weight:600;border-bottom:1px solid var(--ll-border);background:var(--ll-bg)}
-.t-row{display:grid;grid-template-columns:24px 1fr 48px 110px 70px;align-items:center;padding:9px 12px;border-bottom:1px solid var(--ll-border);gap:6px;cursor:pointer}
+.t-head{display:grid;grid-template-columns:24px 1fr 50px 50px 110px 70px;padding:7px 12px;font-size:9px;text-transform:uppercase;letter-spacing:0.6px;color:var(--ll-label);font-weight:600;border-bottom:1px solid var(--ll-border);background:var(--ll-bg)}
+.t-row{display:grid;grid-template-columns:24px 1fr 50px 50px 110px 70px;align-items:center;padding:9px 12px;border-bottom:1px solid var(--ll-border);gap:6px;cursor:pointer}
 .t-row:last-child{border-bottom:none}
 .t-row:hover{background:var(--ll-bg)}
 .t-row.selected{background:var(--ll-blue-light)}
@@ -135,6 +134,10 @@
 .t-cov.green{background:var(--ll-green-bg);color:var(--ll-green-text)}
 .t-cov.yellow{background:var(--ll-yellow-bg);color:var(--ll-yellow-text)}
 .t-cov.red{background:var(--ll-red-bg);color:var(--ll-red-text)}
+.t-bio-cell{display:flex;justify-content:center;align-items:center}
+.bio-btn{display:inline-flex;align-items:center;justify-content:center;background:transparent;border:none;cursor:pointer;font-family:inherit;padding:2px;flex-shrink:0;border-radius:3px;transition:opacity 0.15s}
+.bio-btn:hover{opacity:0.7}
+.bio-btn svg{display:block}
 .psec{margin-bottom:14px}
 .psec h5{font-size:11px;font-weight:600;color:var(--ll-navy-2);margin-bottom:6px;display:flex;align-items:center;gap:5px}
 .match-row{display:grid;grid-template-columns:24px 1fr 55px 1fr;gap:7px;align-items:center;padding:9px 12px;border:1px solid var(--ll-border);border-radius:6px;margin-bottom:5px;background:var(--ll-card);cursor:pointer}
@@ -188,7 +191,45 @@
 .review-note a{color:var(--ll-blue-dark);text-decoration:underline;font-weight:500}
 .calc-spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--ll-blue-border);border-top-color:var(--ll-blue);border-radius:50%;animation:spin 0.8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+.bio-overlay{position:absolute;inset:0;background:rgba(10,37,64,0.45);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+.bio-overlay.show{display:flex;animation:fadeIn 0.15s ease-out}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.bio-card{background:var(--ll-card);border-radius:10px;width:100%;max-width:480px;max-height:88%;overflow-y:auto;animation:slideUp 0.2s ease-out}
+@keyframes slideUp{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}
+.bio-header{padding:18px 18px 14px;display:flex;align-items:flex-start;gap:12px;border-bottom:1px solid var(--ll-border)}
+.bio-avatar{width:48px;height:48px;border-radius:50%;background:#D9EBFA;color:var(--ll-blue);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;flex-shrink:0}
+.bio-info{flex:1}
+.bio-name{font-size:16px;font-weight:600;color:var(--ll-navy);display:flex;align-items:center;gap:8px}
+.bio-meta{font-size:12px;color:var(--ll-text-muted);margin-top:3px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.bio-meta .dot{width:3px;height:3px;border-radius:50%;background:var(--ll-text-muted);display:inline-block}
+.bio-rating{color:var(--ll-yellow-text);font-weight:500}
+.bio-rating i{color:#F5B400}
+.bio-close{background:none;border:none;cursor:pointer;color:var(--ll-text-muted);padding:4px;border-radius:4px;font-family:inherit;flex-shrink:0}
+.bio-close:hover{background:var(--ll-bg);color:var(--ll-navy)}
+.bio-close i{font-size:18px}
+.bio-body{padding:16px 18px}
+.bio-section{margin-bottom:14px}
+.bio-section:last-child{margin-bottom:0}
+.bio-section-label{font-size:9px;text-transform:uppercase;letter-spacing:0.8px;color:var(--ll-label);font-weight:600;margin-bottom:6px}
+.bio-text{font-size:13px;color:var(--ll-navy);line-height:1.5}
+.bio-langs{display:flex;gap:5px;flex-wrap:wrap}
+.bio-lang-pill{font-size:10px;padding:3px 7px;border:1px solid var(--ll-blue-border);color:var(--ll-blue);border-radius:4px;text-transform:uppercase;letter-spacing:0.3px;font-weight:500}
+.bio-tags{display:flex;gap:5px;flex-wrap:wrap}
+.bio-tag{font-size:11px;padding:3px 8px;background:var(--ll-bg);color:var(--ll-navy-2);border-radius:10px;border:1px solid var(--ll-border)}
+.bio-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:4px}
+.bio-stat{background:var(--ll-bg);border-radius:6px;padding:10px;text-align:center}
+.bio-stat-num{font-size:16px;font-weight:600;color:var(--ll-navy)}
+.bio-stat-lbl{font-size:9px;text-transform:uppercase;letter-spacing:0.5px;color:var(--ll-text-muted);margin-top:2px}
+.bio-footer{padding:12px 18px;border-top:1px solid var(--ll-border);display:flex;justify-content:flex-end;gap:8px;background:var(--ll-bg)}
 </style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="icon-bio" viewBox="0 0 16 16">
+      <path d="M13.5 3C13.5 2.75 13.25 2.5 13 2.5H3C2.71875 2.5 2.5 2.75 2.5 3V13C2.5 13.2813 2.71875 13.5 3 13.5H13C13.25 13.5 13.5 13.2813 13.5 13V3ZM13 1C14.0938 1 15 1.90625 15 3V13C15 14.125 14.0938 15 13 15H3C1.875 15 1 14.125 1 13V3C1 1.90625 1.875 1 3 1H13ZM9 5C9 5.4375 8.65625 5.75 8.25 5.75H4.75C4.3125 5.75 4 5.4375 4 5C4 4.59375 4.3125 4.25 4.75 4.25H8.25C8.65625 4.25 9 4.59375 9 5ZM11.25 7.25C11.6563 7.25 12 7.59375 12 8C12 8.4375 11.6563 8.75 11.25 8.75H4.75C4.3125 8.75 4 8.4375 4 8C4 7.59375 4.3125 7.25 4.75 7.25H11.25ZM7 11C7 11.4375 6.65625 11.75 6.25 11.75H4.75C4.3125 11.75 4 11.4375 4 11C4 10.5938 4.3125 10.25 4.75 10.25H6.25C6.65625 10.25 7 10.5938 7 11Z" fill="#0276B1"/>
+    </symbol>
+  </defs>
+</svg>
 
 <h2 class="sr-only">UX-536 self-service multi-class scheduling prototype</h2>
 
@@ -239,7 +280,7 @@
 
           <div class="cb-banner info">
             <i class="ti ti-info-circle"></i>
-            <div><strong>Both of your weekly classes will be with the same trainer.</strong> We'll find a trainer whose availability covers all your selected slots — select more times to give us more options.</div>
+            <div><strong>All of your weekly classes will be with the same trainer.</strong> We&rsquo;ll match you with a trainer whose availability covers all the slots you select.</div>
           </div>
 
           <div id="suggest-banner-host"></div>
@@ -274,7 +315,7 @@
 
     <div class="screen" id="s2">
       <div class="welcome-row">
-        <div><h1>Choose your trainer</h1><p>Pick the trainer you'd like for both of your weekly classes</p></div>
+        <div><h1>Choose your trainer</h1><p>Pick the trainer you'd like for all of your weekly classes</p></div>
         <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">3. Schedule</div></div>
       </div>
       <div class="body-row">
@@ -287,24 +328,52 @@
         </div>
         <div class="content-card">
           <div class="cc-title">Available trainers</div>
-          <div class="cc-desc">Choose one trainer for both weekly classes. Partial matches suggest a slight slot adjustment.</div>
+          <div class="cc-desc">Choose one trainer for all of your weekly classes. Partial matches suggest a slight slot adjustment.</div>
 
           <div class="psec">
-            <h5><i class="ti ti-circle-check" style="color:var(--ll-green-border);font-size:13px"></i> Full matches — covers all your slots</h5>
+            <h5>Full matches — covers all your slots</h5>
             <div class="t-table">
-              <div class="t-head"><div></div><div>Name</div><div>Rating</div><div>Languages</div><div style="text-align:right">Coverage</div></div>
-              <div class="t-row" onclick="selectTrainer(this)" data-tname="Camille Dubois"><div class="t-radio"></div><div class="t-name">Camille Dubois</div><div class="t-rating"><i class="ti ti-star-filled"></i>4.8</div><div class="t-langs"><span class="t-lang-pill">EN</span><span class="t-lang-pill">FR</span><span class="t-lang-pill">ES</span></div><div class="t-cov green">100%</div></div>
-              <div class="t-row" onclick="selectTrainer(this)" data-tname="Elias Sorenson"><div class="t-radio"></div><div class="t-name">Elias Sorenson <span class="t-known">Known</span></div><div class="t-rating"><i class="ti ti-star-filled"></i>4.8</div><div class="t-langs"><span class="t-lang-pill">EN</span><span class="t-lang-pill">ES</span><span class="t-lang-pill">IT</span></div><div class="t-cov green">100%</div></div>
-              <div class="t-row" onclick="selectTrainer(this)" data-tname="Sofía Rodríguez"><div class="t-radio"></div><div class="t-name">Sofía Rodríguez</div><div class="t-rating"><i class="ti ti-star-filled"></i>4.7</div><div class="t-langs"><span class="t-lang-pill">EN</span><span class="t-lang-pill">ES</span></div><div class="t-cov green">85%</div></div>
+              <div class="t-head">
+                <div></div>
+                <div>Name</div>
+                <div style="text-align:center">Bio</div>
+                <div>Rating</div>
+                <div>Languages</div>
+                <div style="text-align:right">Coverage</div>
+              </div>
+              <div class="t-row" onclick="selectTrainer(this)" data-tname="Camille Dubois">
+                <div class="t-radio"></div>
+                <div class="t-name">Camille Dubois</div>
+                <div class="t-bio-cell"><button class="bio-btn" onclick="openBio(event,'camille')" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button></div>
+                <div class="t-rating"><i class="ti ti-star-filled"></i>4.8</div>
+                <div class="t-langs"><span class="t-lang-pill">EN</span><span class="t-lang-pill">FR</span><span class="t-lang-pill">ES</span></div>
+                <div class="t-cov green">100%</div>
+              </div>
+              <div class="t-row" onclick="selectTrainer(this)" data-tname="Elias Sorenson">
+                <div class="t-radio"></div>
+                <div class="t-name">Elias Sorenson <span class="t-known">Known</span></div>
+                <div class="t-bio-cell"><button class="bio-btn" onclick="openBio(event,'elias')" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button></div>
+                <div class="t-rating"><i class="ti ti-star-filled"></i>4.8</div>
+                <div class="t-langs"><span class="t-lang-pill">EN</span><span class="t-lang-pill">ES</span><span class="t-lang-pill">IT</span></div>
+                <div class="t-cov green">100%</div>
+              </div>
+              <div class="t-row" onclick="selectTrainer(this)" data-tname="Sofía Rodríguez">
+                <div class="t-radio"></div>
+                <div class="t-name">Sofía Rodríguez</div>
+                <div class="t-bio-cell"><button class="bio-btn" onclick="openBio(event,'sofia')" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button></div>
+                <div class="t-rating"><i class="ti ti-star-filled"></i>4.7</div>
+                <div class="t-langs"><span class="t-lang-pill">EN</span><span class="t-lang-pill">ES</span></div>
+                <div class="t-cov green">85%</div>
+              </div>
             </div>
           </div>
 
           <div class="psec">
-            <h5><i class="ti ti-alert-triangle" style="color:#F5B400;font-size:13px"></i> Partial matches — small slot adjustment</h5>
+            <h5>Partial matches — small slot adjustment</h5>
             <div class="match-row partial" onclick="selectTrainer(this)" data-tname="Marcus Silva">
               <div class="t-radio"></div>
               <div>
-                <div class="t-name">Marcus Silva</div>
+                <div class="t-name">Marcus Silva <button class="bio-btn" onclick="openBio(event,'marcus')" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button></div>
                 <div class="t-langs" style="margin-top:3px"><span class="t-lang-pill">EN</span><span class="t-lang-pill">ES</span></div>
               </div>
               <div class="t-cov yellow">75%</div>
@@ -313,7 +382,7 @@
             <div class="match-row partial" onclick="selectTrainer(this)" data-tname="Arthur Reyes">
               <div class="t-radio"></div>
               <div>
-                <div class="t-name">Arthur Reyes <span class="t-known">Known</span></div>
+                <div class="t-name">Arthur Reyes <span class="t-known">Known</span> <button class="bio-btn" onclick="openBio(event,'arthur')" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button></div>
                 <div class="t-langs" style="margin-top:3px"><span class="t-lang-pill">EN</span><span class="t-lang-pill">FR</span></div>
               </div>
               <div class="t-cov yellow">75%</div>
@@ -357,7 +426,7 @@
 
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
             <div style="font-size:11px;color:var(--ll-text-muted);text-transform:uppercase;letter-spacing:0.5px;font-weight:600">Proposed schedules</div>
-            <button class="btn-link" style="padding:4px 8px">Generate 3 More</button>
+            <button class="btn-link" style="padding:4px 8px">Load More Options</button>
           </div>
 
           <div class="sched-grid">
@@ -427,7 +496,7 @@
 
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
             <div style="font-size:11px;color:var(--ll-text-muted);text-transform:uppercase;letter-spacing:0.5px;font-weight:600">Proposed schedules · <span id="s4-shown-count">5</span> shown</div>
-            <button class="btn-link" style="padding:4px 8px">Generate 3 More</button>
+            <button class="btn-link" style="padding:4px 8px">Load More Options</button>
           </div>
 
           <div class="sched-grid" id="s4-sched-grid"></div>
@@ -450,22 +519,13 @@
         <div class="prog-card">
           <h4>Edge case</h4>
           <div class="pf"><div class="pf-label">Scenario</div><div class="pf-value">No trainer covers selection</div></div>
-          <div class="pf"><div class="pf-label">Trigger</div><div class="pf-value">All selected slots fail trainer constraint</div></div>
+          <div class="pf"><div class="pf-label">Trigger</div><div class="pf-value">Calculate Coverage returned 0% / no match</div></div>
         </div>
         <div class="content-card">
           <div class="cc-title">Specify Availability — conflict state</div>
           <div class="cc-desc">When the learner clicks Calculate Coverage and no trainer can be matched, both the upfront constraint banner and a contextual warning are shown.</div>
-
-          <div class="cb-banner info">
-            <i class="ti ti-info-circle"></i>
-            <div><strong>Both of your weekly classes will be with the same trainer.</strong> We'll find a trainer whose availability covers all your selected slots.</div>
-          </div>
-
-          <div class="cb-banner warn">
-            <i class="ti ti-alert-triangle"></i>
-            <div><strong>No trainer covers your current selection.</strong> Your selected slots (Sat 07:00 + Sun 07:00) don't match any single trainer. <a href="#" onclick="event.preventDefault();goScreen('e2',document.querySelectorAll('.sb-item')[5])">See your options →</a></div>
-          </div>
-
+          <div class="cb-banner info"><i class="ti ti-info-circle"></i><div><strong>All of your weekly classes will be with the same trainer.</strong> We&rsquo;ll match you with a trainer whose availability covers all the slots you select.</div></div>
+          <div class="cb-banner warn"><i class="ti ti-alert-triangle"></i><div><strong>No trainer covers your current selection.</strong> Your selected slots (Sat 07:00 + Sun 07:00) don't match any single trainer. <a href="#" onclick="event.preventDefault();goScreen('e2',document.querySelectorAll('.sb-item')[5])">See your options →</a></div></div>
           <div class="gs-top">
             <div class="cb-row"><div class="cb"></div>Select all available times</div>
             <div class="legend">
@@ -479,14 +539,8 @@
             <div class="grid-body" id="e1-grid"></div>
           </div>
           <div class="cov-strip">
-            <div class="cov-block">
-              <span class="cov-pct red">0%</span>
-              <span class="cov-lbl">coverage <span class="cov-info">i</span></span>
-            </div>
-            <div class="cta-area">
-              <span class="cta-hint" style="color:var(--ll-red-text)">No trainer matches — see options</span>
-              <button class="btn-primary" disabled>Schedule Options</button>
-            </div>
+            <div class="cov-block"><span class="cov-pct red">0%</span><span class="cov-lbl">coverage <span class="cov-info">i</span></span></div>
+            <div class="cta-area"><button class="btn-link">Select A Trainer</button><button class="btn-primary">Schedule Options</button></div>
           </div>
         </div>
       </div>
@@ -524,6 +578,24 @@
       <div class="left">© 2026 Learnlight. All Rights Reserved <a href="#">Privacy</a> <a href="#">Cookies</a></div>
       <div class="right"><span><i class="ti ti-world" style="font-size:12px;vertical-align:-1px"></i> EN ▾</span><span class="pwby">Powered by: <b>learnl<span style="color:#F5B400">i</span>ght</b></span></div>
     </div>
+
+    <div class="bio-overlay" id="bio-overlay" onclick="closeBioOnBg(event)">
+      <div class="bio-card" onclick="event.stopPropagation()">
+        <div class="bio-header">
+          <div class="bio-avatar" id="bio-avatar">CD</div>
+          <div class="bio-info">
+            <div class="bio-name" id="bio-name">Camille Dubois</div>
+            <div class="bio-meta" id="bio-meta"></div>
+          </div>
+          <button class="bio-close" onclick="closeBio()" aria-label="Close"><i class="ti ti-x"></i></button>
+        </div>
+        <div class="bio-body" id="bio-body"></div>
+        <div class="bio-footer">
+          <button class="btn-ghost" onclick="closeBio()">Close</button>
+          <button class="btn-primary" id="bio-select-btn">Select this trainer</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -532,7 +604,7 @@ const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 const TIMES=['08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30'];
 const UNAVAIL={'0-0':1,'0-1':1,'1-2':1,'2-0':1,'3-3':1,'4-4':1,'5-0':1,'5-1':1,'5-2':1,'5-3':1,'6-0':1,'6-1':1,'6-2':1,'6-3':1,'6-4':1,'6-5':1,'6-6':1,'6-7':1,'6-8':1,'6-9':1,'6-10':1,'6-11':1};
 const TIMES_PRETTY=t=>{const[h,m]=t.split(':').map(Number);const next=m===30?[h+1,0]:[h,30];return t+' → '+String(next[0]).padStart(2,'0')+':'+String(next[1]).padStart(2,'0')};
-const COVERAGE_THRESHOLD=80;
+const MIN_SLOTS=2;
 
 let s1Sel={};
 let coverageCalculated=false;
@@ -542,6 +614,14 @@ let class1Sel=null;
 let dayFilter={Mon:true,Tue:true,Wed:true,Thu:true,Fri:true};
 let suggestionShown=false;
 let suggestionDismissed=false;
+
+const TRAINER_BIOS={
+  camille:{name:'Camille Dubois',init:'CD',title:'Senior Language Trainer · 8 years',rating:'4.8',langs:['EN','FR','ES'],tags:['Business English','TOEFL prep','Conversation'],experience:8,classes:1240,students:312,bio:'French-born trainer based in Lyon, specialising in business English for executives and TOEFL preparation. Camille combines structured grammar work with role-play scenarios drawn from her decade in international consulting. Her sessions are warm, focused, and famously well-paced — students consistently mention how quickly they feel comfortable speaking.',known:false},
+  elias:{name:'Elias Sorenson',init:'ES',title:'Linguistics MA · 6 years',rating:'4.8',langs:['EN','ES','IT'],tags:['Conversation','Pronunciation','Travel English'],experience:6,classes:980,students:267,bio:'Norwegian-Italian trainer based in Madrid, known for pronunciation coaching and informal conversation classes. Elias holds an MA in Applied Linguistics and runs a podcast on language learning. Expect lively sessions with plenty of cultural digressions, real-world media, and zero rote drills.',known:true},
+  sofia:{name:'Sofía Rodríguez',init:'SR',title:'CELTA Certified · 5 years',rating:'4.7',langs:['EN','ES'],tags:['IELTS prep','Academic writing','Grammar'],experience:5,classes:720,students:198,bio:'Spanish-British trainer focused on academic and exam-prep contexts. Sofía has helped over 200 students achieve their target IELTS bands. Her teaching style is methodical, with clear weekly goals and detailed written feedback after each session. Best for learners who want measurable progress.',known:false},
+  marcus:{name:'Marcus Silva',init:'MS',title:'Cambridge CELTA · 4 years',rating:'4.8',langs:['EN','ES'],tags:['Business English','Presentations','Negotiation'],experience:4,classes:610,students:174,bio:'Brazilian-American trainer specialising in business communication for sales and account-management teams. Marcus brings 12 years of corporate experience into his teaching, focusing on the language of pitching, negotiating, and handling difficult conversations. Sessions are intense but rewarding.',known:false},
+  arthur:{name:'Arthur Reyes',init:'AR',title:'DELTA Trained · 7 years',rating:'4.8',langs:['EN','FR'],tags:['Conversation','Business English','Travel'],experience:7,classes:1080,students:283,bio:'French-Mexican trainer based in Paris, with DELTA certification and a background in adult education. Arthur takes a learner-led approach, adapting each session to the goals you bring on the day. Particularly recommended for learners who feel stuck at intermediate level and want a fresh angle.',known:true}
+};
 
 const CLASS2_OPTIONS=[
   {day:'Thursdays',dayKey:'Thu',time:'10:00-10:30',cov:80,col:'green'},
@@ -584,8 +664,7 @@ function refreshS1(){
     const k=di+'-'+ti;
     if(s1Sel[k]){delete s1Sel[k];slot.classList.remove('selected');slot.classList.add('avail');delete slot.dataset.time}
     else{s1Sel[k]=1;slot.classList.add('selected');slot.classList.remove('avail');slot.dataset.time=TIMES_PRETTY(t)}
-    coverageCalculated=false;
-    coverageValue=0;
+    coverageCalculated=false;coverageValue=0;
     updateS1();
   });
 }
@@ -601,60 +680,31 @@ function renderCovArea(){
   } else {
     const pct=coverageValue;
     const cls=pct>=80?'green':pct>=60?'yellow':'red';
-    area.innerHTML='<div class="cov-block"><span class="cov-pct '+cls+'">'+pct+'%</span><span class="cov-lbl">coverage <span class="cov-info" title="How well your selected slots cover trainer availability">i</span></span><button class="recalc-link" onclick="resetCoverage()"><i class="ti ti-refresh"></i>Recalculate</button></div>';
+    area.innerHTML='<div class="cov-block"><span class="cov-pct '+cls+'">'+pct+'%</span><span class="cov-lbl">coverage <span class="cov-info" title="How well your selected slots cover trainer availability">i</span></span></div>';
   }
 }
 
 function calculateCoverage(){
   const btn=document.getElementById('s1-calc-btn');
-  if(btn){
-    btn.innerHTML='<span class="calc-spinner"></span>Calculating…';
-    btn.disabled=true;
-  }
+  if(btn){btn.innerHTML='<span class="calc-spinner"></span>Calculating…';btn.disabled=true}
   setTimeout(()=>{
     const n=Object.keys(s1Sel).length;
     coverageValue=Math.min(100,Math.round(n/5*100));
     coverageCalculated=true;
-    renderCovArea();
-    updateS1();
+    renderCovArea();updateS1();
   },550);
-}
-
-function resetCoverage(){
-  coverageCalculated=false;
-  coverageValue=0;
-  renderCovArea();
-  updateS1();
 }
 
 function updateS1(){
   const n=Object.keys(s1Sel).length;
   const hint=document.getElementById('s1-hint');
   const btn=document.getElementById('s1-genbtn');
-
   renderCovArea();
-
-  // Schedule Options button is enabled ONLY when coverage is calculated AND >= 80%
   if(hint&&btn){
-    if(n===0){
-      hint.textContent='Select your available slots to begin';
-      hint.className='cta-hint';
-      btn.disabled=true;
-    } else if(!coverageCalculated){
-      hint.textContent='Calculate coverage to continue';
-      hint.className='cta-hint';
-      btn.disabled=true;
-    } else if(coverageValue<COVERAGE_THRESHOLD){
-      hint.textContent='Coverage below '+COVERAGE_THRESHOLD+'% — add more slots';
-      hint.className='cta-hint warn';
-      btn.disabled=true;
-    } else {
-      hint.textContent='Ready to schedule';
-      hint.className='cta-hint ok';
-      btn.disabled=false;
-    }
+    if(n===0){hint.textContent='Select your available slots to begin';hint.style.display='';btn.disabled=true}
+    else if(n<MIN_SLOTS){hint.textContent='Select at least '+MIN_SLOTS+' slots';hint.style.display='';btn.disabled=true}
+    else{hint.style.display='none';btn.disabled=false}
   }
-
   if(n>=2&&!suggestionDismissed&&!suggestionShown)showSuggestion();
   if(n<2&&suggestionShown){hideSuggestion()}
 }
@@ -666,11 +716,7 @@ function showSuggestion(){
   suggestionShown=true;
 }
 
-function hideSuggestion(){
-  const host=document.getElementById('suggest-banner-host');if(host)host.innerHTML='';
-  suggestionShown=false;
-}
-
+function hideSuggestion(){const host=document.getElementById('suggest-banner-host');if(host)host.innerHTML='';suggestionShown=false}
 function dismissSuggestion(){suggestionDismissed=true;hideSuggestion()}
 
 function applySuggestion(){
@@ -695,6 +741,32 @@ function selectTrainer(row){
   if(t4)t4.textContent=selectedTrainer;
   if(t4i)t4i.textContent=selectedTrainer.split(' ')[0];
 }
+
+let currentBioKey=null;
+function openBio(event,key){
+  event.stopPropagation();
+  const bio=TRAINER_BIOS[key];if(!bio)return;
+  currentBioKey=key;
+  document.getElementById('bio-avatar').textContent=bio.init;
+  document.getElementById('bio-name').innerHTML=bio.name+(bio.known?' <span class="t-known" style="margin-left:4px">Known</span>':'');
+  document.getElementById('bio-meta').innerHTML='<span class="bio-rating"><i class="ti ti-star-filled"></i>'+bio.rating+'</span><span class="dot"></span><span>'+bio.title+'</span>';
+  const body=document.getElementById('bio-body');
+  body.innerHTML='<div class="bio-stats"><div class="bio-stat"><div class="bio-stat-num">'+bio.experience+'</div><div class="bio-stat-lbl">Years</div></div><div class="bio-stat"><div class="bio-stat-num">'+bio.classes.toLocaleString()+'</div><div class="bio-stat-lbl">Classes</div></div><div class="bio-stat"><div class="bio-stat-num">'+bio.students+'</div><div class="bio-stat-lbl">Students</div></div></div><div class="bio-section" style="margin-top:14px"><div class="bio-section-label">About</div><div class="bio-text">'+bio.bio+'</div></div><div class="bio-section"><div class="bio-section-label">Languages</div><div class="bio-langs">'+bio.langs.map(l=>'<span class="bio-lang-pill">'+l+'</span>').join('')+'</div></div><div class="bio-section"><div class="bio-section-label">Specialises in</div><div class="bio-tags">'+bio.tags.map(t=>'<span class="bio-tag">'+t+'</span>').join('')+'</div></div>';
+  document.getElementById('bio-overlay').classList.add('show');
+}
+
+function closeBio(){document.getElementById('bio-overlay').classList.remove('show');currentBioKey=null}
+function closeBioOnBg(event){if(event.target.id==='bio-overlay')closeBio()}
+
+document.getElementById('bio-select-btn').onclick=()=>{
+  if(!currentBioKey)return;
+  const bio=TRAINER_BIOS[currentBioKey];
+  const row=document.querySelector('#s2 [data-tname="'+bio.name+'"]');
+  if(row)selectTrainer(row);
+  closeBio();
+};
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('bio-overlay').classList.contains('show'))closeBio()});
 
 function selectClass1(card){
   document.querySelectorAll('#s3 .sched-card').forEach(c=>c.classList.remove('selected'));
