@@ -1,165 +1,127 @@
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <style>
-:root{
-  --ll-navy:#0A2540;--ll-navy-2:#1B3A57;--ll-blue:#185FA5;--ll-blue-dark:#0C447C;--ll-blue-light:#E6F1FB;--ll-blue-border:#B5D4F4;
-  --ll-bg:#F4F5F7;--ll-card:#FFFFFF;--ll-border:#E5E7EB;--ll-text-muted:#5F6B7A;--ll-label:#7A8694;
-  --ll-green-fill:#E8F5E0;--ll-green-fill-hover:#D7EBC9;--ll-green-border:#7CB342;
-  --ll-na-fill:#F0F2F5;--ll-na-border:#DDE1E6;
-  --ll-yellow-bg:#FFF4DA;--ll-yellow-text:#B07509;
-  --ll-red-bg:#FCE8EA;--ll-red-text:#C62828;
-  --ll-green-bg:#E1F5EE;--ll-green-text:#0F6E56;
-  --ll-bio-blue:#0276B1;
-}
+:root{--ll-navy:#0A2540;--ll-navy-2:#1B3A57;--ll-blue:#185FA5;--ll-blue-dark:#0C447C;--ll-blue-light:#E6F1FB;--ll-blue-border:#B5D4F4;--ll-bg:#F4F5F7;--ll-card:#FFFFFF;--ll-border:#E5E7EB;--ll-text-muted:#5F6B7A;--ll-label:#7A8694;--ll-green-fill:#E8F5E0;--ll-green-fill-hover:#D7EBC9;--ll-green-border:#7CB342;--ll-na-fill:#F0F2F5;--ll-na-border:#DDE1E6;--ll-yellow-bg:#FFF4DA;--ll-yellow-text:#B07509;--ll-red-bg:#FCE8EA;--ll-red-text:#C62828;--ll-green-bg:#E1F5EE;--ll-green-text:#0F6E56}
 *{box-sizing:border-box;margin:0;padding:0}
 .app{display:flex;min-height:760px;background:var(--ll-bg);font-family:'Fira Sans',sans-serif;color:var(--ll-navy);font-size:13px;position:relative}
-.sidebar{width:210px;min-width:210px;background:var(--ll-card);border-right:1px solid var(--ll-border);padding:14px 0;display:flex;flex-direction:column;flex-shrink:0}
-.sb-brand{padding:6px 16px;display:flex;align-items:baseline;gap:5px}
-.sb-brand-logo{font-size:16px;font-weight:700;color:var(--ll-blue);letter-spacing:-0.3px}
-.sb-brand-logo .dot{color:#F5B400}
+.sidebar{width:220px;min-width:220px;background:var(--ll-card);border-right:1px solid var(--ll-border);padding:14px 0;display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto}
+.sb-brand{padding:6px 16px}.sb-brand-logo{font-size:16px;font-weight:700;color:var(--ll-blue);letter-spacing:-0.3px}.sb-brand-logo .dot{color:#F5B400}
 .sb-sub{font-size:9px;color:var(--ll-label);text-transform:uppercase;letter-spacing:1px;padding:0 16px 12px;border-bottom:1px solid var(--ll-border);margin-bottom:8px}
 .sb-section{font-size:9px;color:var(--ll-label);padding:10px 16px 4px;text-transform:uppercase;letter-spacing:1px;font-weight:600}
-.sb-item{padding:8px 16px 8px 13px;font-size:12px;cursor:pointer;border-left:3px solid transparent;color:var(--ll-navy-2);transition:all 0.15s;line-height:1.35}
-.sb-item:hover{background:var(--ll-bg)}
-.sb-item.active{background:var(--ll-blue-light);color:var(--ll-blue-dark);border-left-color:var(--ll-blue);font-weight:500}
-.sb-item .num{display:inline-block;width:18px;color:var(--ll-label);font-weight:500}
-.sb-item.active .num{color:var(--ll-blue)}
+.sb-item{padding:7px 16px 7px 13px;font-size:12px;cursor:pointer;border-left:3px solid transparent;color:var(--ll-navy-2);transition:all 0.15s;line-height:1.35}
+.sb-item:hover{background:var(--ll-bg)}.sb-item.active{background:var(--ll-blue-light);color:var(--ll-blue-dark);border-left-color:var(--ll-blue);font-weight:500}
+.sb-item .num{display:inline-block;width:18px;color:var(--ll-label);font-weight:500}.sb-item.active .num{color:var(--ll-blue)}
 .main{flex:1;min-width:0;display:flex;flex-direction:column;overflow:hidden;position:relative}
 .app-header{background:var(--ll-card);border-bottom:1px solid var(--ll-border);padding:10px 24px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-.app-header-logo{font-size:18px;font-weight:700;color:var(--ll-blue);letter-spacing:-0.4px}
-.app-header-logo .dot{color:#F5B400}
+.app-header-logo{font-size:18px;font-weight:700;color:var(--ll-blue);letter-spacing:-0.4px}.app-header-logo .dot{color:#F5B400}
 .app-avatar{width:32px;height:32px;border-radius:50%;background:#D9EBFA;color:var(--ll-blue);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500}
-.screen{display:none;flex:1;overflow-y:auto}
-.screen.active{display:block}
+.screen{display:none;flex:1;overflow-y:auto}.screen.active{display:block}
 .welcome-row{display:flex;justify-content:space-between;align-items:flex-start;padding:22px 24px 18px;gap:16px}
 .welcome-row h1{font-size:24px;font-weight:700;color:var(--ll-navy);letter-spacing:-0.3px;line-height:1.15}
 .welcome-row p{font-size:13px;color:var(--ll-navy-2);margin-top:4px}
 .steps{display:flex;align-items:center;gap:0}
 .step{padding:5px 10px;border:1px solid var(--ll-border);border-radius:4px;font-size:11px;color:var(--ll-navy);background:var(--ll-card);min-width:30px;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px}
-.step.done{color:var(--ll-blue)}
-.step.done i{color:var(--ll-blue);font-size:13px}
-.step.active{background:var(--ll-blue);color:#fff;border-color:var(--ll-blue);font-weight:500}
+.step.done{color:var(--ll-blue)}.step.done i{color:var(--ll-blue);font-size:13px}.step.active{background:var(--ll-blue);color:#fff;border-color:var(--ll-blue);font-weight:500}
 .step-sep{width:6px;height:1px;background:var(--ll-border)}
 .body-row{display:flex;gap:14px;padding:0 24px 22px;align-items:flex-start}
 .prog-card{width:200px;min-width:200px;background:var(--ll-card);border-radius:10px;padding:18px 18px 6px;flex-shrink:0;align-self:flex-start}
 .prog-card h4{font-size:13px;font-weight:600;color:var(--ll-navy);margin-bottom:14px}
-.pf{margin-bottom:14px}
-.pf-label{font-size:9px;text-transform:uppercase;letter-spacing:0.8px;color:var(--ll-label);font-weight:500}
+.pf{margin-bottom:14px}.pf-label{font-size:9px;text-transform:uppercase;letter-spacing:0.8px;color:var(--ll-label);font-weight:500}
 .pf-value{font-size:13px;color:var(--ll-navy);margin-top:2px;font-weight:400}
-.pf-row{display:flex;gap:16px;margin-bottom:14px}
-.pf-row .pf{flex:1;margin-bottom:0}
+.pf-row{display:flex;gap:16px;margin-bottom:14px}.pf-row .pf{flex:1;margin-bottom:0}
 .content-card{flex:1;min-width:0;background:var(--ll-card);border-radius:10px;padding:18px;display:flex;flex-direction:column}
 .cc-title{font-size:14px;font-weight:600;color:var(--ll-navy);margin-bottom:6px}
 .cc-desc{font-size:12px;color:var(--ll-navy-2);margin-bottom:14px;line-height:1.5}
 .cb-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ll-navy);margin-bottom:10px}
 .cb{width:14px;height:14px;border:1px solid var(--ll-border);border-radius:3px;cursor:pointer;flex-shrink:0;background:var(--ll-card)}
 .legend{display:flex;align-items:center;gap:14px;justify-content:flex-end;font-size:11px;color:var(--ll-navy)}
-.lg{display:flex;align-items:center;gap:5px}
-.lg-box{width:11px;height:11px;border-radius:2px;border:1px solid}
-.lg-na{background:var(--ll-na-fill);border-color:var(--ll-na-border)}
-.lg-av{background:var(--ll-green-fill);border-color:var(--ll-green-border)}
-.lg-sl{background:var(--ll-blue-light);border-color:var(--ll-blue)}
+.lg{display:flex;align-items:center;gap:5px}.lg-box{width:11px;height:11px;border-radius:2px;border:1px solid}
+.lg-na{background:var(--ll-na-fill);border-color:var(--ll-na-border)}.lg-av{background:var(--ll-green-fill);border-color:var(--ll-green-border)}
+.lg-sl{background:var(--ll-blue-light);border-color:var(--ll-blue)}.lg-mh{background:#A5D89C;border-color:#5BA050}
 .gs-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px}
 .grid{border:1px solid var(--ll-border);border-radius:6px;overflow:hidden}
 .grid-head{display:grid;grid-template-columns:42px repeat(7,1fr);font-size:11px;font-weight:600;color:var(--ll-navy);text-align:center;background:var(--ll-card);border-bottom:1px solid var(--ll-border)}
-.grid-head > div{padding:7px 0}
+.grid-head>div{padding:7px 0}
 .grid-body{max-height:300px;overflow-y:auto;background:var(--ll-card)}
 .grid-row{display:grid;grid-template-columns:42px repeat(7,1fr)}
-.time-lbl{font-size:11px;color:var(--ll-navy);padding:0 6px 0 0;display:flex;align-items:center;justify-content:flex-end;background:var(--ll-card);font-weight:400}
-.slot{height:22px;border-right:1px solid var(--ll-border);border-bottom:1px solid var(--ll-border);cursor:pointer;position:relative;font-size:9px;display:flex;align-items:center;justify-content:center;color:transparent;transition:background 0.08s}
-.grid-row:last-child .slot{border-bottom:none}
-.slot:last-child{border-right:none}
-.slot.avail{background:var(--ll-green-fill)}
-.slot.avail:hover{background:var(--ll-green-fill-hover)}
+.time-lbl{font-size:11px;color:var(--ll-navy);padding:0 6px 0 0;display:flex;align-items:center;justify-content:flex-end;background:var(--ll-card)}
+.slot{height:22px;border-right:1px solid var(--ll-border);border-bottom:1px solid var(--ll-border);cursor:pointer;display:flex;align-items:center;justify-content:center;color:transparent;transition:background 0.08s}
+.grid-row:last-child .slot{border-bottom:none}.slot:last-child{border-right:none}
+.slot.avail{background:var(--ll-green-fill)}.slot.avail:hover{background:var(--ll-green-fill-hover)}
+.slot.match-hint{background:#A5D89C}.slot.match-hint:hover{background:#92CC88}
 .slot.selected{background:var(--ll-blue-light);color:var(--ll-blue-dark)}
 .slot.selected::after{content:attr(data-time);font-size:9px;color:var(--ll-blue-dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 2px;font-weight:500}
 .slot.na{background:var(--ll-na-fill);cursor:default}
 .cov-strip{display:flex;align-items:center;justify-content:space-between;margin-top:12px;gap:12px;flex-wrap:wrap;min-height:42px}
-.cov-block{display:flex;align-items:center;gap:8px}
-.cov-pct{font-size:18px;font-weight:600;line-height:1}
-.cov-pct.green{color:var(--ll-green-text)}
-.cov-pct.yellow{color:var(--ll-yellow-text)}
-.cov-pct.red{color:var(--ll-red-text)}
+.cov-block{display:flex;align-items:center;gap:8px}.cov-pct{font-size:18px;font-weight:600;line-height:1}
+.cov-pct.green{color:var(--ll-green-text)}.cov-pct.yellow{color:var(--ll-yellow-text)}.cov-pct.red{color:var(--ll-red-text)}
 .cov-lbl{font-size:11px;color:var(--ll-text-muted)}
-.cov-info{display:inline-flex;width:13px;height:13px;border-radius:50%;border:1px solid var(--ll-text-muted);color:var(--ll-text-muted);font-size:8px;align-items:center;justify-content:center;cursor:help}
 .calc-cov-btn{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;background:var(--ll-card);border:2px solid var(--ll-blue);border-radius:8px;color:var(--ll-blue);font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:background 0.15s}
-.calc-cov-btn:hover{background:var(--ll-blue-light)}
-.calc-cov-btn i{font-size:16px}
-.calc-cov-btn:disabled{opacity:0.5;cursor:not-allowed}
-.cta-area{display:flex;align-items:center;gap:10px}
-.cta-hint{font-size:11px;color:var(--ll-text-muted);font-style:italic}
-.cta-hint.ok{color:var(--ll-green-text);font-style:normal}
-.cta-hint.warn{color:var(--ll-yellow-text);font-style:normal}
-.btn-primary{padding:8px 18px;background:var(--ll-blue);color:#fff;border:none;border-radius:5px;font-size:12px;cursor:pointer;font-weight:500;font-family:inherit;letter-spacing:0.2px}
-.btn-primary:hover{background:var(--ll-blue-dark)}
-.btn-primary:disabled{background:#B7D2EC;cursor:not-allowed}
+.calc-cov-btn:hover{background:var(--ll-blue-light)}.calc-cov-btn:disabled{opacity:0.5;cursor:not-allowed}
+.load-more-btn{display:inline-flex;align-items:center;padding:6px 16px;background:var(--ll-card);border:1.5px solid var(--ll-blue);border-radius:6px;color:var(--ll-blue);font-size:12px;font-weight:500;cursor:pointer;font-family:inherit;margin-top:8px}
+.load-more-btn:hover{background:var(--ll-blue-light)}
+.cta-area{display:flex;align-items:center;gap:10px}.cta-hint{font-size:11px;color:var(--ll-text-muted);font-style:italic}
+.btn-primary{padding:8px 18px;background:var(--ll-blue);color:#fff;border:none;border-radius:5px;font-size:12px;cursor:pointer;font-weight:500;font-family:inherit}
+.btn-primary:hover{background:var(--ll-blue-dark)}.btn-primary:disabled{background:#B7D2EC;cursor:not-allowed}
 .btn-link{padding:8px 12px;background:none;border:none;color:var(--ll-blue);font-size:12px;cursor:pointer;font-weight:500;font-family:inherit}
+.btn-link:disabled{color:var(--ll-text-muted);cursor:not-allowed;opacity:0.55}
 .btn-ghost{padding:7px 14px;background:var(--ll-card);border:1px solid var(--ll-border);border-radius:5px;font-size:12px;cursor:pointer;color:var(--ll-navy-2);font-family:inherit}
+.btn-outline{padding:8px 16px;background:var(--ll-card);border:1.5px solid var(--ll-blue);border-radius:6px;color:var(--ll-blue);font-size:12px;font-weight:500;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:6px}
+.btn-outline:hover{background:var(--ll-blue-light)}.btn-outline:disabled{opacity:0.5;cursor:not-allowed}
 .app-footer{padding:12px 24px;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--ll-text-muted);border-top:1px solid var(--ll-border);background:var(--ll-card);flex-shrink:0}
-.app-footer .left{display:flex;gap:12px;align-items:center}
 .app-footer .left a{color:var(--ll-blue);text-decoration:underline}
-.app-footer .right{display:flex;gap:10px;align-items:center}
-.app-footer .right .pwby b{color:var(--ll-blue);font-weight:700}
+.app-footer .right{display:flex;gap:10px;align-items:center}.app-footer .right .pwby b{color:var(--ll-blue);font-weight:700}
 .cb-banner{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;border-radius:6px;font-size:11px;line-height:1.5;margin-bottom:12px}
 .cb-banner.info{background:var(--ll-blue-light);color:var(--ll-blue-dark);border:1px solid var(--ll-blue-border)}
 .cb-banner.warn{background:var(--ll-yellow-bg);color:#5C3B05;border:1px solid #F5B400}
-.cb-banner i{font-size:14px;flex-shrink:0;margin-top:1px}
-.cb-banner a{color:var(--ll-blue-dark);text-decoration:underline;font-weight:500}
+.cb-banner i{font-size:14px;flex-shrink:0;margin-top:1px}.cb-banner a{color:var(--ll-blue-dark);text-decoration:underline;font-weight:500}
 .suggest-banner{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;border-radius:6px;font-size:11px;line-height:1.5;margin-bottom:12px;background:var(--ll-yellow-bg);border:1px solid #F5B400;color:#5C3B05}
 .suggest-banner i{font-size:16px;color:#F5B400;flex-shrink:0;margin-top:1px}
 .suggest-banner .sb-title{font-weight:600;color:#5C3B05;font-size:12px}
 .suggest-banner .sb-desc{font-size:11px;margin-top:1px;color:#7A5410}
 .suggest-banner .sb-actions{display:flex;gap:6px;margin-top:6px}
 .suggest-banner .sb-actions button{padding:4px 10px;font-size:11px;border-radius:4px;cursor:pointer;font-family:inherit;font-weight:500;border:none}
-.suggest-banner .sb-apply{background:#F5B400;color:#5C3B05}
-.suggest-banner .sb-dismiss{background:transparent;color:#7A5410}
+.suggest-banner .sb-apply{background:#F5B400;color:#5C3B05}.suggest-banner .sb-dismiss{background:transparent;color:#7A5410}
 .t-table{background:var(--ll-card);border:1px solid var(--ll-border);border-radius:8px;overflow:hidden;margin-bottom:10px}
 .t-head{display:grid;grid-template-columns:24px 1fr 50px 50px 110px 70px;padding:7px 12px;font-size:9px;text-transform:uppercase;letter-spacing:0.6px;color:var(--ll-label);font-weight:600;border-bottom:1px solid var(--ll-border);background:var(--ll-bg)}
-.t-row{display:grid;grid-template-columns:24px 1fr 50px 50px 110px 70px;align-items:center;padding:9px 12px;border-bottom:1px solid var(--ll-border);gap:6px;cursor:pointer}
-.t-row:last-child{border-bottom:none}
-.t-row:hover{background:var(--ll-bg)}
-.t-row.selected{background:var(--ll-blue-light)}
+.t-row{display:grid;grid-template-columns:24px 1fr 50px 50px 110px 70px;align-items:center;padding:8px 12px;border-bottom:1px solid var(--ll-border);gap:6px;cursor:pointer}
+.t-row:last-child{border-bottom:none}.t-row:hover{background:var(--ll-bg)}.t-row.selected{background:var(--ll-blue-light)}
 .t-radio{width:14px;height:14px;border:1px solid var(--ll-border);border-radius:50%;background:var(--ll-card)}
-.t-row.selected .t-radio{background:var(--ll-blue);border-color:var(--ll-blue);box-shadow:inset 0 0 0 2px #fff}
-.t-name{font-size:12px;color:var(--ll-blue);font-weight:500;display:flex;align-items:center;gap:6px}
+.t-row.selected .t-radio,.match-row.selected .t-radio{background:var(--ll-blue);border-color:var(--ll-blue);box-shadow:inset 0 0 0 2px #fff}
+.t-name{font-size:12px;color:var(--ll-blue);font-weight:500;display:flex;align-items:center;gap:8px;min-width:0}
+.t-avatar{width:30px;height:30px;border-radius:50%;object-fit:cover;flex-shrink:0;background:#D9EBFA}
 .t-known{font-size:9px;background:var(--ll-bg);color:var(--ll-text-muted);padding:2px 5px;border-radius:3px;border:1px solid var(--ll-border);font-weight:500;text-transform:uppercase;letter-spacing:0.3px}
-.t-rating{font-size:11px;color:var(--ll-yellow-text);font-weight:500;display:flex;align-items:center;gap:3px}
-.t-rating i{color:#F5B400;font-size:11px}
+.t-rating{font-size:11px;color:var(--ll-yellow-text);font-weight:500;display:flex;align-items:center;gap:3px}.t-rating i{color:#F5B400;font-size:11px}
 .t-langs{font-size:9px;color:var(--ll-blue);font-weight:500;display:flex;gap:3px;flex-wrap:wrap}
 .t-lang-pill{padding:1px 5px;border:1px solid var(--ll-blue-border);border-radius:3px;text-transform:uppercase;letter-spacing:0.3px}
 .t-cov{font-size:12px;font-weight:600;text-align:right;padding:3px 7px;border-radius:10px}
-.t-cov.green{background:var(--ll-green-bg);color:var(--ll-green-text)}
-.t-cov.yellow{background:var(--ll-yellow-bg);color:var(--ll-yellow-text)}
-.t-cov.red{background:var(--ll-red-bg);color:var(--ll-red-text)}
+.t-cov.green{background:var(--ll-green-bg);color:var(--ll-green-text)}.t-cov.yellow{background:var(--ll-yellow-bg);color:var(--ll-yellow-text)}.t-cov.red{background:var(--ll-red-bg);color:var(--ll-red-text)}
 .t-bio-cell{display:flex;justify-content:center;align-items:center}
-.bio-btn{display:inline-flex;align-items:center;justify-content:center;background:transparent;border:none;cursor:pointer;font-family:inherit;padding:2px;flex-shrink:0;border-radius:3px;transition:opacity 0.15s}
-.bio-btn:hover{opacity:0.7}
-.bio-btn svg{display:block}
-.psec{margin-bottom:14px}
-.psec h5{font-size:11px;font-weight:600;color:var(--ll-navy-2);margin-bottom:6px;display:flex;align-items:center;gap:5px}
-.match-row{display:grid;grid-template-columns:24px 1fr 55px 1fr;gap:7px;align-items:center;padding:9px 12px;border:1px solid var(--ll-border);border-radius:6px;margin-bottom:5px;background:var(--ll-card);cursor:pointer}
-.match-row:hover{background:var(--ll-bg)}
-.match-row.selected{background:var(--ll-blue-light);border-color:var(--ll-blue)}
+.bio-btn{display:inline-flex;align-items:center;justify-content:center;background:transparent;border:none;cursor:pointer;padding:2px;flex-shrink:0;border-radius:3px;transition:opacity 0.15s}
+.bio-btn:hover{opacity:0.7}.bio-btn svg{display:block}
+.psec{margin-bottom:14px}.psec h5{font-size:11px;font-weight:600;color:var(--ll-navy-2);margin-bottom:6px;display:flex;align-items:center;gap:5px}
+.match-row{display:grid;grid-template-columns:24px 1fr 55px 1fr;gap:7px;align-items:center;padding:8px 12px;border:1px solid var(--ll-border);border-radius:6px;margin-bottom:5px;background:var(--ll-card);cursor:pointer}
+.match-row:hover{background:var(--ll-bg)}.match-row.selected{background:var(--ll-blue-light);border-color:var(--ll-blue)}
 .match-row.partial{border-left:3px solid #F5B400;padding-left:9px}
-.match-row.selected .t-radio{background:var(--ll-blue);border-color:var(--ll-blue);box-shadow:inset 0 0 0 2px #fff}
-.match-alt{font-size:10px;color:var(--ll-text-muted);line-height:1.3}
-.match-alt strong{color:var(--ll-navy)}
+.match-info{display:flex;align-items:center;gap:8px;min-width:0}
+.match-info-text{display:flex;flex-direction:column;min-width:0}
+.match-alt{font-size:10px;color:var(--ll-text-muted);line-height:1.3}.match-alt strong{color:var(--ll-navy)}
+.trainer-info{margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--ll-border)}
+.trainer-info-label{font-size:13px;font-weight:600;color:var(--ll-navy);margin-bottom:8px}
+.trainer-info-row{display:flex;align-items:center;gap:10px}
+.trainer-info-avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0;background:#D9EBFA}
+.trainer-info-name{font-size:14px;color:var(--ll-navy);font-weight:500}
 .sched-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
 .sched-card{border:1px solid var(--ll-border);border-radius:8px;padding:12px;background:var(--ll-card);cursor:pointer}
-.sched-card:hover{border-color:var(--ll-blue-border)}
-.sched-card.selected{border:2px solid var(--ll-blue);padding:11px}
-.sc-row{display:flex;gap:14px;margin-bottom:7px}
-.sc-col{flex:1}
+.sched-card:hover{border-color:var(--ll-blue-border)}.sched-card.selected{border:2px solid var(--ll-blue);padding:11px}
+.sc-row{display:flex;gap:14px;margin-bottom:7px}.sc-col{flex:1}
 .sc-lbl{font-size:8px;text-transform:uppercase;letter-spacing:0.6px;color:var(--ll-label);font-weight:600}
 .sc-val{font-size:13px;font-weight:500;color:var(--ll-navy);margin-top:1px}
 .sc-cov-lbl{font-size:8px;text-transform:uppercase;letter-spacing:0.6px;color:var(--ll-label);font-weight:600;margin-top:9px}
 .sc-cov-num{font-size:14px;font-weight:600;margin-top:3px}
-.sc-cov-num.green{color:var(--ll-green-text)}
-.sc-cov-num.yellow{color:var(--ll-yellow-text)}
-.sc-cov-num.red{color:var(--ll-red-text)}
+.sc-cov-num.green{color:var(--ll-green-text)}.sc-cov-num.yellow{color:var(--ll-yellow-text)}.sc-cov-num.red{color:var(--ll-red-text)}
 .sc-radio{display:flex;align-items:center;gap:5px;margin-top:9px;padding-top:9px;border-top:1px solid var(--ll-border);font-size:11px;color:var(--ll-navy-2)}
 .sc-radio .rdo{width:12px;height:12px;border:1px solid var(--ll-border);border-radius:50%;background:var(--ll-card)}
 .sched-card.selected .rdo{background:var(--ll-blue);border-color:var(--ll-blue);box-shadow:inset 0 0 0 2px #fff}
@@ -175,41 +137,72 @@
 .alt-card p{font-size:10px;color:var(--ll-text-muted);line-height:1.4;margin:0}
 .confirmed-card{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding:11px 14px;background:var(--ll-green-bg);border-radius:6px;border:1px solid #B7DCB0}
 .checkmark-icon{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:var(--ll-green-text);color:#fff;border-radius:50%;font-size:11px;font-weight:700;flex-shrink:0}
-.confirmed-card .info-text{flex:1}
-.confirmed-card .info-text .title{font-size:12px;color:var(--ll-green-text);font-weight:600}
+.confirmed-card .info-text{flex:1}.confirmed-card .info-text .title{font-size:12px;color:var(--ll-green-text);font-weight:600}
 .confirmed-card .info-text .sub{font-size:11px;color:var(--ll-green-text);opacity:0.85;margin-top:1px}
 .step-marker{width:24px;height:24px;border-radius:50%;background:var(--ll-blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0}
 .day-filter-wrap{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;padding:10px 12px;background:var(--ll-bg);border-radius:6px;border:1px solid var(--ll-border)}
 .day-filter-lbl{font-size:11px;color:var(--ll-text-muted);font-weight:500}
 .day-chip{padding:4px 11px;border:1px solid var(--ll-border);border-radius:14px;font-size:11px;cursor:pointer;background:var(--ll-card);color:var(--ll-navy-2);font-family:inherit;display:flex;align-items:center;gap:5px;user-select:none}
-.day-chip.on{background:var(--ll-blue);color:#fff;border-color:var(--ll-blue)}
-.day-chip .x{font-size:13px;opacity:0.7}
+.day-chip.on{background:var(--ll-blue);color:#fff;border-color:var(--ll-blue)}.day-chip .x{font-size:13px;opacity:0.7}
 .day-filter-reset{margin-left:auto;font-size:10px;color:var(--ll-blue);background:none;border:none;cursor:pointer;font-family:inherit;text-decoration:underline}
-.flow-nav{display:flex;justify-content:space-between;padding:14px 24px;border-top:1px solid var(--ll-border);background:var(--ll-card);align-items:center;flex-shrink:0}
+.flow-nav{display:flex;justify-content:space-between;padding:14px 24px;border-top:1px solid var(--ll-border);background:var(--ll-card);align-items:center;flex-shrink:0;gap:8px}
 .review-note{background:var(--ll-blue-light);border:1px solid var(--ll-blue-border);border-radius:6px;padding:9px 12px;font-size:11px;color:var(--ll-blue-dark);margin-bottom:14px;line-height:1.5;display:flex;align-items:flex-start;gap:8px}
-.review-note i{font-size:14px;flex-shrink:0;margin-top:1px}
-.review-note a{color:var(--ll-blue-dark);text-decoration:underline;font-weight:500}
+.review-note i{font-size:14px;flex-shrink:0;margin-top:1px}.review-note a{color:var(--ll-blue-dark);text-decoration:underline;font-weight:500}
 .calc-spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--ll-blue-border);border-top-color:var(--ll-blue);border-radius:50%;animation:spin 0.8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.bio-overlay{position:absolute;inset:0;background:rgba(10,37,64,0.45);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
-.bio-overlay.show{display:flex;animation:fadeIn 0.15s ease-out}
+.form-row{display:flex;gap:14px;margin-bottom:14px}.form-field{flex:1;min-width:0}.form-field.full{flex-basis:100%}
+.form-label{font-size:13px;font-weight:500;color:var(--ll-navy);margin-bottom:6px;display:block}.form-label .req{color:#C62828;margin-left:2px}
+.form-input{width:100%;padding:9px 12px;border:1px solid var(--ll-border);border-radius:5px;font-size:13px;font-family:inherit;color:var(--ll-navy);background:var(--ll-card);outline:none}
+.form-input:focus{border-color:var(--ll-blue)}
+.form-select{width:100%;padding:9px 30px 9px 12px;border:1px solid var(--ll-border);border-radius:5px;font-size:13px;font-family:inherit;color:var(--ll-navy);background-color:var(--ll-card);appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235F6B7A' stroke-width='2'><polyline points='6 9 12 15 18 9'></polyline></svg>");background-repeat:no-repeat;background-position:right 10px center;cursor:pointer;outline:none}
+.form-select:focus{border-color:var(--ll-blue)}
+.modal-overlay{position:absolute;inset:0;background:rgba(10,37,64,0.45);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.show{display:flex;animation:fadeIn 0.15s ease-out}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.bio-card{background:var(--ll-card);border-radius:10px;width:100%;max-width:480px;max-height:88%;overflow-y:auto;animation:slideUp 0.2s ease-out}
 @keyframes slideUp{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}
+.choice-modal{background:var(--ll-card);border-radius:10px;width:100%;max-width:560px;padding:22px 26px;animation:slideUp 0.2s ease-out}
+.choice-modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px}
+.choice-modal-title{font-size:17px;font-weight:600;color:var(--ll-navy)}.choice-modal-desc{font-size:13px;color:var(--ll-navy);margin-bottom:18px}
+.modal-close{background:none;border:none;cursor:pointer;color:var(--ll-text-muted);padding:4px;border-radius:4px;font-family:inherit}
+.modal-close:hover{background:var(--ll-bg);color:var(--ll-navy)}.modal-close i{font-size:18px}
+.choice-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.choice-card{border:1px solid var(--ll-border);border-radius:10px;padding:22px 18px 18px;cursor:pointer;text-align:center;background:var(--ll-card);transition:border-color 0.15s,background 0.15s}
+.choice-card:hover{border-color:var(--ll-blue);background:var(--ll-blue-light)}
+.choice-illustration{width:120px;height:100px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center}
+.choice-card-label{font-size:14px;font-weight:600;color:var(--ll-navy)}
+.filter-modal{background:var(--ll-card);border-radius:10px;width:100%;max-width:880px;max-height:92%;overflow:hidden;display:flex;flex-direction:column;animation:slideUp 0.2s ease-out}
+.filter-modal-header{padding:18px 22px 12px;border-bottom:1px solid var(--ll-border)}
+.filter-modal-title-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px}
+.filter-modal-title{font-size:17px;font-weight:600;color:var(--ll-navy)}.filter-modal-desc{font-size:12px;color:var(--ll-navy-2);line-height:1.5}
+.filter-modal-body{padding:14px 22px;overflow-y:auto;flex:1}
+.filter-modal-footer{padding:12px 22px;border-top:1px solid var(--ll-border);display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--ll-bg)}
+.filter-modal-footer-right{display:flex;align-items:center;gap:8px}
+.cov-result-inline{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;padding:6px 10px;background:var(--ll-card);border-radius:6px;border:1px solid var(--ll-border)}
+.cov-result-inline .pct{font-weight:700}.cov-result-inline .pct.green{color:var(--ll-green-text)}.cov-result-inline .pct.yellow{color:var(--ll-yellow-text)}.cov-result-inline .pct.red{color:var(--ll-red-text)}
+.cov-result-inline .recalc{background:none;border:none;color:var(--ll-blue);cursor:pointer;font-family:inherit;font-size:11px;padding:2px;display:inline-flex;align-items:center}
+.search-toolbar{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.search-input-wrap{position:relative;flex:1;min-width:220px;max-width:380px}
+.search-input{width:100%;padding:8px 12px 8px 34px;border:1px solid var(--ll-border);border-radius:5px;font-size:13px;font-family:inherit;color:var(--ll-navy);background:var(--ll-card);outline:none}
+.search-input:focus{border-color:var(--ll-blue)}.search-input::placeholder{color:var(--ll-text-muted)}
+.search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--ll-text-muted);font-size:14px}
+.known-cb-wrap{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ll-navy);cursor:pointer;user-select:none}
+.known-cb-wrap input{width:13px;height:13px;cursor:pointer}
+.filter-actions-right{display:flex;align-items:center;gap:10px;margin-left:auto}
+.filter-match-hint{font-size:11px;margin-bottom:8px;padding:6px 10px;background:var(--ll-blue-light);border-radius:5px;border:1px solid var(--ll-blue-border);color:var(--ll-blue-dark);display:flex;align-items:center;gap:6px}
+.filter-match-hint i{font-size:13px}
+.bio-overlay{position:absolute;inset:0;background:rgba(10,37,64,0.45);z-index:110;display:none;align-items:center;justify-content:center;padding:20px}
+.bio-overlay.show{display:flex;animation:fadeIn 0.15s ease-out}
+.bio-card{background:var(--ll-card);border-radius:10px;width:100%;max-width:480px;max-height:88%;overflow-y:auto;animation:slideUp 0.2s ease-out}
 .bio-header{padding:18px 18px 14px;display:flex;align-items:flex-start;gap:12px;border-bottom:1px solid var(--ll-border)}
-.bio-avatar{width:48px;height:48px;border-radius:50%;background:#D9EBFA;color:var(--ll-blue);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;flex-shrink:0}
-.bio-info{flex:1}
+.bio-avatar{width:52px;height:52px;border-radius:50%;background:#D9EBFA;color:var(--ll-blue);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;flex-shrink:0;overflow:hidden}
+.bio-avatar img{width:100%;height:100%;object-fit:cover}.bio-info{flex:1}
 .bio-name{font-size:16px;font-weight:600;color:var(--ll-navy);display:flex;align-items:center;gap:8px}
 .bio-meta{font-size:12px;color:var(--ll-text-muted);margin-top:3px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .bio-meta .dot{width:3px;height:3px;border-radius:50%;background:var(--ll-text-muted);display:inline-block}
-.bio-rating{color:var(--ll-yellow-text);font-weight:500}
-.bio-rating i{color:#F5B400}
+.bio-rating{color:var(--ll-yellow-text);font-weight:500}.bio-rating i{color:#F5B400}
 .bio-close{background:none;border:none;cursor:pointer;color:var(--ll-text-muted);padding:4px;border-radius:4px;font-family:inherit;flex-shrink:0}
-.bio-close:hover{background:var(--ll-bg);color:var(--ll-navy)}
-.bio-close i{font-size:18px}
-.bio-body{padding:16px 18px}
-.bio-section{margin-bottom:14px}
-.bio-section:last-child{margin-bottom:0}
+.bio-close:hover{background:var(--ll-bg);color:var(--ll-navy)}.bio-close i{font-size:18px}
+.bio-body{padding:16px 18px}.bio-section{margin-bottom:14px}.bio-section:last-child{margin-bottom:0}
 .bio-section-label{font-size:9px;text-transform:uppercase;letter-spacing:0.8px;color:var(--ll-label);font-weight:600;margin-bottom:6px}
 .bio-text{font-size:13px;color:var(--ll-navy);line-height:1.5}
 .bio-langs{display:flex;gap:5px;flex-wrap:wrap}
@@ -218,436 +211,474 @@
 .bio-tag{font-size:11px;padding:3px 8px;background:var(--ll-bg);color:var(--ll-navy-2);border-radius:10px;border:1px solid var(--ll-border)}
 .bio-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:4px}
 .bio-stat{background:var(--ll-bg);border-radius:6px;padding:10px;text-align:center}
-.bio-stat-num{font-size:16px;font-weight:600;color:var(--ll-navy)}
-.bio-stat-lbl{font-size:9px;text-transform:uppercase;letter-spacing:0.5px;color:var(--ll-text-muted);margin-top:2px}
+.bio-stat-num{font-size:16px;font-weight:600;color:var(--ll-navy)}.bio-stat-lbl{font-size:9px;text-transform:uppercase;letter-spacing:0.5px;color:var(--ll-text-muted);margin-top:2px}
 .bio-footer{padding:12px 18px;border-top:1px solid var(--ll-border);display:flex;justify-content:flex-end;gap:8px;background:var(--ll-bg)}
+.t1-footer-actions{display:flex;align-items:center;gap:14px}
+.confirm-modal{max-width:540px;max-height:none}
+.confirm-modal .confirm-body{padding:18px 22px}
+.confirm-modal p{font-size:13px;color:var(--ll-navy);line-height:1.55;margin-bottom:10px}
+.confirm-modal .url-box{background:var(--ll-blue-light);border:1px solid var(--ll-blue-border);border-radius:6px;padding:10px 12px;font-size:11px;color:var(--ll-navy);word-break:break-all;line-height:1.5;margin-top:10px;font-family:Menlo,monospace}
+.confirm-modal .url-box .lbl{font-weight:700;font-family:'Fira Sans',sans-serif}
+.confirm-modal .warn-box{background:var(--ll-yellow-bg);border:1px solid #F5B400;border-radius:6px;padding:9px 11px;display:flex;gap:8px;font-size:11px;color:#5C3B05;line-height:1.5;margin-top:10px}
+.confirm-modal .warn-box i{flex-shrink:0;font-size:14px;color:#F5B400;margin-top:1px}
+.confirm-modal .guidelines-toggle{color:var(--ll-blue);font-size:12px;font-weight:500;cursor:pointer;background:none;border:none;font-family:inherit;display:inline-flex;align-items:center;gap:4px;padding:6px 0;margin-top:4px}
+.home-top{background:var(--ll-card);border-bottom:1px solid var(--ll-border);padding:9px 24px;display:flex;align-items:center;gap:22px}
+.home-top-logo{font-size:18px;font-weight:700;color:var(--ll-blue);letter-spacing:-0.4px}.home-top-logo .dot{color:#F5B400}
+.home-top-nav{display:flex;gap:18px;flex:1;align-items:center}
+.home-top-nav-link{font-size:13px;color:var(--ll-navy);font-weight:500;display:flex;align-items:center;gap:3px;cursor:pointer}
+.home-top-controls{display:flex;align-items:center;gap:10px}
+.home-lang-pill{padding:5px 26px 5px 10px;background:var(--ll-card);border:1px solid var(--ll-border);border-radius:5px;font-size:12px;color:var(--ll-navy);position:relative;cursor:pointer}
+.home-lang-pill::after{content:'';position:absolute;right:8px;top:50%;transform:translateY(-50%);width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid var(--ll-text-muted)}
+.home-tool-btn{width:28px;height:28px;border-radius:5px;background:var(--ll-card);border:1px solid var(--ll-border);display:flex;align-items:center;justify-content:center;color:var(--ll-text-muted);cursor:pointer;font-size:14px}
+.home-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+.home-stat-card{background:var(--ll-card);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:12px;border:1px solid var(--ll-border)}
+.home-stat-info{flex:1;min-width:0}.home-stat-lbl{font-size:11px;font-weight:600;color:var(--ll-navy);display:flex;align-items:center;gap:5px}
+.home-stat-num{font-size:22px;font-weight:700;color:var(--ll-navy);margin-top:2px}
+.home-stat-vis{flex-shrink:0;display:flex;align-items:center}
+.home-bars{display:flex;align-items:flex-end;gap:2px;height:32px}.home-bars span{width:5px;background:var(--ll-blue-border);border-radius:1px}.home-bars span.f{background:#F5B400}
+.home-illust-area{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 18px}
+.home-done-title{font-size:18px;font-weight:700;color:var(--ll-navy);margin-bottom:6px;text-align:center}
+.home-done-desc{font-size:13px;color:var(--ll-navy-2);text-align:center;max-width:480px;line-height:1.55;margin-bottom:18px}
+.home-quick{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.home-quick-btn{padding:8px 18px;background:var(--ll-card);border:1px solid var(--ll-blue);border-radius:5px;font-size:12px;color:var(--ll-blue);font-weight:500;cursor:pointer;font-family:inherit}
+.home-quick-btn:hover{background:var(--ll-blue-light)}
+.toast-container{position:absolute;left:20px;bottom:60px;z-index:200;pointer-events:none}
+.toast{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;background:#E8F8EA;border:1px solid #95D69B;border-radius:8px;box-shadow:0 4px 14px rgba(10,37,64,0.12);min-width:260px;max-width:340px;animation:toastIn 0.3s ease-out;pointer-events:auto}
+@keyframes toastIn{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.toast .ic{width:18px;height:18px;border-radius:50%;background:var(--ll-green-text);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px}
+.toast .body-text{flex:1}.toast .ttl{font-size:13px;font-weight:600;color:var(--ll-navy)}.toast .sub{font-size:11px;color:var(--ll-text-muted);margin-top:1px;line-height:1.4}
+.toast .close-btn{background:none;border:none;cursor:pointer;color:var(--ll-text-muted);padding:0;font-family:inherit;font-size:14px}
 </style>
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <symbol id="icon-bio" viewBox="0 0 16 16">
-      <path d="M13.5 3C13.5 2.75 13.25 2.5 13 2.5H3C2.71875 2.5 2.5 2.75 2.5 3V13C2.5 13.2813 2.71875 13.5 3 13.5H13C13.25 13.5 13.5 13.2813 13.5 13V3ZM13 1C14.0938 1 15 1.90625 15 3V13C15 14.125 14.0938 15 13 15H3C1.875 15 1 14.125 1 13V3C1 1.90625 1.875 1 3 1H13ZM9 5C9 5.4375 8.65625 5.75 8.25 5.75H4.75C4.3125 5.75 4 5.4375 4 5C4 4.59375 4.3125 4.25 4.75 4.25H8.25C8.65625 4.25 9 4.59375 9 5ZM11.25 7.25C11.6563 7.25 12 7.59375 12 8C12 8.4375 11.6563 8.75 11.25 8.75H4.75C4.3125 8.75 4 8.4375 4 8C4 7.59375 4.3125 7.25 4.75 7.25H11.25ZM7 11C7 11.4375 6.65625 11.75 6.25 11.75H4.75C4.3125 11.75 4 11.4375 4 11C4 10.5938 4.3125 10.25 4.75 10.25H6.25C6.65625 10.25 7 10.5938 7 11Z" fill="#0276B1"/>
-    </symbol>
-  </defs>
-</svg>
-
-<h2 class="sr-only">UX-536 self-service multi-class scheduling prototype</h2>
+<!-- Full icon-bio symbol with all text-line paths -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="icon-bio" viewBox="0 0 16 16">
+  <path d="M13.5 3C13.5 2.75 13.25 2.5 13 2.5H3C2.71875 2.5 2.5 2.75 2.5 3V13C2.5 13.2813 2.71875 13.5 3 13.5H13C13.25 13.5 13.5 13.2813 13.5 13V3ZM13 1C14.0938 1 15 1.90625 15 3V13C15 14.125 14.0938 15 13 15H3C1.875 15 1 14.125 1 13V3C1 1.90625 1.875 1 3 1H13ZM9 5C9 5.4375 8.65625 5.75 8.25 5.75H4.75C4.3125 5.75 4 5.4375 4 5C4 4.59375 4.3125 4.25 4.75 4.25H8.25C8.65625 4.25 9 4.59375 9 5ZM11.25 7.25C11.6563 7.25 12 7.59375 12 8C12 8.4375 11.6563 8.75 11.25 8.75H4.75C4.3125 8.75 4 8.4375 4 8C4 7.59375 4.3125 7.25 4.75 7.25H11.25ZM7 11C7 11.4375 6.65625 11.75 6.25 11.75H4.75C4.3125 11.75 4 11.4375 4 11C4 10.5938 4.3125 10.25 4.75 10.25H6.25C6.65625 10.25 7 10.5938 7 11Z" fill="#0276B1"/>
+</symbol>
+<symbol id="ill-trainer" viewBox="0 0 120 100"><circle cx="60" cy="42" r="22" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/><circle cx="60" cy="36" r="9" fill="#185FA5"/><path d="M42 62 Q60 50 78 62 L78 80 L42 80 Z" fill="#185FA5"/><circle cx="88" cy="22" r="6" fill="#F5B400" opacity="0.7"/><circle cx="28" cy="70" r="4" fill="#185FA5" opacity="0.4"/></symbol>
+<symbol id="ill-availability" viewBox="0 0 120 100"><rect x="20" y="22" width="80" height="60" rx="4" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/><rect x="20" y="22" width="80" height="14" rx="4" fill="#185FA5"/><rect x="28" y="42" width="14" height="10" rx="2" fill="#fff" stroke="#185FA5"/><rect x="46" y="42" width="14" height="10" rx="2" fill="#0F6E56"/><rect x="64" y="42" width="14" height="10" rx="2" fill="#fff" stroke="#185FA5"/><rect x="82" y="42" width="14" height="10" rx="2" fill="#fff" stroke="#185FA5"/><rect x="28" y="56" width="14" height="10" rx="2" fill="#fff" stroke="#185FA5"/><rect x="46" y="56" width="14" height="10" rx="2" fill="#fff" stroke="#185FA5"/><rect x="64" y="56" width="14" height="10" rx="2" fill="#0F6E56"/><rect x="82" y="56" width="14" height="10" rx="2" fill="#fff" stroke="#185FA5"/></symbol>
+</defs></svg>
 
 <div class="app">
-  <div class="sidebar">
-    <div class="sb-brand"><span class="sb-brand-logo">learnl<span class="dot">i</span>ght</span></div>
-    <div class="sb-sub">UX-536 prototype</div>
-    <div class="sb-section">Main flow</div>
-    <div class="sb-item active" onclick="goScreen('s1',this)"><span class="num">1·</span>Availability</div>
-    <div class="sb-item" onclick="goScreen('s2',this)"><span class="num">2·</span>Trainer selection</div>
-    <div class="sb-item" onclick="goScreen('s3',this)"><span class="num">3·</span>Schedule — class 1</div>
-    <div class="sb-item" onclick="goScreen('s4',this)"><span class="num">4·</span>Schedule — class 2</div>
-    <div class="sb-section">Edge cases</div>
-    <div class="sb-item" onclick="goScreen('e1',this)"><span class="num">✕</span>Conflict (no match)</div>
-    <div class="sb-item" onclick="goScreen('e2',this)"><span class="num">✕</span>No-trainer fallback</div>
-  </div>
+<div class="sidebar">
+<div class="sb-brand"><span class="sb-brand-logo">learnl<span class="dot">i</span>ght</span></div>
+<div class="sb-sub">UX-536 prototype</div>
+<div class="sb-section">Onboarding</div>
+<div class="sb-item active" onclick="goScreen('p0',this)"><span class="num">1·</span>Personal Data</div>
+<div class="sb-item" onclick="goScreen('p0',this);openChoice()"><span class="num">★</span>Setup choice modal</div>
+<div class="sb-section">Path A — Availability first</div>
+<div class="sb-item" onclick="goScreen('s1',this)"><span class="num">A1</span>Availability</div>
+<div class="sb-item" onclick="goScreen('s2',this)"><span class="num">A2</span>Trainer selection</div>
+<div class="sb-section">Path B — Trainer first</div>
+<div class="sb-item" onclick="goScreen('t1',this)"><span class="num">B1</span>Select Trainer</div>
+<div class="sb-item" onclick="goScreen('t1',this);openFilterAvail()"><span class="num">B2</span>Filter Availability modal</div>
+<div class="sb-item" onclick="goScreen('t1',this);openTrainerAvail()"><span class="num">B3</span>Trainer Availability modal</div>
+<div class="sb-section">Schedule (shared)</div>
+<div class="sb-item" onclick="goScreen('s3',this)"><span class="num">3·</span>Class 1</div>
+<div class="sb-item" onclick="goScreen('s4',this)"><span class="num">4·</span>Class 2</div>
+<div class="sb-section">Edge cases</div>
+<div class="sb-item" onclick="goScreen('e1',this)"><span class="num">✕</span>Conflict (no match)</div>
+<div class="sb-item" onclick="goScreen('e2',this)"><span class="num">✕</span>No-trainer fallback</div>
+<div class="sb-section">After confirmation</div>
+<div class="sb-item" onclick="goScreen('s4',this);openConfirmSched()"><span class="num">★</span>Confirmation modal</div>
+<div class="sb-item" onclick="goScreen('home',this)"><span class="num">🏠</span>Homepage (post-sync)</div>
+</div>
 
-  <div class="main">
-    <div class="app-header">
-      <span class="app-header-logo">learnl<span class="dot">i</span>ght</span>
-      <div class="app-avatar">AL</div>
-    </div>
+<div class="main">
+<div class="app-header"><span class="app-header-logo">learnl<span class="dot">i</span>ght</span><div class="app-avatar">AL</div></div>
 
-    <div class="screen active" id="s1">
-      <div class="welcome-row">
-        <div><h1>Welcome, Alex!</h1><p>Let's get your learning program set up for success</p></div>
-        <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">2. Availability</div><div class="step-sep"></div><div class="step">3</div></div>
-      </div>
-      <div class="body-row">
-        <div class="prog-card">
-          <h4>Your Program Details</h4>
-          <div class="pf"><div class="pf-label">Program</div><div class="pf-value">English</div></div>
-          <div class="pf"><div class="pf-label">Assigned Course</div><div class="pf-value">B1 - Intermediate 1</div></div>
-          <div class="pf-row">
-            <div class="pf"><div class="pf-label">Active From</div><div class="pf-value">01 Sep 2025</div></div>
-            <div class="pf"><div class="pf-label">Active To</div><div class="pf-value">01 Jun 2026</div></div>
-          </div>
-          <div class="pf-row">
-            <div class="pf"><div class="pf-label">Total Classes</div><div class="pf-value">16</div></div>
-            <div class="pf"><div class="pf-label">Class Duration</div><div class="pf-value">30 min</div></div>
-          </div>
-          <div class="pf"><div class="pf-label">Class Frequency</div><div class="pf-value">2 × week</div></div>
-        </div>
+<!-- p0 -->
+<div class="screen active" id="p0">
+<div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Let's get your learning program set up for success</p></div>
+<div class="steps"><div class="step active">1. Personal Data</div><div class="step-sep"></div><div class="step">2</div><div class="step-sep"></div><div class="step">3</div></div></div>
+<div class="body-row">
+<div class="prog-card"><h4>Your Program Details</h4>
+<div class="pf"><div class="pf-label">Program</div><div class="pf-value">English</div></div>
+<div class="pf"><div class="pf-label">Assigned Course</div><div class="pf-value">B1 - Intermediate 1</div></div>
+<div class="pf-row"><div class="pf"><div class="pf-label">Active From</div><div class="pf-value">01 Sep 2025</div></div><div class="pf"><div class="pf-label">Active To</div><div class="pf-value">01 Jun 2026</div></div></div>
+<div class="pf-row"><div class="pf"><div class="pf-label">Total Classes</div><div class="pf-value">8</div></div><div class="pf"><div class="pf-label">Class Duration</div><div class="pf-value">30 min</div></div></div>
+<div class="pf"><div class="pf-label">Class Frequency</div><div class="pf-value">Every 1 week</div></div></div>
+<div class="content-card">
+<div class="cc-title">Personal Data</div><div class="cc-desc">Please review and confirm your details to get started</div>
+<div class="form-row"><div class="form-field"><label class="form-label">First Name<span class="req">*</span></label><input class="form-input" type="text" value="John"/></div><div class="form-field"><label class="form-label">Last Name<span class="req">*</span></label><input class="form-input" type="text" value="Doe"/></div></div>
+<div class="form-row"><div class="form-field full"><label class="form-label">Email<span class="req">*</span></label><input class="form-input" type="email" value="johndoe@gmail.com"/></div></div>
+<div class="form-row"><div class="form-field full"><label class="form-label">Time Zone<span class="req">*</span></label><select class="form-select"><option>GMT Standard Time</option><option>Central European Time</option><option>Eastern Standard Time</option></select></div></div>
+<div class="form-row"><div class="form-field full"><label class="form-label">Primary Language<span class="req">*</span></label><select class="form-select"><option>English</option><option>Spanish</option><option>French</option></select></div></div>
+<div style="display:flex;justify-content:flex-end;margin-top:8px"><button class="btn-primary" onclick="openChoice()">Confirm &amp; Continue</button></div>
+</div></div></div>
 
-        <div class="content-card">
-          <div class="cc-title">Specify Availability</div>
-          <div class="cc-desc">Select the slots that fit your availability so we can recommend a more accurate schedule</div>
+<!-- s1 -->
+<div class="screen" id="s1">
+<div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Let's get your learning program set up for success</p></div>
+<div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">2. Availability</div><div class="step-sep"></div><div class="step">3</div></div></div>
+<div class="body-row">
+<div class="prog-card"><h4>Your Program Details</h4>
+<div class="pf"><div class="pf-label">Program</div><div class="pf-value">English</div></div>
+<div class="pf"><div class="pf-label">Assigned Course</div><div class="pf-value">B1 - Intermediate 1</div></div>
+<div class="pf-row"><div class="pf"><div class="pf-label">Active From</div><div class="pf-value">01 Sep 2025</div></div><div class="pf"><div class="pf-label">Active To</div><div class="pf-value">01 Jun 2026</div></div></div>
+<div class="pf-row"><div class="pf"><div class="pf-label">Total Classes</div><div class="pf-value">16</div></div><div class="pf"><div class="pf-label">Duration</div><div class="pf-value">30 min</div></div></div>
+<div class="pf"><div class="pf-label">Frequency</div><div class="pf-value">2 × week</div></div></div>
+<div class="content-card">
+<div class="cc-title">Specify Availability</div>
+<div class="cc-desc">Select the slots that fit your availability. Once you pick your first slot, darker-green cells show compatible slots where at least one matching trainer is also free.</div>
+<div class="cb-banner info"><i class="ti ti-info-circle"></i><div><strong>All weekly classes will be with the same trainer.</strong> We'll match you with a trainer whose availability covers all the slots you select.</div></div>
+<div id="suggest-banner-host"></div>
+<div class="gs-top"><div class="cb-row"><div class="cb"></div>Select all available times</div><div class="legend"><div class="lg"><div class="lg-box lg-na"></div>Not available</div><div class="lg"><div class="lg-box lg-av"></div>Available</div><div class="lg"><div class="lg-box lg-mh"></div>Smart match</div><div class="lg"><div class="lg-box lg-sl"></div>Selected</div></div></div>
+<div class="grid"><div class="grid-head"><div></div><div>Mondays</div><div>Tuesdays</div><div>Wednesdays</div><div>Thursdays</div><div>Fridays</div><div>Saturdays</div><div>Sundays</div></div><div class="grid-body" id="s1-grid"></div></div>
+<div class="cov-strip"><div id="s1-cov-area" style="display:none"></div>
+<div class="cta-area" style="margin-left:auto"><span class="cta-hint" id="s1-hint">Select your available slots to begin</span><button class="btn-link">Select A Trainer</button><button class="btn-primary" id="s1-genbtn" disabled onclick="goScreen('s2',document.querySelectorAll('.sb-item')[3])">Schedule Options</button></div></div>
+</div></div></div>
 
-          <div class="cb-banner info">
-            <i class="ti ti-info-circle"></i>
-            <div><strong>All of your weekly classes will be with the same trainer.</strong> We&rsquo;ll match you with a trainer whose availability covers all the slots you select.</div>
-          </div>
+<!-- s2 -->
+<div class="screen" id="s2">
+<div class="welcome-row"><div><h1>Choose your trainer</h1><p>Pick the trainer you'd like for all of your weekly classes</p></div>
+<div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">3. Schedule</div></div></div>
+<div class="body-row">
+<div class="prog-card"><h4>Your selected slots</h4>
+<div class="pf"><div class="pf-label">Slot 1</div><div class="pf-value">Mon 10:00</div></div>
+<div class="pf"><div class="pf-label">Slot 2</div><div class="pf-value">Thu 10:00</div></div>
+<div class="pf"><div class="pf-label">Slot 3</div><div class="pf-value">Fri 09:30</div></div>
+<div class="pf"><div class="pf-label">Coverage required</div><div class="pf-value">≥ 80%</div></div></div>
+<div class="content-card">
+<div class="cc-title">Available trainers</div>
+<div class="cc-desc">Choose one trainer for all of your weekly classes. Partial matches suggest a slight slot adjustment.</div>
+<div class="psec"><h5>Full matches — covers all your slots</h5>
+<div class="t-table"><div class="t-head"><div></div><div>Name</div><div style="text-align:center">Bio</div><div>Rating</div><div>Languages</div><div style="text-align:right">Coverage</div></div>
+<div class="t-row" onclick="selectTrainer(this)" data-tname="Camille Dubois" data-tkey="camille"><div class="t-radio"></div><div class="t-name"><img class="t-avatar" src="https://i.pravatar.cc/80?img=44" alt=""/>Camille Dubois</div><div class="t-bio-cell"><button class="bio-btn" onclick="openBio(event,'camille')" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button></div><div class="t-rating"><i class="ti ti-star-filled"></i>4.8</div><div class="t-langs"><span class="t-lang-pill">EN</span><span class="t-lang-pill">FR</span><span class="t-lang-pill">ES</span></div><div class="t-cov green">100%</div></div>
+<div class="t-row" onclick="selectTrainer(this)" data-tname="Elias Sorenson" data-tkey="elias"><div class="t-radio"></div><div class="t-name"><img class="t-avatar" src="https://i.pravatar.cc/80?img=8" alt=""/>Elias Sorenson <span class="t-known">Known</span></div><div class="t-bio-cell"><button class="bio-btn" onclick="openBio(event,'elias')" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button></div><div class="t-rating"><i class="ti ti-star-filled"></i>4.8</div><div class="t-langs"><span class="t-lang-pill">EN</span><span class="t-lang-pill">ES</span><span class="t-lang-pill">IT</span></div><div class="t-cov green">100%</div></div>
+<div class="t-row" onclick="selectTrainer(this)" data-tname="Sofía Rodríguez" data-tkey="sofia"><div class="t-radio"></div><div class="t-name"><img class="t-avatar" src="https://i.pravatar.cc/80?img=47" alt=""/>Sofía Rodríguez</div><div class="t-bio-cell"><button class="bio-btn" onclick="openBio(event,'sofia')" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button></div><div class="t-rating"><i class="ti ti-star-filled"></i>4.7</div><div class="t-langs"><span class="t-lang-pill">EN</span><span class="t-lang-pill">ES</span></div><div class="t-cov green">100%</div></div>
+<div class="t-row" onclick="selectTrainer(this)" data-tname="Helena Park" data-tkey="helena"><div class="t-radio"></div><div class="t-name"><img class="t-avatar" src="https://i.pravatar.cc/80?img=49" alt=""/>Helena Park</div><div class="t-bio-cell"><button class="bio-btn" onclick="openBio(event,'helena')" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button></div><div class="t-rating"><i class="ti ti-star-filled"></i>4.9</div><div class="t-langs"><span class="t-lang-pill">EN</span><span class="t-lang-pill">KO</span></div><div class="t-cov green">100%</div></div>
+</div><button class="load-more-btn">Load More</button></div>
+<div class="psec"><h5>Partial matches — small slot adjustment</h5>
+<div class="match-row partial" onclick="selectTrainer(this)" data-tname="Marcus Silva" data-tkey="marcus"><div class="t-radio"></div><div class="match-info"><img class="t-avatar" src="https://i.pravatar.cc/80?img=33" alt=""/><div class="match-info-text"><div class="t-name" style="gap:6px">Marcus Silva <button class="bio-btn" onclick="openBio(event,'marcus')" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button></div><div class="t-langs" style="margin-top:3px"><span class="t-lang-pill">EN</span><span class="t-lang-pill">ES</span></div></div></div><div class="t-cov yellow">75%</div><div class="match-alt">Mon 10:00 ✓ · Fri 09:30 ✓ · Thu: try <strong>Thu 10:30</strong></div></div>
+<div class="match-row partial" onclick="selectTrainer(this)" data-tname="Arthur Reyes" data-tkey="arthur"><div class="t-radio"></div><div class="match-info"><img class="t-avatar" src="https://i.pravatar.cc/80?img=68" alt=""/><div class="match-info-text"><div class="t-name" style="gap:6px">Arthur Reyes <span class="t-known">Known</span> <button class="bio-btn" onclick="openBio(event,'arthur')" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button></div><div class="t-langs" style="margin-top:3px"><span class="t-lang-pill">EN</span><span class="t-lang-pill">FR</span></div></div></div><div class="t-cov yellow">75%</div><div class="match-alt">Thu 10:00 ✓ · Fri 09:30 ✓ · Mon: try <strong>Mon 09:30</strong></div></div>
+<div class="match-row partial" onclick="selectTrainer(this)" data-tname="Yuki Tanaka" data-tkey="yuki"><div class="t-radio"></div><div class="match-info"><img class="t-avatar" src="https://i.pravatar.cc/80?img=16" alt=""/><div class="match-info-text"><div class="t-name" style="gap:6px">Yuki Tanaka <button class="bio-btn" onclick="openBio(event,'yuki')" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button></div><div class="t-langs" style="margin-top:3px"><span class="t-lang-pill">EN</span><span class="t-lang-pill">JA</span></div></div></div><div class="t-cov yellow">75%</div><div class="match-alt">Mon 10:00 ✓ · Thu 10:00 ✓ · Fri: try <strong>Fri 10:00</strong></div></div>
+<div class="match-row partial" onclick="selectTrainer(this)" data-tname="Lukas Hoffmann" data-tkey="lukas"><div class="t-radio"></div><div class="match-info"><img class="t-avatar" src="https://i.pravatar.cc/80?img=51" alt=""/><div class="match-info-text"><div class="t-name" style="gap:6px">Lukas Hoffmann <button class="bio-btn" onclick="openBio(event,'lukas')" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button></div><div class="t-langs" style="margin-top:3px"><span class="t-lang-pill">EN</span><span class="t-lang-pill">DE</span></div></div></div><div class="t-cov yellow">70%</div><div class="match-alt">Mon 10:00 ✓ · Thu: try <strong>Thu 11:00</strong> · Fri: try <strong>Fri 10:00</strong></div></div>
+<button class="load-more-btn">Load More</button></div>
+</div></div>
+<div class="flow-nav"><button class="btn-ghost" onclick="goScreen('s1',document.querySelectorAll('.sb-item')[2])">← Back to availability</button><button class="btn-primary" id="s2-next" disabled onclick="goScreen('s3',document.querySelectorAll('.sb-item')[7])">Continue with selected trainer →</button></div>
+</div>
 
-          <div id="suggest-banner-host"></div>
+<!-- t1 -->
+<div class="screen" id="t1">
+<div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Let's get your learning program ready for success</p></div>
+<div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">2. Trainers</div><div class="step-sep"></div><div class="step">3</div></div></div>
+<div class="body-row">
+<div class="prog-card"><h4>Your Program Details</h4>
+<div class="pf"><div class="pf-label">Program</div><div class="pf-value">English</div></div>
+<div class="pf"><div class="pf-label">Assigned Course</div><div class="pf-value">B1 - Intermediate 1</div></div>
+<div class="pf-row"><div class="pf"><div class="pf-label">Total Classes</div><div class="pf-value">8</div></div><div class="pf"><div class="pf-label">Duration</div><div class="pf-value">30 min</div></div></div>
+<div class="pf"><div class="pf-label">Frequency</div><div class="pf-value">Every 1 week</div></div></div>
+<div class="content-card">
+<div class="cc-title">Select Trainer</div>
+<div class="cc-desc" id="t1-subtitle">Choose a trainer to see your schedule options</div>
+<div class="search-toolbar">
+<div class="search-input-wrap"><i class="ti ti-search search-icon"></i><input class="search-input" type="text" placeholder="Search for a specific trainer" oninput="filterT1()"/></div>
+<label class="known-cb-wrap"><input type="checkbox" id="t1-known-only" onchange="filterT1()"/>Show only known trainers</label>
+<div class="filter-actions-right">
+<button class="btn-link" id="t1-clear-filters" onclick="clearAvailFilter()" style="display:none">Clear Filters</button>
+<button class="btn-outline" onclick="openFilterAvail()"><i class="ti ti-calendar-time"></i>Filter By Availability</button>
+</div>
+</div>
+<div id="t1-filter-hint" style="display:none" class="filter-match-hint"><i class="ti ti-filter-check"></i><span id="t1-filter-hint-text">Showing trainers matching your availability</span></div>
+<div class="t-table"><div class="t-head" style="grid-template-columns:24px 1fr 50px 50px 1fr"><div></div><div>Name</div><div style="text-align:center">Bio</div><div>Rating</div><div>Spoken languages</div></div><div id="t1-rows"></div></div>
+</div></div>
+<div class="flow-nav">
+<button class="btn-ghost" onclick="goScreen('p0',document.querySelectorAll('.sb-item')[0])">← Back</button>
+<div class="t1-footer-actions">
+<button class="btn-link" id="t1-check-avail" disabled onclick="openTrainerAvail()">Check Trainer's Availability</button>
+<button class="btn-primary" id="t1-next" disabled onclick="goScreen('s3',document.querySelectorAll('.sb-item')[8])">Schedule Options</button>
+</div>
+</div>
+</div>
 
-          <div class="gs-top">
-            <div class="cb-row"><div class="cb"></div>Select all available times</div>
-            <div class="legend">
-              <div class="lg"><div class="lg-box lg-na"></div>Not available</div>
-              <div class="lg"><div class="lg-box lg-av"></div>Available</div>
-              <div class="lg"><div class="lg-box lg-sl"></div>Selected</div>
-            </div>
-          </div>
+<!-- s3 -->
+<div class="screen" id="s3">
+<div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Pick your first weekly class</p></div>
+<div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">3. Schedule</div></div></div>
+<div class="body-row">
+<div class="prog-card"><h4>Your Program Details</h4>
+<div class="pf"><div class="pf-label">Trainer</div><div class="pf-value" id="s3-prog-trainer">Camille Dubois</div></div>
+<div class="pf"><div class="pf-label">Class 1</div><div class="pf-value" style="color:var(--ll-blue);font-weight:500">Choosing now</div></div>
+<div class="pf"><div class="pf-label">Class 2</div><div class="pf-value" style="color:var(--ll-label)">After class 1</div></div>
+<div class="pf"><div class="pf-label">Frequency</div><div class="pf-value">2 × week</div></div></div>
+<div class="content-card">
+<div class="cc-title">Select Schedule</div>
+<div class="cc-desc">Confirm your schedule, or return to adjust your availability or trainer if needed.</div>
+<div class="review-note"><i class="ti ti-info-circle"></i><div>Review your <a href="#">cancellation policy</a> before confirming the schedule, and check your <a href="#">time zone</a>.</div></div>
+<div class="trainer-info"><div class="trainer-info-label">Trainer</div><div class="trainer-info-row"><img class="trainer-info-avatar" id="s3-trainer-avatar" src="https://i.pravatar.cc/80?img=44" alt=""/><span class="trainer-info-name" id="s3-trainer-name">Camille Dubois</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div class="step-marker">1</div><div><div style="font-size:13px;font-weight:600;color:var(--ll-navy)">Choose Class 1</div><div style="font-size:11px;color:var(--ll-text-muted)">Pick a recurring weekly time</div></div></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div style="font-size:11px;color:var(--ll-text-muted);text-transform:uppercase;letter-spacing:0.5px;font-weight:600">Proposed schedules</div><button class="btn-link" style="padding:4px 8px">Load More Options</button></div>
+<div class="sched-grid">
+<div class="sched-card" onclick="selectClass1(this)"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">Mondays</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">10:00-10:30</div></div></div><div class="sc-cov-lbl">Schedule coverage</div><div class="sc-cov-num green">85%</div><div class="sc-radio"><div class="rdo"></div>Select this schedule</div></div>
+<div class="sched-card" onclick="selectClass1(this)"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">Thursdays</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">10:00-10:30</div></div></div><div class="sc-cov-lbl">Schedule coverage</div><div class="sc-cov-num yellow">75%</div><div class="sc-radio"><div class="rdo"></div>Select this schedule</div></div>
+<div class="sched-card" onclick="selectClass1(this)"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">Fridays</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">09:30-10:00</div></div></div><div class="sc-cov-lbl">Schedule coverage</div><div class="sc-cov-num red">60%</div><div class="sc-radio"><div class="rdo"></div>Select this schedule</div></div>
+</div>
+</div></div>
+<div class="flow-nav"><button class="btn-ghost" onclick="goScreen('t1',document.querySelectorAll('.sb-item')[4])">← Back</button><button class="btn-primary" id="s3-next" disabled onclick="confirmClass1Go()">Confirm class 1 &amp; continue →</button></div>
+</div>
 
-          <div class="grid">
-            <div class="grid-head">
-              <div></div><div>Mondays</div><div>Tuesdays</div><div>Wednesdays</div><div>Thursdays</div><div>Fridays</div><div>Saturdays</div><div>Sundays</div>
-            </div>
-            <div class="grid-body" id="s1-grid"></div>
-          </div>
+<!-- s4 -->
+<div class="screen" id="s4">
+<div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Now pick your second weekly class</p></div>
+<div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">3. Schedule</div></div></div>
+<div class="body-row">
+<div class="prog-card"><h4>Your Program Details</h4>
+<div class="pf"><div class="pf-label">Trainer</div><div class="pf-value" id="s4-trainer">Camille Dubois</div></div>
+<div class="pf"><div class="pf-label">Class 1</div><div class="pf-value" style="color:var(--ll-green-text);font-weight:500" id="s4-class1">Mondays 10:00-10:30</div></div>
+<div class="pf"><div class="pf-label">Class 2</div><div class="pf-value" style="color:var(--ll-blue);font-weight:500">Choosing now</div></div>
+<div class="pf"><div class="pf-label">Frequency</div><div class="pf-value">2 × week</div></div></div>
+<div class="content-card">
+<div class="cc-title">Select Schedule</div>
+<div class="cc-desc">Pick a second weekly class with <span id="s4-trainer-inline">Camille</span>.</div>
+<div class="trainer-info"><div class="trainer-info-label">Trainer</div><div class="trainer-info-row"><img class="trainer-info-avatar" id="s4-trainer-avatar" src="https://i.pravatar.cc/80?img=44" alt=""/><span class="trainer-info-name" id="s4-trainer-name">Camille Dubois</span></div></div>
+<div class="confirmed-card"><div class="checkmark-icon">✓</div><div class="info-text"><div class="title">Class 1 confirmed — <span id="s4-c1-text">Mondays 10:00-10:30</span></div><div class="sub">85% coverage · with <span id="s4-c1-trainer">Camille Dubois</span></div></div><button class="btn-link" style="padding:4px 10px;font-size:11px" onclick="editClass1()"><i class="ti ti-edit" style="font-size:12px;vertical-align:-2px"></i> Edit</button></div>
+<div id="edit-warning" style="display:none"><div class="cb-banner warn"><i class="ti ti-alert-triangle"></i><div><strong>Changing Class 1 may require picking a new Class 2.</strong></div></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div class="step-marker">2</div><div><div style="font-size:13px;font-weight:600;color:var(--ll-navy)">Choose Class 2</div><div style="font-size:11px;color:var(--ll-text-muted)">Filter by day to narrow your options</div></div></div>
+<div class="day-filter-wrap"><span class="day-filter-lbl">Show days:</span>
+<div class="day-chip on" data-day="Mon" onclick="toggleDayFilter(this)">Mon <span class="x">×</span></div>
+<div class="day-chip on" data-day="Tue" onclick="toggleDayFilter(this)">Tue <span class="x">×</span></div>
+<div class="day-chip on" data-day="Wed" onclick="toggleDayFilter(this)">Wed <span class="x">×</span></div>
+<div class="day-chip on" data-day="Thu" onclick="toggleDayFilter(this)">Thu <span class="x">×</span></div>
+<div class="day-chip on" data-day="Fri" onclick="toggleDayFilter(this)">Fri <span class="x">×</span></div>
+<button class="day-filter-reset" onclick="resetDayFilter()">Reset</button></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div style="font-size:11px;color:var(--ll-text-muted);text-transform:uppercase;letter-spacing:0.5px;font-weight:600">Proposed schedules · <span id="s4-shown-count">5</span> shown</div><button class="btn-link" style="padding:4px 8px">Load More Options</button></div>
+<div class="sched-grid" id="s4-sched-grid"></div>
+<div id="s4-empty" style="display:none;text-align:center;padding:20px;background:var(--ll-bg);border-radius:6px;border:1px solid var(--ll-border);font-size:12px;color:var(--ll-text-muted)">No schedules match the selected days.</div>
+</div></div>
+<div class="flow-nav"><button class="btn-ghost" onclick="goScreen('s3',document.querySelectorAll('.sb-item')[8])">← Back to class 1</button><button class="btn-primary" id="s4-next" disabled onclick="openConfirmSched()">Confirm Schedule</button></div>
+</div>
 
-          <div class="cov-strip">
-            <div id="s1-cov-area" style="display:none"></div>
-            <div class="cta-area" style="margin-left:auto">
-              <span class="cta-hint" id="s1-hint">Select your available slots to begin</span>
-              <button class="btn-link">Select A Trainer</button>
-              <button class="btn-primary" id="s1-genbtn" disabled onclick="goScreen('s2',document.querySelectorAll('.sb-item')[1])">Schedule Options</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<!-- e1 -->
+<div class="screen" id="e1">
+<div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>This selection has a conflict</p></div>
+<div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">2. Availability</div><div class="step-sep"></div><div class="step">3</div></div></div>
+<div class="body-row">
+<div class="prog-card"><h4>Edge case</h4>
+<div class="pf"><div class="pf-label">Scenario</div><div class="pf-value">No trainer covers selection</div></div>
+<div class="pf"><div class="pf-label">Trigger</div><div class="pf-value">Coverage returned 0% / no match</div></div></div>
+<div class="content-card">
+<div class="cc-title">Specify Availability — conflict state</div>
+<div class="cc-desc">When no trainer can be matched, a contextual warning is shown alongside the info banner.</div>
+<div class="cb-banner info"><i class="ti ti-info-circle"></i><div><strong>All weekly classes will be with the same trainer.</strong></div></div>
+<div class="cb-banner warn"><i class="ti ti-alert-triangle"></i><div><strong>No trainer covers your current selection.</strong> Your selected slots (Sat 07:00 + Sun 07:00) don't match any single trainer. <a href="#" onclick="event.preventDefault();goScreen('e2',document.querySelectorAll('.sb-item')[12])">See your options →</a></div></div>
+<div class="grid"><div class="grid-head"><div></div><div>Mondays</div><div>Tuesdays</div><div>Wednesdays</div><div>Thursdays</div><div>Fridays</div><div>Saturdays</div><div>Sundays</div></div><div class="grid-body" id="e1-grid"></div></div>
+<div class="cov-strip"><div class="cov-block"><span class="cov-pct red">0%</span><span class="cov-lbl">coverage</span></div><div class="cta-area"><button class="btn-link">Select A Trainer</button><button class="btn-primary">Schedule Options</button></div></div>
+</div></div></div>
 
-    <div class="screen" id="s2">
-      <div class="welcome-row">
-        <div><h1>Choose your trainer</h1><p>Pick the trainer you'd like for all of your weekly classes</p></div>
-        <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">3. Schedule</div></div>
-      </div>
-      <div class="body-row">
-        <div class="prog-card">
-          <h4>Your selected slots</h4>
-          <div class="pf"><div class="pf-label">Slot 1</div><div class="pf-value">Mon 10:00</div></div>
-          <div class="pf"><div class="pf-label">Slot 2</div><div class="pf-value">Thu 10:00</div></div>
-          <div class="pf"><div class="pf-label">Slot 3</div><div class="pf-value">Fri 09:30</div></div>
-          <div class="pf"><div class="pf-label">Coverage required</div><div class="pf-value">≥ 80%</div></div>
-        </div>
-        <div class="content-card">
-          <div class="cc-title">Available trainers</div>
-          <div class="cc-desc">Choose one trainer for all of your weekly classes. Partial matches suggest a slight slot adjustment.</div>
+<!-- e2 -->
+<div class="screen" id="e2">
+<div class="welcome-row"><div><h1>Let's find a path forward</h1><p>Two ways to get back on track</p></div></div>
+<div class="body-row">
+<div class="prog-card"><h4>Situation</h4>
+<div class="pf"><div class="pf-label">Slot 1</div><div class="pf-value">Sat 07:00</div></div>
+<div class="pf"><div class="pf-label">Slot 2</div><div class="pf-value">Sun 07:00</div></div>
+<div class="pf"><div class="pf-label">Trainers found</div><div class="pf-value" style="color:var(--ll-red-text)">0</div></div></div>
+<div class="content-card">
+<div class="cc-title">No-trainer fallback</div>
+<div class="cc-desc">When no trainer can cover the selection, two paths forward.</div>
+<div class="empty"><div class="icn"><i class="ti ti-calendar-off"></i></div><h4>No trainers available for these slots</h4><p>We couldn't find a trainer who covers Saturday 07:00 and Sunday 07:00. Here's how to move forward:</p>
+<div class="alt-opts"><div class="alt-card"><i class="ti ti-clock-edit"></i><h5>Try nearby times</h5><p>See slots ±1 hour from your preference where trainers are available</p></div><div class="alt-card" onclick="goScreen('s1',document.querySelectorAll('.sb-item')[2])"><i class="ti ti-calendar-plus"></i><h5>Adjust availability</h5><p>Go back and open up more days or times to expand the trainer pool</p></div></div>
+</div></div></div></div>
 
-          <div class="psec">
-            <h5>Full matches — covers all your slots</h5>
-            <div class="t-table">
-              <div class="t-head">
-                <div></div>
-                <div>Name</div>
-                <div style="text-align:center">Bio</div>
-                <div>Rating</div>
-                <div>Languages</div>
-                <div style="text-align:right">Coverage</div>
-              </div>
-              <div class="t-row" onclick="selectTrainer(this)" data-tname="Camille Dubois">
-                <div class="t-radio"></div>
-                <div class="t-name">Camille Dubois</div>
-                <div class="t-bio-cell"><button class="bio-btn" onclick="openBio(event,'camille')" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button></div>
-                <div class="t-rating"><i class="ti ti-star-filled"></i>4.8</div>
-                <div class="t-langs"><span class="t-lang-pill">EN</span><span class="t-lang-pill">FR</span><span class="t-lang-pill">ES</span></div>
-                <div class="t-cov green">100%</div>
-              </div>
-              <div class="t-row" onclick="selectTrainer(this)" data-tname="Elias Sorenson">
-                <div class="t-radio"></div>
-                <div class="t-name">Elias Sorenson <span class="t-known">Known</span></div>
-                <div class="t-bio-cell"><button class="bio-btn" onclick="openBio(event,'elias')" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button></div>
-                <div class="t-rating"><i class="ti ti-star-filled"></i>4.8</div>
-                <div class="t-langs"><span class="t-lang-pill">EN</span><span class="t-lang-pill">ES</span><span class="t-lang-pill">IT</span></div>
-                <div class="t-cov green">100%</div>
-              </div>
-              <div class="t-row" onclick="selectTrainer(this)" data-tname="Sofía Rodríguez">
-                <div class="t-radio"></div>
-                <div class="t-name">Sofía Rodríguez</div>
-                <div class="t-bio-cell"><button class="bio-btn" onclick="openBio(event,'sofia')" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button></div>
-                <div class="t-rating"><i class="ti ti-star-filled"></i>4.7</div>
-                <div class="t-langs"><span class="t-lang-pill">EN</span><span class="t-lang-pill">ES</span></div>
-                <div class="t-cov green">85%</div>
-              </div>
-            </div>
-          </div>
+<!-- home -->
+<div class="screen" id="home">
+<div class="home-top">
+<span class="home-top-logo">learnl<span class="dot">i</span>ght</span>
+<div class="home-top-nav">
+<span class="home-top-nav-link">Learner <i class="ti ti-chevron-down" style="font-size:10px;color:var(--ll-text-muted)"></i></span>
+<span class="home-top-nav-link">Review</span>
+<span class="home-top-nav-link">Practice <i class="ti ti-chevron-down" style="font-size:10px;color:var(--ll-text-muted)"></i></span>
+</div>
+<div class="home-top-controls">
+<div class="home-lang-pill">English</div>
+<div class="home-tool-btn"><i class="ti ti-language"></i></div>
+<div class="home-tool-btn"><i class="ti ti-tools"></i></div>
+<div class="app-avatar">AL</div>
+</div>
+</div>
+<div class="welcome-row" style="padding:22px 24px 14px"><div><h1>Welcome, Alex!</h1><p>We're excited to have you here</p></div></div>
+<div style="padding:0 24px 22px">
+<div class="home-stats">
+<div class="home-stat-card"><div class="home-stat-info"><div class="home-stat-lbl">Course progress <i class="ti ti-info-circle" style="font-size:11px;color:var(--ll-text-muted)"></i></div><div class="home-stat-num">0%</div></div><div class="home-stat-vis"><div class="home-bars"><span style="height:14px"></span><span style="height:18px"></span><span style="height:22px"></span><span style="height:16px"></span><span style="height:24px"></span><span style="height:20px"></span><span class="f" style="height:28px"></span><span class="f" style="height:22px"></span><span class="f" style="height:30px"></span></div></div></div>
+<div class="home-stat-card"><div class="home-stat-info"><div class="home-stat-lbl">Average score <i class="ti ti-info-circle" style="font-size:11px;color:var(--ll-text-muted)"></i></div><div class="home-stat-num">N/A</div></div><div class="home-stat-vis"><div class="home-bars"><span style="height:8px"></span><span style="height:14px"></span><span style="height:20px"></span><span style="height:26px"></span></div></div></div>
+<div class="home-stat-card"><div class="home-stat-info"><div class="home-stat-lbl">Attendance <i class="ti ti-info-circle" style="font-size:11px;color:var(--ll-text-muted)"></i></div><div class="home-stat-num">N/A</div></div><div class="home-stat-vis"><svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#B5D4F4" stroke-width="6" stroke-dasharray="44 88"/><circle cx="20" cy="20" r="14" fill="none" stroke="#F5B400" stroke-width="6" stroke-dasharray="22 110" stroke-dashoffset="-44"/></svg></div></div>
+</div>
+<div class="body-row" style="padding:0;align-items:stretch">
+<div class="prog-card" style="width:260px"><h4>Your Program Details</h4>
+<div class="pf"><div class="pf-label">Program</div><div class="pf-value">English</div></div>
+<div class="pf"><div class="pf-label">Assigned Course</div><div class="pf-value">B1 - Intermediate 1</div></div>
+<div class="pf-row"><div class="pf"><div class="pf-label">Active From</div><div class="pf-value">01 Sep 2025</div></div><div class="pf"><div class="pf-label">Active To</div><div class="pf-value">01 Jun 2026</div></div></div>
+<div class="pf-row"><div class="pf"><div class="pf-label">Total Classes</div><div class="pf-value">8</div></div><div class="pf"><div class="pf-label">Duration</div><div class="pf-value">30 min</div></div></div>
+<div class="pf"><div class="pf-label">Frequency</div><div class="pf-value">Every 1 week</div></div>
+<div style="font-size:11px;color:var(--ll-navy-2);line-height:1.5;margin-top:12px;padding-top:12px;border-top:1px solid var(--ll-border)">Learn more by reviewing this <a href="#" style="color:var(--ll-blue)">tutorial</a> and <a href="#" style="color:var(--ll-blue)">orientation video</a>.</div>
+</div>
+<div class="content-card home-illust-area">
+<svg width="220" height="170" viewBox="0 0 220 170" style="margin-bottom:8px">
+<circle cx="135" cy="38" r="7" fill="#7BA8D4"/><circle cx="165" cy="58" r="6" fill="#A8C5DD"/><circle cx="178" cy="32" r="8" fill="#D0DDEE"/>
+<path d="M135 45 Q133 65 130 80" stroke="#185FA5" stroke-width="1" fill="none" opacity="0.5"/>
+<path d="M165 64 Q163 80 160 95" stroke="#185FA5" stroke-width="1" fill="none" opacity="0.5"/>
+<path d="M178 40 Q176 55 173 70" stroke="#185FA5" stroke-width="1" fill="none" opacity="0.5"/>
+<ellipse cx="75" cy="158" rx="24" ry="3" fill="#0A2540" opacity="0.08"/>
+<ellipse cx="150" cy="158" rx="24" ry="3" fill="#0A2540" opacity="0.08"/>
+<circle cx="75" cy="72" r="10" fill="#E8B89C"/>
+<path d="M65 64 Q68 56 75 58 Q82 56 85 64 Q86 70 80 70 Q70 70 65 64 Z" fill="#C97A4C"/>
+<rect x="65" y="82" width="20" height="48" rx="3" fill="#2C5282"/>
+<rect x="65" y="128" width="20" height="32" rx="2" fill="#1A365D"/>
+<path d="M86 92 L100 105 L98 110" stroke="#E8B89C" stroke-width="3" fill="none" stroke-linecap="round"/>
+<path d="M64 92 L52 100 L50 96" stroke="#E8B89C" stroke-width="3" fill="none" stroke-linecap="round"/>
+<circle cx="150" cy="64" r="11" fill="#8B5A2B"/>
+<path d="M139 56 Q142 48 150 50 Q158 48 161 56 Q162 64 156 64 Q146 64 139 56 Z" fill="#3D2817"/>
+<rect x="138" y="76" width="24" height="40" rx="3" fill="#fff" stroke="#0A2540" stroke-width="1"/>
+<rect x="138" y="114" width="24" height="44" rx="2" fill="#0A2540"/>
+<path d="M138 78 L122 95 L120 90" stroke="#8B5A2B" stroke-width="3" fill="none" stroke-linecap="round"/>
+<path d="M162 78 L182 60 L186 64" stroke="#8B5A2B" stroke-width="3" fill="none" stroke-linecap="round"/>
+<path d="M30 95 Q35 88 42 95 Q48 100 44 110 Q38 116 30 112 Q24 106 30 95 Z" fill="#C8B8DC" opacity="0.7"/>
+<path d="M22 108 L26 115 L25 124" stroke="#7A6B98" stroke-width="1.2" fill="none"/>
+</svg>
+<div class="home-done-title">All done!</div>
+<div class="home-done-desc">Great job on scheduling your classes. You will receive email confirmations shortly. Keep the momentum going by browsing more content below or return tomorrow for new challenges.</div>
+<div class="home-quick"><button class="home-quick-btn">Course</button><button class="home-quick-btn">Fluency Lab</button><button class="home-quick-btn">Activity Library</button></div>
+</div>
+</div>
+</div></div>
 
-          <div class="psec">
-            <h5>Partial matches — small slot adjustment</h5>
-            <div class="match-row partial" onclick="selectTrainer(this)" data-tname="Marcus Silva">
-              <div class="t-radio"></div>
-              <div>
-                <div class="t-name">Marcus Silva <button class="bio-btn" onclick="openBio(event,'marcus')" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button></div>
-                <div class="t-langs" style="margin-top:3px"><span class="t-lang-pill">EN</span><span class="t-lang-pill">ES</span></div>
-              </div>
-              <div class="t-cov yellow">75%</div>
-              <div class="match-alt">Mon 10:00 ✓ &nbsp;·&nbsp; Fri 09:30 ✓ &nbsp;·&nbsp; Thu: try <strong>Thu 10:30</strong></div>
-            </div>
-            <div class="match-row partial" onclick="selectTrainer(this)" data-tname="Arthur Reyes">
-              <div class="t-radio"></div>
-              <div>
-                <div class="t-name">Arthur Reyes <span class="t-known">Known</span> <button class="bio-btn" onclick="openBio(event,'arthur')" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button></div>
-                <div class="t-langs" style="margin-top:3px"><span class="t-lang-pill">EN</span><span class="t-lang-pill">FR</span></div>
-              </div>
-              <div class="t-cov yellow">75%</div>
-              <div class="match-alt">Thu 10:00 ✓ &nbsp;·&nbsp; Fri 09:30 ✓ &nbsp;·&nbsp; Mon: try <strong>Mon 09:30</strong></div>
-            </div>
-          </div>
+<div class="app-footer"><div class="left">© 2026 Learnlight. All Rights Reserved <a href="#">Privacy</a> <a href="#">Cookies</a></div><div class="right"><span><i class="ti ti-world" style="font-size:12px;vertical-align:-1px"></i> EN ▾</span><span class="pwby">Powered by: <b>learnl<span style="color:#F5B400">i</span>ght</b></span></div></div>
 
-        </div>
-      </div>
-      <div class="flow-nav">
-        <button class="btn-ghost" onclick="goScreen('s1',document.querySelectorAll('.sb-item')[0])">← Back to availability</button>
-        <button class="btn-primary" id="s2-next" disabled onclick="goScreen('s3',document.querySelectorAll('.sb-item')[2])">Continue with selected trainer →</button>
-      </div>
-    </div>
+<!-- Modals -->
+<div class="modal-overlay" id="choice-overlay" onclick="closeChoiceOnBg(event)">
+<div class="choice-modal" onclick="event.stopPropagation()">
+<div class="choice-modal-header"><div class="choice-modal-title">Let's Set Up Your Schedule</div><button class="modal-close" onclick="closeChoice()"><i class="ti ti-x"></i></button></div>
+<div class="choice-modal-desc">Choose an option below to start</div>
+<div class="choice-cards">
+<div class="choice-card" onclick="chooseTrainer()"><div class="choice-illustration"><svg width="120" height="100"><use href="#ill-trainer"/></svg></div><div class="choice-card-label">Select my trainer</div></div>
+<div class="choice-card" onclick="chooseAvailability()"><div class="choice-illustration"><svg width="120" height="100"><use href="#ill-availability"/></svg></div><div class="choice-card-label">Specify my availability</div></div>
+</div></div></div>
 
-    <div class="screen" id="s3">
-      <div class="welcome-row">
-        <div><h1>Welcome, Alex!</h1><p>Pick your first weekly class</p></div>
-        <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">3. Schedule</div></div>
-      </div>
-      <div class="body-row">
-        <div class="prog-card">
-          <h4>Your Program Details</h4>
-          <div class="pf"><div class="pf-label">Trainer</div><div class="pf-value">Camille Dubois</div></div>
-          <div class="pf"><div class="pf-label">Class 1</div><div class="pf-value" style="color:var(--ll-blue);font-weight:500">Choosing now</div></div>
-          <div class="pf"><div class="pf-label">Class 2</div><div class="pf-value" style="color:var(--ll-label)">After class 1</div></div>
-          <div class="pf"><div class="pf-label">Frequency</div><div class="pf-value">2 × week</div></div>
-        </div>
-        <div class="content-card">
-          <div class="cc-title">Select Schedule</div>
-          <div class="cc-desc">Confirm your schedule, or return to adjust your availability or trainer if needed.</div>
-          <div class="review-note"><i class="ti ti-info-circle"></i><div>Review your <a href="#">cancellation policy</a> before confirming the schedule, and check your <a href="#">time zone</a>.</div></div>
+<div class="modal-overlay" id="filter-avail-overlay" onclick="closeFilterAvailOnBg(event)">
+<div class="filter-modal" onclick="event.stopPropagation()">
+<div class="filter-modal-header">
+<div class="filter-modal-title-row"><div class="filter-modal-title">Let's Set Up Your Schedule</div><button class="modal-close" onclick="closeFilterAvail()"><i class="ti ti-x"></i></button></div>
+<div class="filter-modal-desc">Select the slots so we can recommend a more accurate schedule</div>
+</div>
+<div class="filter-modal-body">
+<div class="gs-top"><div class="cb-row"><div class="cb"></div>Select all available slots</div><div class="legend"><div class="lg"><div class="lg-box lg-na"></div>Not available</div><div class="lg"><div class="lg-box lg-av"></div>Available</div><div class="lg"><div class="lg-box lg-mh"></div>Smart match</div><div class="lg"><div class="lg-box lg-sl"></div>Selected</div></div></div>
+<div class="grid"><div class="grid-head"><div></div><div>Mondays</div><div>Tuesdays</div><div>Wednesdays</div><div>Thursdays</div><div>Fridays</div><div>Saturdays</div><div>Sundays</div></div><div class="grid-body" id="t2-grid"></div></div>
+<div style="margin-top:10px;font-size:11px;color:var(--ll-text-muted)"><span id="t2-count">0</span> slots selected — trainers list will refresh to show who matches</div>
+</div>
+<div class="filter-modal-footer">
+<div id="t2-cov-slot"><button class="btn-outline" id="t2-calc-btn" onclick="calcT2Coverage()" disabled><i class="ti ti-percentage"></i>Calculate Coverage</button></div>
+<div class="filter-modal-footer-right">
+<button class="btn-link" onclick="closeFilterAvail()">Close</button>
+<button class="btn-primary" id="t2-confirm" disabled onclick="confirmFilterAvail()">Confirm Availability</button>
+</div>
+</div></div></div>
 
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-            <div class="step-marker">1</div>
-            <div>
-              <div style="font-size:13px;font-weight:600;color:var(--ll-navy)">Choose Class 1</div>
-              <div style="font-size:11px;color:var(--ll-text-muted)">Pick a recurring weekly time</div>
-            </div>
-          </div>
+<div class="modal-overlay" id="trainer-avail-overlay" onclick="closeTrainerAvailOnBg(event)">
+<div class="filter-modal" onclick="event.stopPropagation()">
+<div class="filter-modal-header">
+<div class="filter-modal-title-row"><div class="filter-modal-title" id="t3-title">Trainer's Availability</div><button class="modal-close" onclick="closeTrainerAvail()"><i class="ti ti-x"></i></button></div>
+<div class="filter-modal-desc">Select the slots that fit your availability so we can recommend a more accurate schedule, or go back and select another trainer</div>
+</div>
+<div class="filter-modal-body">
+<div class="gs-top"><div class="cb-row"><div class="cb"></div>Select all available slots</div><div class="legend"><div class="lg"><div class="lg-box lg-av"></div>Available</div><div class="lg"><div class="lg-box lg-sl"></div>Selected</div></div></div>
+<div class="grid"><div class="grid-head"><div></div><div>Mondays</div><div>Tuesdays</div><div>Wednesdays</div><div>Thursdays</div><div>Fridays</div><div>Saturdays</div><div>Sundays</div></div><div class="grid-body" id="t3-grid"></div></div>
+<div style="margin-top:10px;font-size:11px;color:var(--ll-text-muted)"><span id="t3-count">0</span> slots selected from <span id="t3-trainer-name-inline">this trainer</span>'s available times</div>
+</div>
+<div class="filter-modal-footer">
+<div id="t3-cov-slot"><button class="btn-outline" id="t3-calc-btn" onclick="calcT3Coverage()" disabled><i class="ti ti-percentage"></i>Calculate Coverage</button></div>
+<div class="filter-modal-footer-right">
+<button class="btn-link" onclick="closeTrainerAvail()">Close</button>
+<button class="btn-primary" id="t3-confirm" disabled onclick="confirmTrainerAvail()">Schedule Options</button>
+</div>
+</div></div></div>
 
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-            <div style="font-size:11px;color:var(--ll-text-muted);text-transform:uppercase;letter-spacing:0.5px;font-weight:600">Proposed schedules</div>
-            <button class="btn-link" style="padding:4px 8px">Load More Options</button>
-          </div>
+<div class="modal-overlay" id="confirm-sched-overlay" onclick="closeConfirmSchedOnBg(event)">
+<div class="filter-modal confirm-modal" onclick="event.stopPropagation()">
+<div class="filter-modal-header">
+<div class="filter-modal-title-row"><div class="filter-modal-title">Your Schedule Is Confirmed</div><button class="modal-close" onclick="closeConfirmSched()"><i class="ti ti-x"></i></button></div>
+</div>
+<div class="confirm-body">
+<p>You will receive email confirmations shortly.</p>
+<p>You can synchronize your Learnlight calendar with your default personal electronic calendar (Outlook, Google Calendar, Yahoo, etc.), by connecting or copying the URL below and follow the instructions of your calendar provider.</p>
+<button class="guidelines-toggle">See guidelines <i class="ti ti-chevron-down"></i></button>
+<div class="url-box"><span class="lbl">URL:</span> webcal://app.learnlight.com/session/ICalFeed?StudentId=b5c23318-ef75-49ba-a82f-2f4375341a54</div>
+<div class="warn-box"><i class="ti ti-alert-triangle"></i><div>You can only join your class from the Learnlight App, not your synced calendar.</div></div>
+</div>
+<div class="filter-modal-footer">
+<div></div>
+<div class="filter-modal-footer-right">
+<button class="btn-link" onclick="goHomeNoSync()">Go To Homepage</button>
+<button class="btn-primary" onclick="syncNowAndGoHome()">Sync Now</button>
+</div>
+</div></div></div>
 
-          <div class="sched-grid">
-            <div class="sched-card" onclick="selectClass1(this)"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">Mondays</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">10:00-10:30</div></div></div><div class="sc-cov-lbl">Schedule coverage</div><div class="sc-cov-num green">85%</div><div class="sc-radio"><div class="rdo"></div>Select this schedule</div></div>
-            <div class="sched-card" onclick="selectClass1(this)"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">Thursdays</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">10:00-10:30</div></div></div><div class="sc-cov-lbl">Schedule coverage</div><div class="sc-cov-num yellow">75%</div><div class="sc-radio"><div class="rdo"></div>Select this schedule</div></div>
-            <div class="sched-card" onclick="selectClass1(this)"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">Fridays</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">09:30-10:00</div></div></div><div class="sc-cov-lbl">Schedule coverage</div><div class="sc-cov-num red">60%</div><div class="sc-radio"><div class="rdo"></div>Select this schedule</div></div>
-          </div>
+<div class="bio-overlay" id="bio-overlay" onclick="closeBioOnBg(event)">
+<div class="bio-card" onclick="event.stopPropagation()">
+<div class="bio-header"><div class="bio-avatar" id="bio-avatar"></div><div class="bio-info"><div class="bio-name" id="bio-name"></div><div class="bio-meta" id="bio-meta"></div></div><button class="bio-close" onclick="closeBio()"><i class="ti ti-x"></i></button></div>
+<div class="bio-body" id="bio-body"></div>
+<div class="bio-footer"><button class="btn-ghost" onclick="closeBio()">Close</button><button class="btn-primary" id="bio-select-btn">Select this trainer</button></div>
+</div></div>
 
-        </div>
-      </div>
-      <div class="flow-nav">
-        <button class="btn-ghost" onclick="goScreen('s2',document.querySelectorAll('.sb-item')[1])">← Back to trainer</button>
-        <button class="btn-primary" id="s3-next" disabled onclick="confirmClass1Go()">Confirm class 1 & continue →</button>
-      </div>
-    </div>
-
-    <div class="screen" id="s4">
-      <div class="welcome-row">
-        <div><h1>Welcome, Alex!</h1><p>Now pick your second weekly class</p></div>
-        <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">3. Schedule</div></div>
-      </div>
-      <div class="body-row">
-        <div class="prog-card">
-          <h4>Your Program Details</h4>
-          <div class="pf"><div class="pf-label">Trainer</div><div class="pf-value" id="s4-trainer">Camille Dubois</div></div>
-          <div class="pf"><div class="pf-label">Class 1</div><div class="pf-value" style="color:var(--ll-green-text);font-weight:500" id="s4-class1">Mondays 10:00-10:30</div></div>
-          <div class="pf"><div class="pf-label">Class 2</div><div class="pf-value" style="color:var(--ll-blue);font-weight:500">Choosing now</div></div>
-          <div class="pf"><div class="pf-label">Frequency</div><div class="pf-value">2 × week</div></div>
-        </div>
-        <div class="content-card">
-          <div class="cc-title">Select Schedule</div>
-          <div class="cc-desc">Pick a second weekly class with <span id="s4-trainer-inline">Camille</span>.</div>
-
-          <div class="confirmed-card">
-            <div class="checkmark-icon">✓</div>
-            <div class="info-text">
-              <div class="title">Class 1 confirmed — <span id="s4-c1-text">Mondays 10:00-10:30</span></div>
-              <div class="sub">85% coverage · with Camille Dubois</div>
-            </div>
-            <button class="btn-link" style="padding:4px 10px;font-size:11px" onclick="editClass1()"><i class="ti ti-edit" style="font-size:12px;vertical-align:-2px"></i> Edit</button>
-          </div>
-
-          <div id="edit-warning" style="display:none">
-            <div class="cb-banner warn">
-              <i class="ti ti-alert-triangle"></i>
-              <div><strong>Changing Class 1 may require picking a new Class 2.</strong> If you choose a Class 1 with a different trainer, your current Class 2 selection will be reset.</div>
-            </div>
-          </div>
-
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-            <div class="step-marker">2</div>
-            <div>
-              <div style="font-size:13px;font-weight:600;color:var(--ll-navy)">Choose Class 2</div>
-              <div style="font-size:11px;color:var(--ll-text-muted)">Filter by day to narrow your options</div>
-            </div>
-          </div>
-
-          <div class="day-filter-wrap">
-            <span class="day-filter-lbl">Show days:</span>
-            <div class="day-chip on" data-day="Mon" onclick="toggleDayFilter(this)">Mon <span class="x">×</span></div>
-            <div class="day-chip on" data-day="Tue" onclick="toggleDayFilter(this)">Tue <span class="x">×</span></div>
-            <div class="day-chip on" data-day="Wed" onclick="toggleDayFilter(this)">Wed <span class="x">×</span></div>
-            <div class="day-chip on" data-day="Thu" onclick="toggleDayFilter(this)">Thu <span class="x">×</span></div>
-            <div class="day-chip on" data-day="Fri" onclick="toggleDayFilter(this)">Fri <span class="x">×</span></div>
-            <button class="day-filter-reset" onclick="resetDayFilter()">Reset</button>
-          </div>
-
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-            <div style="font-size:11px;color:var(--ll-text-muted);text-transform:uppercase;letter-spacing:0.5px;font-weight:600">Proposed schedules · <span id="s4-shown-count">5</span> shown</div>
-            <button class="btn-link" style="padding:4px 8px">Load More Options</button>
-          </div>
-
-          <div class="sched-grid" id="s4-sched-grid"></div>
-          <div id="s4-empty" style="display:none;text-align:center;padding:20px;background:var(--ll-bg);border-radius:6px;border:1px solid var(--ll-border);font-size:12px;color:var(--ll-text-muted)">No schedules match the selected days. Adjust the filter above to see more options.</div>
-
-        </div>
-      </div>
-      <div class="flow-nav">
-        <button class="btn-ghost" onclick="goScreen('s3',document.querySelectorAll('.sb-item')[2])">← Back to class 1</button>
-        <button class="btn-primary" id="s4-next" disabled>Confirm schedule</button>
-      </div>
-    </div>
-
-    <div class="screen" id="e1">
-      <div class="welcome-row">
-        <div><h1>Welcome, Alex!</h1><p>This selection has a conflict</p></div>
-        <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">2. Availability</div><div class="step-sep"></div><div class="step">3</div></div>
-      </div>
-      <div class="body-row">
-        <div class="prog-card">
-          <h4>Edge case</h4>
-          <div class="pf"><div class="pf-label">Scenario</div><div class="pf-value">No trainer covers selection</div></div>
-          <div class="pf"><div class="pf-label">Trigger</div><div class="pf-value">Calculate Coverage returned 0% / no match</div></div>
-        </div>
-        <div class="content-card">
-          <div class="cc-title">Specify Availability — conflict state</div>
-          <div class="cc-desc">When the learner clicks Calculate Coverage and no trainer can be matched, both the upfront constraint banner and a contextual warning are shown.</div>
-          <div class="cb-banner info"><i class="ti ti-info-circle"></i><div><strong>All of your weekly classes will be with the same trainer.</strong> We&rsquo;ll match you with a trainer whose availability covers all the slots you select.</div></div>
-          <div class="cb-banner warn"><i class="ti ti-alert-triangle"></i><div><strong>No trainer covers your current selection.</strong> Your selected slots (Sat 07:00 + Sun 07:00) don't match any single trainer. <a href="#" onclick="event.preventDefault();goScreen('e2',document.querySelectorAll('.sb-item')[5])">See your options →</a></div></div>
-          <div class="gs-top">
-            <div class="cb-row"><div class="cb"></div>Select all available times</div>
-            <div class="legend">
-              <div class="lg"><div class="lg-box lg-na"></div>Not available</div>
-              <div class="lg"><div class="lg-box lg-av"></div>Available</div>
-              <div class="lg"><div class="lg-box lg-sl"></div>Selected</div>
-            </div>
-          </div>
-          <div class="grid">
-            <div class="grid-head"><div></div><div>Mondays</div><div>Tuesdays</div><div>Wednesdays</div><div>Thursdays</div><div>Fridays</div><div>Saturdays</div><div>Sundays</div></div>
-            <div class="grid-body" id="e1-grid"></div>
-          </div>
-          <div class="cov-strip">
-            <div class="cov-block"><span class="cov-pct red">0%</span><span class="cov-lbl">coverage <span class="cov-info">i</span></span></div>
-            <div class="cta-area"><button class="btn-link">Select A Trainer</button><button class="btn-primary">Schedule Options</button></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="screen" id="e2">
-      <div class="welcome-row">
-        <div><h1>Let's find a path forward</h1><p>Two ways to get back on track</p></div>
-        <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">2. Availability</div><div class="step-sep"></div><div class="step">3</div></div>
-      </div>
-      <div class="body-row">
-        <div class="prog-card">
-          <h4>Situation</h4>
-          <div class="pf"><div class="pf-label">Slot 1</div><div class="pf-value">Sat 07:00</div></div>
-          <div class="pf"><div class="pf-label">Slot 2</div><div class="pf-value">Sun 07:00</div></div>
-          <div class="pf"><div class="pf-label">Trainers found</div><div class="pf-value" style="color:var(--ll-red-text)">0</div></div>
-        </div>
-        <div class="content-card">
-          <div class="cc-title">No-trainer fallback</div>
-          <div class="cc-desc">When no trainer can cover the selection, two paths forward — neither is a dead end.</div>
-          <div class="empty">
-            <div class="icn"><i class="ti ti-calendar-off"></i></div>
-            <h4>No trainers available for these slots</h4>
-            <p>We couldn't find a trainer who covers Saturday 07:00 and Sunday 07:00. Here's how to move forward:</p>
-            <div class="alt-opts">
-              <div class="alt-card" onclick="sendPrompt('Walk me through the nearby-times flow for UX-536')"><i class="ti ti-clock-edit"></i><h5>Try nearby times</h5><p>See slots ±1 hour from your preference where trainers are available</p></div>
-              <div class="alt-card" onclick="goScreen('s1',document.querySelectorAll('.sb-item')[0])"><i class="ti ti-calendar-plus"></i><h5>Adjust availability</h5><p>Go back and open up more days or times to expand the trainer pool</p></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="app-footer">
-      <div class="left">© 2026 Learnlight. All Rights Reserved <a href="#">Privacy</a> <a href="#">Cookies</a></div>
-      <div class="right"><span><i class="ti ti-world" style="font-size:12px;vertical-align:-1px"></i> EN ▾</span><span class="pwby">Powered by: <b>learnl<span style="color:#F5B400">i</span>ght</b></span></div>
-    </div>
-
-    <div class="bio-overlay" id="bio-overlay" onclick="closeBioOnBg(event)">
-      <div class="bio-card" onclick="event.stopPropagation()">
-        <div class="bio-header">
-          <div class="bio-avatar" id="bio-avatar">CD</div>
-          <div class="bio-info">
-            <div class="bio-name" id="bio-name">Camille Dubois</div>
-            <div class="bio-meta" id="bio-meta"></div>
-          </div>
-          <button class="bio-close" onclick="closeBio()" aria-label="Close"><i class="ti ti-x"></i></button>
-        </div>
-        <div class="bio-body" id="bio-body"></div>
-        <div class="bio-footer">
-          <button class="btn-ghost" onclick="closeBio()">Close</button>
-          <button class="btn-primary" id="bio-select-btn">Select this trainer</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="toast-container" id="toast-container"></div>
+</div>
 </div>
 
 <script>
 const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 const TIMES=['08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30'];
 const UNAVAIL={'0-0':1,'0-1':1,'1-2':1,'2-0':1,'3-3':1,'4-4':1,'5-0':1,'5-1':1,'5-2':1,'5-3':1,'6-0':1,'6-1':1,'6-2':1,'6-3':1,'6-4':1,'6-5':1,'6-6':1,'6-7':1,'6-8':1,'6-9':1,'6-10':1,'6-11':1};
-const TIMES_PRETTY=t=>{const[h,m]=t.split(':').map(Number);const next=m===30?[h+1,0]:[h,30];return t+' → '+String(next[0]).padStart(2,'0')+':'+String(next[1]).padStart(2,'0')};
-const MIN_SLOTS=2;
+const TP=t=>{const[h,m]=t.split(':').map(Number);const n=m===30?[h+1,0]:[h,30];return t+' → '+String(n[0]).padStart(2,'0')+':'+String(n[1]).padStart(2,'0')};
+const MIN=2;
+let s1S={},t2S={},t3S={};
+let covCalc=false,covVal=0,t2Done=false,t2Val=0,t3Done=false,t3Val=0;
+let sTr='Camille Dubois',sTrK='camille',sTrAv='https://i.pravatar.cc/80?img=44';
+let c1=null,df={Mon:true,Tue:true,Wed:true,Thu:true,Fri:true};
+let sugShown=false,sugDismissed=false,avFilt=false;
 
-let s1Sel={};
-let coverageCalculated=false;
-let coverageValue=0;
-let selectedTrainer=null;
-let class1Sel=null;
-let dayFilter={Mon:true,Tue:true,Wed:true,Thu:true,Fri:true};
-let suggestionShown=false;
-let suggestionDismissed=false;
-
-const TRAINER_BIOS={
-  camille:{name:'Camille Dubois',init:'CD',title:'Senior Language Trainer · 8 years',rating:'4.8',langs:['EN','FR','ES'],tags:['Business English','TOEFL prep','Conversation'],experience:8,classes:1240,students:312,bio:'French-born trainer based in Lyon, specialising in business English for executives and TOEFL preparation. Camille combines structured grammar work with role-play scenarios drawn from her decade in international consulting. Her sessions are warm, focused, and famously well-paced — students consistently mention how quickly they feel comfortable speaking.',known:false},
-  elias:{name:'Elias Sorenson',init:'ES',title:'Linguistics MA · 6 years',rating:'4.8',langs:['EN','ES','IT'],tags:['Conversation','Pronunciation','Travel English'],experience:6,classes:980,students:267,bio:'Norwegian-Italian trainer based in Madrid, known for pronunciation coaching and informal conversation classes. Elias holds an MA in Applied Linguistics and runs a podcast on language learning. Expect lively sessions with plenty of cultural digressions, real-world media, and zero rote drills.',known:true},
-  sofia:{name:'Sofía Rodríguez',init:'SR',title:'CELTA Certified · 5 years',rating:'4.7',langs:['EN','ES'],tags:['IELTS prep','Academic writing','Grammar'],experience:5,classes:720,students:198,bio:'Spanish-British trainer focused on academic and exam-prep contexts. Sofía has helped over 200 students achieve their target IELTS bands. Her teaching style is methodical, with clear weekly goals and detailed written feedback after each session. Best for learners who want measurable progress.',known:false},
-  marcus:{name:'Marcus Silva',init:'MS',title:'Cambridge CELTA · 4 years',rating:'4.8',langs:['EN','ES'],tags:['Business English','Presentations','Negotiation'],experience:4,classes:610,students:174,bio:'Brazilian-American trainer specialising in business communication for sales and account-management teams. Marcus brings 12 years of corporate experience into his teaching, focusing on the language of pitching, negotiating, and handling difficult conversations. Sessions are intense but rewarding.',known:false},
-  arthur:{name:'Arthur Reyes',init:'AR',title:'DELTA Trained · 7 years',rating:'4.8',langs:['EN','FR'],tags:['Conversation','Business English','Travel'],experience:7,classes:1080,students:283,bio:'French-Mexican trainer based in Paris, with DELTA certification and a background in adult education. Arthur takes a learner-led approach, adapting each session to the goals you bring on the day. Particularly recommended for learners who feel stuck at intermediate level and want a fresh angle.',known:true}
+const TB={
+camille:{name:'Camille Dubois',init:'CD',avatar:'https://i.pravatar.cc/160?img=44',title:'Senior Trainer · 8 years',rating:'4.8',langs:['EN','FR','ES'],tags:['Business English','TOEFL prep','Conversation'],experience:8,classes:1240,students:312,bio:'French-born trainer based in Lyon, specialising in business English for executives and TOEFL preparation.',known:false,unavail:{'0-0':1,'0-1':1,'1-2':1,'2-0':1,'3-3':1,'4-4':1,'5-0':1,'5-1':1,'5-2':1,'5-3':1,'6-0':1,'6-1':1,'6-2':1,'6-3':1,'6-4':1,'6-5':1,'6-6':1,'6-7':1,'6-8':1,'6-9':1,'6-10':1,'6-11':1}},
+elias:{name:'Elias Sorenson',init:'ES',avatar:'https://i.pravatar.cc/160?img=8',title:'Linguistics MA · 6 years',rating:'4.8',langs:['EN','ES','IT'],tags:['Conversation','Pronunciation','Travel English'],experience:6,classes:980,students:267,bio:'Norwegian-Italian trainer based in Madrid, known for pronunciation coaching and informal conversation classes.',known:true,unavail:{'0-0':1,'0-1':1,'0-2':1,'1-0':1,'2-3':1,'3-4':1,'4-5':1,'5-6':1,'5-7':1,'6-0':1,'6-1':1,'6-10':1,'6-11':1}},
+sofia:{name:'Sofía Rodríguez',init:'SR',avatar:'https://i.pravatar.cc/160?img=47',title:'CELTA Certified · 5 years',rating:'4.7',langs:['EN','ES'],tags:['IELTS prep','Academic writing','Grammar'],experience:5,classes:720,students:198,bio:'Spanish-British trainer focused on academic and exam-prep contexts.',known:false,unavail:{'2-0':1,'2-1':1,'3-0':1,'3-1':1,'4-0':1,'4-1':1,'5-0':1,'5-1':1,'5-2':1,'6-0':1,'6-1':1,'6-2':1}},
+helena:{name:'Helena Park',init:'HP',avatar:'https://i.pravatar.cc/160?img=49',title:'TESOL Certified · 9 years',rating:'4.9',langs:['EN','KO'],tags:['Academic English','Conversation','Pronunciation'],experience:9,classes:1410,students:355,bio:'Korean-American trainer based in Seoul, with extensive experience teaching learners at all levels.',known:false,unavail:{'0-8':1,'0-9':1,'0-10':1,'0-11':1,'1-8':1,'1-9':1,'1-10':1,'1-11':1,'2-8':1,'2-9':1,'2-10':1,'2-11':1,'3-8':1,'3-9':1,'3-10':1,'3-11':1,'4-8':1,'4-9':1,'4-10':1,'4-11':1,'5-8':1,'5-9':1,'5-10':1,'5-11':1,'6-8':1,'6-9':1,'6-10':1,'6-11':1}},
+marcus:{name:'Marcus Silva',init:'MS',avatar:'https://i.pravatar.cc/160?img=33',title:'Cambridge CELTA · 4 years',rating:'4.8',langs:['EN','ES'],tags:['Business English','Presentations','Negotiation'],experience:4,classes:610,students:174,bio:'Brazilian-American trainer specialising in business communication for sales and account-management teams.',known:false,unavail:{'0-0':1,'1-0':1,'2-0':1,'3-0':1,'4-0':1,'5-3':1,'5-4':1,'5-5':1,'5-6':1,'5-7':1,'5-8':1,'5-9':1,'5-10':1,'5-11':1,'6-0':1,'6-1':1,'6-2':1,'6-3':1,'6-4':1,'6-5':1,'6-6':1,'6-7':1,'6-8':1,'6-9':1,'6-10':1,'6-11':1}},
+arthur:{name:'Arthur Reyes',init:'AR',avatar:'https://i.pravatar.cc/160?img=68',title:'DELTA Trained · 7 years',rating:'4.8',langs:['EN','FR'],tags:['Conversation','Business English','Travel'],experience:7,classes:1080,students:283,bio:'French-Mexican trainer based in Paris, with DELTA certification and a background in adult education.',known:true,unavail:{'5-0':1,'5-1':1,'5-2':1,'5-3':1,'6-0':1,'6-1':1,'6-2':1,'6-3':1,'6-4':1,'6-5':1,'6-6':1,'6-7':1,'6-8':1,'6-9':1,'6-10':1,'6-11':1}},
+yuki:{name:'Yuki Tanaka',init:'YT',avatar:'https://i.pravatar.cc/160?img=16',title:'CELTA · 5 years',rating:'4.7',langs:['EN','JA'],tags:['Conversation','Travel English','Pop culture'],experience:5,classes:780,students:201,bio:'Japanese-Canadian trainer based in Tokyo, focused on conversational fluency.',known:false,unavail:{'0-0':1,'0-1':1,'0-2':1,'0-3':1,'1-0':1,'1-1':1,'1-2':1,'1-3':1,'2-0':1,'2-1':1,'2-2':1,'2-3':1,'3-0':1,'3-1':1,'3-2':1,'3-3':1,'4-0':1,'4-1':1,'4-2':1,'4-3':1}},
+lukas:{name:'Lukas Hoffmann',init:'LH',avatar:'https://i.pravatar.cc/160?img=51',title:'Cambridge CELTA · 6 years',rating:'4.6',langs:['EN','DE'],tags:['Business English','Tech industry','Email writing'],experience:6,classes:890,students:228,bio:'German trainer based in Berlin, specialising in English for the tech industry.',known:false,unavail:{'0-10':1,'0-11':1,'1-10':1,'1-11':1,'2-10':1,'2-11':1,'3-10':1,'3-11':1,'4-10':1,'4-11':1,'5-0':1,'5-1':1,'5-2':1,'5-3':1,'5-4':1,'6-0':1,'6-1':1,'6-2':1,'6-3':1,'6-4':1,'6-5':1,'6-6':1,'6-7':1,'6-8':1,'6-9':1,'6-10':1,'6-11':1}}
 };
+const T1O=['elias','camille','marcus','arthur','sofia','helena','yuki','lukas'];
+const MF=['camille','elias','helena','marcus','arthur'];
+const C2O=[{day:'Thursdays',dayKey:'Thu',time:'10:00-10:30',cov:80,col:'green'},{day:'Tuesdays',dayKey:'Tue',time:'14:00-14:30',cov:75,col:'yellow'},{day:'Wednesdays',dayKey:'Wed',time:'10:00-10:30',cov:70,col:'yellow'},{day:'Fridays',dayKey:'Fri',time:'09:30-10:00',cov:65,col:'yellow'},{day:'Tuesdays',dayKey:'Tue',time:'09:00-09:30',cov:60,col:'red'}];
 
-const CLASS2_OPTIONS=[
-  {day:'Thursdays',dayKey:'Thu',time:'10:00-10:30',cov:80,col:'green'},
-  {day:'Tuesdays',dayKey:'Tue',time:'14:00-14:30',cov:75,col:'yellow'},
-  {day:'Wednesdays',dayKey:'Wed',time:'10:00-10:30',cov:70,col:'yellow'},
-  {day:'Fridays',dayKey:'Fri',time:'09:30-10:00',cov:65,col:'yellow'},
-  {day:'Tuesdays',dayKey:'Tue',time:'09:00-09:30',cov:60,col:'red'}
-];
-
-function buildGrid(containerId,onClick){
-  const c=document.getElementById(containerId);if(!c)return;
-  c.innerHTML='';
+function buildGrid(id,cb,sel,ua){
+  const c=document.getElementById(id);if(!c)return;
+  ua=ua||UNAVAIL;c.innerHTML='';
   TIMES.forEach((t,ti)=>{
     const row=document.createElement('div');row.className='grid-row';
     const lbl=document.createElement('div');lbl.className='time-lbl';
-    if(ti%2===0)lbl.textContent=t;
-    row.appendChild(lbl);
+    if(ti%2===0)lbl.textContent=t;row.appendChild(lbl);
     DAYS.forEach((d,di)=>{
-      const slot=document.createElement('div');
-      const na=UNAVAIL[di+'-'+ti];
-      slot.className='slot '+(na?'na':'avail');
-      slot.dataset.di=di;slot.dataset.ti=ti;slot.dataset.day=d;slot.dataset.t=t;
-      if(!na){slot.onclick=()=>{if(onClick)onClick(slot,di,ti,d,t)}}
-      row.appendChild(slot);
+      const sl=document.createElement('div');const na=ua[di+'-'+ti];
+      sl.className='slot '+(na?'na':'avail');
+      sl.dataset.di=di;sl.dataset.ti=ti;sl.dataset.day=d;sl.dataset.t=t;
+      if(sel&&sel[di+'-'+ti]&&!na){sl.classList.replace('avail','selected');sl.dataset.time=TP(t)}
+      if(!na)sl.onclick=()=>{if(cb)cb(sl,di,ti,d,t)};
+      row.appendChild(sl);
     });
     c.appendChild(row);
+  });
+}
+
+function hints(gridId,sel){
+  const g=document.getElementById(gridId);if(!g)return;
+  g.querySelectorAll('.match-hint').forEach(s=>s.classList.remove('match-hint'));
+  const sk=Object.keys(sel);if(!sk.length)return;
+  const compat=Object.keys(TB).filter(k=>sk.every(x=>!TB[k].unavail[x]));
+  if(!compat.length)return;
+  g.querySelectorAll('.slot.avail').forEach(s=>{
+    const k=s.dataset.di+'-'+s.dataset.ti;
+    if(sel[k])return;
+    if(compat.some(tk=>!TB[tk].unavail[k]))s.classList.add('match-hint');
   });
 }
 
@@ -656,180 +687,171 @@ function goScreen(id,el){
   document.querySelectorAll('.sb-item').forEach(n=>n.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   if(el)el.classList.add('active');
-  if(id==='s4')renderClass2();
+  if(id==='s4')renderC2();
+  if(id==='s3')syncTr();
 }
+
+function openChoice(){document.getElementById('choice-overlay').classList.add('show')}
+function closeChoice(){document.getElementById('choice-overlay').classList.remove('show')}
+function closeChoiceOnBg(e){if(e.target.id==='choice-overlay')closeChoice()}
+function chooseAvailability(){closeChoice();goScreen('s1',document.querySelectorAll('.sb-item')[2])}
+function chooseTrainer(){closeChoice();goScreen('t1',document.querySelectorAll('.sb-item')[4])}
 
 function refreshS1(){
-  buildGrid('s1-grid',(slot,di,ti,d,t)=>{
+  buildGrid('s1-grid',(sl,di,ti,d,t)=>{
     const k=di+'-'+ti;
-    if(s1Sel[k]){delete s1Sel[k];slot.classList.remove('selected');slot.classList.add('avail');delete slot.dataset.time}
-    else{s1Sel[k]=1;slot.classList.add('selected');slot.classList.remove('avail');slot.dataset.time=TIMES_PRETTY(t)}
-    coverageCalculated=false;coverageValue=0;
-    updateS1();
+    if(s1S[k]){delete s1S[k];sl.classList.replace('selected','avail');delete sl.dataset.time}
+    else{s1S[k]=1;sl.classList.replace('avail','selected');sl.dataset.time=TP(t)}
+    covCalc=false;covVal=0;hints('s1-grid',s1S);updateS1();
   });
 }
-
-function renderCovArea(){
-  const area=document.getElementById('s1-cov-area');
-  const n=Object.keys(s1Sel).length;
-  if(!area)return;
-  if(n===0){area.style.display='none';area.innerHTML='';return}
-  area.style.display='';
-  if(!coverageCalculated){
-    area.innerHTML='<button class="calc-cov-btn" id="s1-calc-btn" onclick="calculateCoverage()"><i class="ti ti-percentage"></i>Calculate Coverage</button>';
-  } else {
-    const pct=coverageValue;
-    const cls=pct>=80?'green':pct>=60?'yellow':'red';
-    area.innerHTML='<div class="cov-block"><span class="cov-pct '+cls+'">'+pct+'%</span><span class="cov-lbl">coverage <span class="cov-info" title="How well your selected slots cover trainer availability">i</span></span></div>';
-  }
+function renderCov(){
+  const a=document.getElementById('s1-cov-area');if(!a)return;
+  const n=Object.keys(s1S).length;
+  if(!n){a.style.display='none';a.innerHTML='';return}
+  a.style.display='';
+  if(!covCalc)a.innerHTML='<button class="calc-cov-btn" id="s1-calc-btn" onclick="calcCov()"><i class="ti ti-percentage"></i>Calculate Coverage</button>';
+  else{const c=covVal>=80?'green':covVal>=60?'yellow':'red';a.innerHTML='<div class="cov-block"><span class="cov-pct '+c+'">'+covVal+'%</span><span class="cov-lbl">coverage</span></div>'}
 }
-
-function calculateCoverage(){
-  const btn=document.getElementById('s1-calc-btn');
-  if(btn){btn.innerHTML='<span class="calc-spinner"></span>Calculating…';btn.disabled=true}
-  setTimeout(()=>{
-    const n=Object.keys(s1Sel).length;
-    coverageValue=Math.min(100,Math.round(n/5*100));
-    coverageCalculated=true;
-    renderCovArea();updateS1();
-  },550);
-}
-
+function calcCov(){const b=document.getElementById('s1-calc-btn');if(b){b.innerHTML='<span class="calc-spinner"></span>Calculating…';b.disabled=true}setTimeout(()=>{covVal=Math.min(100,Math.round(Object.keys(s1S).length/5*100));covCalc=true;renderCov();updateS1()},550)}
 function updateS1(){
-  const n=Object.keys(s1Sel).length;
-  const hint=document.getElementById('s1-hint');
-  const btn=document.getElementById('s1-genbtn');
-  renderCovArea();
-  if(hint&&btn){
-    if(n===0){hint.textContent='Select your available slots to begin';hint.style.display='';btn.disabled=true}
-    else if(n<MIN_SLOTS){hint.textContent='Select at least '+MIN_SLOTS+' slots';hint.style.display='';btn.disabled=true}
-    else{hint.style.display='none';btn.disabled=false}
-  }
-  if(n>=2&&!suggestionDismissed&&!suggestionShown)showSuggestion();
-  if(n<2&&suggestionShown){hideSuggestion()}
+  const n=Object.keys(s1S).length;const h=document.getElementById('s1-hint');const b=document.getElementById('s1-genbtn');
+  renderCov();
+  if(h&&b){if(!n){h.textContent='Select your available slots to begin';h.style.display='';b.disabled=true}else if(n<MIN){h.textContent='Select at least '+MIN+' slots';h.style.display='';b.disabled=true}else{h.style.display='none';b.disabled=false}}
+  if(n>=2&&!sugDismissed&&!sugShown)showSug();
+  if(n<2&&sugShown)hideSug();
+}
+function showSug(){if(sugDismissed)return;const h=document.getElementById('suggest-banner-host');if(!h)return;h.innerHTML='<div class="suggest-banner"><i class="ti ti-bulb"></i><div style="flex:1"><div class="sb-title">Try adding Wednesday 10:00 for better matches</div><div class="sb-desc">22 trainers are free at this time — adding it could raise your trainer pool from 4 to 26.</div><div class="sb-actions"><button class="sb-apply" onclick="applySug()">Apply suggestion</button><button class="sb-dismiss" onclick="dismissSug()">Dismiss</button></div></div></div>';sugShown=true}
+function hideSug(){const h=document.getElementById('suggest-banner-host');if(h)h.innerHTML='';sugShown=false}
+function dismissSug(){sugDismissed=true;hideSug()}
+function applySug(){const k='2-4';if(!s1S[k]){const sl=document.querySelector('#s1-grid .slot[data-di="2"][data-ti="4"]');if(sl&&!sl.classList.contains('na')){s1S[k]=1;sl.classList.replace('avail','selected');sl.dataset.time=TP(TIMES[4]);covCalc=false;covVal=0}}dismissSug();hints('s1-grid',s1S);updateS1()}
+
+function openFilterAvail(){
+  document.getElementById('filter-avail-overlay').classList.add('show');
+  buildGrid('t2-grid',(sl,di,ti)=>{
+    const k=di+'-'+ti;
+    if(t2S[k]){delete t2S[k];sl.classList.replace('selected','avail');delete sl.dataset.time}
+    else{t2S[k]=1;sl.classList.replace('avail','selected');sl.dataset.time=TP(TIMES[ti])}
+    t2Done=false;t2Val=0;hints('t2-grid',t2S);renderT2C();upT2();
+  },t2S);
+  hints('t2-grid',t2S);renderT2C();upT2();
+}
+function closeFilterAvail(){document.getElementById('filter-avail-overlay').classList.remove('show')}
+function closeFilterAvailOnBg(e){if(e.target.id==='filter-avail-overlay')closeFilterAvail()}
+function upT2(){
+  const n=Object.keys(t2S).length;
+  const c=document.getElementById('t2-count');if(c)c.textContent=n;
+  const b=document.getElementById('t2-confirm');if(b)b.disabled=n<MIN;
+  const cb=document.getElementById('t2-calc-btn');if(cb)cb.disabled=n<MIN;
+}
+function renderT2C(){
+  const s=document.getElementById('t2-cov-slot');if(!s)return;
+  const n=Object.keys(t2S).length;
+  if(!t2Done)s.innerHTML='<button class="btn-outline" id="t2-calc-btn" onclick="calcT2()" '+(n<MIN?'disabled':'')+'><i class="ti ti-percentage"></i>Calculate Coverage</button>';
+  else{const c=t2Val>=80?'green':t2Val>=60?'yellow':'red';s.innerHTML='<div class="cov-result-inline"><i class="ti ti-percentage" style="color:var(--ll-blue)"></i><span class="pct '+c+'">'+t2Val+'%</span> coverage <button class="recalc" onclick="reT2()"><i class="ti ti-refresh" style="font-size:12px"></i></button></div>'}
+}
+function calcT2(){const b=document.getElementById('t2-calc-btn');if(!b||b.disabled)return;b.innerHTML='<span class="calc-spinner"></span>…';b.disabled=true;setTimeout(()=>{t2Val=Math.min(100,Math.round(Object.keys(t2S).length/5*100));t2Done=true;renderT2C()},550)}
+function reT2(){t2Done=false;t2Val=0;renderT2C()}
+function confirmFilterAvail(){closeFilterAvail();avFilt=Object.keys(t2S).length>=MIN;renderT1();updT1CF()}
+function clearAvailFilter(){t2S={};t2Done=false;t2Val=0;avFilt=false;renderT1();updT1CF()}
+function updT1CF(){
+  const b=document.getElementById('t1-clear-filters');if(!b)return;
+  b.style.display=avFilt?'':'none';
+  const h=document.getElementById('t1-filter-hint');if(h)h.style.display=avFilt?'':'none';
+  if(avFilt){const t=document.getElementById('t1-filter-hint-text');if(t)t.textContent='Showing '+MF.length+' of '+T1O.length+' trainers matching your availability'}
 }
 
-function showSuggestion(){
-  if(suggestionDismissed)return;
-  const host=document.getElementById('suggest-banner-host');if(!host)return;
-  host.innerHTML='<div class="suggest-banner"><i class="ti ti-bulb"></i><div style="flex:1"><div class="sb-title">Try adding Wednesday 10:00 for better matches</div><div class="sb-desc">22 trainers are free at this time — adding it could raise your trainer pool from 4 to 26.</div><div class="sb-actions"><button class="sb-apply" onclick="applySuggestion()">Apply suggestion</button><button class="sb-dismiss" onclick="dismissSuggestion()">Dismiss</button></div></div></div>';
-  suggestionShown=true;
+function openTrainerAvail(){
+  const b=TB[sTrK];if(!b)return;
+  document.getElementById('t3-title').textContent=b.name+'\u2019s Availability';
+  document.getElementById('t3-trainer-name-inline').textContent=b.name;
+  document.getElementById('trainer-avail-overlay').classList.add('show');
+  buildGrid('t3-grid',(sl,di,ti)=>{
+    const k=di+'-'+ti;
+    if(t3S[k]){delete t3S[k];sl.classList.replace('selected','avail');delete sl.dataset.time}
+    else{t3S[k]=1;sl.classList.replace('avail','selected');sl.dataset.time=TP(TIMES[ti])}
+    t3Done=false;t3Val=0;renderT3C();upT3();
+  },t3S,b.unavail);
+  renderT3C();upT3();
 }
-
-function hideSuggestion(){const host=document.getElementById('suggest-banner-host');if(host)host.innerHTML='';suggestionShown=false}
-function dismissSuggestion(){suggestionDismissed=true;hideSuggestion()}
-
-function applySuggestion(){
-  const di=2,ti=4;const k=di+'-'+ti;
-  if(!s1Sel[k]){
-    const slot=document.querySelector('#s1-grid .slot[data-di="'+di+'"][data-ti="'+ti+'"]');
-    if(slot&&!slot.classList.contains('na')){
-      s1Sel[k]=1;slot.classList.add('selected');slot.classList.remove('avail');
-      slot.dataset.time=TIMES_PRETTY(TIMES[ti]);
-      coverageCalculated=false;coverageValue=0;
-    }
-  }
-  dismissSuggestion();updateS1();
+function closeTrainerAvail(){document.getElementById('trainer-avail-overlay').classList.remove('show')}
+function closeTrainerAvailOnBg(e){if(e.target.id==='trainer-avail-overlay')closeTrainerAvail()}
+function upT3(){const n=Object.keys(t3S).length;const b=document.getElementById('t3-confirm');if(b)b.disabled=n<MIN;const c=document.getElementById('t3-calc-btn');if(c)c.disabled=n<MIN}
+function renderT3C(){
+  const s=document.getElementById('t3-cov-slot');if(!s)return;
+  const n=Object.keys(t3S).length;
+  if(!t3Done)s.innerHTML='<button class="btn-outline" id="t3-calc-btn" onclick="calcT3()" '+(n<MIN?'disabled':'')+'><i class="ti ti-percentage"></i>Calculate Coverage</button>';
+  else{const c=t3Val>=80?'green':t3Val>=60?'yellow':'red';s.innerHTML='<div class="cov-result-inline"><i class="ti ti-percentage" style="color:var(--ll-blue)"></i><span class="pct '+c+'">'+t3Val+'%</span> coverage <button class="recalc" onclick="reT3()"><i class="ti ti-refresh" style="font-size:12px"></i></button></div>'}
 }
+function calcT3(){const b=document.getElementById('t3-calc-btn');if(!b||b.disabled)return;b.innerHTML='<span class="calc-spinner"></span>…';b.disabled=true;setTimeout(()=>{t3Val=Math.min(100,Math.round(Object.keys(t3S).length/4*100));t3Done=true;renderT3C()},550)}
+function reT3(){t3Done=false;t3Val=0;renderT3C()}
+function confirmTrainerAvail(){closeTrainerAvail();goScreen('s3',document.querySelectorAll('.sb-item')[8])}
+
+function renderT1(){
+  const h=document.getElementById('t1-rows');if(!h)return;
+  const q=((document.querySelector('#t1 .search-input')||{}).value||'').trim().toLowerCase();
+  const ko=(document.getElementById('t1-known-only')||{}).checked||false;
+  const pool=avFilt?MF:T1O;
+  const list=pool.filter(k=>{const b=TB[k];if(ko&&!b.known)return false;if(q&&!b.name.toLowerCase().includes(q))return false;return true});
+  if(!list.length){h.innerHTML='<div style="padding:24px;text-align:center;color:var(--ll-text-muted);font-size:12px">No trainers match. <a href="#" onclick="event.preventDefault();clearAvailFilter()" style="color:var(--ll-blue)">Clear filters</a></div>';return}
+  h.innerHTML=list.map(k=>{const b=TB[k];const kn=b.known?' <span class="t-known">Known</span>':'';return '<div class="t-row" style="grid-template-columns:24px 1fr 50px 50px 1fr" onclick="selectTrainer(this)" data-tname="'+b.name+'" data-tkey="'+k+'"><div class="t-radio"></div><div class="t-name"><img class="t-avatar" src="'+b.avatar.replace('160','80')+'" alt=""/>'+b.name+kn+'</div><div class="t-bio-cell"><button class="bio-btn" onclick="openBio(event,\''+k+'\')" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button></div><div class="t-rating"><i class="ti ti-star-filled"></i>'+b.rating+'</div><div class="t-langs">'+b.langs.map(l=>'<span class="t-lang-pill">'+l+'</span>').join('')+'</div></div>'}).join('');
+}
+function filterT1(){renderT1()}
 
 function selectTrainer(row){
-  document.querySelectorAll('#s2 .t-row, #s2 .match-row').forEach(r=>r.classList.remove('selected'));
+  document.querySelectorAll('#s2 .t-row,#s2 .match-row,#t1 .t-row').forEach(r=>r.classList.remove('selected'));
   row.classList.add('selected');
-  selectedTrainer=row.dataset.tname;
-  const btn=document.getElementById('s2-next');if(btn)btn.disabled=false;
-  const t4=document.getElementById('s4-trainer');const t4i=document.getElementById('s4-trainer-inline');
-  if(t4)t4.textContent=selectedTrainer;
-  if(t4i)t4i.textContent=selectedTrainer.split(' ')[0];
+  sTr=row.dataset.tname;sTrK=row.dataset.tkey||sTrK;
+  if(TB[sTrK])sTrAv=TB[sTrK].avatar.replace('160','80');
+  t3S={};t3Done=false;t3Val=0;
+  syncTr();
+  const b2=document.getElementById('s2-next');if(b2)b2.disabled=false;
+  const bt=document.getElementById('t1-next');if(bt)bt.disabled=false;
+  const ba=document.getElementById('t1-check-avail');if(ba)ba.disabled=false;
+}
+function syncTr(){
+  ['s3-trainer-name','s4-trainer-name','s3-prog-trainer','s4-trainer','s4-c1-trainer'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=sTr});
+  const i=document.getElementById('s4-trainer-inline');if(i)i.textContent=sTr.split(' ')[0];
+  ['s3-trainer-avatar','s4-trainer-avatar'].forEach(id=>{const el=document.getElementById(id);if(el)el.src=sTrAv});
 }
 
-let currentBioKey=null;
-function openBio(event,key){
-  event.stopPropagation();
-  const bio=TRAINER_BIOS[key];if(!bio)return;
-  currentBioKey=key;
-  document.getElementById('bio-avatar').textContent=bio.init;
-  document.getElementById('bio-name').innerHTML=bio.name+(bio.known?' <span class="t-known" style="margin-left:4px">Known</span>':'');
-  document.getElementById('bio-meta').innerHTML='<span class="bio-rating"><i class="ti ti-star-filled"></i>'+bio.rating+'</span><span class="dot"></span><span>'+bio.title+'</span>';
-  const body=document.getElementById('bio-body');
-  body.innerHTML='<div class="bio-stats"><div class="bio-stat"><div class="bio-stat-num">'+bio.experience+'</div><div class="bio-stat-lbl">Years</div></div><div class="bio-stat"><div class="bio-stat-num">'+bio.classes.toLocaleString()+'</div><div class="bio-stat-lbl">Classes</div></div><div class="bio-stat"><div class="bio-stat-num">'+bio.students+'</div><div class="bio-stat-lbl">Students</div></div></div><div class="bio-section" style="margin-top:14px"><div class="bio-section-label">About</div><div class="bio-text">'+bio.bio+'</div></div><div class="bio-section"><div class="bio-section-label">Languages</div><div class="bio-langs">'+bio.langs.map(l=>'<span class="bio-lang-pill">'+l+'</span>').join('')+'</div></div><div class="bio-section"><div class="bio-section-label">Specialises in</div><div class="bio-tags">'+bio.tags.map(t=>'<span class="bio-tag">'+t+'</span>').join('')+'</div></div>';
+let curBio=null;
+function openBio(e,k){
+  e.stopPropagation();const b=TB[k];if(!b)return;curBio=k;
+  const av=document.getElementById('bio-avatar');av.innerHTML='<img src="'+b.avatar+'" alt="">';
+  document.getElementById('bio-name').innerHTML=b.name+(b.known?' <span class="t-known" style="margin-left:4px">Known</span>':'');
+  document.getElementById('bio-meta').innerHTML='<span class="bio-rating"><i class="ti ti-star-filled"></i>'+b.rating+'</span><span class="dot"></span><span>'+b.title+'</span>';
+  document.getElementById('bio-body').innerHTML='<div class="bio-stats"><div class="bio-stat"><div class="bio-stat-num">'+b.experience+'</div><div class="bio-stat-lbl">Years</div></div><div class="bio-stat"><div class="bio-stat-num">'+b.classes.toLocaleString()+'</div><div class="bio-stat-lbl">Classes</div></div><div class="bio-stat"><div class="bio-stat-num">'+b.students+'</div><div class="bio-stat-lbl">Students</div></div></div><div class="bio-section" style="margin-top:14px"><div class="bio-section-label">About</div><div class="bio-text">'+b.bio+'</div></div><div class="bio-section"><div class="bio-section-label">Languages</div><div class="bio-langs">'+b.langs.map(l=>'<span class="bio-lang-pill">'+l+'</span>').join('')+'</div></div><div class="bio-section"><div class="bio-section-label">Specialises in</div><div class="bio-tags">'+b.tags.map(t=>'<span class="bio-tag">'+t+'</span>').join('')+'</div></div>';
   document.getElementById('bio-overlay').classList.add('show');
 }
+function closeBio(){document.getElementById('bio-overlay').classList.remove('show');curBio=null}
+function closeBioOnBg(e){if(e.target.id==='bio-overlay')closeBio()}
+document.getElementById('bio-select-btn').onclick=()=>{if(!curBio)return;const r=document.querySelector('[data-tkey="'+curBio+'"]');if(r)selectTrainer(r);closeBio()};
+document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;['bio-overlay','confirm-sched-overlay','trainer-avail-overlay','filter-avail-overlay','choice-overlay'].forEach(id=>{document.getElementById(id).classList.remove('show')})});
 
-function closeBio(){document.getElementById('bio-overlay').classList.remove('show');currentBioKey=null}
-function closeBioOnBg(event){if(event.target.id==='bio-overlay')closeBio()}
+function selectClass1(c){document.querySelectorAll('#s3 .sched-card').forEach(x=>x.classList.remove('selected'));c.classList.add('selected');const d=c.querySelector('.sc-val').textContent;const t=c.querySelectorAll('.sc-val')[1].textContent;c1={day:d,time:t};const b=document.getElementById('s3-next');if(b)b.disabled=false}
+function confirmClass1Go(){if(c1){const tx=c1.day+' '+c1.time;['s4-class1','s4-c1-text'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=tx})}goScreen('s4',document.querySelectorAll('.sb-item')[9])}
+function editClass1(){const w=document.getElementById('edit-warning');if(w)w.style.display='';goScreen('s3',document.querySelectorAll('.sb-item')[8])}
+function toggleDayFilter(c){const d=c.dataset.day;df[d]=!df[d];c.classList.toggle('on');c.querySelector('.x').textContent=df[d]?'×':'+';renderC2()}
+function resetDayFilter(){Object.keys(df).forEach(k=>{df[k]=true});document.querySelectorAll('#s4 .day-chip').forEach(c=>{c.classList.add('on');c.querySelector('.x').textContent='×'});renderC2()}
+function renderC2(){const g=document.getElementById('s4-sched-grid');const e=document.getElementById('s4-empty');const n=document.getElementById('s4-shown-count');if(!g)return;const v=C2O.filter(o=>df[o.dayKey]);if(n)n.textContent=v.length;if(!v.length){g.style.display='none';if(e)e.style.display='';return}g.style.display='';if(e)e.style.display='none';g.innerHTML=v.map((o,i)=>'<div class="sched-card" onclick="selC2(this,'+i+')"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">'+o.day+'</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">'+o.time+'</div></div></div><div class="sc-cov-lbl">Schedule coverage</div><div class="sc-cov-num '+o.col+'">'+o.cov+'%</div><div class="sc-radio"><div class="rdo"></div>Select this schedule</div></div>').join('')}
+function selC2(c){document.querySelectorAll('#s4 .sched-card').forEach(x=>x.classList.remove('selected'));c.classList.add('selected');const b=document.getElementById('s4-next');if(b)b.disabled=false}
 
-document.getElementById('bio-select-btn').onclick=()=>{
-  if(!currentBioKey)return;
-  const bio=TRAINER_BIOS[currentBioKey];
-  const row=document.querySelector('#s2 [data-tname="'+bio.name+'"]');
-  if(row)selectTrainer(row);
-  closeBio();
-};
-
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('bio-overlay').classList.contains('show'))closeBio()});
-
-function selectClass1(card){
-  document.querySelectorAll('#s3 .sched-card').forEach(c=>c.classList.remove('selected'));
-  card.classList.add('selected');
-  const day=card.querySelector('.sc-val').textContent;
-  const time=card.querySelectorAll('.sc-val')[1].textContent;
-  class1Sel={day,time};
-  const btn=document.getElementById('s3-next');if(btn)btn.disabled=false;
-}
-
-function confirmClass1Go(){
-  if(class1Sel){
-    const txt=class1Sel.day+' '+class1Sel.time;
-    const e1=document.getElementById('s4-class1');const e2=document.getElementById('s4-c1-text');
-    if(e1)e1.textContent=txt;if(e2)e2.textContent=txt;
-  }
-  goScreen('s4',document.querySelectorAll('.sb-item')[3]);
-}
-
-function editClass1(){
-  const w=document.getElementById('edit-warning');if(w)w.style.display='';
-  goScreen('s3',document.querySelectorAll('.sb-item')[2]);
-}
-
-function toggleDayFilter(chip){
-  const day=chip.dataset.day;dayFilter[day]=!dayFilter[day];
-  chip.classList.toggle('on');
-  chip.querySelector('.x').textContent=dayFilter[day]?'×':'+';
-  renderClass2();
-}
-
-function resetDayFilter(){
-  Object.keys(dayFilter).forEach(k=>{dayFilter[k]=true});
-  document.querySelectorAll('#s4 .day-chip').forEach(c=>{c.classList.add('on');c.querySelector('.x').textContent='×'});
-  renderClass2();
-}
-
-function renderClass2(){
-  const grid=document.getElementById('s4-sched-grid');const empty=document.getElementById('s4-empty');const cnt=document.getElementById('s4-shown-count');
-  if(!grid)return;
-  const visible=CLASS2_OPTIONS.filter(o=>dayFilter[o.dayKey]);
-  if(cnt)cnt.textContent=visible.length;
-  if(visible.length===0){grid.style.display='none';if(empty)empty.style.display='';return}
-  grid.style.display='';if(empty)empty.style.display='none';
-  grid.innerHTML=visible.map((o,i)=>'<div class="sched-card" onclick="selectClass2(this,'+i+')"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">'+o.day+'</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">'+o.time+'</div></div></div><div class="sc-cov-lbl">Schedule coverage</div><div class="sc-cov-num '+o.col+'">'+o.cov+'%</div><div class="sc-radio"><div class="rdo"></div>Select this schedule</div></div>').join('');
-}
-
-function selectClass2(card,i){
-  document.querySelectorAll('#s4 .sched-card').forEach(c=>c.classList.remove('selected'));
-  card.classList.add('selected');
-  const btn=document.getElementById('s4-next');if(btn)btn.disabled=false;
+function openConfirmSched(){document.getElementById('confirm-sched-overlay').classList.add('show')}
+function closeConfirmSched(){document.getElementById('confirm-sched-overlay').classList.remove('show')}
+function closeConfirmSchedOnBg(e){if(e.target.id==='confirm-sched-overlay')closeConfirmSched()}
+function syncNowAndGoHome(){closeConfirmSched();const items=document.querySelectorAll('.sb-item');goScreen('home',items[items.length-1]);showToast('Calendar synced','Your schedule has been synced to your default calendar provider.')}
+function goHomeNoSync(){closeConfirmSched();const items=document.querySelectorAll('.sb-item');goScreen('home',items[items.length-1]);showToast('Schedule confirmed','Your weekly classes are booked. Check your email for confirmation.')}
+function showToast(t,s){
+  const c=document.getElementById('toast-container');if(!c)return;
+  c.innerHTML='<div class="toast"><div class="ic">✓</div><div class="body-text"><div class="ttl">'+t+'</div><div class="sub">'+s+'</div></div><button class="close-btn" onclick="this.closest(\'.toast\').remove()"><i class="ti ti-x"></i></button></div>';
+  setTimeout(()=>{const x=c.querySelector('.toast');if(x){x.style.transition='opacity 0.3s';x.style.opacity='0';setTimeout(()=>{c.innerHTML=''},300)}},5000);
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
   refreshS1();
   buildGrid('e1-grid',null);
-  setTimeout(()=>{
-    const e1Grid=document.getElementById('e1-grid');if(!e1Grid)return;
-    const sa=e1Grid.querySelector('.slot[data-di="5"][data-ti="5"]');
-    const sb=e1Grid.querySelector('.slot[data-di="5"][data-ti="6"]');
-    if(sa){sa.classList.remove('avail');sa.classList.add('selected');sa.dataset.time='10:30 → 11:00'}
-    if(sb){sb.classList.remove('avail');sb.classList.add('selected');sb.dataset.time='11:00 → 11:30'}
-  },50);
-  renderClass2();
+  setTimeout(()=>{const g=document.getElementById('e1-grid');if(!g)return;const a=g.querySelector('.slot[data-di="5"][data-ti="5"]');const b=g.querySelector('.slot[data-di="5"][data-ti="6"]');if(a){a.classList.replace('avail','selected');a.dataset.time='10:30 → 11:00'}if(b){b.classList.replace('avail','selected');b.dataset.time='11:00 → 11:30'}},50);
+  renderC2();renderT1();
 });
 </script>
