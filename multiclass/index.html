@@ -7,7 +7,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 .app{display:flex;min-height:760px;background:var(--ll-bg);font-family:'Fira Sans',sans-serif;color:var(--ll-navy);font-size:13px;position:relative}
 .sidebar{width:220px;min-width:220px;background:var(--ll-card);border-right:1px solid var(--ll-border);padding:14px 0;display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto}
-.sb-brand{padding:6px 16px}.sb-brand-logo{font-size:16px;font-weight:700;color:var(--ll-blue);letter-spacing:-0.3px}
+.sb-brand{padding:6px 16px}.sb-brand-logo{font-size:16px;font-weight:700;color:var(--ll-blue)}
 .sb-sub{font-size:9px;color:var(--ll-label);text-transform:uppercase;letter-spacing:1px;padding:0 16px 12px;border-bottom:1px solid var(--ll-border);margin-bottom:8px}
 .sb-section{font-size:9px;color:var(--ll-label);padding:10px 16px 4px;text-transform:uppercase;letter-spacing:1px;font-weight:600}
 .sb-item{padding:7px 16px 7px 13px;font-size:12px;cursor:pointer;border-left:3px solid transparent;color:var(--ll-navy-2);transition:all 0.15s;line-height:1.35}
@@ -15,7 +15,7 @@
 .sb-item .num{display:inline-block;width:18px;color:var(--ll-label);font-weight:500}.sb-item.active .num{color:var(--ll-blue)}
 .main{flex:1;min-width:0;display:flex;flex-direction:column;overflow:hidden;position:relative}
 .app-header{background:var(--ll-card);border-bottom:1px solid var(--ll-border);padding:10px 24px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-.app-header-logo{font-size:18px;font-weight:700;color:var(--ll-blue);letter-spacing:-0.4px}
+.app-header-logo{font-size:18px;font-weight:700;color:var(--ll-blue)}
 .app-avatar{width:32px;height:32px;border-radius:50%;background:#D9EBFA;color:var(--ll-blue);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500}
 .screen{display:none;flex:1;overflow-y:auto}.screen.active{display:block}
 .welcome-row{display:flex;justify-content:space-between;align-items:flex-start;padding:22px 24px 18px;gap:16px}
@@ -55,13 +55,15 @@
 .slot.na{background:var(--ll-na-fill);cursor:default}
 .cov-strip{display:flex;align-items:center;justify-content:space-between;margin-top:12px;gap:12px;flex-wrap:wrap;min-height:42px}
 .cov-block{display:flex;align-items:center;gap:8px}.cov-pct{font-size:18px;font-weight:600;line-height:1}
-.cov-pct.green{color:var(--ll-green-text)}.cov-pct.yellow{color:var(--ll-yellow-text)}.cov-pct.red{color:var(--ll-red-text)}
+.cov-pct.green{color:var(--ll-green-text)}.cov-pct.red{color:var(--ll-red-text)}
 .cov-lbl{font-size:11px;color:var(--ll-text-muted)}
+.cov-blocked{display:flex;align-items:center;gap:7px;padding:7px 11px;background:var(--ll-red-bg);border:1px solid #EDABAB;border-radius:6px;font-size:11px;color:var(--ll-red-text);font-weight:500}
+.cov-blocked i{font-size:14px;flex-shrink:0}
 .calc-cov-btn{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;background:var(--ll-card);border:2px solid var(--ll-blue);border-radius:8px;color:var(--ll-blue);font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
 .calc-cov-btn:hover{background:var(--ll-blue-light)}.calc-cov-btn:disabled{opacity:0.5;cursor:not-allowed}
 .load-more-btn{display:inline-flex;align-items:center;padding:6px 16px;background:var(--ll-card);border:1.5px solid var(--ll-blue);border-radius:6px;color:var(--ll-blue);font-size:12px;font-weight:500;cursor:pointer;font-family:inherit;margin-top:8px}
 .load-more-btn:hover{background:var(--ll-blue-light)}
-.cta-area{display:flex;align-items:center;gap:10px}.cta-hint{font-size:11px;color:var(--ll-text-muted);font-style:italic}
+.cta-area{display:flex;align-items:center;gap:10px}
 .btn-primary{padding:8px 18px;background:var(--ll-blue);color:#fff;border:none;border-radius:5px;font-size:12px;cursor:pointer;font-weight:500;font-family:inherit}
 .btn-primary:hover{background:var(--ll-blue-dark)}.btn-primary:disabled{background:#B7D2EC;cursor:not-allowed}
 .btn-link{padding:8px 12px;background:none;border:none;color:var(--ll-blue);font-size:12px;cursor:pointer;font-weight:500;font-family:inherit}
@@ -70,16 +72,14 @@
 .btn-outline{padding:8px 16px;background:var(--ll-card);border:1.5px solid var(--ll-blue);border-radius:6px;color:var(--ll-blue);font-size:12px;font-weight:500;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:6px}
 .btn-outline:hover{background:var(--ll-blue-light)}.btn-outline:disabled{opacity:0.5;cursor:not-allowed}
 .app-footer{padding:12px 24px;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--ll-text-muted);border-top:1px solid var(--ll-border);background:var(--ll-card);flex-shrink:0}
-.app-footer .left a{color:var(--ll-blue);text-decoration:underline}
-.app-footer .right{display:flex;gap:10px;align-items:center}
+.app-footer .left a{color:var(--ll-blue);text-decoration:underline}.app-footer .right{display:flex;gap:10px;align-items:center}
 .cb-banner{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;border-radius:6px;font-size:11px;line-height:1.5;margin-bottom:12px}
 .cb-banner.info{background:var(--ll-blue-light);color:var(--ll-blue-dark);border:1px solid var(--ll-blue-border)}
 .cb-banner.warn{background:var(--ll-yellow-bg);color:#5C3B05;border:1px solid #F5B400}
 .cb-banner i{font-size:14px;flex-shrink:0;margin-top:1px}.cb-banner a{color:var(--ll-blue-dark);text-decoration:underline;font-weight:500}
 .suggest-banner{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;border-radius:6px;font-size:11px;line-height:1.5;margin-bottom:12px;background:var(--ll-yellow-bg);border:1px solid #F5B400;color:#5C3B05}
 .suggest-banner i{font-size:16px;color:#F5B400;flex-shrink:0;margin-top:1px}
-.suggest-banner .sb-title{font-weight:600;color:#5C3B05;font-size:12px}
-.suggest-banner .sb-desc{font-size:11px;margin-top:1px;color:#7A5410}
+.suggest-banner .sb-title{font-weight:600;font-size:12px}.suggest-banner .sb-desc{font-size:11px;margin-top:1px;color:#7A5410}
 .suggest-banner .sb-actions{display:flex;gap:6px;margin-top:6px}
 .suggest-banner .sb-actions button{padding:4px 10px;font-size:11px;border-radius:4px;cursor:pointer;font-family:inherit;font-weight:500;border:none}
 .suggest-banner .sb-apply{background:#F5B400;color:#5C3B05}.suggest-banner .sb-dismiss{background:transparent;color:#7A5410}
@@ -96,7 +96,7 @@
 .t-langs{font-size:9px;color:var(--ll-blue);font-weight:500;display:flex;gap:3px;flex-wrap:wrap}
 .t-lang-pill{padding:1px 5px;border:1px solid var(--ll-blue-border);border-radius:3px;text-transform:uppercase;letter-spacing:0.3px}
 .t-cov{font-size:12px;font-weight:600;text-align:right;padding:3px 7px;border-radius:10px}
-.t-cov.green{background:var(--ll-green-bg);color:var(--ll-green-text)}.t-cov.yellow{background:var(--ll-yellow-bg);color:var(--ll-yellow-text)}.t-cov.red{background:var(--ll-red-bg);color:var(--ll-red-text)}
+.t-cov.green{background:var(--ll-green-bg);color:var(--ll-green-text)}.t-cov.yellow{background:var(--ll-yellow-bg);color:var(--ll-yellow-text)}
 .t-bio-cell{display:flex;justify-content:center;align-items:center}
 .bio-btn{display:inline-flex;align-items:center;justify-content:center;background:transparent;border:none;cursor:pointer;padding:2px;flex-shrink:0;border-radius:3px;transition:opacity 0.15s}
 .bio-btn:hover{opacity:0.7}.bio-btn svg{display:block}
@@ -112,8 +112,7 @@
 .trainer-info-row{display:flex;align-items:center;gap:10px}
 .trainer-info-avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0;background:#D9EBFA}
 .trainer-info-name{font-size:14px;color:var(--ll-navy);font-weight:500}
-/* NEW: bio icon inline next to trainer name on s3/s4 */
-.trainer-info-bio-btn{display:inline-flex;align-items:center;justify-content:center;background:transparent;border:none;cursor:pointer;padding:2px 4px;border-radius:3px;transition:opacity 0.15s;margin-left:4px;vertical-align:middle}
+.trainer-info-bio-btn{display:inline-flex;align-items:center;justify-content:center;background:transparent;border:none;cursor:pointer;padding:2px 4px;border-radius:3px;transition:opacity 0.15s;margin-left:4px}
 .trainer-info-bio-btn:hover{opacity:0.7}
 .sched-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
 .sched-card{border:1px solid var(--ll-border);border-radius:8px;padding:12px;background:var(--ll-card);cursor:pointer}
@@ -122,21 +121,10 @@
 .sc-lbl{font-size:8px;text-transform:uppercase;letter-spacing:0.6px;color:var(--ll-label);font-weight:600}
 .sc-val{font-size:13px;font-weight:500;color:var(--ll-navy);margin-top:1px}
 .sc-cov-lbl{font-size:8px;text-transform:uppercase;letter-spacing:0.6px;color:var(--ll-label);font-weight:600;margin-top:9px}
-.sc-cov-num{font-size:14px;font-weight:600;margin-top:3px}
-.sc-cov-num.green{color:var(--ll-green-text)}.sc-cov-num.yellow{color:var(--ll-yellow-text)}.sc-cov-num.red{color:var(--ll-red-text)}
+.sc-cov-num{font-size:14px;font-weight:600;margin-top:3px;color:var(--ll-green-text)}
 .sc-radio{display:flex;align-items:center;gap:5px;margin-top:9px;padding-top:9px;border-top:1px solid var(--ll-border);font-size:11px;color:var(--ll-navy-2)}
 .sc-radio .rdo{width:12px;height:12px;border:1px solid var(--ll-border);border-radius:50%;background:var(--ll-card)}
 .sched-card.selected .rdo{background:var(--ll-blue);border-color:var(--ll-blue);box-shadow:inset 0 0 0 2px #fff}
-.empty{text-align:center;padding:30px 18px;background:var(--ll-bg);border-radius:8px;border:1px solid var(--ll-border)}
-.empty .icn{font-size:30px;color:var(--ll-text-muted);margin-bottom:10px}
-.empty h4{font-size:14px;font-weight:600;margin-bottom:5px;color:var(--ll-navy)}
-.empty p{font-size:12px;color:var(--ll-text-muted);line-height:1.5;max-width:340px;margin:0 auto 14px}
-.alt-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px;max-width:440px;margin-left:auto;margin-right:auto}
-.alt-card{border:1px solid var(--ll-border);border-radius:6px;padding:13px;text-align:left;cursor:pointer;background:var(--ll-card)}
-.alt-card:hover{border-color:var(--ll-blue);background:var(--ll-blue-light)}
-.alt-card i{font-size:20px;color:var(--ll-blue);margin-bottom:5px}
-.alt-card h5{font-size:12px;font-weight:600;color:var(--ll-navy);margin-bottom:3px}
-.alt-card p{font-size:10px;color:var(--ll-text-muted);line-height:1.4;margin:0}
 .confirmed-card{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding:11px 14px;background:var(--ll-green-bg);border-radius:6px;border:1px solid #B7DCB0}
 .checkmark-icon{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:var(--ll-green-text);color:#fff;border-radius:50%;font-size:11px;font-weight:700;flex-shrink:0}
 .confirmed-card .info-text{flex:1}.confirmed-card .info-text .title{font-size:12px;color:var(--ll-green-text);font-weight:600}
@@ -156,7 +144,7 @@
 .form-label{font-size:13px;font-weight:500;color:var(--ll-navy);margin-bottom:6px;display:block}.form-label .req{color:#C62828;margin-left:2px}
 .form-input{width:100%;padding:9px 12px;border:1px solid var(--ll-border);border-radius:5px;font-size:13px;font-family:inherit;color:var(--ll-navy);background:var(--ll-card);outline:none}
 .form-input:focus{border-color:var(--ll-blue)}
-.form-select{width:100%;padding:9px 30px 9px 12px;border:1px solid var(--ll-border);border-radius:5px;font-size:13px;font-family:inherit;color:var(--ll-navy);background-color:var(--ll-card);appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235F6B7A' stroke-width='2'><polyline points='6 9 12 15 18 9'></polyline></svg>");background-repeat:no-repeat;background-position:right 10px center;cursor:pointer;outline:none}
+.form-select{width:100%;padding:9px 30px 9px 12px;border:1px solid var(--ll-border);border-radius:5px;font-size:13px;font-family:inherit;color:var(--ll-navy);background-color:var(--ll-card);appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235F6B7A' stroke-width='2'><polyline points='6 9 12 15 18 9'></polyline></svg>");background-repeat:no-repeat;background-position:right 10px center;cursor:pointer;outline:none}
 .form-select:focus{border-color:var(--ll-blue)}
 .modal-overlay{position:absolute;inset:0;background:rgba(10,37,64,0.45);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
 .modal-overlay.show{display:flex;animation:fadeIn 0.15s ease-out}
@@ -180,8 +168,7 @@
 .filter-modal-footer{padding:12px 22px;border-top:1px solid var(--ll-border);display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--ll-bg)}
 .filter-modal-footer-right{display:flex;align-items:center;gap:8px}
 .cov-result-inline{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;padding:6px 10px;background:var(--ll-card);border-radius:6px;border:1px solid var(--ll-border)}
-.cov-result-inline .pct{font-weight:700}.cov-result-inline .pct.green{color:var(--ll-green-text)}.cov-result-inline .pct.yellow{color:var(--ll-yellow-text)}.cov-result-inline .pct.red{color:var(--ll-red-text)}
-.cov-result-inline .recalc{background:none;border:none;color:var(--ll-blue);cursor:pointer;font-family:inherit;font-size:11px;padding:2px;display:inline-flex;align-items:center}
+.cov-result-inline .pct{font-weight:700}.cov-result-inline .pct.green{color:var(--ll-green-text)}.cov-result-inline .pct.red{color:var(--ll-red-text)}
 .search-toolbar{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
 .search-input-wrap{position:relative;flex:1;min-width:220px;max-width:380px}
 .search-input{width:100%;padding:8px 12px 8px 34px;border:1px solid var(--ll-border);border-radius:5px;font-size:13px;font-family:inherit;color:var(--ll-navy);background:var(--ll-card);outline:none}
@@ -196,7 +183,7 @@
 .bio-overlay.show{display:flex;animation:fadeIn 0.15s ease-out}
 .bio-card{background:var(--ll-card);border-radius:10px;width:100%;max-width:480px;max-height:88%;overflow-y:auto;animation:slideUp 0.2s ease-out}
 .bio-header{padding:18px 18px 14px;display:flex;align-items:flex-start;gap:12px;border-bottom:1px solid var(--ll-border)}
-.bio-avatar{width:52px;height:52px;border-radius:50%;background:#D9EBFA;color:var(--ll-blue);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;flex-shrink:0;overflow:hidden}
+.bio-avatar{width:52px;height:52px;border-radius:50%;background:#D9EBFA;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;flex-shrink:0;overflow:hidden;color:var(--ll-blue)}
 .bio-avatar img{width:100%;height:100%;object-fit:cover}.bio-info{flex:1}
 .bio-name{font-size:16px;font-weight:600;color:var(--ll-navy);display:flex;align-items:center;gap:8px}
 .bio-meta{font-size:12px;color:var(--ll-text-muted);margin-top:3px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
@@ -225,16 +212,16 @@
 .confirm-modal .warn-box i{flex-shrink:0;font-size:14px;color:#F5B400;margin-top:1px}
 .confirm-modal .guidelines-toggle{color:var(--ll-blue);font-size:12px;font-weight:500;cursor:pointer;background:none;border:none;font-family:inherit;display:inline-flex;align-items:center;gap:4px;padding:6px 0;margin-top:4px}
 .home-top{background:var(--ll-card);border-bottom:1px solid var(--ll-border);padding:9px 24px;display:flex;align-items:center;gap:22px}
-.home-top-logo{font-size:18px;font-weight:700;color:var(--ll-blue);letter-spacing:-0.4px}
+.home-top-logo{font-size:18px;font-weight:700;color:var(--ll-blue)}
 .home-top-nav{display:flex;gap:18px;flex:1;align-items:center}
-.home-top-nav-link{font-size:13px;color:var(--ll-navy);font-weight:500;display:flex;align-items:center;gap:3px;cursor:pointer}
+.home-top-nav-link{font-size:13px;color:var(--ll-navy);font-weight:500;cursor:pointer}
 .home-top-controls{display:flex;align-items:center;gap:10px}
 .home-lang-pill{padding:5px 26px 5px 10px;background:var(--ll-card);border:1px solid var(--ll-border);border-radius:5px;font-size:12px;color:var(--ll-navy);position:relative;cursor:pointer}
 .home-lang-pill::after{content:'';position:absolute;right:8px;top:50%;transform:translateY(-50%);width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid var(--ll-text-muted)}
 .home-tool-btn{width:28px;height:28px;border-radius:5px;background:var(--ll-card);border:1px solid var(--ll-border);display:flex;align-items:center;justify-content:center;color:var(--ll-text-muted);cursor:pointer;font-size:14px}
 .home-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
 .home-stat-card{background:var(--ll-card);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:12px;border:1px solid var(--ll-border)}
-.home-stat-info{flex:1;min-width:0}.home-stat-lbl{font-size:11px;font-weight:600;color:var(--ll-navy);display:flex;align-items:center;gap:5px}
+.home-stat-info{flex:1;min-width:0}.home-stat-lbl{font-size:11px;font-weight:600;color:var(--ll-navy)}
 .home-stat-num{font-size:22px;font-weight:700;color:var(--ll-navy);margin-top:2px}
 .home-stat-vis{flex-shrink:0;display:flex;align-items:center}
 .home-bars{display:flex;align-items:flex-end;gap:2px;height:32px}.home-bars span{width:5px;background:var(--ll-blue-border);border-radius:1px}.home-bars span.f{background:#F5B400}
@@ -250,7 +237,6 @@
 .toast .ic{width:18px;height:18px;border-radius:50%;background:var(--ll-green-text);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px}
 .toast .body-text{flex:1}.toast .ttl{font-size:13px;font-weight:600;color:var(--ll-navy)}.toast .sub{font-size:11px;color:var(--ll-text-muted);margin-top:1px;line-height:1.4}
 .toast .close-btn{background:none;border:none;cursor:pointer;color:var(--ll-text-muted);padding:0;font-family:inherit;font-size:14px}
-/* known-only toggle on s2 */
 .s2-toolbar{display:flex;align-items:center;margin-bottom:14px}
 </style>
 
@@ -258,14 +244,14 @@
 <symbol id="icon-bio" viewBox="0 0 16 16">
   <path d="M13.5 3C13.5 2.75 13.25 2.5 13 2.5H3C2.71875 2.5 2.5 2.75 2.5 3V13C2.5 13.2813 2.71875 13.5 3 13.5H13C13.25 13.5 13.5 13.2813 13.5 13V3ZM13 1C14.0938 1 15 1.90625 15 3V13C15 14.125 14.0938 15 13 15H3C1.875 15 1 14.125 1 13V3C1 1.90625 1.875 1 3 1H13ZM9 5C9 5.4375 8.65625 5.75 8.25 5.75H4.75C4.3125 5.75 4 5.4375 4 5C4 4.59375 4.3125 4.25 4.75 4.25H8.25C8.65625 4.25 9 4.59375 9 5ZM11.25 7.25C11.6563 7.25 12 7.59375 12 8C12 8.4375 11.6563 8.75 11.25 8.75H4.75C4.3125 8.75 4 8.4375 4 8C4 7.59375 4.3125 7.25 4.75 7.25H11.25ZM7 11C7 11.4375 6.65625 11.75 6.25 11.75H4.75C4.3125 11.75 4 11.4375 4 11C4 10.5938 4.3125 10.25 4.75 10.25H6.25C6.65625 10.25 7 10.5938 7 11Z" fill="#0276B1"/>
 </symbol>
-<symbol id="ill-trainer" viewBox="0 0 120 100"><circle cx="60" cy="42" r="22" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/><circle cx="60" cy="36" r="9" fill="#185FA5"/><path d="M42 62 Q60 50 78 62 L78 80 L42 80 Z" fill="#185FA5"/><circle cx="88" cy="22" r="6" fill="#F5B400" opacity="0.7"/><circle cx="28" cy="70" r="4" fill="#185FA5" opacity="0.4"/></symbol>
-<symbol id="ill-availability" viewBox="0 0 120 100"><rect x="20" y="22" width="80" height="60" rx="4" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/><rect x="20" y="22" width="80" height="14" rx="4" fill="#185FA5"/><rect x="28" y="42" width="14" height="10" rx="2" fill="#fff" stroke="#185FA5"/><rect x="46" y="42" width="14" height="10" rx="2" fill="#0F6E56"/><rect x="64" y="42" width="14" height="10" rx="2" fill="#fff" stroke="#185FA5"/><rect x="82" y="42" width="14" height="10" rx="2" fill="#fff" stroke="#185FA5"/><rect x="28" y="56" width="14" height="10" rx="2" fill="#fff" stroke="#185FA5"/><rect x="46" y="56" width="14" height="10" rx="2" fill="#fff" stroke="#185FA5"/><rect x="64" y="56" width="14" height="10" rx="2" fill="#0F6E56"/><rect x="82" y="56" width="14" height="10" rx="2" fill="#fff" stroke="#185FA5"/></symbol>
+<symbol id="ill-trainer" viewBox="0 0 120 100"><circle cx="60" cy="42" r="22" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/><circle cx="60" cy="36" r="9" fill="#185FA5"/><path d="M42 62 Q60 50 78 62 L78 80 L42 80 Z" fill="#185FA5"/><circle cx="88" cy="22" r="6" fill="#F5B400" opacity="0.7"/></symbol>
+<symbol id="ill-availability" viewBox="0 0 120 100"><rect x="20" y="22" width="80" height="60" rx="4" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/><rect x="20" y="22" width="80" height="14" rx="4" fill="#185FA5"/><rect x="46" y="42" width="14" height="10" rx="2" fill="#0F6E56"/><rect x="64" y="56" width="14" height="10" rx="2" fill="#0F6E56"/></symbol>
 </defs></svg>
 
 <div class="app">
 <div class="sidebar">
 <div class="sb-brand"><span class="sb-brand-logo">ACME</span></div>
-<div class="sb-sub">UX-536 prototype</div>
+<div class="sb-sub">UX-536 · v24</div>
 <div class="sb-section">Onboarding</div>
 <div class="sb-item active" onclick="goScreen('p0',this)"><span class="num">1·</span>Personal Data</div>
 <div class="sb-item" onclick="goScreen('p0',this);openChoice()"><span class="num">★</span>Setup choice modal</div>
@@ -284,13 +270,12 @@
 <div class="sb-item" onclick="goScreen('e2',this)"><span class="num">✕</span>No-trainer fallback</div>
 <div class="sb-section">After confirmation</div>
 <div class="sb-item" onclick="goScreen('s4',this);openConfirmSched()"><span class="num">★</span>Confirmation modal</div>
-<div class="sb-item" onclick="goScreen('home',this)"><span class="num">🏠</span>Homepage (post-sync)</div>
+<div class="sb-item" onclick="goScreen('home',this)"><span class="num">🏠</span>Homepage</div>
 </div>
 
 <div class="main">
 <div class="app-header"><span class="app-header-logo">ACME</span><div class="app-avatar">AL</div></div>
 
-<!-- p0 -->
 <div class="screen active" id="p0">
 <div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Let's get your learning program set up for success</p></div>
 <div class="steps"><div class="step active">1. Personal Data</div><div class="step-sep"></div><div class="step">2</div><div class="step-sep"></div><div class="step">3</div></div></div>
@@ -299,18 +284,17 @@
 <div class="pf"><div class="pf-label">Program</div><div class="pf-value">English</div></div>
 <div class="pf"><div class="pf-label">Assigned Course</div><div class="pf-value">B1 - Intermediate 1</div></div>
 <div class="pf-row"><div class="pf"><div class="pf-label">Active From</div><div class="pf-value">01 Sep 2025</div></div><div class="pf"><div class="pf-label">Active To</div><div class="pf-value">01 Jun 2026</div></div></div>
-<div class="pf-row"><div class="pf"><div class="pf-label">Total Classes</div><div class="pf-value">8</div></div><div class="pf"><div class="pf-label">Class Duration</div><div class="pf-value">30 min</div></div></div>
-<div class="pf"><div class="pf-label">Class Frequency</div><div class="pf-value">Every 1 week</div></div></div>
+<div class="pf-row"><div class="pf"><div class="pf-label">Total Classes</div><div class="pf-value">8</div></div><div class="pf"><div class="pf-label">Duration</div><div class="pf-value">30 min</div></div></div>
+<div class="pf"><div class="pf-label">Frequency</div><div class="pf-value">Every 1 week</div></div></div>
 <div class="content-card">
 <div class="cc-title">Personal Data</div><div class="cc-desc">Please review and confirm your details to get started</div>
 <div class="form-row"><div class="form-field"><label class="form-label">First Name<span class="req">*</span></label><input class="form-input" type="text" value="John"/></div><div class="form-field"><label class="form-label">Last Name<span class="req">*</span></label><input class="form-input" type="text" value="Doe"/></div></div>
 <div class="form-row"><div class="form-field full"><label class="form-label">Email<span class="req">*</span></label><input class="form-input" type="email" value="johndoe@gmail.com"/></div></div>
-<div class="form-row"><div class="form-field full"><label class="form-label">Time Zone<span class="req">*</span></label><select class="form-select"><option>GMT Standard Time</option><option>Central European Time</option><option>Eastern Standard Time</option></select></div></div>
-<div class="form-row"><div class="form-field full"><label class="form-label">Primary Language<span class="req">*</span></label><select class="form-select"><option>English</option><option>Spanish</option><option>French</option></select></div></div>
+<div class="form-row"><div class="form-field full"><label class="form-label">Time Zone<span class="req">*</span></label><select class="form-select"><option>GMT Standard Time</option><option>Central European Time</option></select></div></div>
+<div class="form-row"><div class="form-field full"><label class="form-label">Primary Language<span class="req">*</span></label><select class="form-select"><option>English</option><option>Spanish</option></select></div></div>
 <div style="display:flex;justify-content:flex-end;margin-top:8px"><button class="btn-primary" onclick="openChoice()">Confirm &amp; Continue</button></div>
 </div></div></div>
 
-<!-- s1 -->
 <div class="screen" id="s1">
 <div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Let's get your learning program set up for success</p></div>
 <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">2. Availability</div><div class="step-sep"></div><div class="step">3</div></div></div>
@@ -318,60 +302,52 @@
 <div class="prog-card"><h4>Your Program Details</h4>
 <div class="pf"><div class="pf-label">Program</div><div class="pf-value">English</div></div>
 <div class="pf-row"><div class="pf"><div class="pf-label">Total Classes</div><div class="pf-value">16</div></div><div class="pf"><div class="pf-label">Duration</div><div class="pf-value">30 min</div></div></div>
-<div class="pf"><div class="pf-label">Frequency</div><div class="pf-value">2 × week</div></div></div>
+<div class="pf"><div class="pf-label">Frequency</div><div class="pf-value">2 × week</div></div>
+<div class="pf"><div class="pf-label">Coverage required</div><div class="pf-value" style="color:var(--ll-blue);font-weight:600">≥ 80%</div></div></div>
 <div class="content-card">
 <div class="cc-title">Specify Availability</div>
-<div class="cc-desc">Select the slots that fit your availability. Once you pick your first slot, darker-green cells show compatible slots where at least one matching trainer is also free.</div>
+<div class="cc-desc">Select your available slots, then calculate coverage. You need ≥ 80% to proceed to schedule options.</div>
 <div class="cb-banner info"><i class="ti ti-info-circle"></i><div><strong>All weekly classes will be with the same trainer.</strong> We'll match you with a trainer whose availability covers all the slots you select.</div></div>
 <div id="suggest-banner-host"></div>
 <div class="gs-top"><div class="cb-row"><div class="cb"></div>Select all available times</div><div class="legend"><div class="lg"><div class="lg-box lg-na"></div>Not available</div><div class="lg"><div class="lg-box lg-av"></div>Available</div><div class="lg"><div class="lg-box lg-mh"></div>Smart match</div><div class="lg"><div class="lg-box lg-sl"></div>Selected</div></div></div>
 <div class="grid"><div class="grid-head"><div></div><div>Mondays</div><div>Tuesdays</div><div>Wednesdays</div><div>Thursdays</div><div>Fridays</div><div>Saturdays</div><div>Sundays</div></div><div class="grid-body" id="s1-grid"></div></div>
 <div class="cov-strip"><div id="s1-cov-area" style="display:none"></div>
-<div class="cta-area" style="margin-left:auto"><span class="cta-hint" id="s1-hint">Select your available slots to begin</span><button class="btn-link">Select A Trainer</button><button class="btn-primary" id="s1-genbtn" disabled onclick="goScreen('s2',document.querySelectorAll('.sb-item')[3])">Schedule Options</button></div></div>
+<div class="cta-area" style="margin-left:auto"><button class="btn-link">Select A Trainer</button><button class="btn-primary" id="s1-genbtn" disabled onclick="goScreen('s2',document.querySelectorAll('.sb-item')[3])">Schedule Options</button></div></div>
 </div></div></div>
 
-<!-- s2: Trainer selection — NOW WITH "Show only known trainers" toggle -->
 <div class="screen" id="s2">
-<div class="welcome-row"><div><h1>Choose your trainer</h1><p>Pick the trainer you'd like for all of your weekly classes</p></div>
+<div class="welcome-row"><div><h1>Choose your trainer</h1><p>Pick the trainer for all of your weekly classes</p></div>
 <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">3. Schedule</div></div></div>
 <div class="body-row">
 <div class="prog-card"><h4>Your selected slots</h4>
 <div class="pf"><div class="pf-label">Slot 1</div><div class="pf-value">Mon 10:00</div></div>
 <div class="pf"><div class="pf-label">Slot 2</div><div class="pf-value">Thu 10:00</div></div>
 <div class="pf"><div class="pf-label">Slot 3</div><div class="pf-value">Fri 09:30</div></div>
-<div class="pf"><div class="pf-label">Coverage required</div><div class="pf-value">≥ 80%</div></div></div>
+<div class="pf"><div class="pf-label">Coverage</div><div class="pf-value" style="color:var(--ll-green-text);font-weight:600">80% ✓</div></div></div>
 <div class="content-card">
 <div class="cc-title">Available trainers</div>
 <div class="cc-desc">Choose one trainer for all of your weekly classes. Partial matches suggest a slight slot adjustment.</div>
-<!-- Known-only filter -->
-<div class="s2-toolbar">
-  <label class="known-cb-wrap"><input type="checkbox" id="s2-known-only" onchange="renderS2()"/>Show only known trainers</label>
-</div>
-<div id="s2-full-section">
-<div class="psec"><h5>Full matches — covers all your slots</h5>
-<div class="t-table"><div class="t-head"><div></div><div>Name</div><div style="text-align:center">Bio</div><div>Rating</div><div>Languages</div><div style="text-align:right">Coverage</div></div>
-<div id="s2-full-rows"></div>
+<div class="s2-toolbar"><label class="known-cb-wrap"><input type="checkbox" id="s2-known-only" onchange="renderS2()"/>Show only known trainers</label></div>
+<div id="s2-full-section"><div class="psec"><h5>Full matches — covers all your slots</h5>
+<div class="t-table"><div class="t-head"><div></div><div>Name</div><div style="text-align:center">Bio</div><div>Rating</div><div>Languages</div><div style="text-align:right">Coverage</div></div><div id="s2-full-rows"></div>
 </div><button class="load-more-btn">Load More</button></div></div>
-<div id="s2-partial-section">
-<div class="psec"><h5>Partial matches — small slot adjustment</h5>
-<div id="s2-partial-rows"></div>
-<button class="load-more-btn">Load More</button></div></div>
+<div id="s2-partial-section"><div class="psec"><h5>Partial matches — small slot adjustment</h5>
+<div id="s2-partial-rows"></div><button class="load-more-btn">Load More</button></div></div>
 </div></div>
 <div class="flow-nav"><button class="btn-ghost" onclick="goScreen('s1',document.querySelectorAll('.sb-item')[2])">← Back to availability</button><button class="btn-primary" id="s2-next" disabled onclick="goScreen('s3',document.querySelectorAll('.sb-item')[7])">Continue with selected trainer →</button></div>
 </div>
 
-<!-- t1 -->
 <div class="screen" id="t1">
-<div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Let's get your learning program ready for success</p></div>
+<div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Let's get your learning program ready</p></div>
 <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">2. Trainers</div><div class="step-sep"></div><div class="step">3</div></div></div>
 <div class="body-row">
 <div class="prog-card"><h4>Your Program Details</h4>
 <div class="pf"><div class="pf-label">Program</div><div class="pf-value">English</div></div>
 <div class="pf-row"><div class="pf"><div class="pf-label">Total Classes</div><div class="pf-value">8</div></div><div class="pf"><div class="pf-label">Duration</div><div class="pf-value">30 min</div></div></div>
-<div class="pf"><div class="pf-label">Frequency</div><div class="pf-value">Every 1 week</div></div></div>
+<div class="pf"><div class="pf-label">Coverage required</div><div class="pf-value" style="color:var(--ll-blue);font-weight:600">≥ 80%</div></div></div>
 <div class="content-card">
 <div class="cc-title">Select Trainer</div>
-<div class="cc-desc" id="t1-subtitle">Choose a trainer to see your schedule options</div>
+<div class="cc-desc">Choose a trainer to see your schedule options</div>
 <div class="search-toolbar">
 <div class="search-input-wrap"><i class="ti ti-search search-icon"></i><input class="search-input" type="text" placeholder="Search for a specific trainer" oninput="filterT1()"/></div>
 <label class="known-cb-wrap"><input type="checkbox" id="t1-known-only" onchange="filterT1()"/>Show only known trainers</label>
@@ -381,18 +357,16 @@
 </div>
 </div>
 <div id="t1-filter-hint" style="display:none" class="filter-match-hint"><i class="ti ti-filter-check"></i><span id="t1-filter-hint-text">Showing trainers matching your availability</span></div>
-<div class="t-table"><div class="t-head" style="grid-template-columns:24px 1fr 50px 50px 1fr"><div></div><div>Name</div><div style="text-align:center">Bio</div><div>Rating</div><div>Spoken languages</div></div><div id="t1-rows"></div></div>
+<div class="t-table"><div class="t-head" style="grid-template-columns:24px 1fr 50px 50px 1fr"><div></div><div>Name</div><div style="text-align:center">Bio</div><div>Rating</div><div>Languages</div></div><div id="t1-rows"></div></div>
 </div></div>
 <div class="flow-nav">
 <button class="btn-ghost" onclick="goScreen('p0',document.querySelectorAll('.sb-item')[0])">← Back</button>
 <div class="t1-footer-actions">
 <button class="btn-link" id="t1-check-avail" disabled onclick="openTrainerAvail()">Check Trainer's Availability</button>
 <button class="btn-primary" id="t1-next" disabled onclick="goScreen('s3',document.querySelectorAll('.sb-item')[8])">Schedule Options</button>
-</div>
-</div>
+</div></div>
 </div>
 
-<!-- s3: Class 1 — NOW WITH bio icon next to trainer name -->
 <div class="screen" id="s3">
 <div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Pick your first weekly class</p></div>
 <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">3. Schedule</div></div></div>
@@ -400,30 +374,23 @@
 <div class="prog-card"><h4>Your Program Details</h4>
 <div class="pf"><div class="pf-label">Trainer</div><div class="pf-value" id="s3-prog-trainer">Camille Dubois</div></div>
 <div class="pf"><div class="pf-label">Class 1</div><div class="pf-value" style="color:var(--ll-blue);font-weight:500">Choosing now</div></div>
-<div class="pf"><div class="pf-label">Class 2</div><div class="pf-value" style="color:var(--ll-label)">After class 1</div></div>
-<div class="pf"><div class="pf-label">Frequency</div><div class="pf-value">2 × week</div></div></div>
+<div class="pf"><div class="pf-label">Class 2</div><div class="pf-value" style="color:var(--ll-label)">After class 1</div></div></div>
 <div class="content-card">
 <div class="cc-title">Select Schedule</div>
 <div class="cc-desc">Confirm your schedule, or return to adjust your availability or trainer if needed.</div>
-<div class="review-note"><i class="ti ti-info-circle"></i><div>Review your <a href="#">cancellation policy</a> before confirming the schedule, and check your <a href="#">time zone</a>.</div></div>
+<div class="review-note"><i class="ti ti-info-circle"></i><div>Review your <a href="#">cancellation policy</a> and check your <a href="#">time zone</a> before confirming.</div></div>
 <div class="trainer-info"><div class="trainer-info-label">Trainer</div>
-<div class="trainer-info-row">
-  <img class="trainer-info-avatar" id="s3-trainer-avatar" src="https://i.pravatar.cc/80?img=44" alt=""/>
-  <span class="trainer-info-name" id="s3-trainer-name">Camille Dubois</span>
-  <button class="trainer-info-bio-btn" id="s3-bio-btn" onclick="openBioForCurrent()" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button>
-</div></div>
+<div class="trainer-info-row"><img class="trainer-info-avatar" id="s3-trainer-avatar" src="https://i.pravatar.cc/80?img=44" alt=""/><span class="trainer-info-name" id="s3-trainer-name">Camille Dubois</span><button class="trainer-info-bio-btn" onclick="openBioForCurrent()" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button></div></div>
 <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div class="step-marker">1</div><div><div style="font-size:13px;font-weight:600;color:var(--ll-navy)">Choose Class 1</div><div style="font-size:11px;color:var(--ll-text-muted)">Pick a recurring weekly time</div></div></div>
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div style="font-size:11px;color:var(--ll-text-muted);text-transform:uppercase;letter-spacing:0.5px;font-weight:600">Proposed schedules</div><button class="btn-link" style="padding:4px 8px">Load More Options</button></div>
 <div class="sched-grid">
-<div class="sched-card" onclick="selectClass1(this)"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">Mondays</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">10:00-10:30</div></div></div><div class="sc-cov-lbl">Schedule coverage</div><div class="sc-cov-num green">85%</div><div class="sc-radio"><div class="rdo"></div>Select this schedule</div></div>
-<div class="sched-card" onclick="selectClass1(this)"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">Thursdays</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">10:00-10:30</div></div></div><div class="sc-cov-lbl">Schedule coverage</div><div class="sc-cov-num yellow">75%</div><div class="sc-radio"><div class="rdo"></div>Select this schedule</div></div>
-<div class="sched-card" onclick="selectClass1(this)"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">Fridays</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">09:30-10:00</div></div></div><div class="sc-cov-lbl">Schedule coverage</div><div class="sc-cov-num red">60%</div><div class="sc-radio"><div class="rdo"></div>Select this schedule</div></div>
-</div>
-</div></div>
+<div class="sched-card" onclick="selectClass1(this)"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">Mondays</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">10:00-10:30</div></div></div><div class="sc-cov-lbl">Schedule coverage</div><div class="sc-cov-num">85%</div><div class="sc-radio"><div class="rdo"></div>Select this schedule</div></div>
+<div class="sched-card" onclick="selectClass1(this)"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">Thursdays</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">10:00-10:30</div></div></div><div class="sc-cov-lbl">Schedule coverage</div><div class="sc-cov-num">82%</div><div class="sc-radio"><div class="rdo"></div>Select this schedule</div></div>
+<div class="sched-card" onclick="selectClass1(this)"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">Fridays</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">09:30-10:00</div></div></div><div class="sc-cov-lbl">Schedule coverage</div><div class="sc-cov-num">80%</div><div class="sc-radio"><div class="rdo"></div>Select this schedule</div></div>
+</div></div></div>
 <div class="flow-nav"><button class="btn-ghost" onclick="goScreen('t1',document.querySelectorAll('.sb-item')[4])">← Back</button><button class="btn-primary" id="s3-next" disabled onclick="confirmClass1Go()">Confirm class 1 &amp; continue →</button></div>
 </div>
 
-<!-- s4: Class 2 — NOW WITH bio icon next to trainer name -->
 <div class="screen" id="s4">
 <div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Now pick your second weekly class</p></div>
 <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">3. Schedule</div></div></div>
@@ -431,17 +398,12 @@
 <div class="prog-card"><h4>Your Program Details</h4>
 <div class="pf"><div class="pf-label">Trainer</div><div class="pf-value" id="s4-trainer">Camille Dubois</div></div>
 <div class="pf"><div class="pf-label">Class 1</div><div class="pf-value" style="color:var(--ll-green-text);font-weight:500" id="s4-class1">Mondays 10:00-10:30</div></div>
-<div class="pf"><div class="pf-label">Class 2</div><div class="pf-value" style="color:var(--ll-blue);font-weight:500">Choosing now</div></div>
-<div class="pf"><div class="pf-label">Frequency</div><div class="pf-value">2 × week</div></div></div>
+<div class="pf"><div class="pf-label">Class 2</div><div class="pf-value" style="color:var(--ll-blue);font-weight:500">Choosing now</div></div></div>
 <div class="content-card">
 <div class="cc-title">Select Schedule</div>
 <div class="cc-desc">Pick a second weekly class with <span id="s4-trainer-inline">Camille</span>.</div>
 <div class="trainer-info"><div class="trainer-info-label">Trainer</div>
-<div class="trainer-info-row">
-  <img class="trainer-info-avatar" id="s4-trainer-avatar" src="https://i.pravatar.cc/80?img=44" alt=""/>
-  <span class="trainer-info-name" id="s4-trainer-name">Camille Dubois</span>
-  <button class="trainer-info-bio-btn" id="s4-bio-btn" onclick="openBioForCurrent()" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button>
-</div></div>
+<div class="trainer-info-row"><img class="trainer-info-avatar" id="s4-trainer-avatar" src="https://i.pravatar.cc/80?img=44" alt=""/><span class="trainer-info-name" id="s4-trainer-name">Camille Dubois</span><button class="trainer-info-bio-btn" onclick="openBioForCurrent()" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button></div></div>
 <div class="confirmed-card"><div class="checkmark-icon">✓</div><div class="info-text"><div class="title">Class 1 confirmed — <span id="s4-c1-text">Mondays 10:00-10:30</span></div><div class="sub">85% coverage · with <span id="s4-c1-trainer">Camille Dubois</span></div></div><button class="btn-link" style="padding:4px 10px;font-size:11px" onclick="editClass1()"><i class="ti ti-edit" style="font-size:12px;vertical-align:-2px"></i> Edit</button></div>
 <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div class="step-marker">2</div><div><div style="font-size:13px;font-weight:600;color:var(--ll-navy)">Choose Class 2</div><div style="font-size:11px;color:var(--ll-text-muted)">Filter by day to narrow your options</div></div></div>
 <div class="day-filter-wrap"><span class="day-filter-lbl">Show days:</span>
@@ -458,76 +420,66 @@
 <div class="flow-nav"><button class="btn-ghost" onclick="goScreen('s3',document.querySelectorAll('.sb-item')[8])">← Back to class 1</button><button class="btn-primary" id="s4-next" disabled onclick="openConfirmSched()">Confirm Schedule</button></div>
 </div>
 
-<!-- e1 -->
 <div class="screen" id="e1">
-<div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>This selection has a conflict</p></div></div>
-<div class="body-row"><div class="prog-card"><h4>Edge case</h4></div>
-<div class="content-card">
-<div class="cc-title">Specify Availability — conflict state</div>
-<div class="cb-banner warn"><i class="ti ti-alert-triangle"></i><div><strong>No trainer covers your current selection.</strong> Sat 07:00 + Sun 07:00 don't match any single trainer. <a href="#" onclick="event.preventDefault();goScreen('e2',document.querySelectorAll('.sb-item')[12])">See your options →</a></div></div>
+<div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Conflict state</p></div></div>
+<div class="body-row"><div class="content-card">
+<div class="cb-banner warn"><i class="ti ti-alert-triangle"></i><div><strong>No trainer covers your current selection.</strong> <a href="#" onclick="event.preventDefault();goScreen('e2',document.querySelectorAll('.sb-item')[12])">See your options →</a></div></div>
 <div class="grid"><div class="grid-head"><div></div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div></div><div class="grid-body" id="e1-grid"></div></div>
 </div></div></div>
 
-<!-- e2 -->
 <div class="screen" id="e2">
 <div class="welcome-row"><div><h1>Let's find a path forward</h1></div></div>
 <div class="body-row"><div class="content-card">
-<div class="empty"><div class="icn"><i class="ti ti-calendar-off"></i></div><h4>No trainers available for these slots</h4><p>Here's how to move forward:</p>
-<div class="alt-opts"><div class="alt-card"><i class="ti ti-clock-edit"></i><h5>Try nearby times</h5><p>See slots ±1 hour from your preference</p></div><div class="alt-card" onclick="goScreen('s1',document.querySelectorAll('.sb-item')[2])"><i class="ti ti-calendar-plus"></i><h5>Adjust availability</h5><p>Open up more days or times</p></div></div>
-</div></div></div></div>
+<div class="empty" style="text-align:center;padding:30px 18px;background:var(--ll-bg);border-radius:8px;border:1px solid var(--ll-border)">
+<div style="font-size:30px;color:var(--ll-text-muted);margin-bottom:10px"><i class="ti ti-calendar-off"></i></div><h4 style="font-size:14px;font-weight:600;margin-bottom:5px;color:var(--ll-navy)">No trainers available for these slots</h4>
+<p style="font-size:12px;color:var(--ll-text-muted);max-width:340px;margin:0 auto 14px">Here's how to move forward:</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:440px;margin:auto">
+<div style="border:1px solid var(--ll-border);border-radius:6px;padding:13px;text-align:left;cursor:pointer;background:var(--ll-card)"><i class="ti ti-clock-edit" style="font-size:20px;color:var(--ll-blue);display:block;margin-bottom:5px"></i><strong style="font-size:12px;font-weight:600;color:var(--ll-navy);display:block;margin-bottom:3px">Try nearby times</strong><span style="font-size:10px;color:var(--ll-text-muted)">See slots ±1 hour from your preference</span></div>
+<div style="border:1px solid var(--ll-border);border-radius:6px;padding:13px;text-align:left;cursor:pointer;background:var(--ll-card)" onclick="goScreen('s1',document.querySelectorAll('.sb-item')[2])"><i class="ti ti-calendar-plus" style="font-size:20px;color:var(--ll-blue);display:block;margin-bottom:5px"></i><strong style="font-size:12px;font-weight:600;color:var(--ll-navy);display:block;margin-bottom:3px">Adjust availability</strong><span style="font-size:10px;color:var(--ll-text-muted)">Open up more days or times</span></div>
+</div></div></div></div></div>
 
-<!-- home -->
 <div class="screen" id="home">
 <div class="home-top"><span class="home-top-logo">ACME</span>
-<div class="home-top-nav"><span class="home-top-nav-link">Learner <i class="ti ti-chevron-down" style="font-size:10px;color:var(--ll-text-muted)"></i></span><span class="home-top-nav-link">Review</span><span class="home-top-nav-link">Practice <i class="ti ti-chevron-down" style="font-size:10px;color:var(--ll-text-muted)"></i></span></div>
-<div class="home-top-controls"><div class="home-lang-pill">English</div><div class="home-tool-btn"><i class="ti ti-language"></i></div><div class="home-tool-btn"><i class="ti ti-tools"></i></div><div class="app-avatar">AL</div></div>
+<div class="home-top-nav"><span class="home-top-nav-link">Learner</span><span class="home-top-nav-link">Review</span><span class="home-top-nav-link">Practice</span></div>
+<div class="home-top-controls"><div class="home-lang-pill">English</div><div class="home-tool-btn"><i class="ti ti-language"></i></div><div class="app-avatar">AL</div></div>
 </div>
 <div class="welcome-row" style="padding:22px 24px 14px"><div><h1>Welcome, Alex!</h1><p>We're excited to have you here</p></div></div>
 <div style="padding:0 24px 22px">
 <div class="home-stats">
-<div class="home-stat-card"><div class="home-stat-info"><div class="home-stat-lbl">Course progress <i class="ti ti-info-circle" style="font-size:11px;color:var(--ll-text-muted)"></i></div><div class="home-stat-num">0%</div></div><div class="home-stat-vis"><div class="home-bars"><span style="height:14px"></span><span style="height:18px"></span><span style="height:22px"></span><span style="height:16px"></span><span style="height:24px"></span><span style="height:20px"></span><span class="f" style="height:28px"></span><span class="f" style="height:30px"></span></div></div></div>
-<div class="home-stat-card"><div class="home-stat-info"><div class="home-stat-lbl">Average score <i class="ti ti-info-circle" style="font-size:11px;color:var(--ll-text-muted)"></i></div><div class="home-stat-num">N/A</div></div><div class="home-stat-vis"><div class="home-bars"><span style="height:8px"></span><span style="height:14px"></span><span style="height:20px"></span><span style="height:26px"></span></div></div></div>
-<div class="home-stat-card"><div class="home-stat-info"><div class="home-stat-lbl">Attendance <i class="ti ti-info-circle" style="font-size:11px;color:var(--ll-text-muted)"></i></div><div class="home-stat-num">N/A</div></div><div class="home-stat-vis"><svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#B5D4F4" stroke-width="6" stroke-dasharray="44 88"/><circle cx="20" cy="20" r="14" fill="none" stroke="#F5B400" stroke-width="6" stroke-dasharray="22 110" stroke-dashoffset="-44"/></svg></div></div>
+<div class="home-stat-card"><div class="home-stat-info"><div class="home-stat-lbl">Course progress</div><div class="home-stat-num">0%</div></div><div class="home-stat-vis"><div class="home-bars"><span style="height:14px"></span><span style="height:18px"></span><span style="height:22px"></span><span class="f" style="height:28px"></span><span class="f" style="height:24px"></span></div></div></div>
+<div class="home-stat-card"><div class="home-stat-info"><div class="home-stat-lbl">Average score</div><div class="home-stat-num">N/A</div></div><div class="home-stat-vis"><div class="home-bars"><span style="height:8px"></span><span style="height:14px"></span><span style="height:20px"></span><span style="height:26px"></span></div></div></div>
+<div class="home-stat-card"><div class="home-stat-info"><div class="home-stat-lbl">Attendance</div><div class="home-stat-num">N/A</div></div><div class="home-stat-vis"><svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#B5D4F4" stroke-width="6" stroke-dasharray="44 88"/><circle cx="20" cy="20" r="14" fill="none" stroke="#F5B400" stroke-width="6" stroke-dasharray="22 110" stroke-dashoffset="-44"/></svg></div></div>
 </div>
 <div class="body-row" style="padding:0;align-items:stretch">
-<div class="prog-card" style="width:260px"><h4>Your Program Details</h4>
+<div class="prog-card" style="width:240px"><h4>Your Program Details</h4>
 <div class="pf"><div class="pf-label">Program</div><div class="pf-value">English</div></div>
 <div class="pf"><div class="pf-label">Assigned Course</div><div class="pf-value">B1 - Intermediate 1</div></div>
 <div class="pf-row"><div class="pf"><div class="pf-label">Active From</div><div class="pf-value">01 Sep 2025</div></div><div class="pf"><div class="pf-label">Active To</div><div class="pf-value">01 Jun 2026</div></div></div>
 <div class="pf-row"><div class="pf"><div class="pf-label">Total Classes</div><div class="pf-value">8</div></div><div class="pf"><div class="pf-label">Duration</div><div class="pf-value">30 min</div></div></div>
-<div class="pf"><div class="pf-label">Frequency</div><div class="pf-value">Every 1 week</div></div>
-<div style="font-size:11px;color:var(--ll-navy-2);line-height:1.5;margin-top:12px;padding-top:12px;border-top:1px solid var(--ll-border)">Learn more by reviewing this <a href="#" style="color:var(--ll-blue)">tutorial</a> and <a href="#" style="color:var(--ll-blue)">orientation video</a>.</div>
 </div>
 <div class="content-card home-illust-area">
-<svg width="220" height="170" viewBox="0 0 220 170" style="margin-bottom:8px">
-<circle cx="135" cy="38" r="7" fill="#7BA8D4"/><circle cx="165" cy="58" r="6" fill="#A8C5DD"/><circle cx="178" cy="32" r="8" fill="#D0DDEE"/>
-<path d="M135 45 Q133 65 130 80" stroke="#185FA5" stroke-width="1" fill="none" opacity="0.5"/>
-<path d="M165 64 Q163 80 160 95" stroke="#185FA5" stroke-width="1" fill="none" opacity="0.5"/>
-<path d="M178 40 Q176 55 173 70" stroke="#185FA5" stroke-width="1" fill="none" opacity="0.5"/>
-<ellipse cx="75" cy="158" rx="24" ry="3" fill="#0A2540" opacity="0.08"/>
-<ellipse cx="150" cy="158" rx="24" ry="3" fill="#0A2540" opacity="0.08"/>
-<circle cx="75" cy="72" r="10" fill="#E8B89C"/>
-<path d="M65 64 Q68 56 75 58 Q82 56 85 64 Q86 70 80 70 Q70 70 65 64 Z" fill="#C97A4C"/>
-<rect x="65" y="82" width="20" height="48" rx="3" fill="#2C5282"/>
-<rect x="65" y="128" width="20" height="32" rx="2" fill="#1A365D"/>
-<path d="M86 92 L100 105 L98 110" stroke="#E8B89C" stroke-width="3" fill="none" stroke-linecap="round"/>
-<path d="M64 92 L52 100 L50 96" stroke="#E8B89C" stroke-width="3" fill="none" stroke-linecap="round"/>
-<circle cx="150" cy="64" r="11" fill="#8B5A2B"/>
-<path d="M139 56 Q142 48 150 50 Q158 48 161 56 Q162 64 156 64 Q146 64 139 56 Z" fill="#3D2817"/>
-<rect x="138" y="76" width="24" height="40" rx="3" fill="#fff" stroke="#0A2540" stroke-width="1"/>
-<rect x="138" y="114" width="24" height="44" rx="2" fill="#0A2540"/>
-<path d="M138 78 L122 95 L120 90" stroke="#8B5A2B" stroke-width="3" fill="none" stroke-linecap="round"/>
-<path d="M162 78 L182 60 L186 64" stroke="#8B5A2B" stroke-width="3" fill="none" stroke-linecap="round"/>
-<path d="M30 95 Q35 88 42 95 Q48 100 44 110 Q38 116 30 112 Q24 106 30 95 Z" fill="#C8B8DC" opacity="0.7"/>
+<svg width="200" height="150" viewBox="0 0 200 150" style="margin-bottom:8px">
+<circle cx="120" cy="32" r="6" fill="#7BA8D4"/><circle cx="150" cy="50" r="5" fill="#A8C5DD"/><circle cx="162" cy="26" r="7" fill="#D0DDEE"/>
+<ellipse cx="68" cy="140" rx="22" ry="3" fill="#0A2540" opacity="0.08"/>
+<ellipse cx="138" cy="140" rx="22" ry="3" fill="#0A2540" opacity="0.08"/>
+<circle cx="68" cy="64" r="9" fill="#E8B89C"/>
+<rect x="60" y="73" width="17" height="42" rx="3" fill="#2C5282"/>
+<rect x="60" y="113" width="17" height="28" rx="2" fill="#1A365D"/>
+<path d="M77 82 L90 95 L88 100" stroke="#E8B89C" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+<path d="M59 82 L48 90 L46 86" stroke="#E8B89C" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+<circle cx="138" cy="56" r="10" fill="#8B5A2B"/>
+<rect x="128" y="68" width="21" height="36" rx="3" fill="#fff" stroke="#0A2540" stroke-width="1"/>
+<rect x="128" y="102" width="21" height="38" rx="2" fill="#0A2540"/>
+<path d="M128 70 L114 86 L112 82" stroke="#8B5A2B" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+<path d="M149 70 L166 54 L170 58" stroke="#8B5A2B" stroke-width="2.5" fill="none" stroke-linecap="round"/>
 </svg>
 <div class="home-done-title">All done!</div>
-<div class="home-done-desc">Great job on scheduling your classes. You will receive email confirmations shortly. Keep the momentum going by browsing more content below or return tomorrow for new challenges.</div>
+<div class="home-done-desc">Great job on scheduling your classes. You will receive email confirmations shortly.</div>
 <div class="home-quick"><button class="home-quick-btn">Course</button><button class="home-quick-btn">Fluency Lab</button><button class="home-quick-btn">Activity Library</button></div>
 </div></div></div></div>
 
 <div class="app-footer"><div class="left">© 2026 ACME. All Rights Reserved <a href="#">Privacy</a> <a href="#">Cookies</a></div><div class="right"><span>EN ▾</span><span>Powered by: <b>ACME</b></span></div></div>
 
-<!-- Modals -->
 <div class="modal-overlay" id="choice-overlay" onclick="closeChoiceOnBg(event)">
 <div class="choice-modal" onclick="event.stopPropagation()">
 <div class="choice-modal-header"><div class="choice-modal-title">Let's Set Up Your Schedule</div><button class="modal-close" onclick="closeChoice()"><i class="ti ti-x"></i></button></div>
@@ -541,12 +493,12 @@
 <div class="filter-modal" onclick="event.stopPropagation()">
 <div class="filter-modal-header">
 <div class="filter-modal-title-row"><div class="filter-modal-title">Let's Set Up Your Schedule</div><button class="modal-close" onclick="closeFilterAvail()"><i class="ti ti-x"></i></button></div>
-<div class="filter-modal-desc">Select the slots so we can recommend a more accurate schedule</div>
+<div class="filter-modal-desc">Select your slots and calculate coverage. You need ≥ 80% to confirm.</div>
 </div>
 <div class="filter-modal-body">
 <div class="gs-top"><div class="cb-row"><div class="cb"></div>Select all available slots</div><div class="legend"><div class="lg"><div class="lg-box lg-na"></div>Not available</div><div class="lg"><div class="lg-box lg-av"></div>Available</div><div class="lg"><div class="lg-box lg-mh"></div>Smart match</div><div class="lg"><div class="lg-box lg-sl"></div>Selected</div></div></div>
 <div class="grid"><div class="grid-head"><div></div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div></div><div class="grid-body" id="t2-grid"></div></div>
-<div style="margin-top:10px;font-size:11px;color:var(--ll-text-muted)"><span id="t2-count">0</span> slots selected — trainer list will refresh to show who matches</div>
+<div style="margin-top:10px;font-size:11px;color:var(--ll-text-muted)"><span id="t2-count">0</span> slots selected</div>
 </div>
 <div class="filter-modal-footer">
 <div id="t2-cov-slot"><button class="btn-outline" id="t2-calc-btn" onclick="calcT2()" disabled><i class="ti ti-percentage"></i>Calculate Coverage</button></div>
@@ -562,7 +514,6 @@
 <div class="filter-modal-body">
 <div class="gs-top"><div class="cb-row"><div class="cb"></div>Select all available slots</div><div class="legend"><div class="lg"><div class="lg-box lg-av"></div>Available</div><div class="lg"><div class="lg-box lg-sl"></div>Selected</div></div></div>
 <div class="grid"><div class="grid-head"><div></div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div></div><div class="grid-body" id="t3-grid"></div></div>
-<div style="margin-top:10px;font-size:11px;color:var(--ll-text-muted)"><span id="t3-count">0</span> slots selected from <span id="t3-trainer-name-inline">this trainer</span>'s available times</div>
 </div>
 <div class="filter-modal-footer">
 <div id="t3-cov-slot"><button class="btn-outline" id="t3-calc-btn" onclick="calcT3()" disabled><i class="ti ti-percentage"></i>Calculate Coverage</button></div>
@@ -595,6 +546,7 @@
 </div>
 
 <script>
+const GATE=80;
 const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 const TIMES=['08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30'];
 const UNAVAIL={'0-0':1,'0-1':1,'1-2':1,'2-0':1,'3-3':1,'4-4':1,'5-0':1,'5-1':1,'5-2':1,'5-3':1,'6-0':1,'6-1':1,'6-2':1,'6-3':1,'6-4':1,'6-5':1,'6-6':1,'6-7':1,'6-8':1,'6-9':1,'6-10':1,'6-11':1};
@@ -608,17 +560,16 @@ let sugShown=false,sugDismissed=false,avFilt=false;
 
 const TB={
 camille:{name:'Camille Dubois',init:'CD',avatar:'https://i.pravatar.cc/160?img=44',title:'Senior Trainer · 8 years',rating:'4.8',langs:['EN','FR','ES'],tags:['Business English','TOEFL prep','Conversation'],experience:8,classes:1240,students:312,bio:'French-born trainer based in Lyon, specialising in business English for executives and TOEFL preparation.',known:false,unavail:{'0-0':1,'0-1':1,'1-2':1,'2-0':1,'3-3':1,'4-4':1,'5-0':1,'5-1':1,'5-2':1,'5-3':1,'6-0':1,'6-1':1,'6-2':1,'6-3':1,'6-4':1,'6-5':1,'6-6':1,'6-7':1,'6-8':1,'6-9':1,'6-10':1,'6-11':1}},
-elias:{name:'Elias Sorenson',init:'ES',avatar:'https://i.pravatar.cc/160?img=8',title:'Linguistics MA · 6 years',rating:'4.8',langs:['EN','ES','IT'],tags:['Conversation','Pronunciation','Travel English'],experience:6,classes:980,students:267,bio:'Norwegian-Italian trainer based in Madrid, known for pronunciation coaching and informal conversation classes.',known:true,unavail:{'0-0':1,'0-1':1,'0-2':1,'1-0':1,'2-3':1,'3-4':1,'4-5':1,'5-6':1,'5-7':1,'6-0':1,'6-1':1,'6-10':1,'6-11':1}},
-sofia:{name:'Sofía Rodríguez',init:'SR',avatar:'https://i.pravatar.cc/160?img=47',title:'CELTA Certified · 5 years',rating:'4.7',langs:['EN','ES'],tags:['IELTS prep','Academic writing','Grammar'],experience:5,classes:720,students:198,bio:'Spanish-British trainer focused on academic and exam-prep contexts.',known:false,unavail:{'2-0':1,'2-1':1,'3-0':1,'3-1':1,'4-0':1,'4-1':1,'5-0':1,'5-1':1,'5-2':1,'6-0':1,'6-1':1,'6-2':1}},
-helena:{name:'Helena Park',init:'HP',avatar:'https://i.pravatar.cc/160?img=49',title:'TESOL Certified · 9 years',rating:'4.9',langs:['EN','KO'],tags:['Academic English','Conversation','Pronunciation'],experience:9,classes:1410,students:355,bio:'Korean-American trainer based in Seoul, with extensive experience teaching learners at all levels.',known:false,unavail:{'0-8':1,'0-9':1,'0-10':1,'0-11':1,'1-8':1,'1-9':1,'1-10':1,'1-11':1,'2-8':1,'2-9':1,'2-10':1,'2-11':1,'3-8':1,'3-9':1,'3-10':1,'3-11':1,'4-8':1,'4-9':1,'4-10':1,'4-11':1,'5-8':1,'5-9':1,'5-10':1,'5-11':1,'6-8':1,'6-9':1,'6-10':1,'6-11':1}},
-marcus:{name:'Marcus Silva',init:'MS',avatar:'https://i.pravatar.cc/160?img=33',title:'Cambridge CELTA · 4 years',rating:'4.8',langs:['EN','ES'],tags:['Business English','Presentations','Negotiation'],experience:4,classes:610,students:174,bio:'Brazilian-American trainer specialising in business communication for sales and account-management teams.',known:false,unavail:{'0-0':1,'1-0':1,'2-0':1,'3-0':1,'4-0':1,'5-3':1,'5-4':1,'5-5':1,'5-6':1,'5-7':1,'5-8':1,'5-9':1,'5-10':1,'5-11':1,'6-0':1,'6-1':1,'6-2':1,'6-3':1,'6-4':1,'6-5':1,'6-6':1,'6-7':1,'6-8':1,'6-9':1,'6-10':1,'6-11':1}},
-arthur:{name:'Arthur Reyes',init:'AR',avatar:'https://i.pravatar.cc/160?img=68',title:'DELTA Trained · 7 years',rating:'4.8',langs:['EN','FR'],tags:['Conversation','Business English','Travel'],experience:7,classes:1080,students:283,bio:'French-Mexican trainer based in Paris, with DELTA certification and a background in adult education.',known:true,unavail:{'5-0':1,'5-1':1,'5-2':1,'5-3':1,'6-0':1,'6-1':1,'6-2':1,'6-3':1,'6-4':1,'6-5':1,'6-6':1,'6-7':1,'6-8':1,'6-9':1,'6-10':1,'6-11':1}},
-yuki:{name:'Yuki Tanaka',init:'YT',avatar:'https://i.pravatar.cc/160?img=16',title:'CELTA · 5 years',rating:'4.7',langs:['EN','JA'],tags:['Conversation','Travel English','Pop culture'],experience:5,classes:780,students:201,bio:'Japanese-Canadian trainer based in Tokyo, focused on conversational fluency.',known:false,unavail:{'0-0':1,'0-1':1,'0-2':1,'0-3':1,'1-0':1,'1-1':1,'1-2':1,'1-3':1,'2-0':1,'2-1':1,'2-2':1,'2-3':1,'3-0':1,'3-1':1,'3-2':1,'3-3':1,'4-0':1,'4-1':1,'4-2':1,'4-3':1}},
-lukas:{name:'Lukas Hoffmann',init:'LH',avatar:'https://i.pravatar.cc/160?img=51',title:'Cambridge CELTA · 6 years',rating:'4.6',langs:['EN','DE'],tags:['Business English','Tech industry','Email writing'],experience:6,classes:890,students:228,bio:'German trainer based in Berlin, specialising in English for the tech industry.',known:false,unavail:{'0-10':1,'0-11':1,'1-10':1,'1-11':1,'2-10':1,'2-11':1,'3-10':1,'3-11':1,'4-10':1,'4-11':1,'5-0':1,'5-1':1,'5-2':1,'5-3':1,'5-4':1,'6-0':1,'6-1':1,'6-2':1,'6-3':1,'6-4':1,'6-5':1,'6-6':1,'6-7':1,'6-8':1,'6-9':1,'6-10':1,'6-11':1}}
+elias:{name:'Elias Sorenson',init:'ES',avatar:'https://i.pravatar.cc/160?img=8',title:'Linguistics MA · 6 years',rating:'4.8',langs:['EN','ES','IT'],tags:['Conversation','Pronunciation'],experience:6,classes:980,students:267,bio:'Norwegian-Italian trainer based in Madrid.',known:true,unavail:{'0-0':1,'0-1':1,'0-2':1,'1-0':1,'2-3':1,'3-4':1,'4-5':1,'5-6':1,'5-7':1,'6-0':1,'6-1':1,'6-10':1,'6-11':1}},
+sofia:{name:'Sofía Rodríguez',init:'SR',avatar:'https://i.pravatar.cc/160?img=47',title:'CELTA Certified · 5 years',rating:'4.7',langs:['EN','ES'],tags:['IELTS prep','Academic writing'],experience:5,classes:720,students:198,bio:'Spanish-British trainer focused on academic contexts.',known:false,unavail:{'2-0':1,'2-1':1,'3-0':1,'3-1':1,'4-0':1,'4-1':1,'5-0':1,'5-1':1,'5-2':1,'6-0':1,'6-1':1,'6-2':1}},
+helena:{name:'Helena Park',init:'HP',avatar:'https://i.pravatar.cc/160?img=49',title:'TESOL Certified · 9 years',rating:'4.9',langs:['EN','KO'],tags:['Academic English','Conversation'],experience:9,classes:1410,students:355,bio:'Korean-American trainer based in Seoul.',known:false,unavail:{'0-8':1,'0-9':1,'0-10':1,'0-11':1,'1-8':1,'1-9':1,'1-10':1,'1-11':1,'2-8':1,'2-9':1,'2-10':1,'2-11':1,'3-8':1,'3-9':1,'3-10':1,'3-11':1,'4-8':1,'4-9':1,'4-10':1,'4-11':1,'5-8':1,'5-9':1,'5-10':1,'5-11':1,'6-8':1,'6-9':1,'6-10':1,'6-11':1}},
+marcus:{name:'Marcus Silva',init:'MS',avatar:'https://i.pravatar.cc/160?img=33',title:'Cambridge CELTA · 4 years',rating:'4.8',langs:['EN','ES'],tags:['Business English'],experience:4,classes:610,students:174,bio:'Brazilian-American business communication trainer.',known:false,unavail:{'0-0':1,'1-0':1,'2-0':1,'3-0':1,'4-0':1,'5-3':1,'5-4':1,'5-5':1,'5-6':1,'5-7':1,'5-8':1,'5-9':1,'5-10':1,'5-11':1,'6-0':1,'6-1':1,'6-2':1,'6-3':1,'6-4':1,'6-5':1,'6-6':1,'6-7':1,'6-8':1,'6-9':1,'6-10':1,'6-11':1}},
+arthur:{name:'Arthur Reyes',init:'AR',avatar:'https://i.pravatar.cc/160?img=68',title:'DELTA Trained · 7 years',rating:'4.8',langs:['EN','FR'],tags:['Conversation','Business English'],experience:7,classes:1080,students:283,bio:'French-Mexican trainer based in Paris.',known:true,unavail:{'5-0':1,'5-1':1,'5-2':1,'5-3':1,'6-0':1,'6-1':1,'6-2':1,'6-3':1,'6-4':1,'6-5':1,'6-6':1,'6-7':1,'6-8':1,'6-9':1,'6-10':1,'6-11':1}},
+yuki:{name:'Yuki Tanaka',init:'YT',avatar:'https://i.pravatar.cc/160?img=16',title:'CELTA · 5 years',rating:'4.7',langs:['EN','JA'],tags:['Conversation'],experience:5,classes:780,students:201,bio:'Japanese-Canadian trainer based in Tokyo.',known:false,unavail:{'0-0':1,'0-1':1,'0-2':1,'0-3':1,'1-0':1,'1-1':1,'1-2':1,'1-3':1,'2-0':1,'2-1':1,'2-2':1,'2-3':1,'3-0':1,'3-1':1,'3-2':1,'3-3':1,'4-0':1,'4-1':1,'4-2':1,'4-3':1}},
+lukas:{name:'Lukas Hoffmann',init:'LH',avatar:'https://i.pravatar.cc/160?img=51',title:'Cambridge CELTA · 6 years',rating:'4.6',langs:['EN','DE'],tags:['Business English','Tech'],experience:6,classes:890,students:228,bio:'German trainer based in Berlin.',known:false,unavail:{'0-10':1,'0-11':1,'1-10':1,'1-11':1,'2-10':1,'2-11':1,'3-10':1,'3-11':1,'4-10':1,'4-11':1,'5-0':1,'5-1':1,'5-2':1,'5-3':1,'5-4':1,'6-0':1,'6-1':1,'6-2':1,'6-3':1,'6-4':1,'6-5':1,'6-6':1,'6-7':1,'6-8':1,'6-9':1,'6-10':1,'6-11':1}}
 };
 const T1O=['elias','camille','marcus','arthur','sofia','helena','yuki','lukas'];
 const MF=['camille','elias','helena','marcus','arthur'];
-// Full / partial split for s2
 const S2_FULL=['camille','elias','sofia','helena'];
 const S2_PARTIAL=[
   {key:'marcus',cov:'75%',hint:'Mon 10:00 ✓ · Fri 09:30 ✓ · Thu: try <strong>Thu 10:30</strong>'},
@@ -626,33 +577,18 @@ const S2_PARTIAL=[
   {key:'yuki',  cov:'75%',hint:'Mon 10:00 ✓ · Thu 10:00 ✓ · Fri: try <strong>Fri 10:00</strong>'},
   {key:'lukas', cov:'70%',hint:'Mon 10:00 ✓ · Thu: try <strong>Thu 11:00</strong> · Fri: try <strong>Fri 10:00</strong>'}
 ];
-const C2O=[{day:'Thursdays',dayKey:'Thu',time:'10:00-10:30',cov:80,col:'green'},{day:'Tuesdays',dayKey:'Tue',time:'14:00-14:30',cov:75,col:'yellow'},{day:'Wednesdays',dayKey:'Wed',time:'10:00-10:30',cov:70,col:'yellow'},{day:'Fridays',dayKey:'Fri',time:'09:30-10:00',cov:65,col:'yellow'},{day:'Tuesdays',dayKey:'Tue',time:'09:00-09:30',cov:60,col:'red'}];
+const C2O=[{day:'Thursdays',dayKey:'Thu',time:'10:00-10:30',cov:82},{day:'Tuesdays',dayKey:'Tue',time:'14:00-14:30',cov:80},{day:'Wednesdays',dayKey:'Wed',time:'10:00-10:30',cov:84},{day:'Fridays',dayKey:'Fri',time:'09:30-10:00',cov:81},{day:'Tuesdays',dayKey:'Tue',time:'09:00-09:30',cov:80}];
 
 function bioIconBtn(k){return '<button class="bio-btn" onclick="openBio(event,\''+k+'\')" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button>'}
 
-// ── s2 render with known-only toggle ──────────────────────────────
 function renderS2(){
   const ko=(document.getElementById('s2-known-only')||{}).checked||false;
-  // Full matches
-  const fullList=S2_FULL.filter(k=>!ko||TB[k].known);
-  const fRows=document.getElementById('s2-full-rows');
-  const fSec=document.getElementById('s2-full-section');
-  if(fRows){
-    if(!fullList.length){fSec.style.display='none'}
-    else{fSec.style.display='';fRows.innerHTML=fullList.map(k=>{const b=TB[k];const kn=b.known?'<span class="t-known">Known</span>':'';const covClass=k==='lukas'?'yellow':'green';return '<div class="t-row" onclick="selectTrainer(this)" data-tname="'+b.name+'" data-tkey="'+k+'"><div class="t-radio"></div><div class="t-name"><img class="t-avatar" src="'+b.avatar.replace('160','80')+'" alt=""/>'+b.name+' '+kn+'</div><div class="t-bio-cell">'+bioIconBtn(k)+'</div><div class="t-rating"><i class="ti ti-star-filled"></i>'+b.rating+'</div><div class="t-langs">'+b.langs.map(l=>'<span class="t-lang-pill">'+l+'</span>').join('')+'</div><div class="t-cov green">100%</div></div>'}).join('')}
-  }
-  // Partial matches
-  const partialList=S2_PARTIAL.filter(({key})=>!ko||TB[key].known);
-  const pRows=document.getElementById('s2-partial-rows');
-  const pSec=document.getElementById('s2-partial-section');
-  if(pRows){
-    if(!partialList.length){pSec.style.display='none'}
-    else{pSec.style.display='';pRows.innerHTML=partialList.map(({key:k,cov,hint})=>{const b=TB[k];const kn=b.known?'<span class="t-known">Known</span>':'';return '<div class="match-row partial" onclick="selectTrainer(this)" data-tname="'+b.name+'" data-tkey="'+k+'"><div class="t-radio"></div><div class="match-info"><img class="t-avatar" src="'+b.avatar.replace('160','80')+'" alt=""/><div class="match-info-text"><div class="t-name" style="gap:6px">'+b.name+' '+kn+' '+bioIconBtn(k)+'</div><div class="t-langs" style="margin-top:3px">'+b.langs.map(l=>'<span class="t-lang-pill">'+l+'</span>').join('')+'</div></div></div><div class="t-cov yellow">'+cov+'</div><div class="match-alt">'+hint+'</div></div>'}).join('')}
-  }
-  // If nothing at all, show empty
-  if(!fullList.length&&!partialList.length){
-    if(fSec)fSec.innerHTML='<div style="padding:24px;text-align:center;color:var(--ll-text-muted);font-size:12px">No known trainers found. <label style="color:var(--ll-blue);cursor:pointer" onclick="document.getElementById(\'s2-known-only\').checked=false;renderS2()">Show all trainers</label></div>';
-  }
+  const fList=S2_FULL.filter(k=>!ko||TB[k].known);
+  const fSec=document.getElementById('s2-full-section');const fRows=document.getElementById('s2-full-rows');
+  if(fRows){fSec.style.display=fList.length?'':'none';if(fList.length)fRows.innerHTML=fList.map(k=>{const b=TB[k];const kn=b.known?'<span class="t-known">Known</span>':'';return '<div class="t-row" onclick="selectTrainer(this)" data-tname="'+b.name+'" data-tkey="'+k+'"><div class="t-radio"></div><div class="t-name"><img class="t-avatar" src="'+b.avatar.replace('160','80')+'" alt=""/>'+b.name+' '+kn+'</div><div class="t-bio-cell">'+bioIconBtn(k)+'</div><div class="t-rating"><i class="ti ti-star-filled"></i>'+b.rating+'</div><div class="t-langs">'+b.langs.map(l=>'<span class="t-lang-pill">'+l+'</span>').join('')+'</div><div class="t-cov green">100%</div></div>'}).join('')}
+  const pList=S2_PARTIAL.filter(({key})=>!ko||TB[key].known);
+  const pSec=document.getElementById('s2-partial-section');const pRows=document.getElementById('s2-partial-rows');
+  if(pRows){pSec.style.display=pList.length?'':'none';if(pList.length)pRows.innerHTML=pList.map(({key:k,cov,hint})=>{const b=TB[k];const kn=b.known?'<span class="t-known">Known</span>':'';return '<div class="match-row partial" onclick="selectTrainer(this)" data-tname="'+b.name+'" data-tkey="'+k+'"><div class="t-radio"></div><div class="match-info"><img class="t-avatar" src="'+b.avatar.replace('160','80')+'" alt=""/><div class="match-info-text"><div class="t-name" style="gap:6px">'+b.name+' '+kn+' '+bioIconBtn(k)+'</div><div class="t-langs" style="margin-top:3px">'+b.langs.map(l=>'<span class="t-lang-pill">'+l+'</span>').join('')+'</div></div></div><div class="t-cov yellow">'+cov+'</div><div class="match-alt">'+hint+'</div></div>'}).join('')}
 }
 
 function buildGrid(id,cb,sel,ua){
@@ -665,7 +601,7 @@ function buildGrid(id,cb,sel,ua){
     DAYS.forEach((d,di)=>{
       const sl=document.createElement('div');const na=ua[di+'-'+ti];
       sl.className='slot '+(na?'na':'avail');
-      sl.dataset.di=di;sl.dataset.ti=ti;sl.dataset.day=d;sl.dataset.t=t;
+      sl.dataset.di=di;sl.dataset.ti=ti;
       if(sel&&sel[di+'-'+ti]&&!na){sl.classList.replace('avail','selected');sl.dataset.time=TP(t)}
       if(!na)sl.onclick=()=>{if(cb)cb(sl,di,ti,d,t)};
       row.appendChild(sl);
@@ -710,26 +646,72 @@ function refreshS1(){
     covCalc=false;covVal=0;hints('s1-grid',s1S);updateS1();
   });
 }
+
 function renderCov(){
   const a=document.getElementById('s1-cov-area');if(!a)return;
   const n=Object.keys(s1S).length;
   if(!n){a.style.display='none';a.innerHTML='';return}
   a.style.display='';
-  if(!covCalc)a.innerHTML='<button class="calc-cov-btn" id="s1-calc-btn" onclick="calcCov()"><i class="ti ti-percentage"></i>Calculate Coverage</button>';
-  else{const c=covVal>=80?'green':covVal>=60?'yellow':'red';a.innerHTML='<div class="cov-block"><span class="cov-pct '+c+'">'+covVal+'%</span><span class="cov-lbl">coverage</span></div>'}
+  if(!covCalc){
+    a.innerHTML='<button class="calc-cov-btn" id="s1-calc-btn" onclick="calcCov()"><i class="ti ti-percentage"></i>Calculate Coverage</button>';
+  } else if(covVal>=GATE){
+    a.innerHTML='<div class="cov-block"><span class="cov-pct green">'+covVal+'%</span><span class="cov-lbl">coverage — threshold met ✓</span></div>';
+  } else {
+    // FAIL: just show the red percentage + locked pill. No hint, no recalculate.
+    a.innerHTML='<div style="display:flex;align-items:center;gap:10px"><span class="cov-pct red">'+covVal+'%</span><div class="cov-blocked"><i class="ti ti-lock"></i>Below 80% — add more available slots to unlock</div></div>';
+  }
 }
-function calcCov(){const b=document.getElementById('s1-calc-btn');if(b){b.innerHTML='<span class="calc-spinner"></span>Calculating…';b.disabled=true}setTimeout(()=>{covVal=Math.min(100,Math.round(Object.keys(s1S).length/5*100));covCalc=true;renderCov();updateS1()},550)}
+
+function calcCov(){
+  const b=document.getElementById('s1-calc-btn');
+  if(b){b.innerHTML='<span class="calc-spinner"></span>Calculating…';b.disabled=true}
+  setTimeout(()=>{
+    const n=Object.keys(s1S).length;
+    covVal=Math.min(100,Math.round(n/5*100));
+    covCalc=true;renderCov();updateS1();
+  },650);
+}
+
 function updateS1(){
-  const n=Object.keys(s1S).length;const h=document.getElementById('s1-hint');const b=document.getElementById('s1-genbtn');
+  const n=Object.keys(s1S).length;const btn=document.getElementById('s1-genbtn');
   renderCov();
-  if(h&&b){if(!n){h.textContent='Select your available slots to begin';h.style.display='';b.disabled=true}else if(n<MIN){h.textContent='Select at least '+MIN+' slots';h.style.display='';b.disabled=true}else{h.style.display='none';b.disabled=false}}
+  if(btn){
+    if(!n||n<MIN||!covCalc||covVal<GATE)btn.disabled=true;
+    else btn.disabled=false;
+  }
   if(n>=2&&!sugDismissed&&!sugShown)showSug();
   if(n<2&&sugShown)hideSug();
 }
-function showSug(){if(sugDismissed)return;const h=document.getElementById('suggest-banner-host');if(!h)return;h.innerHTML='<div class="suggest-banner"><i class="ti ti-bulb"></i><div style="flex:1"><div class="sb-title">Try adding Wednesday 10:00 for better matches</div><div class="sb-desc">22 trainers are free at this time — adding it could raise your trainer pool from 4 to 26.</div><div class="sb-actions"><button class="sb-apply" onclick="applySug()">Apply suggestion</button><button class="sb-dismiss" onclick="dismissSug()">Dismiss</button></div></div></div>';sugShown=true}
+
+function showSug(){
+  if(sugDismissed)return;
+  const h=document.getElementById('suggest-banner-host');if(!h)return;
+  h.innerHTML='<div class="suggest-banner"><i class="ti ti-bulb"></i><div style="flex:1"><div class="sb-title">Try adding more slots for better coverage</div><div class="sb-desc">Adding Wednesday 10:00, Thursday 09:30 and Friday 10:00 will push your coverage above 80%.</div><div class="sb-actions"><button class="sb-apply" onclick="applySug()">Apply suggestion</button><button class="sb-dismiss" onclick="dismissSug()">Dismiss</button></div></div></div>';
+  sugShown=true;
+}
 function hideSug(){const h=document.getElementById('suggest-banner-host');if(h)h.innerHTML='';sugShown=false}
 function dismissSug(){sugDismissed=true;hideSug()}
-function applySug(){const k='2-4';if(!s1S[k]){const sl=document.querySelector('#s1-grid .slot[data-di="2"][data-ti="4"]');if(sl&&!sl.classList.contains('na')){s1S[k]=1;sl.classList.replace('avail','selected');sl.dataset.time=TP(TIMES[4]);covCalc=false;covVal=0}}dismissSug();hints('s1-grid',s1S);updateS1()}
+
+// Applies enough slots to guarantee ≥80% (i.e. 5 slots = 100%)
+function applySug(){
+  // Suggested slots: Wed 10:00 (2-4), Thu 09:30 (3-3 is blocked so use 3-2=09:00), Fri 10:00 (4-4 blocked use 4-3=09:30)
+  // We add slots until we have at least 5 to guarantee ≥80%
+  const toAdd=[['2','4'],['1','3'],['0','3'],['3','2'],['4','3']];
+  toAdd.forEach(([di,ti])=>{
+    const k=di+'-'+ti;
+    if(!s1S[k]&&!UNAVAIL[k]){
+      s1S[k]=1;
+      const sl=document.querySelector('#s1-grid .slot[data-di="'+di+'"][data-ti="'+ti+'"]');
+      if(sl&&!sl.classList.contains('na')){sl.classList.replace('avail','selected');sl.dataset.time=TP(TIMES[parseInt(ti)])}
+    }
+  });
+  dismissSug();
+  hints('s1-grid',s1S);
+  // Immediately calculate so coverage result is shown
+  covVal=Math.min(100,Math.round(Object.keys(s1S).length/5*100));
+  covCalc=true;
+  updateS1();
+}
 
 function openFilterAvail(){
   document.getElementById('filter-avail-overlay').classList.add('show');
@@ -743,15 +725,26 @@ function openFilterAvail(){
 }
 function closeFilterAvail(){document.getElementById('filter-avail-overlay').classList.remove('show')}
 function closeFilterAvailOnBg(e){if(e.target.id==='filter-avail-overlay')closeFilterAvail()}
-function upT2(){const n=Object.keys(t2S).length;const c=document.getElementById('t2-count');if(c)c.textContent=n;const b=document.getElementById('t2-confirm');if(b)b.disabled=n<MIN;const cb=document.getElementById('t2-calc-btn');if(cb)cb.disabled=n<MIN;}
+function upT2(){
+  const n=Object.keys(t2S).length;
+  const c=document.getElementById('t2-count');if(c)c.textContent=n;
+  const cb=document.getElementById('t2-calc-btn');if(cb)cb.disabled=n<MIN;
+  const btn=document.getElementById('t2-confirm');if(btn)btn.disabled=!(t2Done&&t2Val>=GATE);
+}
 function renderT2C(){
   const s=document.getElementById('t2-cov-slot');if(!s)return;
   const n=Object.keys(t2S).length;
-  if(!t2Done)s.innerHTML='<button class="btn-outline" id="t2-calc-btn" onclick="calcT2()" '+(n<MIN?'disabled':'')+'><i class="ti ti-percentage"></i>Calculate Coverage</button>';
-  else{const c=t2Val>=80?'green':t2Val>=60?'yellow':'red';s.innerHTML='<div class="cov-result-inline"><i class="ti ti-percentage" style="color:var(--ll-blue)"></i><span class="pct '+c+'">'+t2Val+'%</span> coverage <button class="recalc" onclick="reT2()"><i class="ti ti-refresh" style="font-size:12px"></i></button></div>'}
+  if(!t2Done){
+    s.innerHTML='<button class="btn-outline" id="t2-calc-btn" onclick="calcT2()" '+(n<MIN?'disabled':'')+'><i class="ti ti-percentage"></i>Calculate Coverage</button>';
+  } else if(t2Val>=GATE){
+    s.innerHTML='<div class="cov-result-inline"><i class="ti ti-percentage" style="color:var(--ll-green-text)"></i><span class="pct green">'+t2Val+'%</span> coverage — threshold met ✓</div>';
+  } else {
+    // No recalculate button, no hint — just the red result + lock message
+    s.innerHTML='<div style="display:flex;align-items:center;gap:8px"><div class="cov-result-inline"><span class="pct red">'+t2Val+'%</span></div><div class="cov-blocked" style="font-size:11px"><i class="ti ti-lock"></i>Below 80% — add more slots to unlock</div></div>';
+  }
+  upT2();
 }
-function calcT2(){const b=document.getElementById('t2-calc-btn');if(!b||b.disabled)return;b.innerHTML='<span class="calc-spinner"></span>…';b.disabled=true;setTimeout(()=>{t2Val=Math.min(100,Math.round(Object.keys(t2S).length/5*100));t2Done=true;renderT2C()},550)}
-function reT2(){t2Done=false;t2Val=0;renderT2C()}
+function calcT2(){const b=document.getElementById('t2-calc-btn');if(!b||b.disabled)return;b.innerHTML='<span class="calc-spinner"></span>…';b.disabled=true;setTimeout(()=>{const n=Object.keys(t2S).length;t2Val=Math.min(100,Math.round(n/5*100));t2Done=true;renderT2C()},650)}
 function confirmFilterAvail(){closeFilterAvail();avFilt=Object.keys(t2S).length>=MIN;renderT1();updT1CF()}
 function clearAvailFilter(){t2S={};t2Done=false;t2Val=0;avFilt=false;renderT1();updT1CF()}
 function updT1CF(){const b=document.getElementById('t1-clear-filters');if(!b)return;b.style.display=avFilt?'':'none';const h=document.getElementById('t1-filter-hint');if(h)h.style.display=avFilt?'':'none';if(avFilt){const t=document.getElementById('t1-filter-hint-text');if(t)t.textContent='Showing '+MF.length+' of '+T1O.length+' trainers matching your availability'}}
@@ -759,7 +752,6 @@ function updT1CF(){const b=document.getElementById('t1-clear-filters');if(!b)ret
 function openTrainerAvail(){
   const b=TB[sTrK];if(!b)return;
   document.getElementById('t3-title').textContent=b.name+'\u2019s Availability';
-  document.getElementById('t3-trainer-name-inline').textContent=b.name;
   document.getElementById('trainer-avail-overlay').classList.add('show');
   buildGrid('t3-grid',(sl,di,ti)=>{
     const k=di+'-'+ti;
@@ -776,10 +768,9 @@ function renderT3C(){
   const s=document.getElementById('t3-cov-slot');if(!s)return;
   const n=Object.keys(t3S).length;
   if(!t3Done)s.innerHTML='<button class="btn-outline" id="t3-calc-btn" onclick="calcT3()" '+(n<MIN?'disabled':'')+'><i class="ti ti-percentage"></i>Calculate Coverage</button>';
-  else{const c=t3Val>=80?'green':t3Val>=60?'yellow':'red';s.innerHTML='<div class="cov-result-inline"><i class="ti ti-percentage" style="color:var(--ll-blue)"></i><span class="pct '+c+'">'+t3Val+'%</span> coverage <button class="recalc" onclick="reT3()"><i class="ti ti-refresh" style="font-size:12px"></i></button></div>'}
+  else{const c=t3Val>=GATE?'green':'red';s.innerHTML='<div class="cov-result-inline"><i class="ti ti-percentage" style="color:var(--ll-blue)"></i><span class="pct '+c+'">'+t3Val+'%</span> coverage</div>'}
 }
-function calcT3(){const b=document.getElementById('t3-calc-btn');if(!b||b.disabled)return;b.innerHTML='<span class="calc-spinner"></span>…';b.disabled=true;setTimeout(()=>{t3Val=Math.min(100,Math.round(Object.keys(t3S).length/4*100));t3Done=true;renderT3C()},550)}
-function reT3(){t3Done=false;t3Val=0;renderT3C()}
+function calcT3(){const b=document.getElementById('t3-calc-btn');if(!b||b.disabled)return;b.innerHTML='<span class="calc-spinner"></span>…';b.disabled=true;setTimeout(()=>{t3Val=Math.min(100,Math.round(Object.keys(t3S).length/4*100));t3Done=true;renderT3C()},650)}
 function confirmTrainerAvail(){closeTrainerAvail();goScreen('s3',document.querySelectorAll('.sb-item')[8])}
 
 function renderT1(){
@@ -795,11 +786,9 @@ function filterT1(){renderT1()}
 
 function selectTrainer(row){
   document.querySelectorAll('#s2 .t-row,#s2 .match-row,#t1 .t-row').forEach(r=>r.classList.remove('selected'));
-  row.classList.add('selected');
-  sTr=row.dataset.tname;sTrK=row.dataset.tkey||sTrK;
+  row.classList.add('selected');sTr=row.dataset.tname;sTrK=row.dataset.tkey||sTrK;
   if(TB[sTrK])sTrAv=TB[sTrK].avatar.replace('160','80');
-  t3S={};t3Done=false;t3Val=0;
-  syncTr();
+  t3S={};t3Done=false;t3Val=0;syncTr();
   const b2=document.getElementById('s2-next');if(b2)b2.disabled=false;
   const bt=document.getElementById('t1-next');if(bt)bt.disabled=false;
   const ba=document.getElementById('t1-check-avail');if(ba)ba.disabled=false;
@@ -809,8 +798,6 @@ function syncTr(){
   const i=document.getElementById('s4-trainer-inline');if(i)i.textContent=sTr.split(' ')[0];
   ['s3-trainer-avatar','s4-trainer-avatar'].forEach(id=>{const el=document.getElementById(id);if(el)el.src=sTrAv});
 }
-
-// Bio opened from s3/s4 trainer header (no selectTrainer callback needed)
 function openBioForCurrent(){openBio({stopPropagation:()=>{}},sTrK)}
 
 let curBio=null;
@@ -832,7 +819,7 @@ function confirmClass1Go(){if(c1){const tx=c1.day+' '+c1.time;['s4-class1','s4-c
 function editClass1(){goScreen('s3',document.querySelectorAll('.sb-item')[8])}
 function toggleDayFilter(c){const d=c.dataset.day;df[d]=!df[d];c.classList.toggle('on');c.querySelector('.x').textContent=df[d]?'×':'+';renderC2()}
 function resetDayFilter(){Object.keys(df).forEach(k=>{df[k]=true});document.querySelectorAll('#s4 .day-chip').forEach(c=>{c.classList.add('on');c.querySelector('.x').textContent='×'});renderC2()}
-function renderC2(){const g=document.getElementById('s4-sched-grid');const e=document.getElementById('s4-empty');const n=document.getElementById('s4-shown-count');if(!g)return;const v=C2O.filter(o=>df[o.dayKey]);if(n)n.textContent=v.length;if(!v.length){g.style.display='none';if(e)e.style.display='';return}g.style.display='';if(e)e.style.display='none';g.innerHTML=v.map((o,i)=>'<div class="sched-card" onclick="selC2(this,'+i+')"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">'+o.day+'</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">'+o.time+'</div></div></div><div class="sc-cov-lbl">Schedule coverage</div><div class="sc-cov-num '+o.col+'">'+o.cov+'%</div><div class="sc-radio"><div class="rdo"></div>Select this schedule</div></div>').join('')}
+function renderC2(){const g=document.getElementById('s4-sched-grid');const e=document.getElementById('s4-empty');const n=document.getElementById('s4-shown-count');if(!g)return;const v=C2O.filter(o=>df[o.dayKey]);if(n)n.textContent=v.length;if(!v.length){g.style.display='none';if(e)e.style.display='';return}g.style.display='';if(e)e.style.display='none';g.innerHTML=v.map((o,i)=>'<div class="sched-card" onclick="selC2(this,'+i+')"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">'+o.day+'</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">'+o.time+'</div></div></div><div class="sc-cov-lbl">Schedule coverage</div><div class="sc-cov-num">'+o.cov+'%</div><div class="sc-radio"><div class="rdo"></div>Select this schedule</div></div>').join('')}
 function selC2(c){document.querySelectorAll('#s4 .sched-card').forEach(x=>x.classList.remove('selected'));c.classList.add('selected');const b=document.getElementById('s4-next');if(b)b.disabled=false}
 
 function openConfirmSched(){document.getElementById('confirm-sched-overlay').classList.add('show')}
@@ -849,7 +836,6 @@ function showToast(t,s){
 document.addEventListener('DOMContentLoaded',()=>{
   refreshS1();
   buildGrid('e1-grid',null);
-  setTimeout(()=>{const g=document.getElementById('e1-grid');if(!g)return;const a=g.querySelector('.slot[data-di="5"][data-ti="5"]');const b=g.querySelector('.slot[data-di="5"][data-ti="6"]');if(a){a.classList.replace('avail','selected');a.dataset.time='10:30 → 11:00'}if(b){b.classList.replace('avail','selected');b.dataset.time='11:00 → 11:30'}},50);
   renderC2();renderT1();renderS2();
 });
 </script>
