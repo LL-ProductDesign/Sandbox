@@ -37,8 +37,10 @@
 .cb-banner.info{background:var(--ll-blue-light);color:var(--ll-blue-dark);border:1px solid var(--ll-blue-border)}
 .cb-banner i{font-size:14px;flex-shrink:0;margin-top:1px}
 .grid-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px}
-.cb-row{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ll-navy)}
-.cb{width:14px;height:14px;border:1px solid var(--ll-border);border-radius:3px;cursor:pointer;flex-shrink:0;background:var(--ll-card)}
+.cb-row{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ll-navy);cursor:pointer;user-select:none}
+.cb-check{width:14px;height:14px;border:1px solid var(--ll-border);border-radius:3px;flex-shrink:0;background:var(--ll-card);display:flex;align-items:center;justify-content:center;transition:background 0.1s,border-color 0.1s}
+.cb-check.checked{background:var(--ll-blue);border-color:var(--ll-blue)}
+.cb-check.checked::after{content:'✓';color:#fff;font-size:9px;font-weight:700}
 .legend{display:flex;align-items:center;gap:14px;font-size:11px;color:var(--ll-navy)}
 .lg{display:flex;align-items:center;gap:5px}
 .lg-swatch{width:28px;height:12px;border-radius:4px}
@@ -135,6 +137,7 @@
 .form-input{width:100%;padding:9px 12px;border:1px solid var(--ll-border);border-radius:5px;font-size:13px;font-family:inherit;color:var(--ll-navy);background:var(--ll-card);outline:none}
 .form-input:focus{border-color:var(--ll-blue)}
 .form-select{width:100%;padding:9px 30px 9px 12px;border:1px solid var(--ll-border);border-radius:5px;font-size:13px;font-family:inherit;color:var(--ll-navy);background-color:var(--ll-card);appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235F6B7A' stroke-width='2'><polyline points='6 9 12 15 18 9'></polyline></svg>");background-repeat:no-repeat;background-position:right 10px center;cursor:pointer;outline:none}
+.form-divider{border:none;border-top:1px solid var(--ll-border);margin:6px 0 14px}
 .modal-overlay{position:absolute;inset:0;background:rgba(10,37,64,0.45);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
 .modal-overlay.show{display:flex;animation:fadeIn 0.15s ease-out}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -234,7 +237,7 @@
 <div class="app">
 <div class="sidebar">
 <div class="sb-brand"><span class="sb-brand-logo">ACME</span></div>
-<div class="sb-sub">UX-536 · v26f</div>
+<div class="sb-sub">UX-536 · v26g</div>
 <div class="sb-section">Onboarding</div>
 <div class="sb-item active" onclick="goScreen('p0',this)"><span class="num">1·</span>Personal Data</div>
 <div class="sb-item" onclick="goScreen('p0',this);openChoice()"><span class="num">★</span>Setup choice modal</div>
@@ -259,18 +262,32 @@
 <div class="main">
 <div class="app-header"><span class="app-header-logo">ACME</span><div class="app-avatar">AL</div></div>
 
+<!-- ① Personal Data — now includes Primary Language -->
 <div class="screen active" id="p0">
 <div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Let's get your learning program set up</p></div>
 <div class="steps"><div class="step active">1. Personal Data</div><div class="step-sep"></div><div class="step">2</div><div class="step-sep"></div><div class="step">3</div></div></div>
 <div class="body-row"><div class="prog-card" id="pc-p0"></div>
 <div class="content-card">
-<div class="cc-title">Personal Data</div><div class="cc-desc">Please review and confirm your details</div>
-<div class="form-row"><div class="form-field"><label class="form-label">First Name<span class="req">*</span></label><input class="form-input" type="text" value="John"/></div><div class="form-field"><label class="form-label">Last Name<span class="req">*</span></label><input class="form-input" type="text" value="Doe"/></div></div>
-<div class="form-row"><div class="form-field full"><label class="form-label">Email<span class="req">*</span></label><input class="form-input" type="email" value="johndoe@gmail.com"/></div></div>
-<div class="form-row"><div class="form-field full"><label class="form-label">Time Zone<span class="req">*</span></label><select class="form-select"><option>GMT Standard Time</option></select></div></div>
+<div class="cc-title">Personal Data</div>
+<div class="cc-desc">Please review and confirm your details to get started</div>
+<div class="form-row">
+  <div class="form-field"><label class="form-label">First Name<span class="req">*</span></label><input class="form-input" type="text" value="John"/></div>
+  <div class="form-field"><label class="form-label">Last Name</label><input class="form-input" type="text" value="Doe"/></div>
+</div>
+<div class="form-row">
+  <div class="form-field full"><label class="form-label">Email Address<span class="req">*</span></label><input class="form-input" type="email" value="johndoe@gmail.com"/></div>
+</div>
+<hr class="form-divider"/>
+<div class="form-row">
+  <div class="form-field full"><label class="form-label">Time Zone<span class="req">*</span></label><select class="form-select"><option>GMT Standard Time</option><option>Central European Time (CET)</option><option>Eastern Standard Time (EST)</option><option>Pacific Standard Time (PST)</option></select></div>
+</div>
+<div class="form-row">
+  <div class="form-field full"><label class="form-label">Primary Language<span class="req">*</span></label><select class="form-select"><option>English</option><option>Spanish</option><option>French</option><option>German</option><option>Portuguese</option></select></div>
+</div>
 <div style="display:flex;justify-content:flex-end;margin-top:8px"><button class="btn-primary" onclick="openChoice()">Confirm &amp; Continue</button></div>
 </div></div></div>
 
+<!-- A1 Availability -->
 <div class="screen" id="s1">
 <div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Let's get your learning program set up</p></div>
 <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">2. Availability</div><div class="step-sep"></div><div class="step">3</div></div></div>
@@ -281,7 +298,11 @@
 <div class="cb-banner info"><i class="ti ti-info-circle"></i><div><strong>All weekly classes will be with the same trainer.</strong></div></div>
 <div id="suggest-banner-host"></div>
 <div class="grid-top">
-  <div class="cb-row"><div class="cb"></div>Select all available slots</div>
+  <!-- ⑤ Select all checkbox -->
+  <div class="cb-row" onclick="toggleSelectAll('s1-grid-wrap')">
+    <div class="cb-check" id="s1-select-all-cb"></div>
+    Select all available slots
+  </div>
   <div class="legend">
     <div class="lg"><div class="lg-swatch lg-na"></div>Not available</div>
     <div class="lg"><div class="lg-swatch lg-av"></div>Available</div>
@@ -290,8 +311,11 @@
   </div>
 </div>
 <div id="s1-grid-wrap"></div>
-<div class="cov-strip"><div id="s1-cov-area" style="display:none"></div>
-<div class="cta-area" style="margin-left:auto"><button class="btn-link">Select A Trainer</button><button class="btn-primary" id="s1-genbtn" disabled onclick="goScreen('s2',document.querySelectorAll('.sb-item')[3])">Schedule Options</button></div></div>
+<!-- ④ Coverage area always shown when slots selected -->
+<div class="cov-strip">
+  <div id="s1-cov-area"></div>
+  <div class="cta-area" style="margin-left:auto"><button class="btn-link">Select A Trainer</button><button class="btn-primary" id="s1-genbtn" disabled onclick="goScreen('s2',document.querySelectorAll('.sb-item')[3])">Schedule Options</button></div>
+</div>
 </div></div></div>
 
 <div class="screen" id="s2">
@@ -375,7 +399,7 @@
 <div class="screen" id="e2"><div class="welcome-row"><div><h1>Let's find a path forward</h1></div></div>
 <div class="body-row"><div class="prog-card" id="pc-e2"></div>
 <div class="content-card"><div style="text-align:center;padding:24px;background:var(--ll-bg);border-radius:8px;border:1px solid var(--ll-border)">
-<div style="font-size:28px;color:var(--ll-text-muted);margin-bottom:8px"><i class="ti ti-calendar-off"></i></div>
+<i class="ti ti-calendar-off" style="font-size:28px;color:var(--ll-text-muted);display:block;margin-bottom:8px"></i>
 <h4 style="font-size:14px;font-weight:600;margin-bottom:12px">No trainers for these slots</h4>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:400px;margin:auto">
 <div style="border:1px solid var(--ll-border);border-radius:6px;padding:12px;background:var(--ll-card);text-align:left"><i class="ti ti-clock-edit" style="font-size:18px;color:var(--ll-blue);display:block;margin-bottom:4px"></i><strong style="font-size:12px">Try nearby times</strong></div>
@@ -421,8 +445,10 @@
 <div class="filter-modal-desc">Select your available slots.</div>
 </div>
 <div class="filter-modal-body">
-<div class="grid-top"><div class="cb-row"><div class="cb"></div>Select all</div>
-<div class="legend"><div class="lg"><div class="lg-swatch lg-na"></div>Not available</div><div class="lg"><div class="lg-swatch lg-av"></div>Available</div><div class="lg"><div class="lg-swatch lg-mh"></div>Smart match</div><div class="lg"><div class="lg-swatch lg-sl"></div>Selected</div></div></div>
+<div class="grid-top">
+  <div class="cb-row" onclick="toggleSelectAll('t2-grid-wrap')"><div class="cb-check" id="t2-select-all-cb"></div>Select all</div>
+  <div class="legend"><div class="lg"><div class="lg-swatch lg-na"></div>Not available</div><div class="lg"><div class="lg-swatch lg-av"></div>Available</div><div class="lg"><div class="lg-swatch lg-mh"></div>Smart match</div><div class="lg"><div class="lg-swatch lg-sl"></div>Selected</div></div>
+</div>
 <div id="t2-grid-wrap"></div>
 <div style="margin-top:10px;font-size:11px;color:var(--ll-text-muted)"><span id="t2-count">0</span> slots selected</div>
 </div>
@@ -437,7 +463,7 @@
 <div class="filter-modal-desc">Select slots that fit your schedule.</div>
 </div>
 <div class="filter-modal-body">
-<div class="grid-top"><div class="cb-row"><div class="cb"></div>Select all</div>
+<div class="grid-top"><div class="cb-row"><div class="cb-check"></div>Select all</div>
 <div class="legend"><div class="lg"><div class="lg-swatch lg-av"></div>Available</div><div class="lg"><div class="lg-swatch lg-sl"></div>Selected</div></div></div>
 <div id="t3-grid-wrap"></div>
 </div>
@@ -469,11 +495,12 @@
 </div>
 
 <script>
+// ── ① Total Classes = 20 ─────────────────────────────────────────
 const PC=`<h4>Your Program Details</h4>
 <div class="pf"><div class="pf-label">Program</div><div class="pf-value">English</div></div>
 <div class="pf"><div class="pf-label">Assigned Course</div><div class="pf-value">B1 - Intermediate 1</div></div>
 <div class="pf-row"><div class="pf"><div class="pf-label">Active From</div><div class="pf-value">01 Sep 2025</div></div><div class="pf"><div class="pf-label">Active To</div><div class="pf-value">01 Jun 2026</div></div></div>
-<div class="pf-row"><div class="pf"><div class="pf-label">Total Classes <i class="ti ti-info-circle" style="font-size:10px;vertical-align:-1px;color:var(--ll-text-muted)"></i></div><div class="pf-value">2</div></div><div class="pf"><div class="pf-label">Class Duration</div><div class="pf-value">30 minutes</div></div></div>
+<div class="pf-row"><div class="pf"><div class="pf-label">Total Classes <i class="ti ti-info-circle" style="font-size:10px;vertical-align:-1px;color:var(--ll-text-muted)"></i></div><div class="pf-value">20</div></div><div class="pf"><div class="pf-label">Class Duration</div><div class="pf-value">30 minutes</div></div></div>
 <div class="pf"><div class="pf-label">Class Frequency</div><div class="pf-value">Every 1 week</div></div>`;
 function fillPC(){
   ['pc-p0','pc-s1','pc-s2','pc-t1','pc-s3','pc-s4','pc-e1','pc-e2'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=PC});
@@ -485,28 +512,18 @@ const TIMES=['08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12
 const MIN=2;
 const TP=t=>{const[h,m]=t.split(':').map(Number);const n=m===30?[h+1,0]:[h,30];return t+' → '+String(n[0]).padStart(2,'0')+':'+String(n[1]).padStart(2,'0')};
 
-// ── Learner unavailability — realistic pattern ────────────────────
-// Logic: Mon early busy (school run), Tue afternoon busy (recurring meeting),
-// Wed morning blocked (team standup), Thu early + late blocked,
-// Fri afternoon blocked (wind-down), full weekends off
-// Plus a mid-morning Wed gap and scattered lunch blocks
-const LEARNER_UNAVAIL = new Set([
-  // Weekends — fully blocked
+// Learner unavailability
+const LEARNER_UNAVAIL=new Set([
   ...[...Array(12)].map((_,ti)=>`5-${ti}`),
   ...[...Array(12)].map((_,ti)=>`6-${ti}`),
-  // Monday: early morning blocked (08:00–09:30), lunch 12:00 blocked
   '0-0','0-1','0-2','0-3','0-9',
-  // Tuesday: morning 08:00–09:00 blocked, afternoon 12:00–13:30 blocked
   '1-0','1-1','1-8','1-9','1-10','1-11',
-  // Wednesday: 08:00–09:00 blocked (standup), 11:00–12:00 blocked
   '2-0','2-1','2-6','2-7',
-  // Thursday: 08:00–08:30 blocked, 12:30–13:30 blocked
   '3-0','3-10','3-11',
-  // Friday: afternoon from 11:30 blocked
   '4-7','4-8','4-9','4-10','4-11',
 ]);
+function isUnavail(di,ti){return LEARNER_UNAVAIL.has(di+'-'+ti);}
 
-// ── Trainer data ──────────────────────────────────────────────────
 const TB={
   camille:{name:'Camille Dubois',avatar:'https://i.pravatar.cc/160?img=44',title:'Senior Trainer · 8 years',rating:'4.8',langs:['EN','FR','ES'],tags:['Business English','TOEFL prep'],experience:8,classes:1240,students:312,bio:'French-born trainer based in Lyon.',known:false,avail:new Set(['0-4','0-5','0-6','0-7','1-4','1-5','1-6','1-7','3-8','3-9','3-10','3-11'])},
   elias:{name:'Elias Sorenson',avatar:'https://i.pravatar.cc/160?img=8',title:'Linguistics MA · 6 years',rating:'4.8',langs:['EN','ES','IT'],tags:['Conversation','Pronunciation'],experience:6,classes:980,students:267,bio:'Norwegian-Italian trainer based in Madrid.',known:true,avail:new Set(['2-2','2-3','2-4','2-5','4-2','4-3','4-4','4-5'])},
@@ -518,9 +535,6 @@ const TB={
   lukas:{name:'Lukas Hoffmann',avatar:'https://i.pravatar.cc/160?img=51',title:'Cambridge CELTA · 6 years',rating:'4.6',langs:['EN','DE'],tags:['Business English'],experience:6,classes:890,students:228,bio:'German trainer based in Berlin.',known:false,avail:new Set(['0-2','0-3','4-2','4-3','4-4'])}
 };
 Object.values(TB).forEach(b=>{b.unavail={};for(let di=0;di<7;di++)for(let ti=0;ti<12;ti++){const k=di+'-'+ti;if(!b.avail.has(k))b.unavail[k]=1;}});
-
-// Combined unavail: learner OR sat/sun
-function isUnavail(di,ti){return LEARNER_UNAVAIL.has(di+'-'+ti);}
 
 const T1O=['camille','elias','sofia','helena','marcus','arthur','yuki','lukas'];
 const MF=['camille','elias','helena','marcus','arthur'];
@@ -547,55 +561,98 @@ function renderS2(){
 }
 
 function buildPillGrid(wrapId,selObj,trainerUnavail,onToggle){
-  // trainerUnavail: optional object {key:1} for trainer-specific grids; null means use learner schedule
   const wrap=document.getElementById(wrapId);if(!wrap)return;
   const tbl=document.createElement('table');
   tbl.className='avail-grid';tbl.style.tableLayout='fixed';tbl.style.width='100%';
   const thead=document.createElement('thead');
-  const htr=document.createElement('tr');
-  htr.appendChild(document.createElement('th'));
+  const htr=document.createElement('tr');htr.appendChild(document.createElement('th'));
   DAYS.forEach(d=>{const th=document.createElement('th');th.textContent=d+'s';htr.appendChild(th)});
   thead.appendChild(htr);tbl.appendChild(thead);
   const tbody=document.createElement('tbody');
   TIMES.forEach((t,ti)=>{
     const tr=document.createElement('tr');
-    const tdl=document.createElement('td');
-    if(ti%2===0)tdl.textContent=t;
-    tr.appendChild(tdl);
+    const tdl=document.createElement('td');if(ti%2===0)tdl.textContent=t;tr.appendChild(tdl);
     DAYS.forEach((d,di)=>{
       const td=document.createElement('td');
-      const pill=document.createElement('div');
-      pill.className='slot-pill';
+      const pill=document.createElement('div');pill.className='slot-pill';
       const k=di+'-'+ti;
-      // Determine unavailability
-      const na = trainerUnavail ? trainerUnavail[k] : isUnavail(di,ti);
+      const na=trainerUnavail?trainerUnavail[k]:isUnavail(di,ti);
       if(na){pill.classList.add('na');}
       else if(selObj[k]){pill.classList.add('selected');pill.textContent=TP(t);}
       else{pill.classList.add('avail');}
       pill.dataset.di=di;pill.dataset.ti=ti;
       if(!na&&onToggle)pill.onclick=()=>onToggle(pill,di,ti,d,t,k);
       td.appendChild(pill);tr.appendChild(td);
-    });
-    tbody.appendChild(tr);
-  });
-  tbl.appendChild(tbody);
-  wrap.innerHTML='';wrap.appendChild(tbl);
+    });tbody.appendChild(tr);
+  });tbl.appendChild(tbody);wrap.innerHTML='';wrap.appendChild(tbl);
 }
 
+// ── ③ Smart match: preserve existing hints when selecting an avail slot ──
+// Compatible trainers = trainers free at ALL currently selected keys
+// We only REMOVE hints if the newly selected slot is incompatible with existing hints
+// i.e. we recalc based on ALL selected (including the new one)
 function recalcHints(wrapId,selObj,trainerUnavail){
   const wrap=document.getElementById(wrapId);if(!wrap)return;
   const selKeys=Object.keys(selObj);
-  wrap.querySelectorAll('.slot-pill.match-hint').forEach(p=>{p.classList.remove('match-hint');p.classList.add('avail');p.textContent='';});
+
+  // Clear existing hints
+  wrap.querySelectorAll('.slot-pill.match-hint').forEach(p=>{
+    p.classList.remove('match-hint');p.classList.add('avail');p.textContent='';
+  });
+
   if(!selKeys.length)return;
+
+  // Trainers compatible with ALL selected slots
   const compat=Object.keys(TB).filter(k=>selKeys.every(sk=>!TB[k].unavail[sk]));
   if(!compat.length)return;
+
+  // Mark unselected available slots as match-hint if any compatible trainer is free there
   wrap.querySelectorAll('.slot-pill.avail').forEach(p=>{
     const k=p.dataset.di+'-'+p.dataset.ti;
     if(selObj[k])return;
-    const na = trainerUnavail ? trainerUnavail[k] : isUnavail(parseInt(p.dataset.di),parseInt(p.dataset.ti));
+    const na=trainerUnavail?trainerUnavail[k]:isUnavail(parseInt(p.dataset.di),parseInt(p.dataset.ti));
     if(na)return;
-    if(compat.some(tk=>!TB[tk].unavail[k])){p.classList.remove('avail');p.classList.add('match-hint');}
+    if(compat.some(tk=>!TB[tk].unavail[k])){
+      p.classList.remove('avail');p.classList.add('match-hint');
+    }
   });
+}
+
+// ── ⑤ Select All toggle ───────────────────────────────────────────
+function toggleSelectAll(wrapId){
+  const wrap=document.getElementById(wrapId);if(!wrap)return;
+  const selObj=wrapId==='s1-grid-wrap'?s1S:wrapId==='t2-grid-wrap'?t2S:t3S;
+  const avPills=[...wrap.querySelectorAll('.slot-pill:not(.na)')];
+  const allSelected=avPills.every(p=>p.classList.contains('selected'));
+
+  if(allSelected){
+    // Deselect all
+    avPills.forEach(p=>{
+      const k=p.dataset.di+'-'+p.dataset.ti;
+      delete selObj[k];
+      p.classList.remove('selected','match-hint');
+      p.classList.add('avail');
+      p.textContent='';
+    });
+  } else {
+    // Select all available
+    avPills.forEach(p=>{
+      if(p.classList.contains('na'))return;
+      const k=p.dataset.di+'-'+p.dataset.ti;
+      const ti=parseInt(p.dataset.ti);
+      selObj[k]=1;
+      p.classList.remove('avail','match-hint');
+      p.classList.add('selected');
+      p.textContent=TP(TIMES[ti]);
+    });
+  }
+
+  // Update checkbox visual
+  const cbId=wrapId==='s1-grid-wrap'?'s1-select-all-cb':wrapId==='t2-grid-wrap'?'t2-select-all-cb':null;
+  if(cbId){const cb=document.getElementById(cbId);if(cb)cb.classList.toggle('checked',!allSelected);}
+
+  if(wrapId==='s1-grid-wrap'){recalcHints('s1-grid-wrap',s1S,null);updateS1();}
+  if(wrapId==='t2-grid-wrap'){recalcHints('t2-grid-wrap',t2S,null);upT2();}
 }
 
 function goScreen(id,el){
@@ -614,28 +671,50 @@ function chooseTrainer(){closeChoice();goScreen('t1',document.querySelectorAll('
 
 function buildS1(){
   buildPillGrid('s1-grid-wrap',s1S,null,(pill,di,ti,d,t,k)=>{
-    if(s1S[k]){delete s1S[k];pill.classList.remove('selected');pill.classList.add('avail');pill.textContent='';}
-    else{s1S[k]=1;pill.classList.remove('avail','match-hint');pill.classList.add('selected');pill.textContent=TP(t);}
-    recalcHints('s1-grid-wrap',s1S,null);updateS1();
-  });recalcHints('s1-grid-wrap',s1S,null);
+    if(s1S[k]){
+      delete s1S[k];pill.classList.remove('selected');pill.classList.add('avail');pill.textContent='';
+    } else {
+      s1S[k]=1;pill.classList.remove('avail','match-hint');pill.classList.add('selected');pill.textContent=TP(t);
+    }
+    // ③ Recalc hints based on full selection (including or excluding this slot)
+    recalcHints('s1-grid-wrap',s1S,null);
+    updateS1();
+  });
+  recalcHints('s1-grid-wrap',s1S,null);
 }
 
+// ④ Coverage button always visible when slots are selected; resets to button on any change
 function renderCov(){
   const a=document.getElementById('s1-cov-area');if(!a)return;
   const n=Object.keys(s1S).length;
-  if(!n){a.style.display='none';a.innerHTML='';return}
-  a.style.display='';
-  if(!covCalc){a.innerHTML='<button class="calc-cov-btn" id="s1-calc-btn" onclick="calcCov()"><i class="ti ti-percentage"></i>Calculate Coverage</button>';}
-  else if(covVal>=80){a.innerHTML='<div style="display:flex;align-items:center;gap:8px"><span class="cov-pct green">'+covVal+'%</span><span class="cov-lbl">coverage ✓</span></div>';}
-  else{a.innerHTML='<div style="display:flex;align-items:center;gap:8px"><span class="cov-pct red">'+covVal+'%</span><span class="cov-lbl">coverage</span></div>';}
+  if(!n){a.innerHTML='';return;}
+  // Always show the Calculate Coverage button; if already calculated show result alongside it
+  if(!covCalc){
+    a.innerHTML='<button class="calc-cov-btn" id="s1-calc-btn" onclick="calcCov()"><i class="ti ti-percentage"></i>Calculate Coverage</button>';
+  } else if(covVal>=80){
+    a.innerHTML='<div style="display:flex;align-items:center;gap:10px"><div style="display:flex;align-items:center;gap:8px"><span class="cov-pct green">'+covVal+'%</span><span class="cov-lbl">coverage ✓</span></div><button class="calc-cov-btn" style="font-size:11px;padding:5px 12px;font-weight:500" onclick="calcCov()"><i class="ti ti-refresh"></i>Recalculate</button></div>';
+  } else {
+    a.innerHTML='<div style="display:flex;align-items:center;gap:10px"><div style="display:flex;align-items:center;gap:8px"><span class="cov-pct red">'+covVal+'%</span><span class="cov-lbl">coverage</span></div><button class="calc-cov-btn" style="font-size:11px;padding:5px 12px;font-weight:500" onclick="calcCov()"><i class="ti ti-refresh"></i>Recalculate</button></div>';
+  }
 }
-function calcCov(){const b=document.getElementById('s1-calc-btn');if(b){b.innerHTML='<span class="calc-spinner"></span>Calculating…';b.disabled=true}setTimeout(()=>{covVal=Math.min(100,Math.round(Object.keys(s1S).length/5*100));covCalc=true;renderCov();updateS1()},650)}
+
+function calcCov(){
+  const b=document.getElementById('s1-calc-btn');
+  const rb=document.querySelector('#s1-cov-area button');
+  if(rb){rb.innerHTML='<span class="calc-spinner"></span>…';rb.disabled=true;}
+  setTimeout(()=>{covVal=Math.min(100,Math.round(Object.keys(s1S).length/5*100));covCalc=true;renderCov();updateS1();},650);
+}
+
 function updateS1(){
-  const n=Object.keys(s1S).length;const btn=document.getElementById('s1-genbtn');
-  renderCov();if(btn)btn.disabled=n<MIN;
+  const n=Object.keys(s1S).length;
+  const btn=document.getElementById('s1-genbtn');
+  // Show coverage area whenever there are slots; reset calculated state on change
+  renderCov();
+  if(btn)btn.disabled=n<MIN;
   if(n>=2&&!sugDismissed&&!sugShown)showSug();
   if(n<2&&sugShown)hideSug();
 }
+
 function showSug(){if(sugDismissed)return;const h=document.getElementById('suggest-banner-host');if(!h)return;h.innerHTML='<div class="suggest-banner"><i class="ti ti-bulb"></i><div style="flex:1"><div class="sb-title">Try the darker green slots</div><div class="sb-desc">They share a compatible trainer with your first selection.</div><div class="sb-actions"><button class="sb-apply" onclick="applySug()">Apply suggestion</button><button class="sb-dismiss" onclick="dismissSug()">Dismiss</button></div></div></div>';sugShown=true}
 function hideSug(){const h=document.getElementById('suggest-banner-host');if(h)h.innerHTML='';sugShown=false}
 function dismissSug(){sugDismissed=true;hideSug()}
@@ -643,7 +722,7 @@ function applySug(){
   const wrap=document.getElementById('s1-grid-wrap');
   if(wrap){[...wrap.querySelectorAll('.slot-pill.match-hint')].slice(0,3).forEach(p=>{const k=p.dataset.di+'-'+p.dataset.ti;s1S[k]=1;p.classList.remove('match-hint');p.classList.add('selected');p.textContent=TP(TIMES[parseInt(p.dataset.ti)]);});}
   dismissSug();recalcHints('s1-grid-wrap',s1S,null);
-  covVal=Math.min(100,Math.round(Object.keys(s1S).length/5*100));covCalc=true;updateS1();
+  covCalc=false;updateS1();
 }
 
 function openFilterAvail(){
@@ -696,7 +775,6 @@ function selectTrainer(row){
 function syncTr(){
   ['s3-trainer-name','s4-trainer-name'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=sTr});
   ['s3-trainer-avatar','s4-trainer-avatar'].forEach(id=>{const el=document.getElementById(id);if(el)el.src=sTrAv});
-  const ti=document.getElementById('s4-trainer-inline');if(ti)ti.textContent=sTr.split(' ')[0];
   const tr4=document.getElementById('s4-c1-trainer');if(tr4)tr4.textContent=sTr;
 }
 function openBioForCurrent(){openBio({stopPropagation:()=>{}},sTrK)}
@@ -719,7 +797,7 @@ function confirmClass1Go(){if(c1){const tx=c1.day+' '+c1.time;['s4-class1','s4-c
 function editClass1(){goScreen('s3',document.querySelectorAll('.sb-item')[8])}
 function toggleDayFilter(c){const d=c.dataset.day;df[d]=!df[d];c.classList.toggle('on');c.querySelector('.x').textContent=df[d]?'×':'+';renderC2()}
 function resetDayFilter(){Object.keys(df).forEach(k=>{df[k]=true});document.querySelectorAll('#s4 .day-chip').forEach(c=>{c.classList.add('on');c.querySelector('.x').textContent='×'});renderC2()}
-function renderC2(){const g=document.getElementById('s4-sched-grid');const e=document.getElementById('s4-empty');const n=document.getElementById('s4-shown-count');if(!g)return;const v=C2O.filter(o=>df[o.dayKey]);if(!v.length){g.style.display='none';if(e)e.style.display='';return}g.style.display='';if(e)e.style.display='none';g.innerHTML=v.map((o,i)=>'<div class="sched-card" onclick="selC2(this,'+i+')"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">'+o.day+'</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">'+o.time+'</div></div></div><div class="sc-cov-lbl">Coverage</div><div class="sc-cov-num">'+o.cov+'%</div><div class="sc-radio"><div class="rdo"></div>Select</div></div>').join('')}
+function renderC2(){const g=document.getElementById('s4-sched-grid');const e=document.getElementById('s4-empty');if(!g)return;const v=C2O.filter(o=>df[o.dayKey]);if(!v.length){g.style.display='none';if(e)e.style.display='';return}g.style.display='';if(e)e.style.display='none';g.innerHTML=v.map((o,i)=>'<div class="sched-card" onclick="selC2(this,'+i+')"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">'+o.day+'</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">'+o.time+'</div></div></div><div class="sc-cov-lbl">Coverage</div><div class="sc-cov-num">'+o.cov+'%</div><div class="sc-radio"><div class="rdo"></div>Select</div></div>').join('')}
 function selC2(c){document.querySelectorAll('#s4 .sched-card').forEach(x=>x.classList.remove('selected'));c.classList.add('selected');const b=document.getElementById('s4-next');if(b)b.disabled=false}
 
 function openConfirmSched(){document.getElementById('confirm-sched-overlay').classList.add('show')}
@@ -731,7 +809,6 @@ function showToast(t,s){const c=document.getElementById('toast-container');if(!c
 
 document.addEventListener('DOMContentLoaded',()=>{
   fillPC();buildS1();
-  // e1 grid: use learner unavail
   buildPillGrid('e1-grid-wrap',{},null,null);
   renderC2();renderT1();renderS2();
 });
