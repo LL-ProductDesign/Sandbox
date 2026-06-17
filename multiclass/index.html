@@ -54,7 +54,7 @@
 .slot.selected::after{content:attr(data-time);font-size:9px;color:var(--ll-blue-dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 2px;font-weight:500}
 .slot.na{background:var(--ll-na-fill);cursor:default}
 .cov-strip{display:flex;align-items:center;justify-content:space-between;margin-top:12px;gap:12px;flex-wrap:wrap;min-height:42px}
-.cov-block{display:flex;align-items:center;gap:8px}.cov-pct{font-size:18px;font-weight:600;line-height:1}
+.cov-pct{font-size:18px;font-weight:600;line-height:1}
 .cov-pct.green{color:var(--ll-green-text)}.cov-pct.red{color:var(--ll-red-text)}
 .cov-lbl{font-size:11px;color:var(--ll-text-muted)}
 .cov-blocked{display:flex;align-items:center;gap:7px;padding:7px 11px;background:var(--ll-red-bg);border:1px solid #EDABAB;border-radius:6px;font-size:11px;color:var(--ll-red-text);font-weight:500}
@@ -241,9 +241,7 @@
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-<symbol id="icon-bio" viewBox="0 0 16 16">
-  <path d="M13.5 3C13.5 2.75 13.25 2.5 13 2.5H3C2.71875 2.5 2.5 2.75 2.5 3V13C2.5 13.2813 2.71875 13.5 3 13.5H13C13.25 13.5 13.5 13.2813 13.5 13V3ZM13 1C14.0938 1 15 1.90625 15 3V13C15 14.125 14.0938 15 13 15H3C1.875 15 1 14.125 1 13V3C1 1.90625 1.875 1 3 1H13ZM9 5C9 5.4375 8.65625 5.75 8.25 5.75H4.75C4.3125 5.75 4 5.4375 4 5C4 4.59375 4.3125 4.25 4.75 4.25H8.25C8.65625 4.25 9 4.59375 9 5ZM11.25 7.25C11.6563 7.25 12 7.59375 12 8C12 8.4375 11.6563 8.75 11.25 8.75H4.75C4.3125 8.75 4 8.4375 4 8C4 7.59375 4.3125 7.25 4.75 7.25H11.25ZM7 11C7 11.4375 6.65625 11.75 6.25 11.75H4.75C4.3125 11.75 4 11.4375 4 11C4 10.5938 4.3125 10.25 4.75 10.25H6.25C6.65625 10.25 7 10.5938 7 11Z" fill="#0276B1"/>
-</symbol>
+<symbol id="icon-bio" viewBox="0 0 16 16"><path d="M13.5 3C13.5 2.75 13.25 2.5 13 2.5H3C2.71875 2.5 2.5 2.75 2.5 3V13C2.5 13.2813 2.71875 13.5 3 13.5H13C13.25 13.5 13.5 13.2813 13.5 13V3ZM13 1C14.0938 1 15 1.90625 15 3V13C15 14.125 14.0938 15 13 15H3C1.875 15 1 14.125 1 13V3C1 1.90625 1.875 1 3 1H13ZM9 5C9 5.4375 8.65625 5.75 8.25 5.75H4.75C4.3125 5.75 4 5.4375 4 5C4 4.59375 4.3125 4.25 4.75 4.25H8.25C8.65625 4.25 9 4.59375 9 5ZM11.25 7.25C11.6563 7.25 12 7.59375 12 8C12 8.4375 11.6563 8.75 11.25 8.75H4.75C4.3125 8.75 4 8.4375 4 8C4 7.59375 4.3125 7.25 4.75 7.25H11.25ZM7 11C7 11.4375 6.65625 11.75 6.25 11.75H4.75C4.3125 11.75 4 11.4375 4 11C4 10.5938 4.3125 10.25 4.75 10.25H6.25C6.65625 10.25 7 10.5938 7 11Z" fill="#0276B1"/></symbol>
 <symbol id="ill-trainer" viewBox="0 0 120 100"><circle cx="60" cy="42" r="22" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/><circle cx="60" cy="36" r="9" fill="#185FA5"/><path d="M42 62 Q60 50 78 62 L78 80 L42 80 Z" fill="#185FA5"/><circle cx="88" cy="22" r="6" fill="#F5B400" opacity="0.7"/></symbol>
 <symbol id="ill-availability" viewBox="0 0 120 100"><rect x="20" y="22" width="80" height="60" rx="4" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/><rect x="20" y="22" width="80" height="14" rx="4" fill="#185FA5"/><rect x="46" y="42" width="14" height="10" rx="2" fill="#0F6E56"/><rect x="64" y="56" width="14" height="10" rx="2" fill="#0F6E56"/></symbol>
 </defs></svg>
@@ -251,7 +249,7 @@
 <div class="app">
 <div class="sidebar">
 <div class="sb-brand"><span class="sb-brand-logo">ACME</span></div>
-<div class="sb-sub">UX-536 · v24</div>
+<div class="sb-sub">UX-536 · v26b</div>
 <div class="sb-section">Onboarding</div>
 <div class="sb-item active" onclick="goScreen('p0',this)"><span class="num">1·</span>Personal Data</div>
 <div class="sb-item" onclick="goScreen('p0',this);openChoice()"><span class="num">★</span>Setup choice modal</div>
@@ -279,13 +277,7 @@
 <div class="screen active" id="p0">
 <div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Let's get your learning program set up for success</p></div>
 <div class="steps"><div class="step active">1. Personal Data</div><div class="step-sep"></div><div class="step">2</div><div class="step-sep"></div><div class="step">3</div></div></div>
-<div class="body-row">
-<div class="prog-card"><h4>Your Program Details</h4>
-<div class="pf"><div class="pf-label">Program</div><div class="pf-value">English</div></div>
-<div class="pf"><div class="pf-label">Assigned Course</div><div class="pf-value">B1 - Intermediate 1</div></div>
-<div class="pf-row"><div class="pf"><div class="pf-label">Active From</div><div class="pf-value">01 Sep 2025</div></div><div class="pf"><div class="pf-label">Active To</div><div class="pf-value">01 Jun 2026</div></div></div>
-<div class="pf-row"><div class="pf"><div class="pf-label">Total Classes</div><div class="pf-value">8</div></div><div class="pf"><div class="pf-label">Duration</div><div class="pf-value">30 min</div></div></div>
-<div class="pf"><div class="pf-label">Frequency</div><div class="pf-value">Every 1 week</div></div></div>
+<div class="body-row"><div class="prog-card" id="pc-p0"></div>
 <div class="content-card">
 <div class="cc-title">Personal Data</div><div class="cc-desc">Please review and confirm your details to get started</div>
 <div class="form-row"><div class="form-field"><label class="form-label">First Name<span class="req">*</span></label><input class="form-input" type="text" value="John"/></div><div class="form-field"><label class="form-label">Last Name<span class="req">*</span></label><input class="form-input" type="text" value="Doe"/></div></div>
@@ -298,15 +290,10 @@
 <div class="screen" id="s1">
 <div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Let's get your learning program set up for success</p></div>
 <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">2. Availability</div><div class="step-sep"></div><div class="step">3</div></div></div>
-<div class="body-row">
-<div class="prog-card"><h4>Your Program Details</h4>
-<div class="pf"><div class="pf-label">Program</div><div class="pf-value">English</div></div>
-<div class="pf-row"><div class="pf"><div class="pf-label">Total Classes</div><div class="pf-value">16</div></div><div class="pf"><div class="pf-label">Duration</div><div class="pf-value">30 min</div></div></div>
-<div class="pf"><div class="pf-label">Frequency</div><div class="pf-value">2 × week</div></div>
-<div class="pf"><div class="pf-label">Coverage required</div><div class="pf-value" style="color:var(--ll-blue);font-weight:600">≥ 80%</div></div></div>
+<div class="body-row"><div class="prog-card" id="pc-s1"></div>
 <div class="content-card">
 <div class="cc-title">Specify Availability</div>
-<div class="cc-desc">Select your available slots, then calculate coverage. You need ≥ 80% to proceed to schedule options.</div>
+<div class="cc-desc">Select your available slots. You can also calculate coverage to see how well your selection matches trainer availability.</div>
 <div class="cb-banner info"><i class="ti ti-info-circle"></i><div><strong>All weekly classes will be with the same trainer.</strong> We'll match you with a trainer whose availability covers all the slots you select.</div></div>
 <div id="suggest-banner-host"></div>
 <div class="gs-top"><div class="cb-row"><div class="cb"></div>Select all available times</div><div class="legend"><div class="lg"><div class="lg-box lg-na"></div>Not available</div><div class="lg"><div class="lg-box lg-av"></div>Available</div><div class="lg"><div class="lg-box lg-mh"></div>Smart match</div><div class="lg"><div class="lg-box lg-sl"></div>Selected</div></div></div>
@@ -318,12 +305,7 @@
 <div class="screen" id="s2">
 <div class="welcome-row"><div><h1>Choose your trainer</h1><p>Pick the trainer for all of your weekly classes</p></div>
 <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">3. Schedule</div></div></div>
-<div class="body-row">
-<div class="prog-card"><h4>Your selected slots</h4>
-<div class="pf"><div class="pf-label">Slot 1</div><div class="pf-value">Mon 10:00</div></div>
-<div class="pf"><div class="pf-label">Slot 2</div><div class="pf-value">Thu 10:00</div></div>
-<div class="pf"><div class="pf-label">Slot 3</div><div class="pf-value">Fri 09:30</div></div>
-<div class="pf"><div class="pf-label">Coverage</div><div class="pf-value" style="color:var(--ll-green-text);font-weight:600">80% ✓</div></div></div>
+<div class="body-row"><div class="prog-card" id="pc-s2"></div>
 <div class="content-card">
 <div class="cc-title">Available trainers</div>
 <div class="cc-desc">Choose one trainer for all of your weekly classes. Partial matches suggest a slight slot adjustment.</div>
@@ -331,8 +313,7 @@
 <div id="s2-full-section"><div class="psec"><h5>Full matches — covers all your slots</h5>
 <div class="t-table"><div class="t-head"><div></div><div>Name</div><div style="text-align:center">Bio</div><div>Rating</div><div>Languages</div><div style="text-align:right">Coverage</div></div><div id="s2-full-rows"></div>
 </div><button class="load-more-btn">Load More</button></div></div>
-<div id="s2-partial-section"><div class="psec"><h5>Partial matches — small slot adjustment</h5>
-<div id="s2-partial-rows"></div><button class="load-more-btn">Load More</button></div></div>
+<div id="s2-partial-section"><div class="psec"><h5>Partial matches — small slot adjustment</h5><div id="s2-partial-rows"></div><button class="load-more-btn">Load More</button></div></div>
 </div></div>
 <div class="flow-nav"><button class="btn-ghost" onclick="goScreen('s1',document.querySelectorAll('.sb-item')[2])">← Back to availability</button><button class="btn-primary" id="s2-next" disabled onclick="goScreen('s3',document.querySelectorAll('.sb-item')[7])">Continue with selected trainer →</button></div>
 </div>
@@ -340,41 +321,24 @@
 <div class="screen" id="t1">
 <div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Let's get your learning program ready</p></div>
 <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">2. Trainers</div><div class="step-sep"></div><div class="step">3</div></div></div>
-<div class="body-row">
-<div class="prog-card"><h4>Your Program Details</h4>
-<div class="pf"><div class="pf-label">Program</div><div class="pf-value">English</div></div>
-<div class="pf-row"><div class="pf"><div class="pf-label">Total Classes</div><div class="pf-value">8</div></div><div class="pf"><div class="pf-label">Duration</div><div class="pf-value">30 min</div></div></div>
-<div class="pf"><div class="pf-label">Coverage required</div><div class="pf-value" style="color:var(--ll-blue);font-weight:600">≥ 80%</div></div></div>
+<div class="body-row"><div class="prog-card" id="pc-t1"></div>
 <div class="content-card">
-<div class="cc-title">Select Trainer</div>
-<div class="cc-desc">Choose a trainer to see your schedule options</div>
+<div class="cc-title">Select Trainer</div><div class="cc-desc">Choose a trainer to see your schedule options</div>
 <div class="search-toolbar">
 <div class="search-input-wrap"><i class="ti ti-search search-icon"></i><input class="search-input" type="text" placeholder="Search for a specific trainer" oninput="filterT1()"/></div>
 <label class="known-cb-wrap"><input type="checkbox" id="t1-known-only" onchange="filterT1()"/>Show only known trainers</label>
-<div class="filter-actions-right">
-<button class="btn-link" id="t1-clear-filters" onclick="clearAvailFilter()" style="display:none">Clear Filters</button>
-<button class="btn-outline" onclick="openFilterAvail()"><i class="ti ti-calendar-time"></i>Filter By Availability</button>
-</div>
-</div>
+<div class="filter-actions-right"><button class="btn-link" id="t1-clear-filters" onclick="clearAvailFilter()" style="display:none">Clear Filters</button><button class="btn-outline" onclick="openFilterAvail()"><i class="ti ti-calendar-time"></i>Filter By Availability</button></div></div>
 <div id="t1-filter-hint" style="display:none" class="filter-match-hint"><i class="ti ti-filter-check"></i><span id="t1-filter-hint-text">Showing trainers matching your availability</span></div>
 <div class="t-table"><div class="t-head" style="grid-template-columns:24px 1fr 50px 50px 1fr"><div></div><div>Name</div><div style="text-align:center">Bio</div><div>Rating</div><div>Languages</div></div><div id="t1-rows"></div></div>
 </div></div>
-<div class="flow-nav">
-<button class="btn-ghost" onclick="goScreen('p0',document.querySelectorAll('.sb-item')[0])">← Back</button>
-<div class="t1-footer-actions">
-<button class="btn-link" id="t1-check-avail" disabled onclick="openTrainerAvail()">Check Trainer's Availability</button>
-<button class="btn-primary" id="t1-next" disabled onclick="goScreen('s3',document.querySelectorAll('.sb-item')[8])">Schedule Options</button>
-</div></div>
+<div class="flow-nav"><button class="btn-ghost" onclick="goScreen('p0',document.querySelectorAll('.sb-item')[0])">← Back</button>
+<div class="t1-footer-actions"><button class="btn-link" id="t1-check-avail" disabled onclick="openTrainerAvail()">Check Trainer's Availability</button><button class="btn-primary" id="t1-next" disabled onclick="goScreen('s3',document.querySelectorAll('.sb-item')[8])">Schedule Options</button></div></div>
 </div>
 
 <div class="screen" id="s3">
 <div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Pick your first weekly class</p></div>
 <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">3. Schedule</div></div></div>
-<div class="body-row">
-<div class="prog-card"><h4>Your Program Details</h4>
-<div class="pf"><div class="pf-label">Trainer</div><div class="pf-value" id="s3-prog-trainer">Camille Dubois</div></div>
-<div class="pf"><div class="pf-label">Class 1</div><div class="pf-value" style="color:var(--ll-blue);font-weight:500">Choosing now</div></div>
-<div class="pf"><div class="pf-label">Class 2</div><div class="pf-value" style="color:var(--ll-label)">After class 1</div></div></div>
+<div class="body-row"><div class="prog-card" id="pc-s3"></div>
 <div class="content-card">
 <div class="cc-title">Select Schedule</div>
 <div class="cc-desc">Confirm your schedule, or return to adjust your availability or trainer if needed.</div>
@@ -394,11 +358,7 @@
 <div class="screen" id="s4">
 <div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Now pick your second weekly class</p></div>
 <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">3. Schedule</div></div></div>
-<div class="body-row">
-<div class="prog-card"><h4>Your Program Details</h4>
-<div class="pf"><div class="pf-label">Trainer</div><div class="pf-value" id="s4-trainer">Camille Dubois</div></div>
-<div class="pf"><div class="pf-label">Class 1</div><div class="pf-value" style="color:var(--ll-green-text);font-weight:500" id="s4-class1">Mondays 10:00-10:30</div></div>
-<div class="pf"><div class="pf-label">Class 2</div><div class="pf-value" style="color:var(--ll-blue);font-weight:500">Choosing now</div></div></div>
+<div class="body-row"><div class="prog-card" id="pc-s4"></div>
 <div class="content-card">
 <div class="cc-title">Select Schedule</div>
 <div class="cc-desc">Pick a second weekly class with <span id="s4-trainer-inline">Camille</span>.</div>
@@ -422,21 +382,25 @@
 
 <div class="screen" id="e1">
 <div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Conflict state</p></div></div>
-<div class="body-row"><div class="content-card">
+<div class="body-row"><div class="prog-card" id="pc-e1"></div>
+<div class="content-card">
 <div class="cb-banner warn"><i class="ti ti-alert-triangle"></i><div><strong>No trainer covers your current selection.</strong> <a href="#" onclick="event.preventDefault();goScreen('e2',document.querySelectorAll('.sb-item')[12])">See your options →</a></div></div>
 <div class="grid"><div class="grid-head"><div></div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div></div><div class="grid-body" id="e1-grid"></div></div>
 </div></div></div>
 
 <div class="screen" id="e2">
 <div class="welcome-row"><div><h1>Let's find a path forward</h1></div></div>
-<div class="body-row"><div class="content-card">
-<div class="empty" style="text-align:center;padding:30px 18px;background:var(--ll-bg);border-radius:8px;border:1px solid var(--ll-border)">
-<div style="font-size:30px;color:var(--ll-text-muted);margin-bottom:10px"><i class="ti ti-calendar-off"></i></div><h4 style="font-size:14px;font-weight:600;margin-bottom:5px;color:var(--ll-navy)">No trainers available for these slots</h4>
+<div class="body-row"><div class="prog-card" id="pc-e2"></div>
+<div class="content-card">
+<div style="text-align:center;padding:30px 18px;background:var(--ll-bg);border-radius:8px;border:1px solid var(--ll-border)">
+<div style="font-size:30px;color:var(--ll-text-muted);margin-bottom:10px"><i class="ti ti-calendar-off"></i></div>
+<h4 style="font-size:14px;font-weight:600;margin-bottom:5px">No trainers available for these slots</h4>
 <p style="font-size:12px;color:var(--ll-text-muted);max-width:340px;margin:0 auto 14px">Here's how to move forward:</p>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:440px;margin:auto">
-<div style="border:1px solid var(--ll-border);border-radius:6px;padding:13px;text-align:left;cursor:pointer;background:var(--ll-card)"><i class="ti ti-clock-edit" style="font-size:20px;color:var(--ll-blue);display:block;margin-bottom:5px"></i><strong style="font-size:12px;font-weight:600;color:var(--ll-navy);display:block;margin-bottom:3px">Try nearby times</strong><span style="font-size:10px;color:var(--ll-text-muted)">See slots ±1 hour from your preference</span></div>
-<div style="border:1px solid var(--ll-border);border-radius:6px;padding:13px;text-align:left;cursor:pointer;background:var(--ll-card)" onclick="goScreen('s1',document.querySelectorAll('.sb-item')[2])"><i class="ti ti-calendar-plus" style="font-size:20px;color:var(--ll-blue);display:block;margin-bottom:5px"></i><strong style="font-size:12px;font-weight:600;color:var(--ll-navy);display:block;margin-bottom:3px">Adjust availability</strong><span style="font-size:10px;color:var(--ll-text-muted)">Open up more days or times</span></div>
-</div></div></div></div></div>
+<div style="border:1px solid var(--ll-border);border-radius:6px;padding:13px;text-align:left;cursor:pointer;background:var(--ll-card)"><i class="ti ti-clock-edit" style="font-size:20px;color:var(--ll-blue);display:block;margin-bottom:5px"></i><strong style="font-size:12px;display:block;margin-bottom:3px">Try nearby times</strong><span style="font-size:10px;color:var(--ll-text-muted)">See slots ±1 hour from your preference</span></div>
+<div style="border:1px solid var(--ll-border);border-radius:6px;padding:13px;text-align:left;cursor:pointer;background:var(--ll-card)" onclick="goScreen('s1',document.querySelectorAll('.sb-item')[2])"><i class="ti ti-calendar-plus" style="font-size:20px;color:var(--ll-blue);display:block;margin-bottom:5px"></i><strong style="font-size:12px;display:block;margin-bottom:3px">Adjust availability</strong><span style="font-size:10px;color:var(--ll-text-muted)">Open up more days or times</span></div>
+</div></div>
+</div></div></div>
 
 <div class="screen" id="home">
 <div class="home-top"><span class="home-top-logo">ACME</span>
@@ -446,30 +410,21 @@
 <div class="welcome-row" style="padding:22px 24px 14px"><div><h1>Welcome, Alex!</h1><p>We're excited to have you here</p></div></div>
 <div style="padding:0 24px 22px">
 <div class="home-stats">
-<div class="home-stat-card"><div class="home-stat-info"><div class="home-stat-lbl">Course progress</div><div class="home-stat-num">0%</div></div><div class="home-stat-vis"><div class="home-bars"><span style="height:14px"></span><span style="height:18px"></span><span style="height:22px"></span><span class="f" style="height:28px"></span><span class="f" style="height:24px"></span></div></div></div>
+<div class="home-stat-card"><div class="home-stat-info"><div class="home-stat-lbl">Course progress</div><div class="home-stat-num">0%</div></div><div class="home-stat-vis"><div class="home-bars"><span style="height:14px"></span><span style="height:18px"></span><span style="height:22px"></span><span class="f" style="height:28px"></span></div></div></div>
 <div class="home-stat-card"><div class="home-stat-info"><div class="home-stat-lbl">Average score</div><div class="home-stat-num">N/A</div></div><div class="home-stat-vis"><div class="home-bars"><span style="height:8px"></span><span style="height:14px"></span><span style="height:20px"></span><span style="height:26px"></span></div></div></div>
 <div class="home-stat-card"><div class="home-stat-info"><div class="home-stat-lbl">Attendance</div><div class="home-stat-num">N/A</div></div><div class="home-stat-vis"><svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#B5D4F4" stroke-width="6" stroke-dasharray="44 88"/><circle cx="20" cy="20" r="14" fill="none" stroke="#F5B400" stroke-width="6" stroke-dasharray="22 110" stroke-dashoffset="-44"/></svg></div></div>
 </div>
 <div class="body-row" style="padding:0;align-items:stretch">
-<div class="prog-card" style="width:240px"><h4>Your Program Details</h4>
-<div class="pf"><div class="pf-label">Program</div><div class="pf-value">English</div></div>
-<div class="pf"><div class="pf-label">Assigned Course</div><div class="pf-value">B1 - Intermediate 1</div></div>
-<div class="pf-row"><div class="pf"><div class="pf-label">Active From</div><div class="pf-value">01 Sep 2025</div></div><div class="pf"><div class="pf-label">Active To</div><div class="pf-value">01 Jun 2026</div></div></div>
-<div class="pf-row"><div class="pf"><div class="pf-label">Total Classes</div><div class="pf-value">8</div></div><div class="pf"><div class="pf-label">Duration</div><div class="pf-value">30 min</div></div></div>
-</div>
+<div class="prog-card" id="pc-home" style="width:240px"></div>
 <div class="content-card home-illust-area">
 <svg width="200" height="150" viewBox="0 0 200 150" style="margin-bottom:8px">
 <circle cx="120" cy="32" r="6" fill="#7BA8D4"/><circle cx="150" cy="50" r="5" fill="#A8C5DD"/><circle cx="162" cy="26" r="7" fill="#D0DDEE"/>
-<ellipse cx="68" cy="140" rx="22" ry="3" fill="#0A2540" opacity="0.08"/>
-<ellipse cx="138" cy="140" rx="22" ry="3" fill="#0A2540" opacity="0.08"/>
-<circle cx="68" cy="64" r="9" fill="#E8B89C"/>
-<rect x="60" y="73" width="17" height="42" rx="3" fill="#2C5282"/>
-<rect x="60" y="113" width="17" height="28" rx="2" fill="#1A365D"/>
+<ellipse cx="68" cy="140" rx="22" ry="3" fill="#0A2540" opacity="0.08"/><ellipse cx="138" cy="140" rx="22" ry="3" fill="#0A2540" opacity="0.08"/>
+<circle cx="68" cy="64" r="9" fill="#E8B89C"/><rect x="60" y="73" width="17" height="42" rx="3" fill="#2C5282"/><rect x="60" y="113" width="17" height="28" rx="2" fill="#1A365D"/>
 <path d="M77 82 L90 95 L88 100" stroke="#E8B89C" stroke-width="2.5" fill="none" stroke-linecap="round"/>
 <path d="M59 82 L48 90 L46 86" stroke="#E8B89C" stroke-width="2.5" fill="none" stroke-linecap="round"/>
 <circle cx="138" cy="56" r="10" fill="#8B5A2B"/>
-<rect x="128" y="68" width="21" height="36" rx="3" fill="#fff" stroke="#0A2540" stroke-width="1"/>
-<rect x="128" y="102" width="21" height="38" rx="2" fill="#0A2540"/>
+<rect x="128" y="68" width="21" height="36" rx="3" fill="#fff" stroke="#0A2540" stroke-width="1"/><rect x="128" y="102" width="21" height="38" rx="2" fill="#0A2540"/>
 <path d="M128 70 L114 86 L112 82" stroke="#8B5A2B" stroke-width="2.5" fill="none" stroke-linecap="round"/>
 <path d="M149 70 L166 54 L170 58" stroke="#8B5A2B" stroke-width="2.5" fill="none" stroke-linecap="round"/>
 </svg>
@@ -525,7 +480,7 @@
 <div class="filter-modal-header"><div class="filter-modal-title-row"><div class="filter-modal-title">Your Schedule Is Confirmed</div><button class="modal-close" onclick="closeConfirmSched()"><i class="ti ti-x"></i></button></div></div>
 <div class="confirm-body">
 <p>You will receive email confirmations shortly.</p>
-<p>You can synchronize your ACME calendar with your default personal electronic calendar (Outlook, Google Calendar, Yahoo, etc.), by connecting or copying the URL below and following the instructions of your calendar provider.</p>
+<p>You can synchronize your ACME calendar with your default personal electronic calendar by copying the URL below and following your calendar provider's instructions.</p>
 <button class="guidelines-toggle">See guidelines <i class="ti ti-chevron-down"></i></button>
 <div class="url-box"><span class="lbl">URL:</span> webcal://app.acme.com/session/ICalFeed?StudentId=b5c23318-ef75-49ba-a82f-2f4375341a54</div>
 <div class="warn-box"><i class="ti ti-alert-triangle"></i><div>You can only join your class from the ACME App, not your synced calendar.</div></div>
@@ -546,6 +501,17 @@
 </div>
 
 <script>
+const PC=`<h4>Your Program Details</h4>
+<div class="pf"><div class="pf-label">Program</div><div class="pf-value">English</div></div>
+<div class="pf"><div class="pf-label">Assigned Course</div><div class="pf-value">B1 - Intermediate 1</div></div>
+<div class="pf-row"><div class="pf"><div class="pf-label">Active From</div><div class="pf-value">01 Sep 2025</div></div><div class="pf"><div class="pf-label">Active To</div><div class="pf-value">01 Jun 2026</div></div></div>
+<div class="pf-row"><div class="pf"><div class="pf-label">Total Classes <i class="ti ti-info-circle" style="font-size:10px;vertical-align:-1px;color:var(--ll-text-muted)"></i></div><div class="pf-value">2</div></div><div class="pf"><div class="pf-label">Class Duration</div><div class="pf-value">30 minutes</div></div></div>
+<div class="pf"><div class="pf-label">Class Frequency</div><div class="pf-value">Every 1 week</div></div>`;
+function fillPC(){
+  ['pc-p0','pc-s1','pc-s2','pc-t1','pc-s3','pc-s4','pc-e1','pc-e2'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=PC});
+  const h=document.getElementById('pc-home');if(h)h.innerHTML=PC+`<div style="font-size:11px;color:var(--ll-navy-2);line-height:1.5;margin-top:12px;padding-top:12px;border-top:1px solid var(--ll-border)">Learn more via this <a href="#" style="color:var(--ll-blue)">tutorial</a> and <a href="#" style="color:var(--ll-blue)">orientation video</a>.</div>`;
+}
+
 const GATE=80;
 const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 const TIMES=['08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30'];
@@ -563,7 +529,7 @@ camille:{name:'Camille Dubois',init:'CD',avatar:'https://i.pravatar.cc/160?img=4
 elias:{name:'Elias Sorenson',init:'ES',avatar:'https://i.pravatar.cc/160?img=8',title:'Linguistics MA · 6 years',rating:'4.8',langs:['EN','ES','IT'],tags:['Conversation','Pronunciation'],experience:6,classes:980,students:267,bio:'Norwegian-Italian trainer based in Madrid.',known:true,unavail:{'0-0':1,'0-1':1,'0-2':1,'1-0':1,'2-3':1,'3-4':1,'4-5':1,'5-6':1,'5-7':1,'6-0':1,'6-1':1,'6-10':1,'6-11':1}},
 sofia:{name:'Sofía Rodríguez',init:'SR',avatar:'https://i.pravatar.cc/160?img=47',title:'CELTA Certified · 5 years',rating:'4.7',langs:['EN','ES'],tags:['IELTS prep','Academic writing'],experience:5,classes:720,students:198,bio:'Spanish-British trainer focused on academic contexts.',known:false,unavail:{'2-0':1,'2-1':1,'3-0':1,'3-1':1,'4-0':1,'4-1':1,'5-0':1,'5-1':1,'5-2':1,'6-0':1,'6-1':1,'6-2':1}},
 helena:{name:'Helena Park',init:'HP',avatar:'https://i.pravatar.cc/160?img=49',title:'TESOL Certified · 9 years',rating:'4.9',langs:['EN','KO'],tags:['Academic English','Conversation'],experience:9,classes:1410,students:355,bio:'Korean-American trainer based in Seoul.',known:false,unavail:{'0-8':1,'0-9':1,'0-10':1,'0-11':1,'1-8':1,'1-9':1,'1-10':1,'1-11':1,'2-8':1,'2-9':1,'2-10':1,'2-11':1,'3-8':1,'3-9':1,'3-10':1,'3-11':1,'4-8':1,'4-9':1,'4-10':1,'4-11':1,'5-8':1,'5-9':1,'5-10':1,'5-11':1,'6-8':1,'6-9':1,'6-10':1,'6-11':1}},
-marcus:{name:'Marcus Silva',init:'MS',avatar:'https://i.pravatar.cc/160?img=33',title:'Cambridge CELTA · 4 years',rating:'4.8',langs:['EN','ES'],tags:['Business English'],experience:4,classes:610,students:174,bio:'Brazilian-American business communication trainer.',known:false,unavail:{'0-0':1,'1-0':1,'2-0':1,'3-0':1,'4-0':1,'5-3':1,'5-4':1,'5-5':1,'5-6':1,'5-7':1,'5-8':1,'5-9':1,'5-10':1,'5-11':1,'6-0':1,'6-1':1,'6-2':1,'6-3':1,'6-4':1,'6-5':1,'6-6':1,'6-7':1,'6-8':1,'6-9':1,'6-10':1,'6-11':1}},
+marcus:{name:'Marcus Silva',init:'MS',avatar:'https://i.pravatar.cc/160?img=33',title:'Cambridge CELTA · 4 years',rating:'4.8',langs:['EN','ES'],tags:['Business English'],experience:4,classes:610,students:174,bio:'Brazilian-American trainer specialising in business communication.',known:false,unavail:{'0-0':1,'1-0':1,'2-0':1,'3-0':1,'4-0':1,'5-3':1,'5-4':1,'5-5':1,'5-6':1,'5-7':1,'5-8':1,'5-9':1,'5-10':1,'5-11':1,'6-0':1,'6-1':1,'6-2':1,'6-3':1,'6-4':1,'6-5':1,'6-6':1,'6-7':1,'6-8':1,'6-9':1,'6-10':1,'6-11':1}},
 arthur:{name:'Arthur Reyes',init:'AR',avatar:'https://i.pravatar.cc/160?img=68',title:'DELTA Trained · 7 years',rating:'4.8',langs:['EN','FR'],tags:['Conversation','Business English'],experience:7,classes:1080,students:283,bio:'French-Mexican trainer based in Paris.',known:true,unavail:{'5-0':1,'5-1':1,'5-2':1,'5-3':1,'6-0':1,'6-1':1,'6-2':1,'6-3':1,'6-4':1,'6-5':1,'6-6':1,'6-7':1,'6-8':1,'6-9':1,'6-10':1,'6-11':1}},
 yuki:{name:'Yuki Tanaka',init:'YT',avatar:'https://i.pravatar.cc/160?img=16',title:'CELTA · 5 years',rating:'4.7',langs:['EN','JA'],tags:['Conversation'],experience:5,classes:780,students:201,bio:'Japanese-Canadian trainer based in Tokyo.',known:false,unavail:{'0-0':1,'0-1':1,'0-2':1,'0-3':1,'1-0':1,'1-1':1,'1-2':1,'1-3':1,'2-0':1,'2-1':1,'2-2':1,'2-3':1,'3-0':1,'3-1':1,'3-2':1,'3-3':1,'4-0':1,'4-1':1,'4-2':1,'4-3':1}},
 lukas:{name:'Lukas Hoffmann',init:'LH',avatar:'https://i.pravatar.cc/160?img=51',title:'Cambridge CELTA · 6 years',rating:'4.6',langs:['EN','DE'],tags:['Business English','Tech'],experience:6,classes:890,students:228,bio:'German trainer based in Berlin.',known:false,unavail:{'0-10':1,'0-11':1,'1-10':1,'1-11':1,'2-10':1,'2-11':1,'3-10':1,'3-11':1,'4-10':1,'4-11':1,'5-0':1,'5-1':1,'5-2':1,'5-3':1,'5-4':1,'6-0':1,'6-1':1,'6-2':1,'6-3':1,'6-4':1,'6-5':1,'6-6':1,'6-7':1,'6-8':1,'6-9':1,'6-10':1,'6-11':1}}
@@ -579,16 +545,16 @@ const S2_PARTIAL=[
 ];
 const C2O=[{day:'Thursdays',dayKey:'Thu',time:'10:00-10:30',cov:82},{day:'Tuesdays',dayKey:'Tue',time:'14:00-14:30',cov:80},{day:'Wednesdays',dayKey:'Wed',time:'10:00-10:30',cov:84},{day:'Fridays',dayKey:'Fri',time:'09:30-10:00',cov:81},{day:'Tuesdays',dayKey:'Tue',time:'09:00-09:30',cov:80}];
 
-function bioIconBtn(k){return '<button class="bio-btn" onclick="openBio(event,\''+k+'\')" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button>'}
+function bioBtn(k){return '<button class="bio-btn" onclick="openBio(event,\''+k+'\')" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button>'}
 
 function renderS2(){
   const ko=(document.getElementById('s2-known-only')||{}).checked||false;
   const fList=S2_FULL.filter(k=>!ko||TB[k].known);
-  const fSec=document.getElementById('s2-full-section');const fRows=document.getElementById('s2-full-rows');
-  if(fRows){fSec.style.display=fList.length?'':'none';if(fList.length)fRows.innerHTML=fList.map(k=>{const b=TB[k];const kn=b.known?'<span class="t-known">Known</span>':'';return '<div class="t-row" onclick="selectTrainer(this)" data-tname="'+b.name+'" data-tkey="'+k+'"><div class="t-radio"></div><div class="t-name"><img class="t-avatar" src="'+b.avatar.replace('160','80')+'" alt=""/>'+b.name+' '+kn+'</div><div class="t-bio-cell">'+bioIconBtn(k)+'</div><div class="t-rating"><i class="ti ti-star-filled"></i>'+b.rating+'</div><div class="t-langs">'+b.langs.map(l=>'<span class="t-lang-pill">'+l+'</span>').join('')+'</div><div class="t-cov green">100%</div></div>'}).join('')}
+  const fSec=document.getElementById('s2-full-section');const fR=document.getElementById('s2-full-rows');
+  if(fR){fSec.style.display=fList.length?'':'none';if(fList.length)fR.innerHTML=fList.map(k=>{const b=TB[k];const kn=b.known?'<span class="t-known">Known</span>':'';return '<div class="t-row" onclick="selectTrainer(this)" data-tname="'+b.name+'" data-tkey="'+k+'"><div class="t-radio"></div><div class="t-name"><img class="t-avatar" src="'+b.avatar.replace('160','80')+'" alt=""/>'+b.name+' '+kn+'</div><div class="t-bio-cell">'+bioBtn(k)+'</div><div class="t-rating"><i class="ti ti-star-filled"></i>'+b.rating+'</div><div class="t-langs">'+b.langs.map(l=>'<span class="t-lang-pill">'+l+'</span>').join('')+'</div><div class="t-cov green">100%</div></div>'}).join('')}
   const pList=S2_PARTIAL.filter(({key})=>!ko||TB[key].known);
-  const pSec=document.getElementById('s2-partial-section');const pRows=document.getElementById('s2-partial-rows');
-  if(pRows){pSec.style.display=pList.length?'':'none';if(pList.length)pRows.innerHTML=pList.map(({key:k,cov,hint})=>{const b=TB[k];const kn=b.known?'<span class="t-known">Known</span>':'';return '<div class="match-row partial" onclick="selectTrainer(this)" data-tname="'+b.name+'" data-tkey="'+k+'"><div class="t-radio"></div><div class="match-info"><img class="t-avatar" src="'+b.avatar.replace('160','80')+'" alt=""/><div class="match-info-text"><div class="t-name" style="gap:6px">'+b.name+' '+kn+' '+bioIconBtn(k)+'</div><div class="t-langs" style="margin-top:3px">'+b.langs.map(l=>'<span class="t-lang-pill">'+l+'</span>').join('')+'</div></div></div><div class="t-cov yellow">'+cov+'</div><div class="match-alt">'+hint+'</div></div>'}).join('')}
+  const pSec=document.getElementById('s2-partial-section');const pR=document.getElementById('s2-partial-rows');
+  if(pR){pSec.style.display=pList.length?'':'none';if(pList.length)pR.innerHTML=pList.map(({key:k,cov,hint})=>{const b=TB[k];const kn=b.known?'<span class="t-known">Known</span>':'';return '<div class="match-row partial" onclick="selectTrainer(this)" data-tname="'+b.name+'" data-tkey="'+k+'"><div class="t-radio"></div><div class="match-info"><img class="t-avatar" src="'+b.avatar.replace('160','80')+'" alt=""/><div class="match-info-text"><div class="t-name" style="gap:6px">'+b.name+' '+kn+' '+bioBtn(k)+'</div><div class="t-langs" style="margin-top:3px">'+b.langs.map(l=>'<span class="t-lang-pill">'+l+'</span>').join('')+'</div></div></div><div class="t-cov yellow">'+cov+'</div><div class="match-alt">'+hint+'</div></div>'}).join('')}
 }
 
 function buildGrid(id,cb,sel,ua){
@@ -600,8 +566,7 @@ function buildGrid(id,cb,sel,ua){
     if(ti%2===0)lbl.textContent=t;row.appendChild(lbl);
     DAYS.forEach((d,di)=>{
       const sl=document.createElement('div');const na=ua[di+'-'+ti];
-      sl.className='slot '+(na?'na':'avail');
-      sl.dataset.di=di;sl.dataset.ti=ti;
+      sl.className='slot '+(na?'na':'avail');sl.dataset.di=di;sl.dataset.ti=ti;
       if(sel&&sel[di+'-'+ti]&&!na){sl.classList.replace('avail','selected');sl.dataset.time=TP(t)}
       if(!na)sl.onclick=()=>{if(cb)cb(sl,di,ti,d,t)};
       row.appendChild(sl);
@@ -610,15 +575,13 @@ function buildGrid(id,cb,sel,ua){
   });
 }
 
-function hints(gridId,sel){
-  const g=document.getElementById(gridId);if(!g)return;
+function hints(gid,sel){
+  const g=document.getElementById(gid);if(!g)return;
   g.querySelectorAll('.match-hint').forEach(s=>s.classList.remove('match-hint'));
   const sk=Object.keys(sel);if(!sk.length)return;
-  const compat=Object.keys(TB).filter(k=>sk.every(x=>!TB[k].unavail[x]));
-  if(!compat.length)return;
+  const compat=Object.keys(TB).filter(k=>sk.every(x=>!TB[k].unavail[x]));if(!compat.length)return;
   g.querySelectorAll('.slot.avail').forEach(s=>{
-    const k=s.dataset.di+'-'+s.dataset.ti;
-    if(sel[k])return;
+    const k=s.dataset.di+'-'+s.dataset.ti;if(sel[k])return;
     if(compat.some(tk=>!TB[tk].unavail[k]))s.classList.add('match-hint');
   });
 }
@@ -631,7 +594,6 @@ function goScreen(id,el){
   if(id==='s4')renderC2();
   if(id==='s3'||id==='s4')syncTr();
 }
-
 function openChoice(){document.getElementById('choice-overlay').classList.add('show')}
 function closeChoice(){document.getElementById('choice-overlay').classList.remove('show')}
 function closeChoiceOnBg(e){if(e.target.id==='choice-overlay')closeChoice()}
@@ -653,98 +615,53 @@ function renderCov(){
   if(!n){a.style.display='none';a.innerHTML='';return}
   a.style.display='';
   if(!covCalc){
+    // Calculate Coverage button always visible once slots are selected
     a.innerHTML='<button class="calc-cov-btn" id="s1-calc-btn" onclick="calcCov()"><i class="ti ti-percentage"></i>Calculate Coverage</button>';
   } else if(covVal>=GATE){
-    a.innerHTML='<div class="cov-block"><span class="cov-pct green">'+covVal+'%</span><span class="cov-lbl">coverage — threshold met ✓</span></div>';
+    a.innerHTML='<div style="display:flex;align-items:center;gap:8px"><span class="cov-pct green">'+covVal+'%</span><span class="cov-lbl">coverage ✓</span></div>';
   } else {
-    // FAIL: just show the red percentage + locked pill. No hint, no recalculate.
-    a.innerHTML='<div style="display:flex;align-items:center;gap:10px"><span class="cov-pct red">'+covVal+'%</span><div class="cov-blocked"><i class="ti ti-lock"></i>Below 80% — add more available slots to unlock</div></div>';
+    // Show red result — no lock, no blocking (button already enabled at 2 slots)
+    a.innerHTML='<div style="display:flex;align-items:center;gap:8px"><span class="cov-pct red">'+covVal+'%</span><span class="cov-lbl">coverage</span></div>';
   }
 }
 
-function calcCov(){
-  const b=document.getElementById('s1-calc-btn');
-  if(b){b.innerHTML='<span class="calc-spinner"></span>Calculating…';b.disabled=true}
-  setTimeout(()=>{
-    const n=Object.keys(s1S).length;
-    covVal=Math.min(100,Math.round(n/5*100));
-    covCalc=true;renderCov();updateS1();
-  },650);
-}
+function calcCov(){const b=document.getElementById('s1-calc-btn');if(b){b.innerHTML='<span class="calc-spinner"></span>Calculating…';b.disabled=true}setTimeout(()=>{covVal=Math.min(100,Math.round(Object.keys(s1S).length/5*100));covCalc=true;renderCov();updateS1()},650)}
 
 function updateS1(){
   const n=Object.keys(s1S).length;const btn=document.getElementById('s1-genbtn');
   renderCov();
-  if(btn){
-    if(!n||n<MIN||!covCalc||covVal<GATE)btn.disabled=true;
-    else btn.disabled=false;
-  }
+  // ── KEY CHANGE: button unlocks at 2 slots, no coverage gate ──
+  if(btn)btn.disabled=n<MIN;
   if(n>=2&&!sugDismissed&&!sugShown)showSug();
   if(n<2&&sugShown)hideSug();
 }
 
-function showSug(){
-  if(sugDismissed)return;
-  const h=document.getElementById('suggest-banner-host');if(!h)return;
-  h.innerHTML='<div class="suggest-banner"><i class="ti ti-bulb"></i><div style="flex:1"><div class="sb-title">Try adding more slots for better coverage</div><div class="sb-desc">Adding Wednesday 10:00, Thursday 09:30 and Friday 10:00 will push your coverage above 80%.</div><div class="sb-actions"><button class="sb-apply" onclick="applySug()">Apply suggestion</button><button class="sb-dismiss" onclick="dismissSug()">Dismiss</button></div></div></div>';
-  sugShown=true;
-}
+function showSug(){if(sugDismissed)return;const h=document.getElementById('suggest-banner-host');if(!h)return;h.innerHTML='<div class="suggest-banner"><i class="ti ti-bulb"></i><div style="flex:1"><div class="sb-title">Try adding more slots for better coverage</div><div class="sb-desc">Adding Wednesday 10:00, Thursday 09:30 and Friday 10:00 will push your coverage above 80%.</div><div class="sb-actions"><button class="sb-apply" onclick="applySug()">Apply suggestion</button><button class="sb-dismiss" onclick="dismissSug()">Dismiss</button></div></div></div>';sugShown=true}
 function hideSug(){const h=document.getElementById('suggest-banner-host');if(h)h.innerHTML='';sugShown=false}
 function dismissSug(){sugDismissed=true;hideSug()}
-
-// Applies enough slots to guarantee ≥80% (i.e. 5 slots = 100%)
 function applySug(){
-  // Suggested slots: Wed 10:00 (2-4), Thu 09:30 (3-3 is blocked so use 3-2=09:00), Fri 10:00 (4-4 blocked use 4-3=09:30)
-  // We add slots until we have at least 5 to guarantee ≥80%
-  const toAdd=[['2','4'],['1','3'],['0','3'],['3','2'],['4','3']];
-  toAdd.forEach(([di,ti])=>{
-    const k=di+'-'+ti;
-    if(!s1S[k]&&!UNAVAIL[k]){
-      s1S[k]=1;
-      const sl=document.querySelector('#s1-grid .slot[data-di="'+di+'"][data-ti="'+ti+'"]');
-      if(sl&&!sl.classList.contains('na')){sl.classList.replace('avail','selected');sl.dataset.time=TP(TIMES[parseInt(ti)])}
-    }
+  [['2','4'],['1','3'],['0','3'],['3','2'],['4','3']].forEach(([di,ti])=>{
+    const k=di+'-'+ti;if(!s1S[k]&&!UNAVAIL[k]){s1S[k]=1;const sl=document.querySelector('#s1-grid .slot[data-di="'+di+'"][data-ti="'+ti+'"]');if(sl&&!sl.classList.contains('na')){sl.classList.replace('avail','selected');sl.dataset.time=TP(TIMES[parseInt(ti)])}}
   });
-  dismissSug();
-  hints('s1-grid',s1S);
-  // Immediately calculate so coverage result is shown
-  covVal=Math.min(100,Math.round(Object.keys(s1S).length/5*100));
-  covCalc=true;
-  updateS1();
+  dismissSug();hints('s1-grid',s1S);covVal=Math.min(100,Math.round(Object.keys(s1S).length/5*100));covCalc=true;updateS1();
 }
 
 function openFilterAvail(){
   document.getElementById('filter-avail-overlay').classList.add('show');
-  buildGrid('t2-grid',(sl,di,ti)=>{
-    const k=di+'-'+ti;
-    if(t2S[k]){delete t2S[k];sl.classList.replace('selected','avail');delete sl.dataset.time}
-    else{t2S[k]=1;sl.classList.replace('avail','selected');sl.dataset.time=TP(TIMES[ti])}
-    t2Done=false;t2Val=0;hints('t2-grid',t2S);renderT2C();upT2();
-  },t2S);
+  buildGrid('t2-grid',(sl,di,ti)=>{const k=di+'-'+ti;if(t2S[k]){delete t2S[k];sl.classList.replace('selected','avail');delete sl.dataset.time}else{t2S[k]=1;sl.classList.replace('avail','selected');sl.dataset.time=TP(TIMES[ti])}t2Done=false;t2Val=0;hints('t2-grid',t2S);renderT2C();upT2();},t2S);
   hints('t2-grid',t2S);renderT2C();upT2();
 }
 function closeFilterAvail(){document.getElementById('filter-avail-overlay').classList.remove('show')}
 function closeFilterAvailOnBg(e){if(e.target.id==='filter-avail-overlay')closeFilterAvail()}
-function upT2(){
-  const n=Object.keys(t2S).length;
-  const c=document.getElementById('t2-count');if(c)c.textContent=n;
-  const cb=document.getElementById('t2-calc-btn');if(cb)cb.disabled=n<MIN;
-  const btn=document.getElementById('t2-confirm');if(btn)btn.disabled=!(t2Done&&t2Val>=GATE);
-}
+function upT2(){const n=Object.keys(t2S).length;const c=document.getElementById('t2-count');if(c)c.textContent=n;const cb=document.getElementById('t2-calc-btn');if(cb)cb.disabled=n<MIN;const btn=document.getElementById('t2-confirm');if(btn)btn.disabled=!(t2Done&&t2Val>=GATE);}
 function renderT2C(){
-  const s=document.getElementById('t2-cov-slot');if(!s)return;
-  const n=Object.keys(t2S).length;
-  if(!t2Done){
-    s.innerHTML='<button class="btn-outline" id="t2-calc-btn" onclick="calcT2()" '+(n<MIN?'disabled':'')+'><i class="ti ti-percentage"></i>Calculate Coverage</button>';
-  } else if(t2Val>=GATE){
-    s.innerHTML='<div class="cov-result-inline"><i class="ti ti-percentage" style="color:var(--ll-green-text)"></i><span class="pct green">'+t2Val+'%</span> coverage — threshold met ✓</div>';
-  } else {
-    // No recalculate button, no hint — just the red result + lock message
-    s.innerHTML='<div style="display:flex;align-items:center;gap:8px"><div class="cov-result-inline"><span class="pct red">'+t2Val+'%</span></div><div class="cov-blocked" style="font-size:11px"><i class="ti ti-lock"></i>Below 80% — add more slots to unlock</div></div>';
-  }
+  const s=document.getElementById('t2-cov-slot');if(!s)return;const n=Object.keys(t2S).length;
+  if(!t2Done){s.innerHTML='<button class="btn-outline" id="t2-calc-btn" onclick="calcT2()" '+(n<MIN?'disabled':'')+'><i class="ti ti-percentage"></i>Calculate Coverage</button>';}
+  else if(t2Val>=GATE){s.innerHTML='<div class="cov-result-inline"><i class="ti ti-percentage" style="color:var(--ll-green-text)"></i><span class="pct green">'+t2Val+'%</span> coverage — threshold met ✓</div>';}
+  else{s.innerHTML='<div style="display:flex;align-items:center;gap:8px"><div class="cov-result-inline"><span class="pct red">'+t2Val+'%</span></div><div class="cov-blocked" style="font-size:11px;display:flex;align-items:center;gap:7px;padding:7px 11px;background:var(--ll-red-bg);border:1px solid #EDABAB;border-radius:6px;color:var(--ll-red-text);font-weight:500"><i class="ti ti-lock" style="font-size:14px"></i>Below 80% — add more slots to unlock</div></div>';}
   upT2();
 }
-function calcT2(){const b=document.getElementById('t2-calc-btn');if(!b||b.disabled)return;b.innerHTML='<span class="calc-spinner"></span>…';b.disabled=true;setTimeout(()=>{const n=Object.keys(t2S).length;t2Val=Math.min(100,Math.round(n/5*100));t2Done=true;renderT2C()},650)}
+function calcT2(){const b=document.getElementById('t2-calc-btn');if(!b||b.disabled)return;b.innerHTML='<span class="calc-spinner"></span>…';b.disabled=true;setTimeout(()=>{t2Val=Math.min(100,Math.round(Object.keys(t2S).length/5*100));t2Done=true;renderT2C()},650)}
 function confirmFilterAvail(){closeFilterAvail();avFilt=Object.keys(t2S).length>=MIN;renderT1();updT1CF()}
 function clearAvailFilter(){t2S={};t2Done=false;t2Val=0;avFilt=false;renderT1();updT1CF()}
 function updT1CF(){const b=document.getElementById('t1-clear-filters');if(!b)return;b.style.display=avFilt?'':'none';const h=document.getElementById('t1-filter-hint');if(h)h.style.display=avFilt?'':'none';if(avFilt){const t=document.getElementById('t1-filter-hint-text');if(t)t.textContent='Showing '+MF.length+' of '+T1O.length+' trainers matching your availability'}}
@@ -753,23 +670,12 @@ function openTrainerAvail(){
   const b=TB[sTrK];if(!b)return;
   document.getElementById('t3-title').textContent=b.name+'\u2019s Availability';
   document.getElementById('trainer-avail-overlay').classList.add('show');
-  buildGrid('t3-grid',(sl,di,ti)=>{
-    const k=di+'-'+ti;
-    if(t3S[k]){delete t3S[k];sl.classList.replace('selected','avail');delete sl.dataset.time}
-    else{t3S[k]=1;sl.classList.replace('avail','selected');sl.dataset.time=TP(TIMES[ti])}
-    t3Done=false;t3Val=0;renderT3C();upT3();
-  },t3S,b.unavail);
-  renderT3C();upT3();
+  buildGrid('t3-grid',(sl,di,ti)=>{const k=di+'-'+ti;if(t3S[k]){delete t3S[k];sl.classList.replace('selected','avail');delete sl.dataset.time}else{t3S[k]=1;sl.classList.replace('avail','selected');sl.dataset.time=TP(TIMES[ti])}t3Done=false;t3Val=0;renderT3C();upT3();},t3S,b.unavail);renderT3C();upT3();
 }
 function closeTrainerAvail(){document.getElementById('trainer-avail-overlay').classList.remove('show')}
 function closeTrainerAvailOnBg(e){if(e.target.id==='trainer-avail-overlay')closeTrainerAvail()}
 function upT3(){const n=Object.keys(t3S).length;const b=document.getElementById('t3-confirm');if(b)b.disabled=n<MIN;const c=document.getElementById('t3-calc-btn');if(c)c.disabled=n<MIN}
-function renderT3C(){
-  const s=document.getElementById('t3-cov-slot');if(!s)return;
-  const n=Object.keys(t3S).length;
-  if(!t3Done)s.innerHTML='<button class="btn-outline" id="t3-calc-btn" onclick="calcT3()" '+(n<MIN?'disabled':'')+'><i class="ti ti-percentage"></i>Calculate Coverage</button>';
-  else{const c=t3Val>=GATE?'green':'red';s.innerHTML='<div class="cov-result-inline"><i class="ti ti-percentage" style="color:var(--ll-blue)"></i><span class="pct '+c+'">'+t3Val+'%</span> coverage</div>'}
-}
+function renderT3C(){const s=document.getElementById('t3-cov-slot');if(!s)return;const n=Object.keys(t3S).length;if(!t3Done){s.innerHTML='<button class="btn-outline" id="t3-calc-btn" onclick="calcT3()" '+(n<MIN?'disabled':'')+'><i class="ti ti-percentage"></i>Calculate Coverage</button>';}else{const c=t3Val>=GATE?'green':'red';s.innerHTML='<div class="cov-result-inline"><i class="ti ti-percentage" style="color:var(--ll-blue)"></i><span class="pct '+c+'">'+t3Val+'%</span> coverage</div>';}}
 function calcT3(){const b=document.getElementById('t3-calc-btn');if(!b||b.disabled)return;b.innerHTML='<span class="calc-spinner"></span>…';b.disabled=true;setTimeout(()=>{t3Val=Math.min(100,Math.round(Object.keys(t3S).length/4*100));t3Done=true;renderT3C()},650)}
 function confirmTrainerAvail(){closeTrainerAvail();goScreen('s3',document.querySelectorAll('.sb-item')[8])}
 
@@ -780,7 +686,7 @@ function renderT1(){
   const pool=avFilt?MF:T1O;
   const list=pool.filter(k=>{const b=TB[k];if(ko&&!b.known)return false;if(q&&!b.name.toLowerCase().includes(q))return false;return true});
   if(!list.length){h.innerHTML='<div style="padding:24px;text-align:center;color:var(--ll-text-muted);font-size:12px">No trainers match. <a href="#" onclick="event.preventDefault();clearAvailFilter()" style="color:var(--ll-blue)">Clear filters</a></div>';return}
-  h.innerHTML=list.map(k=>{const b=TB[k];const kn=b.known?' <span class="t-known">Known</span>':'';return '<div class="t-row" style="grid-template-columns:24px 1fr 50px 50px 1fr" onclick="selectTrainer(this)" data-tname="'+b.name+'" data-tkey="'+k+'"><div class="t-radio"></div><div class="t-name"><img class="t-avatar" src="'+b.avatar.replace('160','80')+'" alt=""/>'+b.name+kn+'</div><div class="t-bio-cell">'+bioIconBtn(k)+'</div><div class="t-rating"><i class="ti ti-star-filled"></i>'+b.rating+'</div><div class="t-langs">'+b.langs.map(l=>'<span class="t-lang-pill">'+l+'</span>').join('')+'</div></div>'}).join('');
+  h.innerHTML=list.map(k=>{const b=TB[k];const kn=b.known?' <span class="t-known">Known</span>':'';return '<div class="t-row" style="grid-template-columns:24px 1fr 50px 50px 1fr" onclick="selectTrainer(this)" data-tname="'+b.name+'" data-tkey="'+k+'"><div class="t-radio"></div><div class="t-name"><img class="t-avatar" src="'+b.avatar.replace('160','80')+'" alt=""/>'+b.name+kn+'</div><div class="t-bio-cell">'+bioBtn(k)+'</div><div class="t-rating"><i class="ti ti-star-filled"></i>'+b.rating+'</div><div class="t-langs">'+b.langs.map(l=>'<span class="t-lang-pill">'+l+'</span>').join('')+'</div></div>'}).join('');
 }
 function filterT1(){renderT1()}
 
@@ -794,12 +700,14 @@ function selectTrainer(row){
   const ba=document.getElementById('t1-check-avail');if(ba)ba.disabled=false;
 }
 function syncTr(){
-  ['s3-trainer-name','s4-trainer-name','s3-prog-trainer','s4-trainer','s4-c1-trainer'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=sTr});
-  const i=document.getElementById('s4-trainer-inline');if(i)i.textContent=sTr.split(' ')[0];
-  ['s3-trainer-avatar','s4-trainer-avatar'].forEach(id=>{const el=document.getElementById(id);if(el)el.src=sTrAv});
+  const n3=document.getElementById('s3-trainer-name');if(n3)n3.textContent=sTr;
+  const n4=document.getElementById('s4-trainer-name');if(n4)n4.textContent=sTr;
+  const a3=document.getElementById('s3-trainer-avatar');if(a3)a3.src=sTrAv;
+  const a4=document.getElementById('s4-trainer-avatar');if(a4)a4.src=sTrAv;
+  const ti=document.getElementById('s4-trainer-inline');if(ti)ti.textContent=sTr.split(' ')[0];
+  const tr4=document.getElementById('s4-c1-trainer');if(tr4)tr4.textContent=sTr;
 }
 function openBioForCurrent(){openBio({stopPropagation:()=>{}},sTrK)}
-
 let curBio=null;
 function openBio(e,k){
   e.stopPropagation();const b=TB[k];if(!b)return;curBio=k;
@@ -827,15 +735,7 @@ function closeConfirmSched(){document.getElementById('confirm-sched-overlay').cl
 function closeConfirmSchedOnBg(e){if(e.target.id==='confirm-sched-overlay')closeConfirmSched()}
 function syncNowAndGoHome(){closeConfirmSched();const items=document.querySelectorAll('.sb-item');goScreen('home',items[items.length-1]);showToast('Calendar synced','Your schedule has been synced to your default calendar provider.')}
 function goHomeNoSync(){closeConfirmSched();const items=document.querySelectorAll('.sb-item');goScreen('home',items[items.length-1]);showToast('Schedule confirmed','Your weekly classes are booked. Check your email for confirmation.')}
-function showToast(t,s){
-  const c=document.getElementById('toast-container');if(!c)return;
-  c.innerHTML='<div class="toast"><div class="ic">✓</div><div class="body-text"><div class="ttl">'+t+'</div><div class="sub">'+s+'</div></div><button class="close-btn" onclick="this.closest(\'.toast\').remove()"><i class="ti ti-x"></i></button></div>';
-  setTimeout(()=>{const x=c.querySelector('.toast');if(x){x.style.transition='opacity 0.3s';x.style.opacity='0';setTimeout(()=>{c.innerHTML=''},300)}},5000);
-}
+function showToast(t,s){const c=document.getElementById('toast-container');if(!c)return;c.innerHTML='<div class="toast"><div class="ic">✓</div><div class="body-text"><div class="ttl">'+t+'</div><div class="sub">'+s+'</div></div><button class="close-btn" onclick="this.closest(\'.toast\').remove()"><i class="ti ti-x"></i></button></div>';setTimeout(()=>{const x=c.querySelector('.toast');if(x){x.style.transition='opacity 0.3s';x.style.opacity='0';setTimeout(()=>{c.innerHTML=''},300)}},5000);}
 
-document.addEventListener('DOMContentLoaded',()=>{
-  refreshS1();
-  buildGrid('e1-grid',null);
-  renderC2();renderT1();renderS2();
-});
+document.addEventListener('DOMContentLoaded',()=>{fillPC();refreshS1();buildGrid('e1-grid',null);renderC2();renderT1();renderS2();});
 </script>
