@@ -36,61 +36,24 @@
 .cb-banner{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;border-radius:6px;font-size:11px;line-height:1.5;margin-bottom:12px}
 .cb-banner.info{background:var(--ll-blue-light);color:var(--ll-blue-dark);border:1px solid var(--ll-blue-border)}
 .cb-banner i{font-size:14px;flex-shrink:0;margin-top:1px}
-
-/* ── Grid top bar — your exact values ───────────────────────────── */
-.grid-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
-  flex-wrap:wrap;
-  gap:8px;
-}
+.grid-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px}
 .cb-row{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ll-navy)}
 .cb{width:14px;height:14px;border:1px solid var(--ll-border);border-radius:3px;cursor:pointer;flex-shrink:0;background:var(--ll-card)}
 .legend{display:flex;align-items:center;gap:14px;font-size:11px;color:var(--ll-navy)}
 .lg{display:flex;align-items:center;gap:5px}
-
-/* ── Legend swatch — your exact values: 28×12, border-radius 4px ── */
-.lg-swatch{
-  width:28px;
-  height:12px;
-  border-radius:4px;
-}
-.lg-na{background:var(--ll-na-fill)}
-.lg-av{background:var(--ll-green-fill)}
-.lg-mh{background:var(--ll-match)}
-.lg-sl{background:var(--ll-blue-light);border:2px solid var(--ll-blue)}
-
-/* ── Slot pill — your exact values: 100% w, 28px h, br 4px ─────── */
-.slot-pill{
-  width:100%;
-  height:28px;
-  border-radius:4px;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  transition:background 0.1s, transform 0.08s;
-  font-size:10px;
-  font-weight:500;
-  color:transparent;
-  user-select:none;
-}
+.lg-swatch{width:28px;height:12px;border-radius:4px}
+.lg-na{background:var(--ll-na-fill)}.lg-av{background:var(--ll-green-fill)}.lg-mh{background:var(--ll-match)}.lg-sl{background:var(--ll-blue-light);border:2px solid var(--ll-blue)}
+.slot-pill{width:100%;height:28px;border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.1s,transform 0.08s;font-size:10px;font-weight:500;color:transparent;user-select:none}
 .slot-pill:active{transform:scale(0.95)}
 .slot-pill.avail{background:var(--ll-green-fill)}.slot-pill.avail:hover{background:var(--ll-green-fill-hover)}
 .slot-pill.match-hint{background:var(--ll-match)}.slot-pill.match-hint:hover{background:var(--ll-match-hover)}
 .slot-pill.selected{background:var(--ll-blue-light);border:2px solid var(--ll-blue);color:var(--ll-blue);font-size:9px;font-weight:600}
 .slot-pill.na{background:var(--ll-na-fill);cursor:default}
-
-/* ── Table layout ───────────────────────────────────────────────── */
 .avail-grid{width:100%;border-collapse:separate;border-spacing:0}
 .avail-grid thead th{font-size:12px;font-weight:600;color:var(--ll-navy);padding:0 4px 10px;text-align:center}
 .avail-grid thead th:first-child{width:48px;text-align:right}
 .avail-grid tbody td{padding:2px 3px;vertical-align:middle}
 .avail-grid tbody td:first-child{font-size:11px;font-weight:600;color:var(--ll-navy);text-align:right;padding-right:10px;white-space:nowrap;width:48px}
-
-/* ── rest ─────────────────────────────────────────────────────── */
 .cov-strip{display:flex;align-items:center;justify-content:space-between;margin-top:14px;gap:12px;flex-wrap:wrap;min-height:40px}
 .cov-pct{font-size:18px;font-weight:600}.cov-pct.green{color:var(--ll-green-text)}.cov-pct.red{color:var(--ll-red-text)}
 .cov-lbl{font-size:11px;color:var(--ll-text-muted)}
@@ -264,14 +227,14 @@
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="icon-bio" viewBox="0 0 16 16"><path d="M13.5 3C13.5 2.75 13.25 2.5 13 2.5H3C2.71875 2.5 2.5 2.75 2.5 3V13C2.5 13.2813 2.71875 13.5 3 13.5H13C13.25 13.5 13.5 13.2813 13.5 13V3ZM13 1C14.0938 1 15 1.90625 15 3V13C15 14.125 14.0938 15 13 15H3C1.875 15 1 14.125 1 13V3C1 1.90625 1.875 1 3 1H13ZM9 5C9 5.4375 8.65625 5.75 8.25 5.75H4.75C4.3125 5.75 4 5.4375 4 5C4 4.59375 4.3125 4.25 4.75 4.25H8.25C8.65625 4.25 9 4.59375 9 5ZM11.25 7.25C11.6563 7.25 12 7.59375 12 8C12 8.4375 11.6563 8.75 11.25 8.75H4.75C4.3125 8.75 4 8.4375 4 8C4 7.59375 4.3125 7.25 4.75 7.25H11.25ZM7 11C7 11.4375 6.65625 11.75 6.25 11.75H4.75C4.3125 11.75 4 11.4375 4 11C4 10.5938 4.3125 10.25 4.75 10.25H6.25C6.65625 10.25 7 10.5938 7 11Z" fill="#0276B1"/></symbol>
-<symbol id="ill-trainer" viewBox="0 0 120 100"><circle cx="60" cy="42" r="22" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/><circle cx="60" cy="36" r="9" fill="#185FA5"/><path d="M42 62 Q60 50 78 62 L78 80 L42 80 Z" fill="#185FA5"/><circle cx="88" cy="22" r="6" fill="#F5B400" opacity="0.7"/></symbol>
+<symbol id="ill-trainer" viewBox="0 0 120 100"><circle cx="60" cy="42" r="22" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/><circle cx="60" cy="36" r="9" fill="#185FA5"/><path d="M42 62 Q60 50 78 62 L78 80 L42 80 Z" fill="#185FA5"/></symbol>
 <symbol id="ill-availability" viewBox="0 0 120 100"><rect x="20" y="22" width="80" height="60" rx="4" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/><rect x="20" y="22" width="80" height="14" rx="4" fill="#185FA5"/><rect x="46" y="42" width="14" height="10" rx="2" fill="#0F6E56"/><rect x="64" y="56" width="14" height="10" rx="2" fill="#0F6E56"/></symbol>
 </defs></svg>
 
 <div class="app">
 <div class="sidebar">
 <div class="sb-brand"><span class="sb-brand-logo">ACME</span></div>
-<div class="sb-sub">UX-536 · v26e</div>
+<div class="sb-sub">UX-536 · v26f</div>
 <div class="sb-section">Onboarding</div>
 <div class="sb-item active" onclick="goScreen('p0',this)"><span class="num">1·</span>Personal Data</div>
 <div class="sb-item" onclick="goScreen('p0',this);openChoice()"><span class="num">★</span>Setup choice modal</div>
@@ -297,11 +260,11 @@
 <div class="app-header"><span class="app-header-logo">ACME</span><div class="app-avatar">AL</div></div>
 
 <div class="screen active" id="p0">
-<div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Let's get your learning program set up for success</p></div>
+<div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Let's get your learning program set up</p></div>
 <div class="steps"><div class="step active">1. Personal Data</div><div class="step-sep"></div><div class="step">2</div><div class="step-sep"></div><div class="step">3</div></div></div>
 <div class="body-row"><div class="prog-card" id="pc-p0"></div>
 <div class="content-card">
-<div class="cc-title">Personal Data</div><div class="cc-desc">Please review and confirm your details to get started</div>
+<div class="cc-title">Personal Data</div><div class="cc-desc">Please review and confirm your details</div>
 <div class="form-row"><div class="form-field"><label class="form-label">First Name<span class="req">*</span></label><input class="form-input" type="text" value="John"/></div><div class="form-field"><label class="form-label">Last Name<span class="req">*</span></label><input class="form-input" type="text" value="Doe"/></div></div>
 <div class="form-row"><div class="form-field full"><label class="form-label">Email<span class="req">*</span></label><input class="form-input" type="email" value="johndoe@gmail.com"/></div></div>
 <div class="form-row"><div class="form-field full"><label class="form-label">Time Zone<span class="req">*</span></label><select class="form-select"><option>GMT Standard Time</option></select></div></div>
@@ -309,13 +272,13 @@
 </div></div></div>
 
 <div class="screen" id="s1">
-<div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Let's get your learning program set up for success</p></div>
+<div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Let's get your learning program set up</p></div>
 <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">2. Availability</div><div class="step-sep"></div><div class="step">3</div></div></div>
 <div class="body-row"><div class="prog-card" id="pc-s1"></div>
 <div class="content-card">
 <div class="cc-title">Specify Availability</div>
-<div class="cc-desc">Select the slots that fit your availability so we can recommend a more accurate schedule. Once you pick the first one, <strong>darker green</strong> shows where a matching trainer is also free.</div>
-<div class="cb-banner info"><i class="ti ti-info-circle"></i><div><strong>All weekly classes will be with the same trainer.</strong> We'll match you with a trainer whose availability covers all the slots you select.</div></div>
+<div class="cc-desc">Select the slots that fit your availability. Once you pick the first one, <strong>darker green</strong> shows where a matching trainer is also free.</div>
+<div class="cb-banner info"><i class="ti ti-info-circle"></i><div><strong>All weekly classes will be with the same trainer.</strong></div></div>
 <div id="suggest-banner-host"></div>
 <div class="grid-top">
   <div class="cb-row"><div class="cb"></div>Select all available slots</div>
@@ -332,66 +295,64 @@
 </div></div></div>
 
 <div class="screen" id="s2">
-<div class="welcome-row"><div><h1>Choose your trainer</h1><p>Pick the trainer for all of your weekly classes</p></div>
+<div class="welcome-row"><div><h1>Choose your trainer</h1></div>
 <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">3. Schedule</div></div></div>
 <div class="body-row"><div class="prog-card" id="pc-s2"></div>
 <div class="content-card">
 <div class="cc-title">Available trainers</div>
-<div class="cc-desc">Choose one trainer for all of your weekly classes. Partial matches suggest a slight slot adjustment.</div>
+<div class="cc-desc">Choose one trainer for all of your weekly classes.</div>
 <div class="s2-toolbar"><label class="known-cb-wrap"><input type="checkbox" id="s2-known-only" onchange="renderS2()"/>Show only known trainers</label></div>
-<div id="s2-full-section"><div class="psec"><h5>Full matches — covers all your slots</h5>
+<div id="s2-full-section"><div class="psec"><h5>Full matches</h5>
 <div class="t-table"><div class="t-head"><div></div><div>Name</div><div style="text-align:center">Bio</div><div>Rating</div><div>Languages</div><div style="text-align:right">Coverage</div></div><div id="s2-full-rows"></div></div><button class="load-more-btn">Load More</button></div></div>
-<div id="s2-partial-section"><div class="psec"><h5>Partial matches — small slot adjustment</h5><div id="s2-partial-rows"></div></div></div>
+<div id="s2-partial-section"><div class="psec"><h5>Partial matches</h5><div id="s2-partial-rows"></div></div></div>
 </div></div>
-<div class="flow-nav"><button class="btn-ghost" onclick="goScreen('s1',document.querySelectorAll('.sb-item')[2])">← Back to availability</button><button class="btn-primary" id="s2-next" disabled onclick="goScreen('s3',document.querySelectorAll('.sb-item')[7])">Continue with selected trainer →</button></div>
+<div class="flow-nav"><button class="btn-ghost" onclick="goScreen('s1',document.querySelectorAll('.sb-item')[2])">← Back</button><button class="btn-primary" id="s2-next" disabled onclick="goScreen('s3',document.querySelectorAll('.sb-item')[7])">Continue →</button></div>
 </div>
 
 <div class="screen" id="t1">
-<div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Let's get your learning program ready</p></div>
+<div class="welcome-row"><div><h1>Welcome, Alex!</h1></div>
 <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">2. Trainers</div><div class="step-sep"></div><div class="step">3</div></div></div>
 <div class="body-row"><div class="prog-card" id="pc-t1"></div>
 <div class="content-card">
-<div class="cc-title">Select Trainer</div><div class="cc-desc">Choose a trainer to see your schedule options</div>
+<div class="cc-title">Select Trainer</div>
 <div class="search-toolbar">
-<div class="search-input-wrap"><i class="ti ti-search search-icon"></i><input class="search-input" type="text" placeholder="Search for a specific trainer" oninput="filterT1()"/></div>
+<div class="search-input-wrap"><i class="ti ti-search search-icon"></i><input class="search-input" type="text" placeholder="Search trainer" oninput="filterT1()"/></div>
 <label class="known-cb-wrap"><input type="checkbox" id="t1-known-only" onchange="filterT1()"/>Show only known trainers</label>
 <div class="filter-actions-right"><button class="btn-link" id="t1-clear-filters" onclick="clearAvailFilter()" style="display:none">Clear Filters</button><button class="btn-outline" onclick="openFilterAvail()"><i class="ti ti-calendar-time"></i>Filter By Availability</button></div></div>
 <div id="t1-filter-hint" style="display:none" class="filter-match-hint"><i class="ti ti-filter-check"></i><span id="t1-filter-hint-text"></span></div>
 <div class="t-table"><div class="t-head" style="grid-template-columns:24px 1fr 50px 50px 1fr"><div></div><div>Name</div><div style="text-align:center">Bio</div><div>Rating</div><div>Languages</div></div><div id="t1-rows"></div></div>
 </div></div>
 <div class="flow-nav"><button class="btn-ghost" onclick="goScreen('p0',document.querySelectorAll('.sb-item')[0])">← Back</button>
-<div class="t1-footer-actions"><button class="btn-link" id="t1-check-avail" disabled onclick="openTrainerAvail()">Check Trainer's Availability</button><button class="btn-primary" id="t1-next" disabled onclick="goScreen('s3',document.querySelectorAll('.sb-item')[8])">Schedule Options</button></div></div>
+<div class="t1-footer-actions"><button class="btn-link" id="t1-check-avail" disabled onclick="openTrainerAvail()">Check Availability</button><button class="btn-primary" id="t1-next" disabled onclick="goScreen('s3',document.querySelectorAll('.sb-item')[8])">Schedule Options</button></div></div>
 </div>
 
 <div class="screen" id="s3">
-<div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Pick your first weekly class</p></div>
+<div class="welcome-row"><div><h1>Welcome, Alex!</h1></div>
 <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">3. Schedule</div></div></div>
 <div class="body-row"><div class="prog-card" id="pc-s3"></div>
 <div class="content-card">
 <div class="cc-title">Select Schedule</div>
-<div class="review-note"><i class="ti ti-info-circle"></i><div>Review your <a href="#">cancellation policy</a> and check your <a href="#">time zone</a> before confirming.</div></div>
+<div class="review-note"><i class="ti ti-info-circle"></i><div>Review your <a href="#">cancellation policy</a> and <a href="#">time zone</a> before confirming.</div></div>
 <div class="trainer-info"><div class="trainer-info-label">Trainer</div>
 <div class="trainer-info-row"><img class="trainer-info-avatar" id="s3-trainer-avatar" src="https://i.pravatar.cc/80?img=44" alt=""/><span class="trainer-info-name" id="s3-trainer-name">Camille Dubois</span><button class="trainer-info-bio-btn" onclick="openBioForCurrent()"><svg width="16" height="16"><use href="#icon-bio"/></svg></button></div></div>
-<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div class="step-marker">1</div><div><div style="font-size:13px;font-weight:600;color:var(--ll-navy)">Choose Class 1</div><div style="font-size:11px;color:var(--ll-text-muted)">Pick a recurring weekly time</div></div></div>
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div style="font-size:11px;color:var(--ll-text-muted);text-transform:uppercase;letter-spacing:0.5px;font-weight:600">Proposed schedules</div><button class="btn-link" style="padding:4px 8px">Load More Options</button></div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div class="step-marker">1</div><div><div style="font-size:13px;font-weight:600;color:var(--ll-navy)">Choose Class 1</div></div></div>
 <div class="sched-grid">
-<div class="sched-card" onclick="selectClass1(this)"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">Mondays</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">10:00-10:30</div></div></div><div class="sc-cov-lbl">Schedule coverage</div><div class="sc-cov-num">85%</div><div class="sc-radio"><div class="rdo"></div>Select this schedule</div></div>
-<div class="sched-card" onclick="selectClass1(this)"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">Thursdays</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">10:00-10:30</div></div></div><div class="sc-cov-lbl">Schedule coverage</div><div class="sc-cov-num">82%</div><div class="sc-radio"><div class="rdo"></div>Select this schedule</div></div>
-<div class="sched-card" onclick="selectClass1(this)"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">Fridays</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">09:30-10:00</div></div></div><div class="sc-cov-lbl">Schedule coverage</div><div class="sc-cov-num">80%</div><div class="sc-radio"><div class="rdo"></div>Select this schedule</div></div>
+<div class="sched-card" onclick="selectClass1(this)"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">Mondays</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">10:00-10:30</div></div></div><div class="sc-cov-lbl">Coverage</div><div class="sc-cov-num">85%</div><div class="sc-radio"><div class="rdo"></div>Select</div></div>
+<div class="sched-card" onclick="selectClass1(this)"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">Thursdays</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">10:00-10:30</div></div></div><div class="sc-cov-lbl">Coverage</div><div class="sc-cov-num">82%</div><div class="sc-radio"><div class="rdo"></div>Select</div></div>
+<div class="sched-card" onclick="selectClass1(this)"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">Fridays</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">09:30-10:00</div></div></div><div class="sc-cov-lbl">Coverage</div><div class="sc-cov-num">80%</div><div class="sc-radio"><div class="rdo"></div>Select</div></div>
 </div></div></div>
 <div class="flow-nav"><button class="btn-ghost" onclick="goScreen('t1',document.querySelectorAll('.sb-item')[4])">← Back</button><button class="btn-primary" id="s3-next" disabled onclick="confirmClass1Go()">Confirm class 1 &amp; continue →</button></div>
 </div>
 
 <div class="screen" id="s4">
-<div class="welcome-row"><div><h1>Welcome, Alex!</h1><p>Now pick your second weekly class</p></div>
+<div class="welcome-row"><div><h1>Welcome, Alex!</h1></div>
 <div class="steps"><div class="step done"><i class="ti ti-check"></i></div><div class="step done"><i class="ti ti-check"></i></div><div class="step-sep"></div><div class="step active">3. Schedule</div></div></div>
 <div class="body-row"><div class="prog-card" id="pc-s4"></div>
 <div class="content-card">
 <div class="cc-title">Select Schedule</div>
-<div class="cc-desc">Pick a second weekly class with <span id="s4-trainer-inline">Camille</span>.</div>
 <div class="trainer-info"><div class="trainer-info-label">Trainer</div>
-<div class="trainer-info-row"><img class="trainer-info-avatar" id="s4-trainer-avatar" src="https://i.pravatar.cc/80?img=44" alt=""/><span class="trainer-info-name" id="s4-trainer-name">Camille Dubois</span><button class="trainer-info-bio-btn" onclick="openBioForCurrent()"><svg width="16" height="16"><use href="#icon-bio"/></svg></button></div></div>
-<div class="confirmed-card"><div class="checkmark-icon">✓</div><div class="info-text"><div class="title">Class 1 confirmed — <span id="s4-c1-text">Mondays 10:00-10:30</span></div><div class="sub">85% coverage · with <span id="s4-c1-trainer">Camille Dubois</span></div></div><button class="btn-link" style="padding:4px 10px;font-size:11px" onclick="editClass1()"><i class="ti ti-edit" style="font-size:12px;vertical-align:-2px"></i> Edit</button></div>
+<div class="trainer-info-row"><img class="trainer-info-avatar" id="s4-trainer-avatar" src="https://i.pravatar.cc/80?img=44" alt=""/><span class="trainer-info-name" id="s4-trainer-name">Camille Dubois</span></div></div>
+<div class="confirmed-card"><div class="checkmark-icon">✓</div><div class="info-text"><div class="title">Class 1 confirmed — <span id="s4-c1-text">Mondays 10:00-10:30</span></div><div class="sub">with <span id="s4-c1-trainer">Camille Dubois</span></div></div><button class="btn-link" style="padding:4px 10px;font-size:11px" onclick="editClass1()">Edit</button></div>
 <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div class="step-marker">2</div><div><div style="font-size:13px;font-weight:600;color:var(--ll-navy)">Choose Class 2</div></div></div>
 <div class="day-filter-wrap"><span class="day-filter-lbl">Show days:</span>
 <div class="day-chip on" data-day="Mon" onclick="toggleDayFilter(this)">Mon <span class="x">×</span></div>
@@ -400,11 +361,10 @@
 <div class="day-chip on" data-day="Thu" onclick="toggleDayFilter(this)">Thu <span class="x">×</span></div>
 <div class="day-chip on" data-day="Fri" onclick="toggleDayFilter(this)">Fri <span class="x">×</span></div>
 <button class="day-filter-reset" onclick="resetDayFilter()">Reset</button></div>
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div style="font-size:11px;color:var(--ll-text-muted);text-transform:uppercase;letter-spacing:0.5px;font-weight:600">Proposed schedules · <span id="s4-shown-count">5</span> shown</div></div>
 <div class="sched-grid" id="s4-sched-grid"></div>
 <div id="s4-empty" style="display:none;text-align:center;padding:20px;background:var(--ll-bg);border-radius:6px;font-size:12px;color:var(--ll-text-muted)">No schedules match.</div>
 </div></div>
-<div class="flow-nav"><button class="btn-ghost" onclick="goScreen('s3',document.querySelectorAll('.sb-item')[8])">← Back to class 1</button><button class="btn-primary" id="s4-next" disabled onclick="openConfirmSched()">Confirm Schedule</button></div>
+<div class="flow-nav"><button class="btn-ghost" onclick="goScreen('s3',document.querySelectorAll('.sb-item')[8])">← Back</button><button class="btn-primary" id="s4-next" disabled onclick="openConfirmSched()">Confirm Schedule</button></div>
 </div>
 
 <div class="screen" id="e1"><div class="welcome-row"><div><h1>Conflict state</h1></div></div>
@@ -414,21 +374,20 @@
 
 <div class="screen" id="e2"><div class="welcome-row"><div><h1>Let's find a path forward</h1></div></div>
 <div class="body-row"><div class="prog-card" id="pc-e2"></div>
-<div class="content-card">
-<div style="text-align:center;padding:30px 18px;background:var(--ll-bg);border-radius:8px;border:1px solid var(--ll-border)">
-<div style="font-size:30px;color:var(--ll-text-muted);margin-bottom:10px"><i class="ti ti-calendar-off"></i></div>
-<h4 style="font-size:14px;font-weight:600;margin-bottom:5px">No trainers available for these slots</h4>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:440px;margin:16px auto 0">
-<div style="border:1px solid var(--ll-border);border-radius:6px;padding:13px;text-align:left;background:var(--ll-card)"><i class="ti ti-clock-edit" style="font-size:20px;color:var(--ll-blue);display:block;margin-bottom:5px"></i><strong style="font-size:12px;display:block">Try nearby times</strong></div>
-<div style="border:1px solid var(--ll-border);border-radius:6px;padding:13px;text-align:left;cursor:pointer;background:var(--ll-card)" onclick="goScreen('s1',document.querySelectorAll('.sb-item')[2])"><i class="ti ti-calendar-plus" style="font-size:20px;color:var(--ll-blue);display:block;margin-bottom:5px"></i><strong style="font-size:12px;display:block">Adjust availability</strong></div>
+<div class="content-card"><div style="text-align:center;padding:24px;background:var(--ll-bg);border-radius:8px;border:1px solid var(--ll-border)">
+<div style="font-size:28px;color:var(--ll-text-muted);margin-bottom:8px"><i class="ti ti-calendar-off"></i></div>
+<h4 style="font-size:14px;font-weight:600;margin-bottom:12px">No trainers for these slots</h4>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:400px;margin:auto">
+<div style="border:1px solid var(--ll-border);border-radius:6px;padding:12px;background:var(--ll-card);text-align:left"><i class="ti ti-clock-edit" style="font-size:18px;color:var(--ll-blue);display:block;margin-bottom:4px"></i><strong style="font-size:12px">Try nearby times</strong></div>
+<div style="border:1px solid var(--ll-border);border-radius:6px;padding:12px;background:var(--ll-card);text-align:left;cursor:pointer" onclick="goScreen('s1',document.querySelectorAll('.sb-item')[2])"><i class="ti ti-calendar-plus" style="font-size:18px;color:var(--ll-blue);display:block;margin-bottom:4px"></i><strong style="font-size:12px">Adjust availability</strong></div>
 </div></div></div></div></div>
 
 <div class="screen" id="home">
 <div class="home-top"><span class="home-top-logo">ACME</span>
 <div class="home-top-nav"><span class="home-top-nav-link">Learner</span><span class="home-top-nav-link">Review</span><span class="home-top-nav-link">Practice</span></div>
-<div class="home-top-controls"><div class="home-lang-pill">English</div><div class="home-tool-btn"><i class="ti ti-language"></i></div><div class="app-avatar">AL</div></div>
+<div class="home-top-controls"><div class="home-lang-pill">English</div><div class="app-avatar">AL</div></div>
 </div>
-<div class="welcome-row" style="padding:22px 24px 14px"><div><h1>Welcome, Alex!</h1><p>We're excited to have you here</p></div></div>
+<div class="welcome-row" style="padding:22px 24px 14px"><div><h1>Welcome, Alex!</h1></div></div>
 <div style="padding:0 24px 22px">
 <div class="home-stats">
 <div class="home-stat-card"><div class="home-stat-info"><div class="home-stat-lbl">Course progress</div><div class="home-stat-num">0%</div></div></div>
@@ -439,17 +398,17 @@
 <div class="prog-card" id="pc-home" style="width:240px"></div>
 <div class="content-card home-illust-area">
 <div class="home-done-title">All done!</div>
-<div class="home-done-desc">Great job on scheduling your classes. You will receive email confirmations shortly.</div>
+<div class="home-done-desc">Your classes are scheduled. Check your email for confirmation.</div>
 <div class="home-quick"><button class="home-quick-btn">Course</button><button class="home-quick-btn">Fluency Lab</button><button class="home-quick-btn">Activity Library</button></div>
 </div></div></div></div>
 
-<div class="app-footer"><div class="left">© 2026 ACME. All Rights Reserved</div><div class="right"><span>EN ▾</span><span>Powered by: <b>ACME</b></span></div></div>
+<div class="app-footer"><div class="left">© 2026 ACME</div><div class="right">Powered by <b>ACME</b></div></div>
 
 <!-- Modals -->
 <div class="modal-overlay" id="choice-overlay" onclick="closeChoiceOnBg(event)">
 <div class="choice-modal" onclick="event.stopPropagation()">
 <div class="choice-modal-header"><div class="choice-modal-title">Let's Set Up Your Schedule</div><button class="modal-close" onclick="closeChoice()"><i class="ti ti-x"></i></button></div>
-<div class="choice-modal-desc">Choose an option below to start</div>
+<div class="choice-modal-desc">Choose an option to start</div>
 <div class="choice-cards">
 <div class="choice-card" onclick="chooseTrainer()"><div class="choice-illustration"><svg width="120" height="100"><use href="#ill-trainer"/></svg></div><div class="choice-card-label">Select my trainer</div></div>
 <div class="choice-card" onclick="chooseAvailability()"><div class="choice-illustration"><svg width="120" height="100"><use href="#ill-availability"/></svg></div><div class="choice-card-label">Specify my availability</div></div>
@@ -458,11 +417,11 @@
 <div class="modal-overlay" id="filter-avail-overlay" onclick="closeFilterAvailOnBg(event)">
 <div class="filter-modal" onclick="event.stopPropagation()">
 <div class="filter-modal-header">
-<div class="filter-modal-title-row"><div class="filter-modal-title">Let's Set Up Your Schedule</div><button class="modal-close" onclick="closeFilterAvail()"><i class="ti ti-x"></i></button></div>
-<div class="filter-modal-desc">Select your slots so we can recommend matching trainers.</div>
+<div class="filter-modal-title-row"><div class="filter-modal-title">Set Your Availability</div><button class="modal-close" onclick="closeFilterAvail()"><i class="ti ti-x"></i></button></div>
+<div class="filter-modal-desc">Select your available slots.</div>
 </div>
 <div class="filter-modal-body">
-<div class="grid-top"><div class="cb-row"><div class="cb"></div>Select all available slots</div>
+<div class="grid-top"><div class="cb-row"><div class="cb"></div>Select all</div>
 <div class="legend"><div class="lg"><div class="lg-swatch lg-na"></div>Not available</div><div class="lg"><div class="lg-swatch lg-av"></div>Available</div><div class="lg"><div class="lg-swatch lg-mh"></div>Smart match</div><div class="lg"><div class="lg-swatch lg-sl"></div>Selected</div></div></div>
 <div id="t2-grid-wrap"></div>
 <div style="margin-top:10px;font-size:11px;color:var(--ll-text-muted)"><span id="t2-count">0</span> slots selected</div>
@@ -475,10 +434,10 @@
 <div class="filter-modal" onclick="event.stopPropagation()">
 <div class="filter-modal-header">
 <div class="filter-modal-title-row"><div class="filter-modal-title" id="t3-title">Trainer's Availability</div><button class="modal-close" onclick="closeTrainerAvail()"><i class="ti ti-x"></i></button></div>
-<div class="filter-modal-desc">Select the slots that fit your availability</div>
+<div class="filter-modal-desc">Select slots that fit your schedule.</div>
 </div>
 <div class="filter-modal-body">
-<div class="grid-top"><div class="cb-row"><div class="cb"></div>Select all available slots</div>
+<div class="grid-top"><div class="cb-row"><div class="cb"></div>Select all</div>
 <div class="legend"><div class="lg"><div class="lg-swatch lg-av"></div>Available</div><div class="lg"><div class="lg-swatch lg-sl"></div>Selected</div></div></div>
 <div id="t3-grid-wrap"></div>
 </div>
@@ -491,10 +450,9 @@
 <div class="filter-modal-header"><div class="filter-modal-title-row"><div class="filter-modal-title">Your Schedule Is Confirmed</div><button class="modal-close" onclick="closeConfirmSched()"><i class="ti ti-x"></i></button></div></div>
 <div class="confirm-body">
 <p>You will receive email confirmations shortly.</p>
-<p>Synchronize your ACME calendar by copying the URL below into your calendar provider.</p>
 <button class="guidelines-toggle">See guidelines <i class="ti ti-chevron-down"></i></button>
 <div class="url-box"><span class="lbl">URL:</span> webcal://app.acme.com/session/ICalFeed?StudentId=b5c23318-ef75-49ba-a82f-2f4375341a54</div>
-<div class="warn-box"><i class="ti ti-alert-triangle"></i><div>You can only join your class from the ACME App, not your synced calendar.</div></div>
+<div class="warn-box"><i class="ti ti-alert-triangle"></i><div>You can only join your class from the ACME App.</div></div>
 </div>
 <div class="filter-modal-footer"><div></div>
 <div class="filter-modal-footer-right"><button class="btn-link" onclick="goHomeNoSync()">Go To Homepage</button><button class="btn-primary" onclick="syncNowAndGoHome()">Sync Now</button></div>
@@ -525,32 +483,56 @@ function fillPC(){
 const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 const TIMES=['08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30'];
 const MIN=2;
-const UNAVAIL={'5-0':1,'5-1':1,'5-2':1,'5-3':1,'5-4':1,'5-5':1,'5-6':1,'5-7':1,'5-8':1,'5-9':1,'5-10':1,'5-11':1,'6-0':1,'6-1':1,'6-2':1,'6-3':1,'6-4':1,'6-5':1,'6-6':1,'6-7':1,'6-8':1,'6-9':1,'6-10':1,'6-11':1};
 const TP=t=>{const[h,m]=t.split(':').map(Number);const n=m===30?[h+1,0]:[h,30];return t+' → '+String(n[0]).padStart(2,'0')+':'+String(n[1]).padStart(2,'0')};
+
+// ── Learner unavailability — realistic pattern ────────────────────
+// Logic: Mon early busy (school run), Tue afternoon busy (recurring meeting),
+// Wed morning blocked (team standup), Thu early + late blocked,
+// Fri afternoon blocked (wind-down), full weekends off
+// Plus a mid-morning Wed gap and scattered lunch blocks
+const LEARNER_UNAVAIL = new Set([
+  // Weekends — fully blocked
+  ...[...Array(12)].map((_,ti)=>`5-${ti}`),
+  ...[...Array(12)].map((_,ti)=>`6-${ti}`),
+  // Monday: early morning blocked (08:00–09:30), lunch 12:00 blocked
+  '0-0','0-1','0-2','0-3','0-9',
+  // Tuesday: morning 08:00–09:00 blocked, afternoon 12:00–13:30 blocked
+  '1-0','1-1','1-8','1-9','1-10','1-11',
+  // Wednesday: 08:00–09:00 blocked (standup), 11:00–12:00 blocked
+  '2-0','2-1','2-6','2-7',
+  // Thursday: 08:00–08:30 blocked, 12:30–13:30 blocked
+  '3-0','3-10','3-11',
+  // Friday: afternoon from 11:30 blocked
+  '4-7','4-8','4-9','4-10','4-11',
+]);
+
+// ── Trainer data ──────────────────────────────────────────────────
+const TB={
+  camille:{name:'Camille Dubois',avatar:'https://i.pravatar.cc/160?img=44',title:'Senior Trainer · 8 years',rating:'4.8',langs:['EN','FR','ES'],tags:['Business English','TOEFL prep'],experience:8,classes:1240,students:312,bio:'French-born trainer based in Lyon.',known:false,avail:new Set(['0-4','0-5','0-6','0-7','1-4','1-5','1-6','1-7','3-8','3-9','3-10','3-11'])},
+  elias:{name:'Elias Sorenson',avatar:'https://i.pravatar.cc/160?img=8',title:'Linguistics MA · 6 years',rating:'4.8',langs:['EN','ES','IT'],tags:['Conversation','Pronunciation'],experience:6,classes:980,students:267,bio:'Norwegian-Italian trainer based in Madrid.',known:true,avail:new Set(['2-2','2-3','2-4','2-5','4-2','4-3','4-4','4-5'])},
+  sofia:{name:'Sofía Rodríguez',avatar:'https://i.pravatar.cc/160?img=47',title:'CELTA Certified · 5 years',rating:'4.7',langs:['EN','ES'],tags:['IELTS prep'],experience:5,classes:720,students:198,bio:'Spanish-British trainer.',known:false,avail:new Set(['0-8','0-9','0-10','0-11','4-4','4-5','4-6'])},
+  helena:{name:'Helena Park',avatar:'https://i.pravatar.cc/160?img=49',title:'TESOL Certified · 9 years',rating:'4.9',langs:['EN','KO'],tags:['Academic English'],experience:9,classes:1410,students:355,bio:'Korean-American trainer based in Seoul.',known:false,avail:new Set(['1-2','1-3','1-4','1-5','3-2','3-3','3-4','3-5'])},
+  marcus:{name:'Marcus Silva',avatar:'https://i.pravatar.cc/160?img=33',title:'Cambridge CELTA · 4 years',rating:'4.8',langs:['EN','ES'],tags:['Business English'],experience:4,classes:610,students:174,bio:'Brazilian-American trainer.',known:false,avail:new Set(['0-6','0-7','0-8','2-6','2-7','2-8'])},
+  arthur:{name:'Arthur Reyes',avatar:'https://i.pravatar.cc/160?img=68',title:'DELTA Trained · 7 years',rating:'4.8',langs:['EN','FR'],tags:['Conversation'],experience:7,classes:1080,students:283,bio:'French-Mexican trainer based in Paris.',known:true,avail:new Set(['3-8','3-9','3-10','4-8','4-9','4-10'])},
+  yuki:{name:'Yuki Tanaka',avatar:'https://i.pravatar.cc/160?img=16',title:'CELTA · 5 years',rating:'4.7',langs:['EN','JA'],tags:['Conversation'],experience:5,classes:780,students:201,bio:'Japanese-Canadian trainer based in Tokyo.',known:false,avail:new Set(['1-8','1-9','1-10','2-8','2-9','2-10'])},
+  lukas:{name:'Lukas Hoffmann',avatar:'https://i.pravatar.cc/160?img=51',title:'Cambridge CELTA · 6 years',rating:'4.6',langs:['EN','DE'],tags:['Business English'],experience:6,classes:890,students:228,bio:'German trainer based in Berlin.',known:false,avail:new Set(['0-2','0-3','4-2','4-3','4-4'])}
+};
+Object.values(TB).forEach(b=>{b.unavail={};for(let di=0;di<7;di++)for(let ti=0;ti<12;ti++){const k=di+'-'+ti;if(!b.avail.has(k))b.unavail[k]=1;}});
+
+// Combined unavail: learner OR sat/sun
+function isUnavail(di,ti){return LEARNER_UNAVAIL.has(di+'-'+ti);}
+
+const T1O=['camille','elias','sofia','helena','marcus','arthur','yuki','lukas'];
+const MF=['camille','elias','helena','marcus','arthur'];
+const S2_FULL=['camille','elias','sofia','helena'];
+const S2_PARTIAL=[{key:'marcus',cov:'75%',hint:'Mon 10:00 ✓ · Wed 11:00 ✓'},{key:'arthur',cov:'75%',hint:'Thu 12:30 ✓ · Fri 10:00 ✓'}];
+const C2O=[{day:'Thursdays',dayKey:'Thu',time:'10:00-10:30',cov:82},{day:'Tuesdays',dayKey:'Tue',time:'09:30-10:00',cov:80},{day:'Wednesdays',dayKey:'Wed',time:'10:00-10:30',cov:84},{day:'Fridays',dayKey:'Fri',time:'09:30-10:00',cov:81},{day:'Tuesdays',dayKey:'Tue',time:'09:00-09:30',cov:80}];
 
 let s1S={},t2S={},t3S={};
 let covCalc=false,covVal=0;
 let sTr='Camille Dubois',sTrK='camille',sTrAv='https://i.pravatar.cc/80?img=44';
 let c1=null,df={Mon:true,Tue:true,Wed:true,Thu:true,Fri:true};
 let sugShown=false,sugDismissed=false,avFilt=false;
-
-const TB={
-  camille:{name:'Camille Dubois',avatar:'https://i.pravatar.cc/160?img=44',title:'Senior Trainer · 8 years',rating:'4.8',langs:['EN','FR','ES'],tags:['Business English','TOEFL prep'],experience:8,classes:1240,students:312,bio:'French-born trainer based in Lyon.',known:false,avail:new Set(['0-4','0-5','0-6','0-7','1-4','1-5','1-6','1-7','3-8','3-9','3-10','3-11'])},
-  elias:{name:'Elias Sorenson',avatar:'https://i.pravatar.cc/160?img=8',title:'Linguistics MA · 6 years',rating:'4.8',langs:['EN','ES','IT'],tags:['Conversation','Pronunciation'],experience:6,classes:980,students:267,bio:'Norwegian-Italian trainer based in Madrid.',known:true,avail:new Set(['2-2','2-3','2-4','2-5','4-2','4-3','4-4','4-5'])},
-  sofia:{name:'Sofía Rodríguez',avatar:'https://i.pravatar.cc/160?img=47',title:'CELTA Certified · 5 years',rating:'4.7',langs:['EN','ES'],tags:['IELTS prep'],experience:5,classes:720,students:198,bio:'Spanish-British trainer.',known:false,avail:new Set(['0-8','0-9','0-10','0-11','4-4','4-5','4-6','4-7'])},
-  helena:{name:'Helena Park',avatar:'https://i.pravatar.cc/160?img=49',title:'TESOL Certified · 9 years',rating:'4.9',langs:['EN','KO'],tags:['Academic English'],experience:9,classes:1410,students:355,bio:'Korean-American trainer based in Seoul.',known:false,avail:new Set(['1-2','1-3','1-4','1-5','3-2','3-3','3-4','3-5'])},
-  marcus:{name:'Marcus Silva',avatar:'https://i.pravatar.cc/160?img=33',title:'Cambridge CELTA · 4 years',rating:'4.8',langs:['EN','ES'],tags:['Business English'],experience:4,classes:610,students:174,bio:'Brazilian-American trainer.',known:false,avail:new Set(['0-6','0-7','0-8','2-6','2-7','2-8'])},
-  arthur:{name:'Arthur Reyes',avatar:'https://i.pravatar.cc/160?img=68',title:'DELTA Trained · 7 years',rating:'4.8',langs:['EN','FR'],tags:['Conversation'],experience:7,classes:1080,students:283,bio:'French-Mexican trainer based in Paris.',known:true,avail:new Set(['3-8','3-9','3-10','4-8','4-9','4-10'])},
-  yuki:{name:'Yuki Tanaka',avatar:'https://i.pravatar.cc/160?img=16',title:'CELTA · 5 years',rating:'4.7',langs:['EN','JA'],tags:['Conversation'],experience:5,classes:780,students:201,bio:'Japanese-Canadian trainer based in Tokyo.',known:false,avail:new Set(['1-8','1-9','1-10','2-8','2-9','2-10'])},
-  lukas:{name:'Lukas Hoffmann',avatar:'https://i.pravatar.cc/160?img=51',title:'Cambridge CELTA · 6 years',rating:'4.6',langs:['EN','DE'],tags:['Business English'],experience:6,classes:890,students:228,bio:'German trainer based in Berlin.',known:false,avail:new Set(['0-0','0-1','0-2','4-0','4-1','4-2'])}
-};
-Object.values(TB).forEach(b=>{b.unavail={};for(let di=0;di<7;di++)for(let ti=0;ti<12;ti++){const k=di+'-'+ti;if(!b.avail.has(k))b.unavail[k]=1;}});
-
-const T1O=['camille','elias','sofia','helena','marcus','arthur','yuki','lukas'];
-const MF=['camille','elias','helena','marcus','arthur'];
-const S2_FULL=['camille','elias','sofia','helena'];
-const S2_PARTIAL=[{key:'marcus',cov:'75%',hint:'Mon 10:00 ✓ · Wed 11:00 ✓'},{key:'arthur',cov:'75%',hint:'Thu 12:30 ✓ · Fri 13:00 ✓'}];
-const C2O=[{day:'Thursdays',dayKey:'Thu',time:'10:00-10:30',cov:82},{day:'Tuesdays',dayKey:'Tue',time:'14:00-14:30',cov:80},{day:'Wednesdays',dayKey:'Wed',time:'10:00-10:30',cov:84},{day:'Fridays',dayKey:'Fri',time:'09:30-10:00',cov:81},{day:'Tuesdays',dayKey:'Tue',time:'09:00-09:30',cov:80}];
 
 function bioBtn(k){return '<button class="bio-btn" onclick="openBio(event,\''+k+'\')" aria-label="View bio"><svg width="16" height="16"><use href="#icon-bio"/></svg></button>'}
 
@@ -564,9 +546,9 @@ function renderS2(){
   if(pR){pSec.style.display=pList.length?'':'none';if(pList.length)pR.innerHTML=pList.map(({key:k,cov,hint})=>{const b=TB[k];const kn=b.known?'<span class="t-known">Known</span>':'';return '<div class="match-row partial" onclick="selectTrainer(this)" data-tname="'+b.name+'" data-tkey="'+k+'"><div class="t-radio"></div><div class="match-info"><img class="t-avatar" src="'+b.avatar.replace('160','80')+'" alt=""/><div class="match-info-text"><div class="t-name" style="gap:6px">'+b.name+' '+kn+' '+bioBtn(k)+'</div><div class="t-langs" style="margin-top:3px">'+b.langs.map(l=>'<span class="t-lang-pill">'+l+'</span>').join('')+'</div></div></div><div class="t-cov yellow">'+cov+'</div><div class="match-alt">'+hint+'</div></div>'}).join('')}
 }
 
-function buildPillGrid(wrapId,selObj,ua,onToggle){
+function buildPillGrid(wrapId,selObj,trainerUnavail,onToggle){
+  // trainerUnavail: optional object {key:1} for trainer-specific grids; null means use learner schedule
   const wrap=document.getElementById(wrapId);if(!wrap)return;
-  ua=ua||UNAVAIL;
   const tbl=document.createElement('table');
   tbl.className='avail-grid';tbl.style.tableLayout='fixed';tbl.style.width='100%';
   const thead=document.createElement('thead');
@@ -585,7 +567,8 @@ function buildPillGrid(wrapId,selObj,ua,onToggle){
       const pill=document.createElement('div');
       pill.className='slot-pill';
       const k=di+'-'+ti;
-      const na=ua[k];
+      // Determine unavailability
+      const na = trainerUnavail ? trainerUnavail[k] : isUnavail(di,ti);
       if(na){pill.classList.add('na');}
       else if(selObj[k]){pill.classList.add('selected');pill.textContent=TP(t);}
       else{pill.classList.add('avail');}
@@ -599,8 +582,7 @@ function buildPillGrid(wrapId,selObj,ua,onToggle){
   wrap.innerHTML='';wrap.appendChild(tbl);
 }
 
-function recalcHints(wrapId,selObj,ua){
-  ua=ua||UNAVAIL;
+function recalcHints(wrapId,selObj,trainerUnavail){
   const wrap=document.getElementById(wrapId);if(!wrap)return;
   const selKeys=Object.keys(selObj);
   wrap.querySelectorAll('.slot-pill.match-hint').forEach(p=>{p.classList.remove('match-hint');p.classList.add('avail');p.textContent='';});
@@ -609,7 +591,9 @@ function recalcHints(wrapId,selObj,ua){
   if(!compat.length)return;
   wrap.querySelectorAll('.slot-pill.avail').forEach(p=>{
     const k=p.dataset.di+'-'+p.dataset.ti;
-    if(selObj[k]||ua[k])return;
+    if(selObj[k])return;
+    const na = trainerUnavail ? trainerUnavail[k] : isUnavail(parseInt(p.dataset.di),parseInt(p.dataset.ti));
+    if(na)return;
     if(compat.some(tk=>!TB[tk].unavail[k])){p.classList.remove('avail');p.classList.add('match-hint');}
   });
 }
@@ -629,11 +613,11 @@ function chooseAvailability(){closeChoice();goScreen('s1',document.querySelector
 function chooseTrainer(){closeChoice();goScreen('t1',document.querySelectorAll('.sb-item')[4])}
 
 function buildS1(){
-  buildPillGrid('s1-grid-wrap',s1S,UNAVAIL,(pill,di,ti,d,t,k)=>{
+  buildPillGrid('s1-grid-wrap',s1S,null,(pill,di,ti,d,t,k)=>{
     if(s1S[k]){delete s1S[k];pill.classList.remove('selected');pill.classList.add('avail');pill.textContent='';}
     else{s1S[k]=1;pill.classList.remove('avail','match-hint');pill.classList.add('selected');pill.textContent=TP(t);}
-    recalcHints('s1-grid-wrap',s1S,UNAVAIL);updateS1();
-  });recalcHints('s1-grid-wrap',s1S,UNAVAIL);
+    recalcHints('s1-grid-wrap',s1S,null);updateS1();
+  });recalcHints('s1-grid-wrap',s1S,null);
 }
 
 function renderCov(){
@@ -652,23 +636,23 @@ function updateS1(){
   if(n>=2&&!sugDismissed&&!sugShown)showSug();
   if(n<2&&sugShown)hideSug();
 }
-function showSug(){if(sugDismissed)return;const h=document.getElementById('suggest-banner-host');if(!h)return;h.innerHTML='<div class="suggest-banner"><i class="ti ti-bulb"></i><div style="flex:1"><div class="sb-title">Try the highlighted slots for better trainer matches</div><div class="sb-desc">Dark green slots share compatible trainers with your first selection.</div><div class="sb-actions"><button class="sb-apply" onclick="applySug()">Apply suggestion</button><button class="sb-dismiss" onclick="dismissSug()">Dismiss</button></div></div></div>';sugShown=true}
+function showSug(){if(sugDismissed)return;const h=document.getElementById('suggest-banner-host');if(!h)return;h.innerHTML='<div class="suggest-banner"><i class="ti ti-bulb"></i><div style="flex:1"><div class="sb-title">Try the darker green slots</div><div class="sb-desc">They share a compatible trainer with your first selection.</div><div class="sb-actions"><button class="sb-apply" onclick="applySug()">Apply suggestion</button><button class="sb-dismiss" onclick="dismissSug()">Dismiss</button></div></div></div>';sugShown=true}
 function hideSug(){const h=document.getElementById('suggest-banner-host');if(h)h.innerHTML='';sugShown=false}
 function dismissSug(){sugDismissed=true;hideSug()}
 function applySug(){
   const wrap=document.getElementById('s1-grid-wrap');
   if(wrap){[...wrap.querySelectorAll('.slot-pill.match-hint')].slice(0,3).forEach(p=>{const k=p.dataset.di+'-'+p.dataset.ti;s1S[k]=1;p.classList.remove('match-hint');p.classList.add('selected');p.textContent=TP(TIMES[parseInt(p.dataset.ti)]);});}
-  dismissSug();recalcHints('s1-grid-wrap',s1S,UNAVAIL);
+  dismissSug();recalcHints('s1-grid-wrap',s1S,null);
   covVal=Math.min(100,Math.round(Object.keys(s1S).length/5*100));covCalc=true;updateS1();
 }
 
 function openFilterAvail(){
   document.getElementById('filter-avail-overlay').classList.add('show');
-  buildPillGrid('t2-grid-wrap',t2S,UNAVAIL,(pill,di,ti,d,t,k)=>{
+  buildPillGrid('t2-grid-wrap',t2S,null,(pill,di,ti,d,t,k)=>{
     if(t2S[k]){delete t2S[k];pill.classList.remove('selected');pill.classList.add('avail');pill.textContent='';}
     else{t2S[k]=1;pill.classList.remove('avail','match-hint');pill.classList.add('selected');pill.textContent=TP(t);}
-    recalcHints('t2-grid-wrap',t2S,UNAVAIL);upT2();
-  });recalcHints('t2-grid-wrap',t2S,UNAVAIL);upT2();
+    recalcHints('t2-grid-wrap',t2S,null);upT2();
+  });recalcHints('t2-grid-wrap',t2S,null);upT2();
 }
 function closeFilterAvail(){document.getElementById('filter-avail-overlay').classList.remove('show')}
 function closeFilterAvailOnBg(e){if(e.target.id==='filter-avail-overlay')closeFilterAvail()}
@@ -735,19 +719,20 @@ function confirmClass1Go(){if(c1){const tx=c1.day+' '+c1.time;['s4-class1','s4-c
 function editClass1(){goScreen('s3',document.querySelectorAll('.sb-item')[8])}
 function toggleDayFilter(c){const d=c.dataset.day;df[d]=!df[d];c.classList.toggle('on');c.querySelector('.x').textContent=df[d]?'×':'+';renderC2()}
 function resetDayFilter(){Object.keys(df).forEach(k=>{df[k]=true});document.querySelectorAll('#s4 .day-chip').forEach(c=>{c.classList.add('on');c.querySelector('.x').textContent='×'});renderC2()}
-function renderC2(){const g=document.getElementById('s4-sched-grid');const e=document.getElementById('s4-empty');const n=document.getElementById('s4-shown-count');if(!g)return;const v=C2O.filter(o=>df[o.dayKey]);if(n)n.textContent=v.length;if(!v.length){g.style.display='none';if(e)e.style.display='';return}g.style.display='';if(e)e.style.display='none';g.innerHTML=v.map((o,i)=>'<div class="sched-card" onclick="selC2(this,'+i+')"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">'+o.day+'</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">'+o.time+'</div></div></div><div class="sc-cov-lbl">Schedule coverage</div><div class="sc-cov-num">'+o.cov+'%</div><div class="sc-radio"><div class="rdo"></div>Select this schedule</div></div>').join('')}
+function renderC2(){const g=document.getElementById('s4-sched-grid');const e=document.getElementById('s4-empty');const n=document.getElementById('s4-shown-count');if(!g)return;const v=C2O.filter(o=>df[o.dayKey]);if(!v.length){g.style.display='none';if(e)e.style.display='';return}g.style.display='';if(e)e.style.display='none';g.innerHTML=v.map((o,i)=>'<div class="sched-card" onclick="selC2(this,'+i+')"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">'+o.day+'</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">'+o.time+'</div></div></div><div class="sc-cov-lbl">Coverage</div><div class="sc-cov-num">'+o.cov+'%</div><div class="sc-radio"><div class="rdo"></div>Select</div></div>').join('')}
 function selC2(c){document.querySelectorAll('#s4 .sched-card').forEach(x=>x.classList.remove('selected'));c.classList.add('selected');const b=document.getElementById('s4-next');if(b)b.disabled=false}
 
 function openConfirmSched(){document.getElementById('confirm-sched-overlay').classList.add('show')}
 function closeConfirmSched(){document.getElementById('confirm-sched-overlay').classList.remove('show')}
 function closeConfirmSchedOnBg(e){if(e.target.id==='confirm-sched-overlay')closeConfirmSched()}
 function syncNowAndGoHome(){closeConfirmSched();const items=document.querySelectorAll('.sb-item');goScreen('home',items[items.length-1]);showToast('Calendar synced','Your schedule has been synced.')}
-function goHomeNoSync(){closeConfirmSched();const items=document.querySelectorAll('.sb-item');goScreen('home',items[items.length-1]);showToast('Schedule confirmed','Your weekly classes are booked.')}
+function goHomeNoSync(){closeConfirmSched();const items=document.querySelectorAll('.sb-item');goScreen('home',items[items.length-1]);showToast('Schedule confirmed','Your classes are booked.')}
 function showToast(t,s){const c=document.getElementById('toast-container');if(!c)return;c.innerHTML='<div class="toast"><div class="ic">✓</div><div class="body-text"><div class="ttl">'+t+'</div><div class="sub">'+s+'</div></div><button class="close-btn" onclick="this.closest(\'.toast\').remove()"><i class="ti ti-x"></i></button></div>';setTimeout(()=>{const x=c.querySelector('.toast');if(x){x.style.transition='opacity 0.3s';x.style.opacity='0';setTimeout(()=>{c.innerHTML=''},300)}},5000);}
 
 document.addEventListener('DOMContentLoaded',()=>{
   fillPC();buildS1();
-  buildPillGrid('e1-grid-wrap',{},UNAVAIL,null);
+  // e1 grid: use learner unavail
+  buildPillGrid('e1-grid-wrap',{},null,null);
   renderC2();renderT1();renderS2();
 });
 </script>
