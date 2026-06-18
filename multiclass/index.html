@@ -2,6 +2,10 @@
 <html lang="en">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>UX-536 Prototype v26i</title></head>
 <body style="margin:0;padding:0">
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>UX-536 Prototype v26i</title></head>
+<body style="margin:0;padding:0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -307,9 +311,8 @@
 <div class="cc-title">Specify Availability</div>
 <div class="cc-desc">Select the slots that fit your availability. Once you pick the first one, <strong>darker green</strong> shows where a matching trainer is also free.</div>
 <div class="cb-banner info"><i class="ti ti-info-circle"></i><div><strong>All weekly classes will be with the same trainer.</strong></div></div>
-<div id="suggest-banner-host"></div>
+
 <div class="grid-top">
-  <!-- ⑤ Select all checkbox -->
   <div class="cb-row" onclick="toggleSelectAll('s1-grid-wrap')">
     <div class="cb-check" id="s1-select-all-cb"></div>
     Select all available slots
@@ -325,7 +328,7 @@
 <!-- ④ Coverage area always shown when slots selected -->
 <div class="cov-strip">
   <div id="s1-cov-area"></div>
-  <div class="cta-area" style="margin-left:auto"><button class="btn-link">Select A Trainer</button><button class="btn-primary" id="s1-genbtn" disabled onclick="goScreen('s2',document.querySelectorAll('.sb-item')[3])">Schedule Options</button></div>
+  <div class="cta-area" style="margin-left:auto"><button class="btn-primary" id="s1-genbtn" disabled onclick="goScreen('s2',document.querySelectorAll('.sb-item')[3])">Select A Trainer</button></div>
 </div>
 </div></div></div>
 
@@ -371,11 +374,7 @@
 <div class="trainer-info"><div class="trainer-info-label">Trainer</div>
 <div class="trainer-info-row"><img class="trainer-info-avatar" id="s3-trainer-avatar" src="https://i.pravatar.cc/80?img=44" alt=""/><span class="trainer-info-name" id="s3-trainer-name">Camille Dubois</span><button class="trainer-info-bio-btn" onclick="openBioForCurrent()"><svg width="16" height="16"><use href="#icon-bio"/></svg></button></div></div>
 <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div class="step-marker">1</div><div><div style="font-size:13px;font-weight:600;color:var(--ll-navy)">Choose Class 1</div></div></div>
-<div class="sched-grid">
-<div class="sched-card" onclick="selectClass1(this)"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">Mondays</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">10:00-10:30</div></div></div><div class="sc-cov-lbl">Coverage</div><div class="sc-cov-num">85%</div><div class="sc-radio"><div class="rdo"></div>Select</div></div>
-<div class="sched-card" onclick="selectClass1(this)"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">Thursdays</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">10:00-10:30</div></div></div><div class="sc-cov-lbl">Coverage</div><div class="sc-cov-num">82%</div><div class="sc-radio"><div class="rdo"></div>Select</div></div>
-<div class="sched-card" onclick="selectClass1(this)"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">Fridays</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">09:30-10:00</div></div></div><div class="sc-cov-lbl">Coverage</div><div class="sc-cov-num">80%</div><div class="sc-radio"><div class="rdo"></div>Select</div></div>
-</div></div></div>
+<div class="sched-grid" id="s3-sched-grid"></div></div></div>
 <div class="flow-nav"><button class="btn-ghost" onclick="goScreen('t1',document.querySelectorAll('.sb-item')[4])">← Back</button><button class="btn-primary" id="s3-next" disabled onclick="confirmClass1Go()">Confirm class 1 &amp; continue →</button></div>
 </div>
 
@@ -581,7 +580,12 @@ function renderS2(){
     const h5=fSec?fSec.querySelector('h5'):null;
     if(h5)h5.style.display='none';
     const fR=document.getElementById('s2-full-rows');
-    if(fR&&fList.length)fR.innerHTML=fList.map(k=>{const b=TB[k];const kn=b.known?'<span class="t-known">Known</span>':'';return '<div class="t-row" onclick="selectTrainer(this)" data-tname="'+b.name+'" data-tkey="'+k+'"><div class="t-radio"></div><div class="t-name"><img class="t-avatar" src="'+b.avatar.replace('160','80')+'" alt=""/>'+b.name+' '+kn+'</div><div class="t-bio-cell">'+bioBtn(k)+'</div><div class="t-rating"><i class="ti ti-star-filled"></i>'+b.rating+'</div><div class="t-langs">'+b.langs.map(l=>'<span class="t-lang-pill">'+l+'</span>').join('')+'</div><div class="t-cov green">100%</div></div>'}).join('');
+    if(fR&&fList.length){
+      // Use actual calculated coverage — smart match slots can yield anything ≥80%
+      const dispCov=covCalc?covVal+'%':'–';
+      const covClass=covVal===100?'green':'yellow';
+      fR.innerHTML=fList.map(k=>{const b=TB[k];const kn=b.known?'<span class="t-known">Known</span>':'';return '<div class="t-row" onclick="selectTrainer(this)" data-tname="'+b.name+'" data-tkey="'+k+'"><div class="t-radio"></div><div class="t-name"><img class="t-avatar" src="'+b.avatar.replace('160','80')+'" alt=""/>'+b.name+' '+kn+'</div><div class="t-bio-cell">'+bioBtn(k)+'</div><div class="t-rating"><i class="ti ti-star-filled"></i>'+b.rating+'</div><div class="t-langs">'+b.langs.map(l=>'<span class="t-lang-pill">'+l+'</span>').join('')+'</div><div class="t-cov '+covClass+'">'+dispCov+'</div></div>'}).join('');
+    }
   } else {
     // No single trainer covers all selected slots → partial matches
     if(fSec)fSec.style.display='none';
@@ -647,43 +651,65 @@ function buildPillGrid(wrapId,selObj,trainerUnavail,onToggle){
       const td=document.createElement('td');
       const pill=document.createElement('div');pill.className='slot-pill';
       const k=di+'-'+ti;
-      const na=trainerUnavail?trainerUnavail[k]:isUnavail(di,ti);
-      if(na){pill.classList.add('na');}
-      else if(selObj[k]){pill.classList.add('selected');pill.textContent=TP(t);}
-      else{pill.classList.add('avail');}
+
+      // For trainer-specific grids (B3), use trainerUnavail directly
+      if(trainerUnavail){
+        const na=trainerUnavail[k];
+        if(na){pill.classList.add('na');}
+        else if(selObj[k]){pill.classList.add('selected');pill.textContent=TP(t);}
+        else{pill.classList.add('avail');}
+        if(!na&&onToggle)pill.onclick=()=>onToggle(pill,di,ti,d,t,k);
+      } else {
+        // Learner grid: green = at least one trainer covers ≥80% of their total slots
+        // including this slot. Grey = no trainer can cover this slot at all.
+        // First check: is learner available?
+        const learnerNA=isUnavail(di,ti);
+        if(learnerNA){
+          pill.classList.add('na');
+        } else {
+          // Check if any trainer is free at this slot
+          const trainerCoversSlot=Object.keys(TB).some(tk=>!TB[tk].unavail[k]);
+          if(!trainerCoversSlot){
+            // No trainer free here → grey (unavailable)
+            pill.classList.add('na');
+          } else if(selObj[k]){
+            pill.classList.add('selected');pill.textContent=TP(t);
+          } else {
+            pill.classList.add('avail');
+          }
+          if(trainerCoversSlot&&!learnerNA&&onToggle)pill.onclick=()=>onToggle(pill,di,ti,d,t,k);
+        }
+      }
       pill.dataset.di=di;pill.dataset.ti=ti;
-      if(!na&&onToggle)pill.onclick=()=>onToggle(pill,di,ti,d,t,k);
       td.appendChild(pill);tr.appendChild(td);
     });tbody.appendChild(tr);
   });tbl.appendChild(tbody);wrap.innerHTML='';wrap.appendChild(tbl);
 }
 
-// ── ③ Smart match: preserve existing hints when selecting an avail slot ──
-// Compatible trainers = trainers free at ALL currently selected keys
-// We only REMOVE hints if the newly selected slot is incompatible with existing hints
-// i.e. we recalc based on ALL selected (including the new one)
+// Smart match: based on first selected slot's trainers
+// Find trainers available at the FIRST selected slot,
+// then highlight slots where those same trainers are also free
 function recalcHints(wrapId,selObj,trainerUnavail){
   const wrap=document.getElementById(wrapId);if(!wrap)return;
   const selKeys=Object.keys(selObj);
 
-  // Clear existing hints
+  // Clear existing hints back to avail
   wrap.querySelectorAll('.slot-pill.match-hint').forEach(p=>{
     p.classList.remove('match-hint');p.classList.add('avail');p.textContent='';
   });
 
   if(!selKeys.length)return;
 
-  // Trainers compatible with ALL selected slots
-  const compat=Object.keys(TB).filter(k=>selKeys.every(sk=>!TB[k].unavail[sk]));
-  if(!compat.length)return;
+  // Find trainers available at the FIRST selected slot
+  const firstKey=selKeys[0];
+  const firstSlotTrainers=Object.keys(TB).filter(tk=>!TB[tk].unavail[firstKey]);
+  if(!firstSlotTrainers.length)return;
 
-  // Mark unselected available slots as match-hint if any compatible trainer is free there
+  // Smart match: slots where ANY of those same first-slot trainers are free
   wrap.querySelectorAll('.slot-pill.avail').forEach(p=>{
     const k=p.dataset.di+'-'+p.dataset.ti;
     if(selObj[k])return;
-    const na=trainerUnavail?trainerUnavail[k]:isUnavail(parseInt(p.dataset.di),parseInt(p.dataset.ti));
-    if(na)return;
-    if(compat.some(tk=>!TB[tk].unavail[k])){
+    if(firstSlotTrainers.some(tk=>!TB[tk].unavail[k])){
       p.classList.remove('avail');p.classList.add('match-hint');
     }
   });
@@ -722,7 +748,7 @@ function toggleSelectAll(wrapId){
   const cbId=wrapId==='s1-grid-wrap'?'s1-select-all-cb':wrapId==='t2-grid-wrap'?'t2-select-all-cb':null;
   if(cbId){const cb=document.getElementById(cbId);if(cb)cb.classList.toggle('checked',!allSelected);}
 
-  if(wrapId==='s1-grid-wrap'){recalcHints('s1-grid-wrap',s1S,null);updateS1();}
+  if(wrapId==='s1-grid-wrap'){recalcHints('s1-grid-wrap',s1S,null);recomputeCov();updateS1();}
   if(wrapId==='t2-grid-wrap'){recalcHints('t2-grid-wrap',t2S,null);upT2();}
 }
 
@@ -733,8 +759,26 @@ function goScreen(id,el){
   if(el)el.classList.add('active');
   if(id==='s4')renderC2();
   if(id==='s3'||id==='s4')syncTr();
+  if(id==='s3')renderS3();
   if(id==='s2')renderS2();
 }
+
+const S3O=[{day:'Mondays',time:'10:00-10:30'},{day:'Thursdays',time:'10:00-10:30'},{day:'Fridays',time:'09:30-10:00'}];
+function renderS3(){
+  const g=document.getElementById('s3-sched-grid');if(!g)return;
+  const full=covVal===100;
+  const covs=full?[100,100,100]:[85,82,80];
+  const col=full?'var(--ll-green-text)':'var(--ll-yellow-text)';
+  g.innerHTML=S3O.map((o,i)=>'<div class="sched-card" onclick="selectClass1(this)">'
+    +'<div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">'+o.day+'</div></div>'
+    +'<div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">'+o.time+'</div></div></div>'
+    +'<div class="sc-cov-lbl">Coverage</div>'
+    +'<div class="sc-cov-num" style="color:'+col+'">'+covs[i]+'%</div>'
+    +'<div class="sc-radio"><div class="rdo"></div>Select</div></div>'
+  ).join('');
+  const btn=document.getElementById('s3-next');if(btn)btn.disabled=true;
+}
+
 function openChoice(){document.getElementById('choice-overlay').classList.add('show')}
 function closeChoice(){document.getElementById('choice-overlay').classList.remove('show')}
 function closeChoiceOnBg(e){if(e.target.id==='choice-overlay')closeChoice()}
@@ -748,11 +792,25 @@ function buildS1(){
     } else {
       s1S[k]=1;pill.classList.remove('avail','match-hint');pill.classList.add('selected');pill.textContent=TP(t);
     }
-    // ③ Recalc hints based on full selection (including or excluding this slot)
     recalcHints('s1-grid-wrap',s1S,null);
+    recomputeCov();
     updateS1();
   });
   recalcHints('s1-grid-wrap',s1S,null);
+}
+
+// Silently recompute covVal on every slot change — no spinner, keeps value always fresh
+function recomputeCov(){
+  const selKeys=Object.keys(s1S);
+  if(!selKeys.length){covVal=0;covCalc=false;return;}
+  let best=0;
+  Object.keys(TB).forEach(tk=>{
+    const covered=selKeys.filter(sk=>!TB[tk].unavail[sk]).length;
+    const pct=selKeys.length>0?covered/selKeys.length:0;
+    if(pct>best)best=pct;
+  });
+  covVal=best===1?100:Math.max(80,Math.min(99,Math.round(best*100)));
+  // Don't set covCalc=true here — the button still controls whether % is shown in the UI
 }
 
 // ④ Coverage button always visible when slots are selected; resets to button on any change
@@ -774,22 +832,21 @@ function calcCov(){
   const rb=document.querySelector('#s1-cov-area button');
   if(rb){rb.innerHTML='<span class="calc-spinner"></span>…';rb.disabled=true;}
   setTimeout(()=>{
-    const wrap=document.getElementById('s1-grid-wrap');
     const selKeys=Object.keys(s1S);
-
-    // Check if every selected slot was originally a smart match hint
-    // A slot is a smart match if it exists in the compatible trainer pool
-    // for the FIRST selected slot (i.e. trainers that cover the anchor slot)
-    // Simpler rule: all selected slots are smart-match if there exists at least
-    // one trainer who covers ALL of them → that's 100% coverage
-    const compatTrainers=Object.keys(TB).filter(k=>selKeys.every(sk=>!TB[k].unavail[sk]));
-
-    if(compatTrainers.length>0){
-      // At least one trainer covers all selected slots → 100%
+    // Find trainers who cover ALL selected slots → 100%
+    // Find trainers who cover SOME selected slots → partial, proportional coverage
+    // Best trainer = highest slot coverage across selected slots
+    let best=0;
+    Object.keys(TB).forEach(tk=>{
+      const covered=selKeys.filter(sk=>!TB[tk].unavail[sk]).length;
+      const pct=selKeys.length>0?covered/selKeys.length:0;
+      if(pct>best)best=pct;
+    });
+    // Scale: if best trainer covers 100% → 100%, otherwise clamp to 80–99%
+    if(best===1){
       covVal=100;
     } else {
-      // Mixed selection (some avail-only slots) → scaled ≥80%
-      covVal=Math.max(80,Math.min(99,80+Math.round((selKeys.length-1)*2)));
+      covVal=Math.max(80,Math.min(99,Math.round(best*100)));
     }
     covCalc=true;renderCov();updateS1();renderS2();
   },650);
@@ -798,11 +855,10 @@ function calcCov(){
 function updateS1(){
   const n=Object.keys(s1S).length;
   const btn=document.getElementById('s1-genbtn');
-  // Show coverage area whenever there are slots; reset calculated state on change
   renderCov();
   if(btn)btn.disabled=n<MIN;
-  if(n>=2&&!sugDismissed&&!sugShown)showSug();
-  if(n<2&&sugShown)hideSug();
+  if(n>=2&&!sugDismissed&&!sugShown){/* showSug() — disabled */}
+  if(n<2&&sugShown){/* hideSug() — disabled */}
 }
 
 function showSug(){if(sugDismissed)return;const h=document.getElementById('suggest-banner-host');if(!h)return;h.innerHTML='<div class="suggest-banner"><i class="ti ti-bulb"></i><div style="flex:1"><div class="sb-title">Try the darker green slots</div><div class="sb-desc">They share a compatible trainer with your first selection.</div><div class="sb-actions"><button class="sb-apply" onclick="applySug()">Apply suggestion</button><button class="sb-dismiss" onclick="dismissSug()">Dismiss</button></div></div></div>';sugShown=true}
@@ -903,4 +959,5 @@ document.addEventListener('DOMContentLoaded',()=>{
   renderC2();renderT1();renderS2();
 });
 </script>
+</body></html>
 </body></html>
