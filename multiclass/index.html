@@ -580,12 +580,7 @@ function renderS2(){
     const h5=fSec?fSec.querySelector('h5'):null;
     if(h5)h5.style.display='none';
     const fR=document.getElementById('s2-full-rows');
-    if(fR&&fList.length){
-      // Use actual calculated coverage — smart match slots can yield anything ≥80%
-      const dispCov=covCalc?covVal+'%':'–';
-      const covClass=covVal===100?'green':'yellow';
-      fR.innerHTML=fList.map(k=>{const b=TB[k];const kn=b.known?'<span class="t-known">Known</span>':'';return '<div class="t-row" onclick="selectTrainer(this)" data-tname="'+b.name+'" data-tkey="'+k+'"><div class="t-radio"></div><div class="t-name"><img class="t-avatar" src="'+b.avatar.replace('160','80')+'" alt=""/>'+b.name+' '+kn+'</div><div class="t-bio-cell">'+bioBtn(k)+'</div><div class="t-rating"><i class="ti ti-star-filled"></i>'+b.rating+'</div><div class="t-langs">'+b.langs.map(l=>'<span class="t-lang-pill">'+l+'</span>').join('')+'</div><div class="t-cov '+covClass+'">'+dispCov+'</div></div>'}).join('');
-    }
+    if(fR&&fList.length)fR.innerHTML=fList.map(k=>{const b=TB[k];const kn=b.known?'<span class="t-known">Known</span>':'';return '<div class="t-row" onclick="selectTrainer(this)" data-tname="'+b.name+'" data-tkey="'+k+'"><div class="t-radio"></div><div class="t-name"><img class="t-avatar" src="'+b.avatar.replace('160','80')+'" alt=""/>'+b.name+' '+kn+'</div><div class="t-bio-cell">'+bioBtn(k)+'</div><div class="t-rating"><i class="ti ti-star-filled"></i>'+b.rating+'</div><div class="t-langs">'+b.langs.map(l=>'<span class="t-lang-pill">'+l+'</span>').join('')+'</div><div class="t-cov green">100%</div></div>'}).join('');
   } else {
     // No single trainer covers all selected slots → partial matches
     if(fSec)fSec.style.display='none';
@@ -748,7 +743,7 @@ function toggleSelectAll(wrapId){
   const cbId=wrapId==='s1-grid-wrap'?'s1-select-all-cb':wrapId==='t2-grid-wrap'?'t2-select-all-cb':null;
   if(cbId){const cb=document.getElementById(cbId);if(cb)cb.classList.toggle('checked',!allSelected);}
 
-  if(wrapId==='s1-grid-wrap'){recalcHints('s1-grid-wrap',s1S,null);recomputeCov();updateS1();}
+  if(wrapId==='s1-grid-wrap'){recalcHints('s1-grid-wrap',s1S,null);updateS1();}
   if(wrapId==='t2-grid-wrap'){recalcHints('t2-grid-wrap',t2S,null);upT2();}
 }
 
@@ -792,25 +787,11 @@ function buildS1(){
     } else {
       s1S[k]=1;pill.classList.remove('avail','match-hint');pill.classList.add('selected');pill.textContent=TP(t);
     }
+    // ③ Recalc hints based on full selection (including or excluding this slot)
     recalcHints('s1-grid-wrap',s1S,null);
-    recomputeCov();
     updateS1();
   });
   recalcHints('s1-grid-wrap',s1S,null);
-}
-
-// Silently recompute covVal on every slot change — no spinner, keeps value always fresh
-function recomputeCov(){
-  const selKeys=Object.keys(s1S);
-  if(!selKeys.length){covVal=0;covCalc=false;return;}
-  let best=0;
-  Object.keys(TB).forEach(tk=>{
-    const covered=selKeys.filter(sk=>!TB[tk].unavail[sk]).length;
-    const pct=selKeys.length>0?covered/selKeys.length:0;
-    if(pct>best)best=pct;
-  });
-  covVal=best===1?100:Math.max(80,Math.min(99,Math.round(best*100)));
-  // Don't set covCalc=true here — the button still controls whether % is shown in the UI
 }
 
 // ④ Coverage button always visible when slots are selected; resets to button on any change
