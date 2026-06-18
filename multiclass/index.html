@@ -6,6 +6,10 @@
 <html lang="en">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>UX-536 Prototype v26i</title></head>
 <body style="margin:0;padding:0">
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>UX-536 Prototype v26i</title></head>
+<body style="margin:0;padding:0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -320,7 +324,7 @@
   <div class="legend">
     <div class="lg"><div class="lg-swatch lg-na"></div>Not available</div>
     <div class="lg"><div class="lg-swatch lg-av"></div>Available</div>
-    <div class="lg"><div class="lg-swatch lg-mh"></div>Smart match</div>
+    <div class="lg"><div class="lg-swatch lg-mh"></div>Same trainer available</div>
     <div class="lg"><div class="lg-swatch lg-sl"></div>Selected</div>
   </div>
 </div>
@@ -397,8 +401,9 @@
 <button class="day-filter-reset" onclick="resetDayFilter()">Reset</button></div>
 <div class="sched-grid" id="s4-sched-grid"></div>
 <div id="s4-empty" style="display:none;text-align:center;padding:20px;background:var(--ll-bg);border-radius:6px;font-size:12px;color:var(--ll-text-muted)">No schedules match.</div>
+<div id="s4-c2-confirmed" style="display:none" class="confirmed-card"><div class="checkmark-icon">✓</div><div class="info-text"><div class="title">Class 2 confirmed — <span id="s4-c2-text">Thursdays 10:00-10:30</span></div><div class="sub">with <span id="s4-c2-trainer">Camille Dubois</span></div></div><button class="btn-link" style="padding:4px 10px;font-size:11px" onclick="editClass2()">Edit</button></div>
 </div></div>
-<div class="flow-nav"><button class="btn-ghost" onclick="goScreen('s3',document.querySelectorAll('.sb-item')[8])">← Back</button><button class="btn-primary" id="s4-next" disabled onclick="openConfirmSched()">Confirm Schedule</button></div>
+<div class="flow-nav"><button class="btn-ghost" onclick="goScreen('s3',document.querySelectorAll('.sb-item')[8])">← Back</button><button class="btn-primary" id="s4-next" disabled onclick="confirmClass2Go()">Confirm class 2 &amp; continue →</button></div>
 </div>
 
 <div class="screen" id="e1"><div class="welcome-row"><div><h1>Conflict state</h1></div></div>
@@ -457,7 +462,7 @@
 <div class="filter-modal-body">
 <div class="grid-top">
   <div class="cb-row" onclick="toggleSelectAll('t2-grid-wrap')"><div class="cb-check" id="t2-select-all-cb"></div>Select all</div>
-  <div class="legend"><div class="lg"><div class="lg-swatch lg-na"></div>Not available</div><div class="lg"><div class="lg-swatch lg-av"></div>Available</div><div class="lg"><div class="lg-swatch lg-mh"></div>Smart match</div><div class="lg"><div class="lg-swatch lg-sl"></div>Selected</div></div>
+  <div class="legend"><div class="lg"><div class="lg-swatch lg-na"></div>Not available</div><div class="lg"><div class="lg-swatch lg-av"></div>Available</div><div class="lg"><div class="lg-swatch lg-mh"></div>Same trainer available</div><div class="lg"><div class="lg-swatch lg-sl"></div>Selected</div></div>
 </div>
 <div id="t2-grid-wrap"></div>
 <div style="margin-top:10px;font-size:11px;color:var(--ll-text-muted)"><span id="t2-count">0</span> slots selected</div>
@@ -925,7 +930,34 @@ function editClass1(){goScreen('s3',document.querySelectorAll('.sb-item')[8])}
 function toggleDayFilter(c){const d=c.dataset.day;df[d]=!df[d];c.classList.toggle('on');c.querySelector('.x').textContent=df[d]?'×':'+';renderC2()}
 function resetDayFilter(){Object.keys(df).forEach(k=>{df[k]=true});document.querySelectorAll('#s4 .day-chip').forEach(c=>{c.classList.add('on');c.querySelector('.x').textContent='×'});renderC2()}
 function renderC2(){const g=document.getElementById('s4-sched-grid');const e=document.getElementById('s4-empty');if(!g)return;const v=C2O.filter(o=>df[o.dayKey]);if(!v.length){g.style.display='none';if(e)e.style.display='';return}g.style.display='';if(e)e.style.display='none';g.innerHTML=v.map((o,i)=>'<div class="sched-card" onclick="selC2(this,'+i+')"><div class="sc-row"><div class="sc-col"><div class="sc-lbl">Day</div><div class="sc-val">'+o.day+'</div></div><div class="sc-col"><div class="sc-lbl">Time</div><div class="sc-val">'+o.time+'</div></div></div><div class="sc-cov-lbl">Coverage</div><div class="sc-cov-num">'+o.cov+'%</div><div class="sc-radio"><div class="rdo"></div>Select</div></div>').join('')}
-function selC2(c){document.querySelectorAll('#s4 .sched-card').forEach(x=>x.classList.remove('selected'));c.classList.add('selected');const b=document.getElementById('s4-next');if(b)b.disabled=false}
+function selC2(c,i){
+  document.querySelectorAll('#s4 .sched-card').forEach(x=>x.classList.remove('selected'));
+  c.classList.add('selected');
+  const btn=document.getElementById('s4-next');if(btn){btn.disabled=false;btn.textContent='Confirm class 2 & continue →';}
+  // Hide c2 confirmed strip when re-selecting
+  const strip=document.getElementById('s4-c2-confirmed');if(strip)strip.style.display='none';
+}
+function confirmClass2Go(){
+  // Read selected card details
+  const sel=document.querySelector('#s4 .sched-card.selected');if(!sel)return;
+  const day=sel.querySelector('.sc-val').textContent;
+  const time=sel.querySelectorAll('.sc-val')[1].textContent;
+  const tx=day+' '+time;
+  const t2=document.getElementById('s4-c2-text');if(t2)t2.textContent=tx;
+  const tr=document.getElementById('s4-c2-trainer');if(tr)tr.textContent=sTr;
+  // Show confirmation strip, hide schedule grid + day filter
+  const strip=document.getElementById('s4-c2-confirmed');if(strip)strip.style.display='flex';
+  // Change button to final confirm
+  const btn=document.getElementById('s4-next');
+  if(btn){btn.textContent='Confirm Schedule';btn.onclick=openConfirmSched;}
+}
+function editClass2(){
+  // Hide strip, re-enable schedule selection
+  const strip=document.getElementById('s4-c2-confirmed');if(strip)strip.style.display='none';
+  document.querySelectorAll('#s4 .sched-card').forEach(x=>x.classList.remove('selected'));
+  const btn=document.getElementById('s4-next');
+  if(btn){btn.disabled=true;btn.textContent='Confirm class 2 & continue →';btn.onclick=confirmClass2Go;}
+}
 
 function openConfirmSched(){document.getElementById('confirm-sched-overlay').classList.add('show')}
 function closeConfirmSched(){document.getElementById('confirm-sched-overlay').classList.remove('show')}
@@ -940,5 +972,6 @@ document.addEventListener('DOMContentLoaded',()=>{
   renderC2();renderT1();renderS2();
 });
 </script>
+</body></html>
 </body></html>
 </body></html>
