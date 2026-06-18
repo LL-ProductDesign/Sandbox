@@ -116,6 +116,7 @@
 .match-row.partial .day-breakdown{padding-left:41px}
 .day-chip-ok{display:inline-flex;align-items:center;gap:3px;padding:2px 8px 2px 5px;border-radius:20px;font-size:11px;font-weight:500;background:var(--ll-green-bg);color:var(--ll-green-text);border:1px solid #B7DCB0}
 .day-chip-bad{display:inline-flex;align-items:center;gap:3px;padding:2px 8px 2px 5px;border-radius:20px;font-size:11px;font-weight:500;background:var(--ll-red-bg);color:var(--ll-red-text);border:1px solid #F7C1C1}
+.day-chip-suggest{display:inline-flex;align-items:center;gap:3px;padding:2px 8px 2px 6px;border-radius:20px;font-size:11px;font-weight:500;background:var(--ll-blue-light);color:var(--ll-blue);border:1px solid var(--ll-blue-border)}
 .day-chip-ok i,.day-chip-bad i{font-size:11px}
 .adjust-link{font-size:10px;color:var(--ll-blue);text-decoration:underline;cursor:pointer;margin-left:4px;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;background:none;border:none;font-family:inherit;padding:0}
 .trainer-info{margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--ll-border)}
@@ -612,9 +613,38 @@ function renderS2(){
           const[di,ti]=sk.split('-').map(Number);
           const label=DAYS[di]+' '+TIMES[ti];
           const ok=!TB[k].unavail[sk];
-          return ok
-            ?'<span class="day-chip-ok"><i class="ti ti-check"></i>'+label+'</span>'
-            :'<span class="day-chip-bad"><i class="ti ti-x"></i>'+label+'</span>';
+          if(ok){
+            return '<span class="day-chip-ok"><i class="ti ti-check"></i>'+label+'</span>';
+          } else {
+            // Find nearest alternative slot on any day where this trainer IS free
+            // Search ±2 time slots on the same day first, then adjacent days
+            let suggested=null;
+            for(let delta=1;delta<=4&&!suggested;delta++){
+              [-delta,delta].forEach(d=>{
+                const nti=ti+d;
+                if(!suggested&&nti>=0&&nti<TIMES.length){
+                  const nk=di+'-'+nti;
+                  if(!TB[k].unavail[nk]&&!isUnavail(di,nti))suggested=DAYS[di]+' '+TIMES[nti];
+                }
+              });
+            }
+            // If nothing on same day, try adjacent days same time
+            if(!suggested){
+              for(let dd=1;dd<=2&&!suggested;dd++){
+                [-dd,dd].forEach(d=>{
+                  const ndi=di+d;
+                  if(!suggested&&ndi>=0&&ndi<5){
+                    const nk=ndi+'-'+ti;
+                    if(!TB[k].unavail[nk]&&!isUnavail(ndi,ti))suggested=DAYS[ndi]+' '+TIMES[ti];
+                  }
+                });
+              }
+            }
+            const suggestion=suggested
+              ?'<span class="day-chip-suggest"><i class="ti ti-arrow-right" style="font-size:10px"></i>Try '+suggested+'</span>'
+              :'';
+            return '<span class="day-chip-bad"><i class="ti ti-x"></i>'+label+'</span>'+suggestion;
+          }
         }).join('');
         const covered=sortedKeys.filter(sk=>!TB[k].unavail[sk]).length;
         const dynCov=sortedKeys.length>0?Math.max(80,Math.round((covered/sortedKeys.length)*100))+'%':'–';
