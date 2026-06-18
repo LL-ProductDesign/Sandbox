@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>UX-536 Prototype v26i</title></head>
+<body style="margin:0;padding:0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -699,10 +703,28 @@ function renderCov(){
 }
 
 function calcCov(){
-  const b=document.getElementById('s1-calc-btn');
   const rb=document.querySelector('#s1-cov-area button');
   if(rb){rb.innerHTML='<span class="calc-spinner"></span>…';rb.disabled=true;}
-  setTimeout(()=>{covVal=Math.min(100,Math.round(Object.keys(s1S).length/5*100));covCalc=true;renderCov();updateS1();},650);
+  setTimeout(()=>{
+    const wrap=document.getElementById('s1-grid-wrap');
+    const selKeys=Object.keys(s1S);
+
+    // Check if every selected slot was originally a smart match hint
+    // A slot is a smart match if it exists in the compatible trainer pool
+    // for the FIRST selected slot (i.e. trainers that cover the anchor slot)
+    // Simpler rule: all selected slots are smart-match if there exists at least
+    // one trainer who covers ALL of them → that's 100% coverage
+    const compatTrainers=Object.keys(TB).filter(k=>selKeys.every(sk=>!TB[k].unavail[sk]));
+
+    if(compatTrainers.length>0){
+      // At least one trainer covers all selected slots → 100%
+      covVal=100;
+    } else {
+      // Mixed selection (some avail-only slots) → scaled ≥80%
+      covVal=Math.max(80,Math.min(99,80+Math.round((selKeys.length-1)*2)));
+    }
+    covCalc=true;renderCov();updateS1();
+  },650);
 }
 
 function updateS1(){
@@ -812,4 +834,4 @@ document.addEventListener('DOMContentLoaded',()=>{
   buildPillGrid('e1-grid-wrap',{},null,null);
   renderC2();renderT1();renderS2();
 });
-</script>
+</script></body></html>
