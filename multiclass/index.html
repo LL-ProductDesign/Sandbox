@@ -392,8 +392,8 @@
 <div class="trainer-info"><div class="trainer-info-label">Trainer</div>
 <div class="trainer-info-row"><img class="trainer-info-avatar" id="s4-trainer-avatar" src="https://i.pravatar.cc/80?img=44" alt=""/><span class="trainer-info-name" id="s4-trainer-name">Camille Dubois</span></div></div>
 <div class="confirmed-card"><div class="checkmark-icon">✓</div><div class="info-text"><div class="title">Class 1 confirmed — <span id="s4-c1-text">Mondays 10:00-10:30</span></div><div class="sub">with <span id="s4-c1-trainer">Camille Dubois</span></div></div><button class="btn-link" style="padding:4px 10px;font-size:11px" onclick="editClass1()">Edit</button></div>
-<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div class="step-marker">2</div><div><div style="font-size:13px;font-weight:600;color:var(--ll-navy)">Choose Class 2</div></div></div>
-<div class="day-filter-wrap"><span class="day-filter-lbl">Show days:</span>
+<div id="s4-step2-header" style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div class="step-marker">2</div><div><div style="font-size:13px;font-weight:600;color:var(--ll-navy)">Choose Class 2</div></div></div>
+<div id="s4-day-filter" class="day-filter-wrap"><span class="day-filter-lbl">Show days:</span>
 <div class="day-chip on" data-day="Mon" onclick="toggleDayFilter(this)">Mon <span class="x">×</span></div>
 <div class="day-chip on" data-day="Tue" onclick="toggleDayFilter(this)">Tue <span class="x">×</span></div>
 <div class="day-chip on" data-day="Wed" onclick="toggleDayFilter(this)">Wed <span class="x">×</span></div>
@@ -968,23 +968,29 @@ function selC2(c,i){
   const strip=document.getElementById('s4-c2-confirmed');if(strip)strip.style.display='none';
 }
 function confirmClass2Go(){
-  // Read selected card details
   const sel=document.querySelector('#s4 .sched-card.selected');if(!sel)return;
   const day=sel.querySelector('.sc-val').textContent;
   const time=sel.querySelectorAll('.sc-val')[1].textContent;
   const tx=day+' '+time;
   const t2=document.getElementById('s4-c2-text');if(t2)t2.textContent=tx;
   const tr=document.getElementById('s4-c2-trainer');if(tr)tr.textContent=sTr;
-  // Show confirmation strip, hide schedule grid + day filter
+  // Hide selection UI — show only the two confirmed cards
+  ['s4-step2-header','s4-day-filter','s4-sched-grid','s4-empty'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.style.display='none';
+  });
+  // Show Class 2 confirmation strip
   const strip=document.getElementById('s4-c2-confirmed');if(strip)strip.style.display='flex';
-  // Change button to final confirm
+  // Update button to final confirm
   const btn=document.getElementById('s4-next');
   if(btn){btn.textContent='Confirm Schedule';btn.onclick=openConfirmSched;}
 }
 function editClass2(){
-  // Hide strip, re-enable schedule selection
-  const strip=document.getElementById('s4-c2-confirmed');if(strip)strip.style.display='none';
+  // Restore selection UI
+  document.getElementById('s4-step2-header').style.display='flex';
+  document.getElementById('s4-day-filter').style.display='flex';
+  document.getElementById('s4-sched-grid').style.display='';
   document.querySelectorAll('#s4 .sched-card').forEach(x=>x.classList.remove('selected'));
+  const strip=document.getElementById('s4-c2-confirmed');if(strip)strip.style.display='none';
   const btn=document.getElementById('s4-next');
   if(btn){btn.disabled=true;btn.textContent='Confirm class 2 & continue →';btn.onclick=confirmClass2Go;}
 }
