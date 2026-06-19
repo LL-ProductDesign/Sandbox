@@ -133,7 +133,11 @@
 .swap-action-btn{font-size:10px;padding:3px 9px;border-radius:4px;background:var(--ll-blue);color:#fff;border:none;cursor:pointer;font-family:inherit;white-space:nowrap}
 .swap-panel-footer{padding:8px 12px;display:flex;align-items:center;justify-content:space-between;background:var(--ll-card);border-top:1px solid var(--ll-border)}
 .swap-dismiss{font-size:10px;color:var(--ll-text-muted);background:none;border:none;cursor:pointer;font-family:inherit;text-decoration:underline;padding:0}
-.cov-updated{font-size:11px;color:var(--ll-green-text);font-weight:500;display:inline-flex;align-items:center;gap:4px}
+.confirm-strip{margin:0 12px 10px 12px;background:var(--ll-green-bg);border:1px solid #B7DCB0;border-radius:8px;padding:10px 14px;display:flex;align-items:center;gap:10px}
+.confirm-strip-icon{width:22px;height:22px;border-radius:50%;background:var(--ll-green-text);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+.confirm-strip-body{flex:1;font-size:11px;color:var(--ll-green-text);line-height:1.4}
+.confirm-strip-body strong{font-weight:600}
+.confirm-strip-undo{font-size:10px;color:var(--ll-green-text);text-decoration:underline;cursor:pointer;background:none;border:none;font-family:inherit;padding:0;white-space:nowrap;opacity:0.8}
 .trainer-info{margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--ll-border)}
 .trainer-info-label{font-size:13px;font-weight:600;color:var(--ll-navy);margin-bottom:8px}
 .trainer-info-row{display:flex;align-items:center;gap:10px}
@@ -363,7 +367,7 @@
 <div class="s2-toolbar"><label class="known-cb-wrap"><input type="checkbox" id="s2-known-only" onchange="renderS2()"/>Show only known trainers</label></div>
 <div id="s2-full-section"><div class="psec"><h5>Full matches</h5>
 <div class="t-table"><div class="t-head"><div></div><div>Name</div><div style="text-align:center">Bio</div><div>Rating</div><div>Languages</div><div style="text-align:right">Coverage</div></div><div id="s2-full-rows"></div></div><button class="load-more-btn">Load More</button></div></div>
-<div id="s2-partial-section"><div class="psec"><h5>Partial matches</h5><p style="font-size:11px;color:var(--ll-text-muted);margin-bottom:10px;line-height:1.5">No trainer is free for all your weekly classes. These trainers can cover some of them — use "Adjust this slot" to improve the match.</p><div id="s2-partial-rows"></div></div></div>
+<div id="s2-partial-section"><div class="psec"><h5>Partial matches</h5><p style="font-size:11px;color:var(--ll-text-muted);margin-bottom:10px;line-height:1.5">These trainers don't have enough slots to cover your weekly class frequency yet. Adding the suggested slot may unlock them as a full match.</p><div id="s2-partial-rows"></div></div></div>
 </div></div>
 <div class="flow-nav"><button class="btn-ghost" onclick="goScreen('s1',document.querySelectorAll('.sb-item')[2])">← Back</button><button class="btn-primary" id="s2-next" disabled onclick="goScreen('s3',document.querySelectorAll('.sb-item')[7])">Select Schedules →</button></div>
 </div>
@@ -645,143 +649,83 @@ function renderS2(){
   const ko=(document.getElementById('s2-known-only')||{}).checked||false;
   const fSec=document.getElementById('s2-full-section');
   const pSec=document.getElementById('s2-partial-section');
-
-  // Determine if selection has full coverage: at least one trainer covers ALL selected slots
   const selKeys=Object.keys(s1S);
-  const hasFullMatch=selKeys.length===0||Object.keys(TB).some(k=>selKeys.every(sk=>!TB[k].unavail[sk]));
 
-  if(hasFullMatch){
-    // Full matches — no section title
-    if(pSec)pSec.style.display='none';
-    const fList=S2_FULL.filter(k=>!ko||TB[k].known);
-    if(fSec)fSec.style.display=fList.length?'':'none';
-    const h5=fSec?fSec.querySelector('h5'):null;
-    if(h5)h5.style.display='none';
-    const fR=document.getElementById('s2-full-rows');
-    if(fR&&fList.length)fR.innerHTML=fList.map(k=>{const b=TB[k];const kn=b.known?'<span class="t-known">Known</span>':'';return '<div class="t-row" onclick="selectTrainer(this)" data-tname="'+b.name+'" data-tkey="'+k+'"><div class="t-radio"></div><div class="t-name"><img class="t-avatar" src="'+b.avatar.replace('160','80')+'" alt=""/>'+b.name+' '+kn+'</div><div class="t-bio-cell">'+bioBtn(k)+'</div><div class="t-rating"><i class="ti ti-star-filled"></i>'+b.rating+'</div><div class="t-langs">'+b.langs.map(l=>'<span class="t-lang-pill">'+l+'</span>').join('')+'</div><div class="t-cov green">100%</div></div>'}).join('');
-  } else {
-    // No single trainer covers all selected slots → partial matches
-    if(fSec)fSec.style.display='none';
-    const pList=S2_PARTIAL.filter(({key})=>!ko||TB[key].known);
-    if(pSec)pSec.style.display=pList.length?'':'none';
-    const pR=document.getElementById('s2-partial-rows');
-    if(pR){
-      const selKeys=Object.keys(s1S);
-      // Sort by day then time
-      const sortedKeys=selKeys.slice().sort((a,b)=>{
-        const[da,ta]=a.split('-').map(Number);const[db,tb]=b.split('-').map(Number);
-        return da!==db?da-db:ta-tb;
-      });
-      // Dynamic partial list: trainers who cover at least 1 but not all selected slots
-      const dynPartial=T1O.filter(k=>{
-        if(ko&&!TB[k].known)return false;
-        const covered=sortedKeys.filter(sk=>!TB[k].unavail[sk]).length;
-        return covered>0&&covered<sortedKeys.length;
-      });
-      pSec.style.display=dynPartial.length?'':'none';
-      pR.innerHTML=dynPartial.map(k=>{
-        const b=TB[k];const kn=b.known?'<span class="t-known">Known</span>':'';
-        const covered=sortedKeys.filter(sk=>!TB[k].unavail[sk]).length;
-        const total=sortedKeys.length;
-        const conflicts=total-covered;
-        const dynCov=total>0?Math.max(80,Math.round((covered/total)*100))+'%':'–';
+  // Full match: trainer has ≥ MIN slots overlapping with learner's selection
+  // (enough to cover the learner's weekly class frequency)
+  const fullList=T1O.filter(k=>{
+    if(ko&&!TB[k].known)return false;
+    if(selKeys.length===0)return true;
+    const overlap=selKeys.filter(sk=>!TB[k].unavail[sk]).length;
+    return overlap>=MIN;
+  });
 
-        // Build expandable detail chips (only bad slots + suggestions)
-        const detailChips=sortedKeys.filter(sk=>TB[k].unavail[sk]).map(sk=>{
-          const[di,ti]=sk.split('-').map(Number);
-          const label=DAYS[di]+' '+TIMES[ti];
-          let suggested=null;
-          for(let delta=1;delta<=4&&!suggested;delta++){
-            [-delta,delta].forEach(d=>{
-              const nti=ti+d;
-              if(!suggested&&nti>=0&&nti<TIMES.length){
-                const nk=di+'-'+nti;
-                if(!TB[k].unavail[nk]&&!isUnavail(di,nti))suggested=DAYS[di]+' '+TIMES[nti];
-              }
-            });
+  // Partial list: trainer has some overlap but fewer than MIN compatible slots
+  const partialList=T1O.filter(k=>{
+    if(ko&&!TB[k].known)return false;
+    if(fullList.includes(k))return false;
+    const overlap=selKeys.filter(sk=>!TB[k].unavail[sk]).length;
+    return overlap>0&&overlap<MIN;
+  });
+
+  // Show partials only when viable full-match trainers < 8
+  const showPartials=fullList.length<8&&partialList.length>0&&selKeys.length>0;
+
+  // Render full matches
+  if(fSec){fSec.style.display=fullList.length?'':'none';}
+  const h5=fSec?fSec.querySelector('h5'):null;
+  if(h5)h5.style.display='none';
+  const fR=document.getElementById('s2-full-rows');
+  if(fR&&fullList.length){
+    const dispCov=covCalc?covVal+'%':'–';
+    const covClass=covVal===100?'green':'yellow';
+    fR.innerHTML=fullList.map(k=>{
+      const b=TB[k];const kn=b.known?'<span class="t-known">Known</span>':'';;
+      return '<div class="t-row" onclick="selectTrainer(this)" data-tname="'+b.name+'" data-tkey="'+k+'"><div class="t-radio"></div><div class="t-name"><img class="t-avatar" src="'+b.avatar.replace('160','80')+'" alt=""/>'+b.name+' '+kn+'</div><div class="t-bio-cell">'+bioBtn(k)+'</div><div class="t-rating"><i class="ti ti-star-filled"></i>'+b.rating+'</div><div class="t-langs">'+b.langs.map(l=>'<span class="t-lang-pill">'+l+'</span>').join('')+'</div><div class="t-cov '+covClass+'">'+dispCov+'</div></div>';
+    }).join('');
+  }
+
+  // Render partial matches
+  if(pSec)pSec.style.display=showPartials?'':' none';
+  const pR=document.getElementById('s2-partial-rows');
+  if(pR&&showPartials){
+    const sortedKeys=selKeys.slice().sort((a,b)=>{
+      const[da,ta]=a.split('-').map(Number);const[db,tb]=b.split('-').map(Number);
+      return da!==db?da-db:ta-tb;
+    });
+    pR.innerHTML=partialList.map(k=>{
+      const b=TB[k];const kn=b.known?'<span class="t-known">Known</span>':'';;
+      const covered=sortedKeys.filter(sk=>!TB[k].unavail[sk]).length;
+      const total=sortedKeys.length;
+      const dynCov=total>0?Math.max(80,Math.round((covered/total)*100))+'%':'–';
+      // Find best slot to add: trainer free, learner free, not already selected
+      // We want a slot that would bring this trainer's overlap up to MIN
+      let recommended=null;
+      for(let di=0;di<5&&!recommended;di++){
+        for(let ti=0;ti<TIMES.length&&!recommended;ti++){
+          const sk=di+'-'+ti;
+          if(!s1S[sk]&&!TB[k].unavail[sk]&&!isUnavail(di,ti)){
+            recommended=DAYS[di]+' '+TIMES[ti];
           }
-          if(!suggested){
-            for(let dd=1;dd<=2&&!suggested;dd++){
-              [-dd,dd].forEach(d=>{
-                const ndi=di+d;
-                if(!suggested&&ndi>=0&&ndi<5){
-                  const nk=ndi+'-'+ti;
-                  if(!TB[k].unavail[nk]&&!isUnavail(ndi,ti))suggested=DAYS[ndi]+' '+TIMES[ti];
-                }
-              });
-            }
-          }
-          return '<span class="day-chip-bad"><i class="ti ti-x"></i>'+label+'</span>'
-            +(suggested?'<span class="day-chip-suggest"><i class="ti ti-arrow-right" style="font-size:10px"></i>Try '+suggested+'</span>':'');
-        }).join('');
-
-        const rowId='partial-detail-'+k;
-        const conflictText=conflicts===1?'1 conflict':conflicts+' conflicts';
-
-        // Build swap rows for the panel
-        const conflictKeys=sortedKeys.filter(sk=>TB[k].unavail[sk]);
-        const swapRows=conflictKeys.map(sk=>{
-          const[di,ti]=sk.split('-').map(Number);
-          const label=DAYS[di]+' '+TIMES[ti];
-          let suggested=null;
-          let sugKey=null;
-          for(let delta=1;delta<=4&&!suggested;delta++){
-            [-delta,delta].forEach(d=>{
-              const nti=ti+d;
-              if(!suggested&&nti>=0&&nti<TIMES.length){
-                const nk=di+'-'+nti;
-                if(!TB[k].unavail[nk]&&!isUnavail(di,nti)){suggested=DAYS[di]+' '+TIMES[nti];sugKey=nk;}
-              }
-            });
-          }
-          if(!suggested){
-            for(let dd=1;dd<=2&&!suggested;dd++){
-              [-dd,dd].forEach(d=>{
-                const ndi=di+d;
-                if(!suggested&&ndi>=0&&ndi<5){
-                  const nk=ndi+'-'+ti;
-                  if(!TB[k].unavail[nk]&&!isUnavail(ndi,ti)){suggested=DAYS[ndi]+' '+TIMES[ti];sugKey=nk;}
-                }
-              });
-            }
-          }
-          const sugLabel=suggested||'No nearby slot';
-          const swapId='swap-'+k+'-'+sk;
-          const canSwap=!!suggested;
-          return '<div class="swap-row" id="'+swapId+'">'
-            +'<span class="slot-bad"><i class="ti ti-x" style="font-size:10px"></i>'+label+'</span>'
-            +'<span class="swap-arrow"><i class="ti ti-arrow-right"></i></span>'
-            +'<span class="slot-suggest">'+sugLabel+'</span>'
-            +(canSwap
-              ?'<button class="swap-action-btn" onclick="event.stopPropagation();swapSlot(\''+k+'\',\''+sk+'\',\''+sugKey+'\',\''+swapId+'\',\''+rowId+'\')">Swap</button>'
-              :'<span style="font-size:10px;color:var(--ll-text-muted)">No alt</span>')
-            +'</div>';
-        }).join('');
-
-        return '<div class="match-row partial" id="row-'+k+'" onclick="selectTrainer(this)" data-tname="'+b.name+'" data-tkey="'+k+'">'
-          +'<div class="match-row-top"><div class="t-radio"></div>'
-          +'<div class="match-info"><img class="t-avatar" src="'+b.avatar.replace('160','80')+'" alt=""/>'
-          +'<div class="match-info-text"><div class="t-name" style="gap:6px">'+b.name+' '+kn+' '+bioBtn(k)+'</div>'
-          +'<div class="t-langs" style="margin-top:3px">'+b.langs.map(l=>'<span class="t-lang-pill">'+l+'</span>').join('')+'</div>'
-          +'</div></div>'
-          +'<div></div><div class="t-rating"><i class="ti ti-star-filled"></i>'+b.rating+'</div>'
-          +'<div class="t-langs">'+b.langs.map(l=>'<span class="t-lang-pill">'+l+'</span>').join('')+'</div>'
-          +'<div class="t-cov yellow" id="cov-'+k+'">'+dynCov+'</div></div>'
-          +'<div class="day-breakdown" style="justify-content:space-between">'
-          +'<span id="summary-'+k+'" style="font-size:11px;color:var(--ll-text-muted)">Covers <strong style="color:var(--ll-navy)">'+covered+' of '+total+'</strong> slots — '+conflictText+'</span>'
-          +'<button class="adjust-link" onclick="event.stopPropagation();toggleSwapPanel(\''+rowId+'\')" id="'+rowId+'-btn">See details ↓</button>'
-          +'</div>'
-          +'<div id="'+rowId+'" style="display:none">'
-          +'<div class="swap-panel">'
-          +'<div class="swap-panel-header"><i class="ti ti-adjustments-horizontal" aria-hidden="true"></i>Adjust slots for '+b.name+'</div>'
-          +swapRows
-          +'<div class="swap-panel-footer">'
-          +'<button class="swap-dismiss" onclick="event.stopPropagation();toggleSwapPanel(\''+rowId+'\')">Keep my current selection</button>'
-          +'<button class="btn-primary" style="font-size:11px;padding:5px 12px" onclick="event.stopPropagation();swapAll(\''+k+'\',\''+rowId+'\')"><i class="ti ti-refresh" style="font-size:11px"></i> Swap all</button>'
-          +'</div></div></div>'
-          +'</div>';
-      }).join('');
-    }
+        }
+      }
+      const recHtml=recommended
+        ?'<span style="font-size:11px;color:var(--ll-text-muted)">Add <strong style="color:var(--ll-blue)">'+recommended+'</strong> to your availability to unlock this trainer</span>'
+        :'<span style="font-size:11px;color:var(--ll-text-muted)">Check trainer\'s calendar for compatible slots</span>';
+      return '<div class="match-row partial" id="row-'+k+'" data-tname="'+b.name+'" data-tkey="'+k+'">'+
+        '<div class="match-row-top"><div class="t-radio"></div>'+
+        '<div class="match-info"><img class="t-avatar" src="'+b.avatar.replace('160','80')+'" alt=""/>'+
+        '<div class="match-info-text"><div class="t-name" style="gap:6px">'+b.name+' '+kn+' '+bioBtn(k)+'</div>'+
+        '<div class="t-langs" style="margin-top:3px">'+b.langs.map(l=>'<span class="t-lang-pill">'+l+'</span>').join('')+'</div>'+
+        '</div></div>'+
+        '<div></div><div class="t-rating"><i class="ti ti-star-filled"></i>'+b.rating+'</div>'+
+        '<div class="t-langs">'+b.langs.map(l=>'<span class="t-lang-pill">'+l+'</span>').join('')+'</div>'+
+        '<div class="t-cov yellow">'+dynCov+'</div></div>'+
+        '<div class="day-breakdown" style="justify-content:space-between;flex-wrap:wrap;gap:8px">'+
+        recHtml+
+        '<button class="btn-ghost" style="font-size:10px;padding:3px 10px" onclick="event.stopPropagation();openTrainerAvailFor(\''+ k +'\')"><i class="ti ti-calendar" style="font-size:11px;vertical-align:-2px"></i> View calendar</button>'+
+        '</div></div>';
+    }).join('');
   }
 }
 
@@ -1043,6 +987,17 @@ function closeTrainerAvailOnBg(e){if(e.target.id==='trainer-avail-overlay')close
 function upT3(){const n=Object.keys(t3S).length;const b=document.getElementById('t3-confirm');if(b)b.disabled=n<MIN}
 function confirmTrainerAvail(){closeTrainerAvail();goScreen('s3',document.querySelectorAll('.sb-item')[8])}
 
+function selectAndFix(trainerKey,panelId){
+  // Select this trainer
+  const row=document.getElementById('row-'+trainerKey);
+  if(row)selectTrainer(row);
+  // Open the swap panel
+  const el=document.getElementById(panelId);
+  if(el)el.style.display='block';
+  const btn=document.getElementById(panelId+'-btn');
+  if(btn)btn.style.display='none'; // hide the button once panel is open
+}
+
 function toggleSwapPanel(id){
   const el=document.getElementById(id);
   const btn=document.getElementById(id+'-btn');
@@ -1052,12 +1007,11 @@ function toggleSwapPanel(id){
   if(btn)btn.textContent=open?'Hide details ↑':'See details ↓';
 }
 
-// Swap a single conflicting slot inline
+// Swap a single conflicting slot
 function swapSlot(trainerKey,oldSlotKey,newSlotKey,swapRowId,panelId){
-  // Update s1S
   delete s1S[oldSlotKey];
   s1S[newSlotKey]=1;
-  // Update the swap row UI to show swapped state
+  // Mark this swap row as done
   const row=document.getElementById(swapRowId);
   if(row){
     const[di,ti]=newSlotKey.split('-').map(Number);
@@ -1068,11 +1022,10 @@ function swapSlot(trainerKey,oldSlotKey,newSlotKey,swapRowId,panelId){
       +'<span class="slot-swapped"><i class="ti ti-check" style="font-size:10px"></i>'+newLabel+'</span>'
       +'<span style="font-size:10px;color:var(--ll-green-text);font-weight:500">Done</span>';
   }
-  // Recheck coverage for this trainer
   refreshPartialRow(trainerKey,panelId);
 }
 
-// Swap all conflicting slots for a trainer at once
+// Swap all remaining conflicting slots
 function swapAll(trainerKey,panelId){
   const panel=document.getElementById(panelId);if(!panel)return;
   panel.querySelectorAll('.swap-row').forEach(row=>{
@@ -1081,31 +1034,83 @@ function swapAll(trainerKey,panelId){
   });
 }
 
-// Refresh the coverage badge and summary text after a swap
+// After any swap: recheck conflicts, update UI, handle completion
 function refreshPartialRow(trainerKey,panelId){
   const selKeys=Object.keys(s1S);
   const covered=selKeys.filter(sk=>!TB[trainerKey].unavail[sk]).length;
   const total=selKeys.length;
   const conflicts=total-covered;
   const newCov=total>0?Math.max(80,Math.round((covered/total)*100))+'%':'–';
+  const trainerFirstName=TB[trainerKey]?TB[trainerKey].name.split(' ')[0]:trainerKey;
 
+  // Update coverage badge
   const covEl=document.getElementById('cov-'+trainerKey);
-  if(covEl){
-    covEl.textContent=newCov;
-    if(conflicts===0){covEl.className='t-cov green';}
-    else{covEl.className='t-cov yellow';}
-  }
+  if(covEl){covEl.textContent=newCov;covEl.className=conflicts===0?'t-cov green':'t-cov yellow';}
+
+  // Update summary text
   const sumEl=document.getElementById('summary-'+trainerKey);
   if(sumEl){
     if(conflicts===0){
-      sumEl.innerHTML='<span class="cov-updated"><i class="ti ti-check" style="font-size:12px"></i>Covers all '+total+' slots — select schedules to continue</span>';
+      sumEl.innerHTML='<span class="cov-updated"><i class="ti ti-check" style="font-size:12px"></i>Covers all '+total+' slots</span>';
     } else {
-      const conflictText=conflicts===1?'1 conflict':conflicts+' conflicts';
+      const conflictText=conflicts===1?'1 conflict remaining':conflicts+' conflicts remaining';
       sumEl.innerHTML='Covers <strong style="color:var(--ll-navy)">'+covered+' of '+total+'</strong> slots — '+conflictText;
     }
   }
-  // Rebuild grid to reflect new selection
+
+  // Update "Swap all" button label to reflect remaining conflicts
+  const swapAllBtn=document.getElementById('swapall-'+trainerKey);
+  if(swapAllBtn&&conflicts>0){
+    swapAllBtn.innerHTML='<i class="ti ti-refresh" style="font-size:11px"></i> Swap remaining &amp; select '+trainerFirstName;
+  }
+
+  if(conflicts===0){
+    // All conflicts resolved → show confirmation strip, auto-select trainer, enable button
+    const panelEl=document.getElementById(panelId);
+    if(panelEl){
+      panelEl.style.display='none';
+      // Insert confirmation strip after the panel container
+      const existingStrip=document.getElementById('confirm-strip-'+trainerKey);
+      if(!existingStrip){
+        const strip=document.createElement('div');
+        strip.id='confirm-strip-'+trainerKey;
+        strip.className='confirm-strip';
+        strip.innerHTML='<div class="confirm-strip-icon"><i class="ti ti-check" style="font-size:11px"></i></div>'
+          +'<div class="confirm-strip-body"><strong>'+TB[trainerKey].name+' selected</strong> — slots adjusted to match availability</div>'
+          +'<button class="confirm-strip-undo" onclick="event.stopPropagation();undoSwaps(\''+trainerKey+'\')">Undo</button>';
+        panelEl.parentNode.insertBefore(strip,panelEl.nextSibling);
+      }
+    }
+    // Auto-select this trainer
+    const row=document.getElementById('row-'+trainerKey);
+    if(row)selectTrainer(row);
+    // Hide the "See details" toggle button
+    const detailBtn=document.getElementById(panelId+'-btn');
+    if(detailBtn)detailBtn.style.display='none';
+  }
+
   buildS1();
+}
+
+// Undo all swaps for a trainer — re-render the partial list
+function undoSwaps(trainerKey){
+  // Remove the confirmation strip
+  const strip=document.getElementById('confirm-strip-'+trainerKey);
+  if(strip)strip.remove();
+  // Deselect this trainer if selected
+  if(sTrK===trainerKey){
+    sTrK='';sTr='';
+    const btn=document.getElementById('s2-next');if(btn)btn.disabled=true;
+  }
+  // Re-render s2 so the partial row is rebuilt fresh
+  renderS2();
+  // Note: s1S changes from swaps are kept — user can redo manually
+}
+
+function openTrainerAvailFor(trainerKey){
+  const b=TB[trainerKey];if(!b)return;
+  sTrK=trainerKey;sTr=b.name;sTrAv=b.avatar.replace('160','80');
+  openTrainerAvail();
 }
 
 function renderT1(){
