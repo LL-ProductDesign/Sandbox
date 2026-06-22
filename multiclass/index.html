@@ -61,6 +61,8 @@
 .slot-pill:active{transform:scale(0.95)}
 .slot-pill.avail{background:var(--ll-green-fill)}.slot-pill.avail:hover{background:var(--ll-green-fill-hover)}
 .slot-pill.match-hint{background:var(--ll-match)}.slot-pill.match-hint:hover{background:var(--ll-match-hover)}
+.slot-pill.learner-sel{background:#E6F1FB;border:1.5px solid #185FA5;cursor:default}
+.slot-pill.overlap{background:var(--ll-match);cursor:pointer}.slot-pill.overlap:hover{background:var(--ll-match-hover)}
 .slot-pill.selected{background:var(--ll-blue-light);border:2px solid var(--ll-blue);color:var(--ll-blue);font-size:9px;font-weight:600}
 .slot-pill.na{background:var(--ll-na-fill);cursor:default}
 .avail-grid{width:100%;border-collapse:separate;border-spacing:0}
@@ -522,18 +524,21 @@
 </div></div></div>
 
 <div class="modal-overlay" id="trainer-avail-overlay" onclick="closeTrainerAvailOnBg(event)">
-<div class="filter-modal" onclick="event.stopPropagation()">
+<div class="filter-modal" onclick="event.stopPropagation()" style="max-width:600px">
 <div class="filter-modal-header">
 <div class="filter-modal-title-row"><div class="filter-modal-title" id="t3-title">Trainer's Availability</div><button class="modal-close" onclick="closeTrainerAvail()"><i class="ti ti-x"></i></button></div>
-<div class="filter-modal-desc">Select slots that fit your schedule.</div>
+<div class="filter-modal-desc" id="t3-desc">Select slots that fit your schedule.</div>
 </div>
 <div class="filter-modal-body">
 <div class="grid-top"><div class="cb-row"><div class="cb-check"></div>Select all</div>
-<div class="legend"><div class="lg"><div class="lg-swatch lg-av"></div>Available</div><div class="lg"><div class="lg-swatch lg-sl"></div>Selected</div></div></div>
+<div class="legend" id="t3-legend">
+  <div class="lg"><div class="lg-swatch lg-av"></div>Available</div>
+  <div class="lg"><div class="lg-swatch lg-sl"></div>Selected</div>
+</div></div>
 <div id="t3-grid-wrap"></div>
 </div>
 <div class="filter-modal-footer"><div></div>
-<div class="filter-modal-footer-right"><button class="btn-link" onclick="closeTrainerAvail()">Close</button><button class="btn-primary" id="t3-confirm" disabled onclick="confirmTrainerAvail()">Schedule Options</button><button class="btn-primary" id="t3-confirm-unlock" style="display:none" disabled onclick="confirmTrainerAvailUnlock()">Confirm</button></div>
+<div class="filter-modal-footer-right"><button class="btn-link" onclick="closeTrainerAvail()">Close</button><button class="btn-primary" id="t3-confirm" disabled onclick="confirmTrainerAvail()">Schedule Options</button><button class="btn-primary" id="t3-confirm-unlock" style="display:none" disabled onclick="confirmTrainerAvailUnlock()">Add availability</button></div>
 </div></div></div>
 
 <div class="modal-overlay" id="confirm-sched-overlay" onclick="closeConfirmSchedOnBg(event)">
@@ -991,11 +996,15 @@ function openTrainerAvail(){
 }
 function closeTrainerAvail(){
   document.getElementById('trainer-avail-overlay').classList.remove('show');
-  // Reset to normal mode
   const normal=document.getElementById('t3-confirm');
   const unlock=document.getElementById('t3-confirm-unlock');
   if(normal){normal.style.display='';normal.disabled=true;}
   if(unlock){unlock.style.display='none';unlock.disabled=true;}
+  // Reset legend and desc to normal mode
+  const legend=document.getElementById('t3-legend');
+  if(legend)legend.innerHTML='<div class="lg"><div class="lg-swatch lg-av"></div>Available</div><div class="lg"><div class="lg-swatch lg-sl"></div>Selected</div>';
+  const desc=document.getElementById('t3-desc');
+  if(desc)desc.textContent='Select slots that fit your schedule.';
   t3UnlockTrainer=null;
 }
 function closeTrainerAvailOnBg(e){if(e.target.id==='trainer-avail-overlay')closeTrainerAvail()}
@@ -1004,7 +1013,7 @@ function upT3(){
   const b=document.getElementById('t3-confirm');
   const u=document.getElementById('t3-confirm-unlock');
   if(b)b.disabled=n<MIN;
-  if(u)u.disabled=n<MIN;
+  if(u)u.disabled=n<1;
 }
 function confirmTrainerAvail(){closeTrainerAvail();goScreen('s3',document.querySelectorAll('.sb-item')[8])}
 
@@ -1153,18 +1162,77 @@ function openFindSlot(trainerKey){
   t3UnlockTrainer=trainerKey;
   const b=TB[trainerKey];if(!b)return;
   sTrK=trainerKey;sTr=b.name;sTrAv=b.avatar.replace('160','80');
-  document.getElementById('t3-title').textContent='Find a slot with '+b.name;
+  const firstName=b.name.split(' ')[0];
+  document.getElementById('t3-title').textContent='Find a slot with '+firstName;
+  document.getElementById('t3-desc').textContent='Your current slots are shown in blue. '+firstName+'\'s availability is green. Select additional slots to add to your availability.';
+  // Update legend for comparison mode
+  document.getElementById('t3-legend').innerHTML=
+    '<div class="lg"><div class="lg-swatch" style="background:#E6F1FB;border:1.5px solid #185FA5;border-radius:4px;width:22px;height:10px"></div>Your availability</div>'
+    +'<div class="lg"><div class="lg-swatch" style="background:#CEE5C3;border-radius:4px;width:22px;height:10px"></div>'+firstName+'\'s availability</div>'
+    +'<div class="lg"><div class="lg-swatch lg-sl"></div>Selected to add</div>';
   document.getElementById('trainer-avail-overlay').classList.add('show');
-  // Switch to Confirm mode
+  // Switch to unlock mode buttons
   document.getElementById('t3-confirm').style.display='none';
   document.getElementById('t3-confirm-unlock').style.display='';
   document.getElementById('t3-confirm-unlock').disabled=true;
   t3S={};
-  buildPillGrid('t3-grid-wrap',t3S,b.unavail,(pill,di,ti,d,t,k)=>{
-    if(t3S[k]){delete t3S[k];pill.classList.remove('selected');pill.classList.add('avail');pill.textContent='';}
-    else{t3S[k]=1;pill.classList.remove('avail');pill.classList.add('selected');pill.textContent=TP(t);}
-    upT3();
-  });upT3();
+  // Build comparison grid
+  buildCompareGrid('t3-grid-wrap',b,trainerKey);
+}
+
+function buildCompareGrid(wrapId,trainer,trainerKey){
+  const wrap=document.getElementById(wrapId);if(!wrap)return;
+  const tbl=document.createElement('table');
+  tbl.className='avail-grid';
+  tbl.style.tableLayout='fixed';
+  tbl.style.width='100%';
+  const thead=document.createElement('thead');
+  const headRow=document.createElement('tr');
+  const thEmpty=document.createElement('th');headRow.appendChild(thEmpty);
+  // All 7 days — Sat/Sun always grey
+  DAYS.forEach((d,di)=>{
+    const th=document.createElement('th');th.textContent=d;
+    if(di>=5)th.style.opacity='0.4';
+    headRow.appendChild(th);
+  });
+  thead.appendChild(headRow);tbl.appendChild(thead);
+  const tbody=document.createElement('tbody');
+  TIMES.forEach((t,ti)=>{
+    const tr=document.createElement('tr');
+    const tdl=document.createElement('td');if(ti%2===0)tdl.textContent=t;tr.appendChild(tdl);
+    DAYS.forEach((d,di)=>{
+      const td=document.createElement('td');
+      const pill=document.createElement('div');pill.className='slot-pill';
+      const k=di+'-'+ti;
+      const learnerHas=!!s1S[k];
+      const trainerFree=!trainer.unavail[k];
+
+      if(di>=5){
+        pill.classList.add('na');
+      } else if(learnerHas){
+        // Learner already selected — blue, non-clickable
+        pill.classList.add('learner-sel');
+        pill.textContent=TP(t);
+      } else if(trainerFree){
+        // Trainer available — selectable
+        if(t3S[k]){
+          pill.classList.add('selected');pill.textContent=TP(t);
+        } else {
+          pill.classList.add('avail');pill.style.background='#CEE5C3';
+        }
+        pill.onclick=()=>{
+          if(t3S[k]){delete t3S[k];pill.classList.remove('selected');pill.classList.add('avail');pill.style.background='#CEE5C3';pill.textContent='';}
+          else{t3S[k]=1;pill.classList.add('selected');pill.style.background='';pill.textContent=TP(t);}
+          upT3();
+        };
+      } else {
+        pill.classList.add('na');
+      }
+      pill.dataset.di=di;pill.dataset.ti=ti;
+      td.appendChild(pill);tr.appendChild(td);
+    });tbody.appendChild(tr);
+  });tbl.appendChild(tbody);wrap.innerHTML='';wrap.appendChild(tbl);
+  upT3();
 }
 
 function confirmTrainerAvailUnlock(){
