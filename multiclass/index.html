@@ -533,7 +533,7 @@
 <div id="t3-grid-wrap"></div>
 </div>
 <div class="filter-modal-footer"><div></div>
-<div class="filter-modal-footer-right"><button class="btn-link" onclick="closeTrainerAvail()">Close</button><button class="btn-primary" id="t3-confirm" disabled onclick="confirmTrainerAvail()">Schedule Options</button></div>
+<div class="filter-modal-footer-right"><button class="btn-link" onclick="closeTrainerAvail()">Close</button><button class="btn-primary" id="t3-confirm" disabled onclick="confirmTrainerAvail()">Schedule Options</button><button class="btn-primary" id="t3-confirm-unlock" style="display:none" disabled onclick="confirmTrainerAvailUnlock()">Confirm</button></div>
 </div></div></div>
 
 <div class="modal-overlay" id="confirm-sched-overlay" onclick="closeConfirmSchedOnBg(event)">
@@ -638,6 +638,7 @@ const S2_PARTIAL=[
 const C2O=[{day:'Thursdays',dayKey:'Thu',time:'10:00-10:30',cov:82},{day:'Tuesdays',dayKey:'Tue',time:'09:30-10:00',cov:80},{day:'Wednesdays',dayKey:'Wed',time:'10:00-10:30',cov:84},{day:'Fridays',dayKey:'Fri',time:'09:30-10:00',cov:81},{day:'Tuesdays',dayKey:'Tue',time:'09:00-09:30',cov:80}];
 
 let s1S={},t2S={},t3S={};
+let t3UnlockTrainer=null;
 let covCalc=false,covVal=0;
 let sTr='Camille Dubois',sTrK='camille',sTrAv='https://i.pravatar.cc/80?img=44';
 let c1=null,df={Mon:true,Tue:true,Wed:true,Thu:true,Fri:true};
@@ -652,10 +653,22 @@ function renderS2(){
   const selKeys=Object.keys(s1S);
 
   // Full match: trainer has ≥ MIN slots overlapping with learner's selection
-  // (enough to cover the learner's weekly class frequency)
+  // Also: if ALL selected slots are smart match (covered by first-slot trainers),
+  // those trainers are guaranteed full matches regardless of total count
+  const sortedKeys=selKeys.slice().sort((a,b)=>{
+    const[da,ta]=a.split('-').map(Number);const[db,tb]=b.split('-').map(Number);
+    return da!==db?da-db:ta-tb;
+  });
+  const firstKey=sortedKeys[0];
+  const firstSlotTrainers=firstKey?T1O.filter(k=>!TB[k].unavail[firstKey]):[];
+  // Smart match = all selected slots are covered by first-slot trainers
+  const allSmartMatch=selKeys.length>=MIN&&selKeys.every(sk=>firstSlotTrainers.some(k=>!TB[k].unavail[sk]));
+
   const fullList=T1O.filter(k=>{
     if(ko&&!TB[k].known)return false;
     if(selKeys.length===0)return true;
+    // First-slot trainers are full match when all selected slots are smart match
+    if(allSmartMatch&&firstSlotTrainers.includes(k))return true;
     const overlap=selKeys.filter(sk=>!TB[k].unavail[sk]).length;
     return overlap>=MIN;
   });
@@ -689,10 +702,6 @@ function renderS2(){
   if(pSec)pSec.style.display=showPartials?'':' none';
   const pR=document.getElementById('s2-partial-rows');
   if(pR&&showPartials){
-    const sortedKeys=selKeys.slice().sort((a,b)=>{
-      const[da,ta]=a.split('-').map(Number);const[db,tb]=b.split('-').map(Number);
-      return da!==db?da-db:ta-tb;
-    });
     pR.innerHTML=partialList.map(k=>{
       const b=TB[k];const kn=b.known?'<span class="t-known">Known</span>':'';;
       const covered=sortedKeys.filter(sk=>!TB[k].unavail[sk]).length;
@@ -708,11 +717,9 @@ function renderS2(){
           }
         }
       }
-      const recHtml=recommended
-        ?'<span style="font-size:11px;color:var(--ll-text-muted)">Add <strong style="color:var(--ll-blue)">'+recommended+'</strong> to your availability to unlock this trainer</span>'
-        +'<button class="btn-outline" style="font-size:11px;padding:3px 10px" data-slot-key="'+recommendedKey+'" data-slot-label="'+recommended+'" data-trainer-key="'+k+'" onclick="event.stopPropagation();var b=this;addSlotAndUnlock(b.dataset.slotKey,b.dataset.slotLabel,b.dataset.trainerKey)"><i class="ti ti-plus" style="font-size:11px"></i> Add '+recommended+'</button>'
-        :'<span style="font-size:11px;color:var(--ll-text-muted)">Check trainer\'s calendar for compatible slots</span>'
-        +'<button class="btn-ghost" style="font-size:10px;padding:3px 10px" onclick="event.stopPropagation();openTrainerAvailFor(\''+k+'\')"><i class="ti ti-calendar" style="font-size:11px;vertical-align:-2px"></i> View calendar</button>';
+      const firstName=b.name.split(' ')[0];
+      const recHtml='<span style="font-size:11px;color:var(--ll-text-muted)">This trainer doesn\'t have enough slots to cover your weekly classes yet.</span>'
+        +'<button class="btn-outline" style="font-size:11px;padding:4px 12px" data-trainer-key="'+k+'" onclick="event.stopPropagation();openFindSlot(this.dataset.trainerKey)"><i class="ti ti-calendar-search" style="font-size:11px"></i> Find a slot with '+firstName+'</button>';
       return '<div class="match-row partial" id="row-'+k+'" data-tname="'+b.name+'" data-tkey="'+k+'">'+
         '<div class="match-row-top"><div class="t-radio"></div>'+
         '<div class="match-info"><img class="t-avatar" src="'+b.avatar.replace('160','80')+'" alt=""/>'+
@@ -982,9 +989,23 @@ function openTrainerAvail(){
     upT3();
   });upT3();
 }
-function closeTrainerAvail(){document.getElementById('trainer-avail-overlay').classList.remove('show')}
+function closeTrainerAvail(){
+  document.getElementById('trainer-avail-overlay').classList.remove('show');
+  // Reset to normal mode
+  const normal=document.getElementById('t3-confirm');
+  const unlock=document.getElementById('t3-confirm-unlock');
+  if(normal){normal.style.display='';normal.disabled=true;}
+  if(unlock){unlock.style.display='none';unlock.disabled=true;}
+  t3UnlockTrainer=null;
+}
 function closeTrainerAvailOnBg(e){if(e.target.id==='trainer-avail-overlay')closeTrainerAvail()}
-function upT3(){const n=Object.keys(t3S).length;const b=document.getElementById('t3-confirm');if(b)b.disabled=n<MIN}
+function upT3(){
+  const n=Object.keys(t3S).length;
+  const b=document.getElementById('t3-confirm');
+  const u=document.getElementById('t3-confirm-unlock');
+  if(b)b.disabled=n<MIN;
+  if(u)u.disabled=n<MIN;
+}
 function confirmTrainerAvail(){closeTrainerAvail();goScreen('s3',document.querySelectorAll('.sb-item')[8])}
 
 function selectAndFix(trainerKey,panelId){
@@ -1128,10 +1149,43 @@ function undoAddSlot(slotKey){
   const c=document.getElementById('toast-container');if(c)c.innerHTML='';
 }
 
-function openTrainerAvailFor(trainerKey){
+function openFindSlot(trainerKey){
+  t3UnlockTrainer=trainerKey;
   const b=TB[trainerKey];if(!b)return;
   sTrK=trainerKey;sTr=b.name;sTrAv=b.avatar.replace('160','80');
-  openTrainerAvail();
+  document.getElementById('t3-title').textContent='Find a slot with '+b.name;
+  document.getElementById('trainer-avail-overlay').classList.add('show');
+  // Switch to Confirm mode
+  document.getElementById('t3-confirm').style.display='none';
+  document.getElementById('t3-confirm-unlock').style.display='';
+  document.getElementById('t3-confirm-unlock').disabled=true;
+  t3S={};
+  buildPillGrid('t3-grid-wrap',t3S,b.unavail,(pill,di,ti,d,t,k)=>{
+    if(t3S[k]){delete t3S[k];pill.classList.remove('selected');pill.classList.add('avail');pill.textContent='';}
+    else{t3S[k]=1;pill.classList.remove('avail');pill.classList.add('selected');pill.textContent=TP(t);}
+    upT3();
+  });upT3();
+}
+
+function confirmTrainerAvailUnlock(){
+  // Add all selected trainer slots to learner's selection
+  Object.keys(t3S).forEach(sk=>{ s1S[sk]=1; });
+  closeTrainerAvail();
+  // Re-render
+  buildS1();
+  renderS2();
+  // Toast
+  const trainerName=TB[t3UnlockTrainer]?TB[t3UnlockTrainer].name:'trainer';
+  const slotCount=Object.keys(t3S).length;
+  const c=document.getElementById('toast-container');if(!c)return;
+  c.innerHTML='<div class="toast" style="background:#E6F1FB;border-color:var(--ll-blue-border)">'
+    +'<div class="ic" style="background:var(--ll-blue)"><i class="ti ti-check" style="font-size:11px"></i></div>'
+    +'<div class="body-text"><div class="ttl" style="color:var(--ll-navy)">'+slotCount+' slot'+(slotCount>1?'s':'')+' added</div>'
+    +'<div class="sub">'+trainerName+' is now available as a full match</div></div>'
+    +'<button class="close-btn" onclick="this.closest(\'.toast\').remove()"><i class="ti ti-x"></i></button>'
+    +'</div>';
+  setTimeout(()=>{const x=c.querySelector('.toast');if(x){x.style.transition='opacity 0.3s';x.style.opacity='0';setTimeout(()=>{c.innerHTML=''},300);}},6000);
+  t3UnlockTrainer=null;
 }
 
 function renderT1(){
